@@ -1,0 +1,23 @@
+target 'YKBase' do
+
+pod 'Masonry'
+pod 'SDCycleScrollView','~> 1.64'
+pod 'LXMButtonImagePosition', '~> 1.1.1'
+pod 'AFNetworking','~>3.1.0'
+pod 'IQKeyboardManager'
+pod 'UMengUShare/UI','~>6.4.5'
+pod 'UMengUShare/Social/WeChat','~>6.4.5'
+pod 'UMengUShare/Social/QQ','~>6.4.5'
+pod ‘UMengUShare/Social/Sina','~>6.4.5'
+
+pod 'UMengAnalytics'
+pod 'TZImagePickerController' # 图片选择控制器
+pod 'WebViewJavascriptBridge' # JS ↔ OC
+
+pod 'Bugly'
+pod 'SVProgressHUD'
+pod 'MJRefresh'
+pod 'JPush'
+end
+
+
