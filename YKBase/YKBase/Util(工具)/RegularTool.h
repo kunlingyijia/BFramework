@@ -16,6 +16,7 @@
 + (NSString *)htmlShuangyinhao:(NSString *)values;
 + (UIColor *) colorWithHexString: (NSString *) stringToConvert;
 + (NSString *) nullDefultString: (NSString *)fromString null:(NSString *)nullStr;
+
 /// 正则匹配邮编
 + (BOOL)checkZipcode:(NSString*)value;
 /// 正则匹配邮箱号
