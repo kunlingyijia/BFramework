@@ -18,6 +18,7 @@ pod 'Bugly'
 pod 'SVProgressHUD'
 pod 'MJRefresh'
 pod 'JPush'
+
 end
 
 

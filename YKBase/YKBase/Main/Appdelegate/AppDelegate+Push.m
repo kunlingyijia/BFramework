@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate+Push.h"
-@implementation AppDelegate (Push)
+@implementation AppDelegate(Push)
 #pragma mark - 设置所有第三方
 -(void)SetUpJGPush:(NSDictionary *)launchOptions{
     //极光推送

@@ -17,7 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     [self addAllChidViewController];
 }
 - (void)addAllChidViewController {
@@ -25,7 +24,6 @@
     UIView *bgView = [[UIView alloc] initWithFrame:self.tabBar.bounds];
     [self.tabBar insertSubview:bgView atIndex:0];
     bgView.userInteractionEnabled = YES;
-    
     bgView.backgroundColor = [UIColor whiteColor];
     self.tabBar.opaque = YES;
     //设置状态栏字体颜色
@@ -34,9 +32,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     //创建主页面四个分类
     //创建一个单例 存储四个分类 在整个工程都能用
-HomePageVC*   homePageVC = [[HomePageVC alloc] initWithNibName:@"HomePageVC" bundle:nil];
-    
-  MyInfoVC* myInfoVC = [[MyInfoVC alloc] initWithNibName:@"MyInfoVC" bundle:nil];
+    HomePageVC*   homePageVC = [[HomePageVC alloc] initWithNibName:@"HomePageVC" bundle:nil];
+    MyInfoVC* myInfoVC = [[MyInfoVC alloc] initWithNibName:@"MyInfoVC" bundle:nil];
     [self addOneChildVc:homePageVC title:@"首页" imageName:@"首页" selectedImageName:@"首页－点击"];
     [self addOneChildVc:myInfoVC title:@"我的" imageName:@"我的" selectedImageName:@"我的－点击"];
    
@@ -44,10 +41,7 @@ HomePageVC*   homePageVC = [[HomePageVC alloc] initWithNibName:@"HomePageVC" bun
     //添加导航控制器
     BaseNavigationVC *nav1 = [[BaseNavigationVC alloc] initWithRootViewController:homePageVC];
     BaseNavigationVC *nav2 = [[BaseNavigationVC alloc] initWithRootViewController:myInfoVC];
-    
     self.viewControllers = @[nav1, nav2];
-    
-    
 }
 
 - (void)addOneChildVc:(BaseViewController *)childVc title:(NSString *)title imageName:(NSString *)imageN selectedImageName:(NSString *)selectedImageN {

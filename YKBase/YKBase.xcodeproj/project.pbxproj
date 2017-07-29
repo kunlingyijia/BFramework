@@ -212,6 +212,8 @@
 		BD12806D1F2AD18700DD9A8F /* YKAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127F9E1F2AD18700DD9A8F /* YKAppClient.m */; };
 		BD12806E1F2AD18700DD9A8F /* YKDataTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127FA01F2AD18700DD9A8F /* YKDataTool.m */; };
 		BD12806F1F2AD18700DD9A8F /* YKHTTPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127FA21F2AD18700DD9A8F /* YKHTTPSession.m */; };
+		BD7995811F2B20B800FA0CBF /* TouchTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7995801F2B20B800FA0CBF /* TouchTool.m */; };
+		BD7995841F2B37C100FA0CBF /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7995831F2B37C100FA0CBF /* UITabBar+badge.m */; };
 		BDC5175E1F2ADDDB00E1821E /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC517591F2ADDDB00E1821E /* AdViewController.m */; };
 		BDC5175F1F2ADDDB00E1821E /* AdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDC5175A1F2ADDDB00E1821E /* AdViewController.xib */; };
 		BDC517601F2ADDDB00E1821E /* UserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC5175C1F2ADDDB00E1821E /* UserGuideViewController.m */; };
@@ -684,6 +686,10 @@
 		BD127FA01F2AD18700DD9A8F /* YKDataTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKDataTool.m; sourceTree = "<group>"; };
 		BD127FA11F2AD18700DD9A8F /* YKHTTPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKHTTPSession.h; sourceTree = "<group>"; };
 		BD127FA21F2AD18700DD9A8F /* YKHTTPSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKHTTPSession.m; sourceTree = "<group>"; };
+		BD79957F1F2B20B800FA0CBF /* TouchTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchTool.h; sourceTree = "<group>"; };
+		BD7995801F2B20B800FA0CBF /* TouchTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTool.m; sourceTree = "<group>"; };
+		BD7995821F2B37C100FA0CBF /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+badge.h"; sourceTree = "<group>"; };
+		BD7995831F2B37C100FA0CBF /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
 		BDC517581F2ADDDB00E1821E /* AdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdViewController.h; sourceTree = "<group>"; };
 		BDC517591F2ADDDB00E1821E /* AdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdViewController.m; sourceTree = "<group>"; };
 		BDC5175A1F2ADDDB00E1821E /* AdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdViewController.xib; sourceTree = "<group>"; };
@@ -803,9 +809,10 @@
 		BD127D921F2AD18600DD9A8F /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				BD127DB61F2AD18600DD9A8F /* UIKit */,
+				BD127D951F2AD18600DD9A8F /* Foundation */,
 				BD127D931F2AD18600DD9A8F /* CALayer+LayerColor.h */,
 				BD127D941F2AD18600DD9A8F /* CALayer+LayerColor.m */,
-				BD127D951F2AD18600DD9A8F /* Foundation */,
 				BD127DAC1F2AD18600DD9A8F /* NSString+DWString.h */,
 				BD127DAD1F2AD18600DD9A8F /* NSString+DWString.m */,
 				BD127DAE1F2AD18600DD9A8F /* NSString+TextHight.h */,
@@ -816,9 +823,10 @@
 				BD127DB31F2AD18600DD9A8F /* UIColor+DWColor.m */,
 				BD127DB41F2AD18600DD9A8F /* UIImageView+SD.h */,
 				BD127DB51F2AD18600DD9A8F /* UIImageView+SD.m */,
-				BD127DB61F2AD18600DD9A8F /* UIKit */,
 				BD127DD51F2AD18600DD9A8F /* UITableView+NoData.h */,
 				BD127DD61F2AD18600DD9A8F /* UITableView+NoData.m */,
+				BD7995821F2B37C100FA0CBF /* UITabBar+badge.h */,
+				BD7995831F2B37C100FA0CBF /* UITabBar+badge.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1911,6 +1919,8 @@
 				BD127FA01F2AD18700DD9A8F /* YKDataTool.m */,
 				BD127FA11F2AD18700DD9A8F /* YKHTTPSession.h */,
 				BD127FA21F2AD18700DD9A8F /* YKHTTPSession.m */,
+				BD79957F1F2B20B800FA0CBF /* TouchTool.h */,
+				BD7995801F2B20B800FA0CBF /* TouchTool.m */,
 			);
 			path = "Util(工具)";
 			sourceTree = "<group>";
@@ -2217,6 +2227,7 @@
 				BD12805C1F2AD18700DD9A8F /* GKResizeableCropOverlayView.m in Sources */,
 				BD127FCF1F2AD18700DD9A8F /* PublicViewController.m in Sources */,
 				BD1280491F2AD18700DD9A8F /* RegionViewController.m in Sources */,
+				BD7995841F2B37C100FA0CBF /* UITabBar+badge.m in Sources */,
 				BD12800E1F2AD18700DD9A8F /* FMDatabaseQueue.m in Sources */,
 				BD127FC71F2AD18700DD9A8F /* AppDelegate+Push.m in Sources */,
 				BD127FBB1F2AD18700DD9A8F /* UIView+WHFrame.m in Sources */,
@@ -2258,6 +2269,7 @@
 				BD1280581F2AD18700DD9A8F /* GKImageCropOverlayView.m in Sources */,
 				BD127FB61F2AD18700DD9A8F /* UIButton+WHCountDown.m in Sources */,
 				BD1280011F2AD18700DD9A8F /* NSDataEx.m in Sources */,
+				BD7995811F2B20B800FA0CBF /* TouchTool.m in Sources */,
 				BD1280681F2AD18700DD9A8F /* DWHelper.m in Sources */,
 				BD12801A1F2AD18700DD9A8F /* SDBrowserImageView.m in Sources */,
 				BD127FAC1F2AD18700DD9A8F /* NSString+WHNormalRegEx.m in Sources */,
@@ -2493,7 +2505,7 @@
 					"$(PROJECT_DIR)/YKBase/ThirdPart/AliPay",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/高德定位",
 				);
-				GCC_PREFIX_HEADER = "/Users/xiyakun/Desktop/YKBase/YKBase/Main/DW-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/xiyakun/Desktop/BFramework/YKBase/YKBase/Main/DW-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2520,6 +2532,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/AliPay",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/WXChatPay",
+					"$(PROJECT_DIR)/YKBase/ThirdPart/CoreJPush/Lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.dfb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2539,7 +2552,7 @@
 					"$(PROJECT_DIR)/YKBase/ThirdPart/AliPay",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/高德定位",
 				);
-				GCC_PREFIX_HEADER = "/Users/xiyakun/Desktop/YKBase/YKBase/Main/DW-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/xiyakun/Desktop/BFramework/YKBase/YKBase/Main/DW-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2566,6 +2579,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/AliPay",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/WXChatPay",
+					"$(PROJECT_DIR)/YKBase/ThirdPart/CoreJPush/Lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.dfb;
 				PRODUCT_NAME = "$(TARGET_NAME)";

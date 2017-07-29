@@ -78,7 +78,7 @@
     //高的地图
     [self AMap];
     //极光推送
-//    [self JGPush:launchOptions];
+    [self JGPush:launchOptions];
     [self SetUpJGPush:launchOptions];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
    

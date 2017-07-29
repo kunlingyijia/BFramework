@@ -11,6 +11,8 @@
 #import "HomePageVC.h"
 #import "AppDelegate.h"
 #import "AdModel.h"
+#import "TouchTool.h"
+
 @interface HomePageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 ///分页参数
@@ -22,6 +24,11 @@
 #pragma mark -  视图将出现在屏幕之前
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+// [TouchTool FingerprintUnlock:^(BOOL success) {
+//     
+// } Faild:^(NSError * _Nonnull error) {
+//     
+// }];
    // [ThirdPartyTool MJRefreshBeginRefreView:self.tableView];
 
 }

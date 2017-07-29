@@ -35,7 +35,7 @@
     __block int A6 =1;
     __block int A3 =1;
     __block int A7 =1;
-    for (int i=0; i<1; i++) {
+    for (int i=0; i<100; i++) {
         AdModel *model = [[AdModel alloc]init];
         model.region_id = 1;
         model.position = 1;
