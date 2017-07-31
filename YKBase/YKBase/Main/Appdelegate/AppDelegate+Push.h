@@ -9,8 +9,13 @@
 #import "AppDelegate.h"
 
 @interface AppDelegate (Push)<JPUSHRegisterDelegate>
-///pushAlias
-@property (nonatomic, strong) NSString  *pushAlias ;
-///设置极光
--(void)SetUpJGPush:(NSDictionary *)launchOptions;
+/////pushAlias
+//@property (nonatomic, strong) NSString  *pushAlias ;
+/////设置极光
+//-(void)SetUpJGPush:(NSDictionary *)launchOptions;
+
+/** 注册JPush */
+-(void)registerJPush:(NSDictionary *)launchOptions;
+
+
 @end

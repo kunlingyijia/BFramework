@@ -14,8 +14,8 @@
 -(void)initService{
     //退出登录
     [YKNotification  addObserver:self selector:@selector(logOut:)name:@"退出账号" object:nil];
-    //设置别名
-    [YKNotification addObserver:self selector:@selector(SetUpAlias:) name:@"设置别名" object:nil];
+//    //设置别名
+//    [YKNotification addObserver:self selector:@selector(SetUpAlias:) name:@"设置别名" object:nil];
 }
 
 #pragma mark - 退出登录
@@ -27,28 +27,39 @@
     LoginVC * VC=  GetVC(LoginVC)
     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES];
 }
-#pragma mark -  设置别名
--(void)SetUpAlias:(NSNotification*)sender{
-    NSDictionary * dic = sender.userInfo;
-    self. pushAlias =dic[@"pushAlias"];
-    [JPUSHService setAlias: self. pushAlias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
-}
-#pragma mark - 推送别名
-- (void)tagsAliasCallback:(int)iResCode
-                     tags:(NSSet *)tags
-                    alias:(NSString *)alias {
-    
-    if (iResCode == 0) {
-        
-    }
-    if (iResCode == 6002) {
-        [JPUSHService setAlias: self. pushAlias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
-    }
-    else{
-        
-    }
-    NSLog(@"push set alias success alisa = %@", alias);
-}
+//#pragma mark -  设置别名
+//-(void)SetUpAlias:(NSNotification*)sender{
+//    NSDictionary * dic = sender.userInfo;
+//    self. pushAlias =dic[@"pushAlias"];
+//    __weak typeof(self) weakSelf = self;
+//
+//    [JPUSHService setAlias:self. pushAlias completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+//        if (iResCode == 0) {
+//            
+//        }
+//        if (iResCode == 6002) {
+//            [weakSelf SetUpAlias:sender];
+//        }
+//        
+//    } seq:0];
+//   // [JPUSHService setAlias: self. pushAlias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+//}
+//#pragma mark - 推送别名
+//- (void)tagsAliasCallback:(int)iResCode
+//                     tags:(NSSet *)tags
+//                    alias:(NSString *)alias {
+//    
+//    if (iResCode == 0) {
+//        
+//    }
+//    if (iResCode == 6002) {
+//        [JPUSHService setAlias: self. pushAlias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
+//    }
+//    else{
+//        
+//    }
+//    NSLog(@"push set alias success alisa = %@", alias);
+//}
 
 #pragma mark ————— 初始化window —————
 -(void)initWindow{
@@ -78,9 +89,10 @@
     //高的地图
     [self AMap];
     //极光推送
-    [self JGPush:launchOptions];
-    [self SetUpJGPush:launchOptions];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [self registerJPush:launchOptions];
+//   // [self JGPush:launchOptions];
+//    [self SetUpJGPush:launchOptions];
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
    
  
 }

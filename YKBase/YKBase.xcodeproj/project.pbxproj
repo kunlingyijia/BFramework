@@ -223,6 +223,7 @@
 		BDC5176E1F2ADE5D00E1821E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDC517661F2ADE5D00E1821E /* Main.storyboard */; };
 		BDC5176F1F2ADE5D00E1821E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDC517681F2ADE5D00E1821E /* Info.plist */; };
 		BDC517711F2ADE5D00E1821E /* YKBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDC5176A1F2ADE5D00E1821E /* YKBase.xcdatamodeld */; };
+		BDCB58A21F2F02A300E2424E /* CoreJPush.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCB58A11F2F02A300E2424E /* CoreJPush.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -701,6 +702,10 @@
 		BDC517671F2ADE5D00E1821E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BDC517681F2ADE5D00E1821E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDC5176B1F2ADE5D00E1821E /* YKBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YKBase.xcdatamodel; sourceTree = "<group>"; };
+		BDCB589E1F2F029800E2424E /* CoreJPushProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreJPushProtocol.h; sourceTree = "<group>"; };
+		BDCB589F1F2F029800E2424E /* CoreJPushSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreJPushSingleton.h; sourceTree = "<group>"; };
+		BDCB58A01F2F02A300E2424E /* CoreJPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreJPush.h; sourceTree = "<group>"; };
+		BDCB58A11F2F02A300E2424E /* CoreJPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreJPush.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1035,6 +1040,10 @@
 			children = (
 				BD127DEC1F2AD18600DD9A8F /* AppDelegate+Push.h */,
 				BD127DED1F2AD18600DD9A8F /* AppDelegate+Push.m */,
+				BDCB589E1F2F029800E2424E /* CoreJPushProtocol.h */,
+				BDCB589F1F2F029800E2424E /* CoreJPushSingleton.h */,
+				BDCB58A01F2F02A300E2424E /* CoreJPush.h */,
+				BDCB58A11F2F02A300E2424E /* CoreJPush.m */,
 				BD127DEE1F2AD18600DD9A8F /* AppDelegate+Service.h */,
 				BD127DEF1F2AD18600DD9A8F /* AppDelegate+Service.m */,
 				BD127DF01F2AD18600DD9A8F /* AppDelegate.h */,
@@ -2210,6 +2219,7 @@
 				BD1280061F2AD18700DD9A8F /* CTLeftPopView.m in Sources */,
 				BD1280171F2AD18700DD9A8F /* NewTextField.m in Sources */,
 				BD1280361F2AD18700DD9A8F /* ValuePickerView.m in Sources */,
+				BDCB58A21F2F02A300E2424E /* CoreJPush.m in Sources */,
 				BD127FAA1F2AD18700DD9A8F /* NSMutableArray+WHBlock.m in Sources */,
 				BD12801F1F2AD18700DD9A8F /* SGAdvertScrollView.m in Sources */,
 				BD1280071F2AD18700DD9A8F /* CTPopViewSingle.m in Sources */,

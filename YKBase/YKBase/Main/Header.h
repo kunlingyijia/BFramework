@@ -81,6 +81,5 @@
 #import "LoginVC.h"
 #import <WebKit/WebKit.h>
 #import "UITabBar+badge.h"
-#import "CoreJPush.h"
 
 #endif /* Header_h */
