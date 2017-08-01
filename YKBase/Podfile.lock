@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - BaiduMapKit (3.3.2)
   - Bugly (2.4.8)
   - IQKeyboardManager (4.0.10)
   - JCore (1.1.5)
@@ -54,6 +55,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
+  - BaiduMapKit
   - Bugly
   - IQKeyboardManager
   - JPush
@@ -72,6 +74,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  BaiduMapKit: 5118390d63b375483bd64c963e8e32a40fd9ddb5
   Bugly: da3c02408c14838d498429320545a8e439392978
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   JCore: 9bd9c770c877c583d98b90a68792b8361974c231
@@ -87,6 +90,6 @@ SPEC CHECKSUMS:
   UMengUShare: a5711c54e640b04e3048e931d2b88d50f9cfa55c
   WebViewJavascriptBridge: 791ee0e26d1bf15efe5fb7fb9666a71a19b89d77
 
-PODFILE CHECKSUM: 08d04ce6d6ad8129d1b1bda83d04edabec02a487
+PODFILE CHECKSUM: 46d1d8c2a1db843ff2fa4c7b95c76fb4cd169bb4
 
 COCOAPODS: 1.2.1

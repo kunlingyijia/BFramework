@@ -54,8 +54,10 @@
 #define  appScheme @"我要测试"
 ///唯一标示
 #define BundleId @"com.gd.dfb"
-//地图
+//高德地图
 #define GDKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"1d86e5860559ec6cbb1391ce853bd3f2" : @"9fad225d5991e4b6399bb5e80fc67e79"
+//百度地图
+#define BaiDuKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"tFV3DpTNI0Gy4sBBGC1GbBGF1dfhXayA" : @"tFV3DpTNI0Gy4sBBGC1GbBGF1dfhXayA"
 //极光
 #define JGKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"d6d378151a2c2ec02e15b83c" : @"5a6a612f0afc228f2dce9fef"
 //友盟

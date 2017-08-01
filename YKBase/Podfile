@@ -18,7 +18,7 @@ pod 'Bugly'
 pod 'SVProgressHUD'
 pod 'MJRefresh'
 pod 'JPush'
+pod 'BaiduMapKit' #百度地图SDK
 
 end
-
 

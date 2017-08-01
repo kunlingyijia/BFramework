@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @class GesturePasswordView;
 static NSString *channel = @"Publish channel";
 static BOOL isProduction = FALSE;

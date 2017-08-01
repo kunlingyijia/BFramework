@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@interface MapModel : NSObject
+@interface ThreeMapModel : NSObject
 ///经度
 @property (nonatomic, strong) NSString  *lng;
 ///纬度
@@ -66,7 +66,7 @@ typedef enum : NSUInteger {
 //设置网络请求成功 失败的bolck
 typedef void(^MJRefreshBlock)();
 ///跳转到第三方地图
-+(void)PushThrdPatyMapWithStart:(MapModel*)startModel End:(MapModel*)endModel;
++(void)PushThrdPatyMapWithStart:(ThreeMapModel*)startModel End:(ThreeMapModel*)endModel;
 ///更新版本
 +(void)updateVerison;
 ///刷新加载

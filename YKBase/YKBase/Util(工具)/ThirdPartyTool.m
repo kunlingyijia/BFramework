@@ -12,7 +12,7 @@
 #import "SharePanelModel.h"
 #import "BaseSendTextView.h"
 
-@implementation MapModel
+@implementation ThreeMapModel
 @end
 @implementation PayModel
 @end
@@ -21,7 +21,7 @@
 
 @implementation ThirdPartyTool
 #pragma mark -  跳转到第三方地图
-+(void)PushThrdPatyMapWithStart:(MapModel*)startModel End:(MapModel*)endModel{
++(void)PushThrdPatyMapWithStart:(ThreeMapModel*)startModel End:(ThreeMapModel*)endModel{
     NSString *startname =startModel.address;//我的位置
     double startlng = [startModel.lng doubleValue];//经度
     double startlat = [startModel.lat doubleValue];//纬度
