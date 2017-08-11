@@ -63,8 +63,10 @@ typedef enum : NSUInteger {
     LayoutType_Draw //滑动
 
 }YKLayoutType;
-//设置网络请求成功 失败的bolck
+//设置刷新
 typedef void(^MJRefreshBlock)();
+//设置网络请求成功 失败的bolck
+typedef void(^ULoginSuccess)(UMSocialUserInfoResponse  * response);
 ///跳转到第三方地图
 +(void)PushThrdPatyMapWithStart:(ThreeMapModel*)startModel End:(ThreeMapModel*)endModel;
 ///更新版本
@@ -80,7 +82,8 @@ typedef void(^MJRefreshBlock)();
 ///友盟 分享
 +(void)UShareType:(YKShareType)shareType LayoutType:(YKLayoutType)layoutType ShareModel:(ShareModel*)model;
 ///第三方登录
-+(void)ULoginType:(UMSocialPlatformType)platformType;
++(void)ULoginType:(UMSocialPlatformType)platformType ULoginSuccess:(ULoginSuccess )loginSuccess;
+
 
 
 @end

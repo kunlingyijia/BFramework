@@ -32,27 +32,27 @@
 -(void)SET_UI{
     self.title = @"我的设置";
     [self showBackBtn];
-    __block int A6 =1;
-    __block int A3 =1;
-    __block int A7 =1;
-    for (int i=0; i<100; i++) {
-        AdModel *model = [[AdModel alloc]init];
-        model.region_id = 1;
-        model.position = 1;
-        NSURLSessionDataTask * task =  [HTTPTool  requestAdWithParm:model  active:YES success:^(BaseResponse * _Nullable baseRes) {
-            //NSLog(@"%@", [baseRes yy_modelToJSONObject]);
-            if (baseRes.resultCode == 1) {
-                NSLog(@"6-----%d",A6++);
-            }else {
-                NSLog(@"7-----%d",A7++);
-            }
-        } faild:^(NSError * _Nonnull error) {
-            NSLog(@"3-----%d",A3++);
-        } ];
-       if (task) {
-            [self.sessionArray addObject:task];
-        }
-    }
+//    __block int A6 =1;
+//    __block int A3 =1;
+//    __block int A7 =1;
+//    for (int i=0; i<100; i++) {
+//        AdModel *model = [[AdModel alloc]init];
+//        model.region_id = 1;
+//        model.position = 1;
+//        NSURLSessionDataTask * task =  [HTTPTool  requestAdWithParm:model  active:YES success:^(BaseResponse * _Nullable baseRes) {
+//            //NSLog(@"%@", [baseRes yy_modelToJSONObject]);
+//            if (baseRes.resultCode == 1) {
+//                NSLog(@"6-----%d",A6++);
+//            }else {
+//                NSLog(@"7-----%d",A7++);
+//            }
+//        } faild:^(NSError * _Nonnull error) {
+//            NSLog(@"3-----%d",A3++);
+//        } ];
+//       if (task) {
+//            [self.sessionArray addObject:task];
+//        }
+//    }
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -91,6 +91,18 @@
             UpdatePasswordVC *VC = GetVC(UpdatePasswordVC);
             PushVC(VC)
     
+        }
+            break;
+            //修改密码
+        case 108: {
+            //设置别名
+            [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
+            //退出登录
+            [YKNotification postNotificationName:@"退出账号" object:nil userInfo:nil];
+//            if ([HTTPTool isLogin]){
+//                return;
+//            }
+            
         }
             break;
         default:

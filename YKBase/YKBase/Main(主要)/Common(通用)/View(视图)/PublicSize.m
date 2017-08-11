@@ -121,8 +121,43 @@
 
 @end
 
+
+
+@implementation BlueLabel
+#pragma mark - 蓝色标签
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self SetUpSize];
+        
+    }
+    return self;
+}
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self SetUpSize];
+    }
+    return self;
+}
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self SetUpSize];
+    }
+    return self;
+}
+-(void)SetUpSize {
+    self.textColor = [UIColor colorWithHexString:kBlueColor];
+    self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
+}
+
+@end
 @implementation PublicLabel
-#pragma mark - 白色标签
+#pragma mark - 公共标签
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
@@ -220,9 +255,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.backgroundColor = [UIColor colorWithHexString:kRedColor];
-
-    [self.layer setLaberMasksToBounds:YES cornerRadius:20*SizeScale borderWidth:0.0*SizeScale borderColor:[UIColor colorWithHexString:kRedColor]];
+    self.backgroundColor = [UIColor colorWithHexString:kBlueColor];
+    [self.layer setLaberMasksToBounds:YES cornerRadius:5*SizeScale borderWidth:0.0*SizeScale borderColor:[UIColor colorWithHexString:kBlueColor]];
     [self setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     
 }
@@ -239,7 +273,41 @@
 
 
 
+@implementation BlueBtn
+#pragma mark - 蓝色按钮
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self SetUpSize];
+        
+    }
+    return self;
+}
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self SetUpSize];
+    }
+    return self;
+}
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self SetUpSize];
+    }
+    return self;
+}
+-(void)SetUpSize {
+    self.titleLabel. textColor = [UIColor colorWithHexString:kBlueColor];
+    //self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
+}
+
+@end
 @implementation DarkGreyTF
+
 #pragma mark - 深灰输入框
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -269,9 +337,8 @@
 }
 -(void)SetUpSize {
      self. textColor = [UIColor colorWithHexString:kDarkGrey];
-     self.tintColor = [UIColor redColor];
-
-    self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
+     // self.tintColor = [UIColor redColor];
+     self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
 }
 
 @end
@@ -384,5 +451,80 @@
 
 @end
 
+
+@implementation LineView
+#pragma mark - 线视图
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self addSubview];
+    }
+    return self;
+}
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self addSubview];
+        
+    }
+    return self;
+}
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addSubview];
+    }
+    return self;
+}
+-(void)addSubview{
+    self.backgroundColor = [UIColor colorWithHexString:kLineColor];
+}
+-(void)layoutSubviews{
+    CGRect  Frame= self.frame;
+    Frame.size.height =0.3*SizeScale;
+    self.frame= Frame;
+}
+
+
+@end
+
+@implementation CutView
+#pragma mark - 圆角视图
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self addSubview];
+    }
+    return self;
+}
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self addSubview];
+        
+    }
+    return self;
+}
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addSubview];
+    }
+    return self;
+}
+-(void)addSubview{
+//    self.backgroundColor = [UIColor colorWithHexString:kLineColor];
+    [self.layer setLaberMasksToBounds:YES cornerRadius:10.0*SizeScale borderWidth:0.0 borderColor:nil];
+}
+
+
+
+@end
 
 

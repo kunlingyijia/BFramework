@@ -36,7 +36,8 @@
        
 }
 - (void)setTitilColor{
-    NSDictionary * dict= [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica-Bold" size:17*SizeScale],NSFontAttributeName, [UIColor colorWithHexString:kDarkGrey],NSForegroundColorAttributeName, nil];
+
+    NSDictionary * dict= [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica-Bold" size:17*SizeScale],NSFontAttributeName, [UIColor whiteColor],NSForegroundColorAttributeName, nil];
     self.navigationBar.titleTextAttributes = dict;
     
 }

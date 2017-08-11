@@ -23,7 +23,7 @@
 + (BOOL)checkMailInput:(NSString *)mail;
 /// 正则匹配手机号
 + (BOOL)checkTelNumber:(NSString *) telNumber;
-/// 正则匹配用户密码6-18位数字和字母组合
+/// 正则匹配用户密码6-16位数字和字母组合
 + (BOOL)checkPassword:(NSString *) password;
 /// 正则匹配用户姓名,20位的中文或英文
 + (BOOL)checkUserName : (NSString *) userName;
@@ -51,4 +51,6 @@
 + (BOOL) checkAmount:(NSString *) amount;
 /// 正则匹配6位正整数
 + (BOOL)checkNumber6:(NSString *) number;
+#pragma mark - 正则匹配3位正整数
++ (BOOL)checkNumber3:(NSString *) number;
 @end

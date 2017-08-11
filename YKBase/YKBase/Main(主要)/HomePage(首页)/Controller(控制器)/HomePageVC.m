@@ -12,8 +12,13 @@
 #import "AppDelegate.h"
 #import "AdModel.h"
 #import "TouchTool.h"
-
+#import "HomePageOneCell.h"
+#import "HomePageTwoCell.h"
+#import "HomePageThreeCell.h"
+#import "MessageVC.h"
+#import "DebitCardDetailsVC.h"
 @interface HomePageVC ()<UITableViewDelegate,UITableViewDataSource>
+
 @property(nonatomic,strong)UITableView *tableView;
 ///分页参数
 @property (nonatomic, assign) NSInteger pageIndex;
@@ -48,9 +53,19 @@
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
+    [self ShowRightBtnImage:@"消息" Back:^{
+        //跳转
+        MessageVC * VC =  GetVC(MessageVC);
+        PushVC(VC);
+    }];
+    [self showLeftBtnImage:@"扫一扫" Back:^{
+        //跳转
+        MessageVC * VC =  GetVC(MessageVC);
+        PushVC(VC);
+    }];
+   
     self.title = @"首页";
-    [(AppDelegate*)[UIApplication sharedApplication].delegate initUserGuidePage];
-    [self showBackBtn];
+    //[(AppDelegate*)[UIApplication sharedApplication].delegate initUserGuidePage];
     [self setUpTableView];
     
 }
@@ -63,16 +78,20 @@
     _tableView.tableFooterView = [UIView new];
     [self.view addSubview:_tableView];
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
-   
+    [_tableView tableViewregisterNibArray:@[@"HomePageOneCell",@"HomePageTwoCell",@"HomePageThreeCell"]];
     
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
+    
+    
     self.pageIndex =1;
 //    [self requestAction];
     //上拉刷新下拉加载
     [self Refresh];
+
+    
 }
 -(void)Refresh{
     __weak typeof(self) weakSelf = self;
@@ -88,58 +107,150 @@
 }
 #pragma mark - 网络请求
 -(void)requestAction{
-//    //        // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                [ThirdPartyTool MJRefreshEndRefreView:self.tableView];
-//                
-//});
+
     AdModel *model = [[AdModel alloc]init];
     model.region_id = 1;
     model.position = 1;
     __weak typeof(self) weakSelf = self;
-    NSURLSessionDataTask * task =  [HTTPTool  requestAdWithParm:model  active:YES success:^(BaseResponse * _Nullable baseRes) {
-        //NSLog(@"%@", [baseRes yy_modelToJSONObject]);
-        if (baseRes.resultCode == 1) {
-        
-        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-
-        }else {
-                   }
-    } faild:^(NSError * _Nonnull error) {
-        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-
-        } ];
-    if (task) {
-        [self.sessionArray addObject:task];
-    }
+//    NSURLSessionDataTask * task =  [HTTPTool  requestAdWithParm:model  active:YES success:^(BaseResponse * _Nullable baseRes) {
+//        //NSLog(@"%@", [baseRes yy_modelToJSONObject]);
+//        if (baseRes.resultCode == 1) {
+//        
+//        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+//
+//        }else {
+//                   }
+//    } faild:^(NSError * _Nonnull error) {
+//        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+//
+//        } ];
+//    if (task) {
+//        [self.sessionArray addObject:task];
+//    }
 }
 #pragma tableView 代理方法
 //tab分区个数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     //分区个数
-    return 1;
+    return 2;
 }
 ///tab个数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     [tableView tableViewDisplayWitimage:nil ifNecessaryForRowCount:self.dataArray.count];
-    return 15;
+    if (section ==0) {
+        return 2;
+    }else{
+        return 1;
+
+    }
+    
+    
 }
 //tab设置
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //分割线
-    //tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+
+    __weak typeof(self) weakSelf = self;
+        switch (indexPath.section) {
+            case 0:
+            {
+                if (indexPath.row ==0) {
+                    HomePageOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageOneCell" forIndexPath:indexPath];
+                    //轮播图
+                    cell.HomePageOneCellImgBlock = ^(NSInteger tag){
+                        
+                    };
+                    
+                    
+                    
+                    //cell 赋值
+                    //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+                    // cell 其他配置
+                    return cell;
+
+                }else{
+                    HomePageTwoCell  * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageTwoCell" forIndexPath:indexPath];
+                    //选项点击
+                    cell.HomePageTwoCellBlock = ^(NSInteger tag){
+                        //跳转
+                        MessageVC * VC =  GetVC(MessageVC);
+                        PushVC(VC);
+                    };
+                    //cell 赋值
+                    //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+                    // cell 其他配置
+                    return cell;
+
+                }
+                break;
+            }
+            case 1:
+            {
+                HomePageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageThreeCell" forIndexPath:indexPath];
+                //cell 赋值
+                //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+                // cell 其他配置
+                return cell;
+
+                break;
+            }
+            default:{
+                return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+                break;
+                
+            }
+        }
+        
+   
+
+    
+    
+    
+   
 }
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (indexPath.section==1) {
+        
+        //跳转
+        DebitCardDetailsVC * VC =  GetVC(DebitCardDetailsVC);
+        
+        PushVC(VC);
+        
+    }
     
     
 }
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80;
+    switch (indexPath.section) {
+        case 0:
+        {
+            if (indexPath.row==0) {
+                return 0.40*Width +0.125*Width;
+            }else{
+                return 0.40*Width;
+ 
+            }
+            
+            
+            break;
+        }
+            
+        case 1:
+        {
+            return Width *0.35;
+            break;
+        }
+            
+        default:{
+            return 0.0;
+            break;
+            
+        }
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -151,3 +262,9 @@
 }
 
 @end
+
+
+
+
+
+

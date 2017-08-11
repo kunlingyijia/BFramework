@@ -14,7 +14,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        
+    
         self.clipsToBounds = NO;
         
         _btnImageView = [[UIImageView alloc]init];

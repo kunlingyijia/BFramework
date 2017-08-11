@@ -23,9 +23,12 @@
     //Push 跳转
     [YKDataTool moveLoginToken];
     [YKDataTool moveLoginKey];
-    [DWAlertTool showToast:@"请先登录"];
-    LoginVC * VC=  GetVC(LoginVC)
-    [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES];
+    if ([HTTPTool isLogin]) {
+        return;
+    }
+//    [DWAlertTool showToast:@"请先登录"];
+//    LoginVC * VC=  GetVC(LoginVC)
+//    [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES];
 }
 //#pragma mark -  设置别名
 //-(void)SetUpAlias:(NSNotification*)sender{
@@ -82,14 +85,14 @@
 -(void)initThirdParty:(NSDictionary *)launchOptions{
     //设置错误统计
      [self initBugly];
-    //设置友盟
-    [self UMManager];
-    //设置微信支付
-    [self WXApy];
-    //高的地图
-    [self AMap];
-    //极光推送
-    [self registerJPush:launchOptions];
+//    //设置友盟
+//    [self UMManager];
+//    //设置微信支付
+//    [self WXApy];
+//    //高的地图
+//    [self AMap];
+//    //极光推送
+//    [self registerJPush:launchOptions];
 //   // [self JGPush:launchOptions];
 //    [self SetUpJGPush:launchOptions];
 //    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -243,9 +246,9 @@
     //  清理缓存
     //  [JWLaunchAd clearDiskCache];
     //  1.设置启动页广告图片的url
-    //NSString *imgUrlString =@"http://imgstore.cdn.sogou.com/app/a/100540002/714860.jpg";
+    NSString *imgUrlString =@"http://imgstore.cdn.sogou.com/app/a/100540002/714860.jpg";
     //  GIF
-    NSString *imgUrlString = @"http://img1.imgtn.bdimg.com/it/u=473895314,616407725&fm=206&gp=0.jpg";
+    //NSString *imgUrlString = @"http://img1.imgtn.bdimg.com/it/u=473895314,616407725&fm=206&gp=0.jpg";
     if ([[NSUserDefaults standardUserDefaults] boolForKey:BOOLFORKEY]) {
         [JWLaunchAd initImageWithAttribute:6.0 showSkipType:SkipShowTypeNone setLaunchAd:^(JWLaunchAd *launchAd) {
             __block JWLaunchAd *weakSelf = launchAd;
@@ -270,11 +273,11 @@
         if (![[NSUserDefaults standardUserDefaults] boolForKey:BOOLFORKEY]) {
           [[NSUserDefaults standardUserDefaults] setBool:YES forKey:BOOLFORKEY];
             // 静态引导页
-            //[self setStaticGuidePage];
+            [self setStaticGuidePage];
             // 动态引导页
-             //[self setDynamicGuidePage];
+            //[self setDynamicGuidePage];
             // 视频引导页
-            [self setVideoGuidePage];
+            //[self setVideoGuidePage];
        }
 }
 #pragma mark - 设置APP静态图片引导页

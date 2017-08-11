@@ -56,7 +56,7 @@
     
     __weak typeof(self) weakSelf = self;
     
-    [DWAlertTool alertActionSheetWithTitle:@"获取图片" message:nil OKWithTitleOne:@"相册" OKWithTitleTwo:@"拍照" CancelWithTitle:@"取消" withOKDefaultOne:^(UIAlertAction *defaultaction) {
+    [self alertActionSheetWithTitle:@"获取图片" message:nil OKWithTitleOne:@"相册" OKWithTitleTwo:@"拍照" CancelWithTitle:@"取消" withOKDefaultOne:^(UIAlertAction *defaultaction) {
         //判断相册权限
         
         ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
@@ -164,13 +164,17 @@
     ImagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//（选择类型）表示仅仅从相册中选取照片
     ImagePicker.delegate = self;//指定代理，因此我们要实现UIImagePickerControllerDelegate,  UINavigationControllerDelegate协议
     ImagePicker.allowsEditing = YES;//设置在相册选完照片后，是否跳到编辑模式进行图片剪裁。(允许用户编辑)
-    [self presentViewController:ImagePicker animated:YES completion:^{
-        //iOS 8 bug.  the status bar will sometimes not be hidden after the camera is displayed, which causes the preview after an image is captured to be black
-        if (ImagePicker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
-            [[UIApplication sharedApplication] setStatusBarHidden:NO];
-            //[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-        }
-    }];
+    // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self presentViewController:ImagePicker animated:YES completion:^{
+            //iOS 8 bug.  the status bar will sometimes not be hidden after the camera is displayed, which causes the preview after an image is captured to be black
+            if (ImagePicker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
+                [[UIApplication sharedApplication] setStatusBarHidden:NO];
+                //[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+            }
+        }];
+    });
+    
     //[self presentViewController:imagePicker animated:YES completion:nil];//显示相册
 }
 //拍照

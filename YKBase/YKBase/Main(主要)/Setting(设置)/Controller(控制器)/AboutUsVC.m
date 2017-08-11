@@ -40,7 +40,9 @@
         case 101: {
             
             [DWAlertTool showToast:@"喜欢我们,打分鼓励,喜欢我们,打分鼓励,喜欢我们,打分鼓励,喜欢我们,打分鼓励,喜欢我们,打分鼓励,喜欢我们,打分鼓励"];
-            [ThirdPartyTool ULoginType:UMSocialPlatformType_WechatSession];
+            [ThirdPartyTool ULoginType:UMSocialPlatformType_WechatSession ULoginSuccess:^(UMSocialUserInfoResponse *response) {
+                
+            }];
             
         }
             break;
@@ -49,7 +51,7 @@
             [DWAlertTool showToast:@"分享给朋友"];
             ShareModel * model = [ShareModel new];
             model.text = @"哎呀我去" ;
-            [ThirdPartyTool UShareType:ShareTypeText LayoutType:LayoutType_Draw ShareModel:model ];
+            [ThirdPartyTool UShareType:ShareTypeText LayoutType:LayoutType_Pop_up ShareModel:model ];
         }
             break;
             //联系客服

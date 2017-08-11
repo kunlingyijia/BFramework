@@ -20,5 +20,10 @@
 #import "UITextField+WHPlaceholder.h"
 #import "UIView+WHFrame.h"
 #import "UIView+WHGesture.h"
-
+#import "CALayer+LayerColor.h"
+#import "UIColor+DWColor.h"
+#import "UIImageView+SD.h"
+#import "NSString+DWString.h"
+#import "NSString+TextHight.h"
+#import "UIView+LBExtension.h"
 #endif /* WHUIKit_h */

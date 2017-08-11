@@ -99,17 +99,17 @@
     //代码实现获得应用的Verison号：
     NSString *oldVerison = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     __weak typeof(self) weakSelf = self;
-    [HTTPTool requestVersionUWithParm:model active:YES success:^(BaseResponse * _Nullable baseRes) {
-        if (baseRes.resultCode == 1) {
-        VerisonModel* model =[VerisonModel yy_modelWithDictionary:((NSDictionary*)baseRes.data)];
-        if ([oldVerison compare:model.versionCode]==NSOrderedAscending) {
-        //NSOrderedAscending (升序)
-        [weakSelf addMandatoryAlertAction:model];
-        }
-    }
-    } faild:^(id  _Nullable error) {
-        
-    }];
+//    [HTTPTool requestVersionUWithParm:model active:YES success:^(BaseResponse * _Nullable baseRes) {
+//        if (baseRes.resultCode == 1) {
+//        VerisonModel* model =[VerisonModel yy_modelWithDictionary:((NSDictionary*)baseRes.data)];
+//        if ([oldVerison compare:model.versionCode]==NSOrderedAscending) {
+//        //NSOrderedAscending (升序)
+//        [weakSelf addMandatoryAlertAction:model];
+//        }
+//    }
+//    } faild:^(id  _Nullable error) {
+//        
+//    }];
 }
 #pragma mark - 强制更新
 +(void)addMandatoryAlertAction:(VerisonModel*)model{
@@ -464,7 +464,8 @@
     }];
 }
 #pragma mark - 第三方登录
-+(void)ULoginType:(UMSocialPlatformType)platformType{
+///第三方登录
++(void)ULoginType:(UMSocialPlatformType)platformType ULoginSuccess:(ULoginSuccess )loginSuccess;{
      [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:[DWAlertTool getCurrentUIVC] completion:^(id result, NSError *error) {
       
          if (error) {
@@ -487,7 +488,7 @@
              NSLog(@" gender: %@", resp.gender);
              // 第三方平台SDK原始数据
              NSLog(@" originalResponse: %@", resp.originalResponse);
-       
+             loginSuccess(resp);
          }
      
      

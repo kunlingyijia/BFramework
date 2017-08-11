@@ -14,12 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - BaiduMapKit (3.3.2)
   - Bugly (2.4.8)
   - IQKeyboardManager (4.0.10)
   - JCore (1.1.5)
   - JPush (3.0.6):
     - JCore (~> 1.1.1)
+  - LBXScan (1.1.1):
+    - ZXingObjC (~> 3.0)
   - LXMButtonImagePosition (1.1.1)
   - Masonry (1.0.2)
   - MJRefresh (3.1.12)
@@ -51,14 +52,16 @@ PODS:
     - UMengUShare/Social/ReducedWeChat
   - UMengUShare/UI (6.4.5):
     - UMengUShare/Core
-  - WebViewJavascriptBridge (6.0.2)
+  - ZXingObjC (3.2.1):
+    - ZXingObjC/All (= 3.2.1)
+  - ZXingObjC/All (3.2.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
-  - BaiduMapKit
   - Bugly
   - IQKeyboardManager
   - JPush
+  - LBXScan (~> 1.1.1)
   - LXMButtonImagePosition (~> 1.1.1)
   - Masonry
   - MJRefresh
@@ -70,15 +73,14 @@ DEPENDENCIES:
   - UMengUShare/Social/Sina (~> 6.4.5)
   - UMengUShare/Social/WeChat (~> 6.4.5)
   - UMengUShare/UI (~> 6.4.5)
-  - WebViewJavascriptBridge
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  BaiduMapKit: 5118390d63b375483bd64c963e8e32a40fd9ddb5
   Bugly: da3c02408c14838d498429320545a8e439392978
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   JCore: 9bd9c770c877c583d98b90a68792b8361974c231
   JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
+  LBXScan: dfb4d8ae8e4cff2aa0c9e1771e43954dce1469a9
   LXMButtonImagePosition: bbbe4fceb2f6011cf02add36750acbeddd161c3e
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
@@ -88,8 +90,8 @@ SPEC CHECKSUMS:
   TZImagePickerController: 8c02d10822404b26c4330cdb79f2e46fb6a61473
   UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
   UMengUShare: a5711c54e640b04e3048e931d2b88d50f9cfa55c
-  WebViewJavascriptBridge: 791ee0e26d1bf15efe5fb7fb9666a71a19b89d77
+  ZXingObjC: bbf7b8f0cf8933fdd33eb4f9f46e22308552869b
 
-PODFILE CHECKSUM: 46d1d8c2a1db843ff2fa4c7b95c76fb4cd169bb4
+PODFILE CHECKSUM: 9fac4801982d67853af4d756358b8879fa75e2ec
 
 COCOAPODS: 1.2.1

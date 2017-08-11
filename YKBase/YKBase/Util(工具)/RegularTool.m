@@ -209,10 +209,10 @@
 }
 
 
-#pragma mark - 正则匹配用户密码6-18位数字和字母组合
+#pragma mark - 正则匹配用户密码6-16位数字和字母组合
 + (BOOL)checkPassword:(NSString *) password
 {
-    NSString *pattern = @"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{6,18}";
+    NSString *pattern = @"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{6,16}";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:password];
     return isMatch;
@@ -335,6 +335,13 @@
 #pragma mark - 正则匹配6位正整数
 + (BOOL)checkNumber6:(NSString *) number{
     NSString *stringRegex = @"^[1-9]\\d{0,5}$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
+    BOOL flag = [phoneTest evaluateWithObject:number];
+    return flag;
+}
+#pragma mark - 正则匹配3位正整数
++ (BOOL)checkNumber3:(NSString *) number{
+    NSString *stringRegex = @"^[1-9]\\d{0,2}$";
     NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
     BOOL flag = [phoneTest evaluateWithObject:number];
     return flag;

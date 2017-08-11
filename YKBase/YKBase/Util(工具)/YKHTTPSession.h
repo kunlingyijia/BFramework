@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 //#import <UIKit/UIKit.h>
 @class BaseViewController;
+@class Userinfo;
 @interface YKHTTPSession : NSObject
 //设置网络请求成功 失败的bolck
 typedef void(^YKSuccessCallback)(NSDictionary* _Nullable response);
 typedef void(^YKFaildCallback)(NSError * _Nonnull  error);
+
 //typedef NS_ENUM(NSUInteger,HTTPSRequestType)
 //{
 //    HTTPSRequestTypeGet = 0,
@@ -28,6 +30,10 @@ typedef enum : NSUInteger {
 + (nullable YKHTTPSession *)shareSession;
 ///BaseViewController
 @property (nonatomic, strong) BaseViewController  * _Nullable BaseVC ;
+///用户信息
+@property (nonatomic, strong) Userinfo   * _Nullable userinfo ;
+
+
 //网络请求
 - (nullable NSURLSessionDataTask *)requestDataWithParm:(nullable id)parm act:( nonnull NSString *)actName sign:(nullable id)sign method:(YKRequestMethod)method  showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable YKSuccessCallback)success faild:(nullable YKFaildCallback)faild;
 ///网络监测者

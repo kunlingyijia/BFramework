@@ -37,6 +37,17 @@
 @property (nonatomic, strong) NSIndexPath  *indexPath ;
 
 @end
+
+
+/**
+ 蓝色标签
+ */
+@interface BlueLabel : UILabel
+///indexPath
+@property (nonatomic, strong) NSIndexPath  *indexPath ;
+
+@end
+
 /**
  公共标签
  */
@@ -57,6 +68,11 @@
  提交按钮
  */
 @interface SubmitBtn : PublicBtn
+@end
+/**
+ 提交按钮
+ */
+@interface BlueBtn : PublicBtn
 @end
 /**
  深灰输入框
@@ -84,3 +100,22 @@
 @interface LightGreyTV : EZTextView
 
 @end
+
+
+
+
+/**
+ 线视图
+ */
+@interface LineView : UIView
+
+@end
+
+/**
+ 圆角视图
+ */
+@interface CutView : UIView
+
+@end
+
+

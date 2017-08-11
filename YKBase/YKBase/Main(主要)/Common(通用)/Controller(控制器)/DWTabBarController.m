@@ -7,67 +7,207 @@
 //
 
 #import "DWTabBarController.h"
+#import "LBTabBar.h"
+
 #import "HomePageVC.h"
+#import "CardPackageVC.h"
+#import "BillVC.h"
 #import "MyInfoVC.h"
-@interface DWTabBarController ()
+#import "PopupVC.h"
+#import "AddDebitCard.h"
+#import "AddDebitCardVC.h"
+#import "MyWalletVC.h"
+#import "TopUpVC.h"
+@interface DWTabBarController ()<LBTabBarDelegate>
 
 @end
 
 @implementation DWTabBarController
+#pragma mark - 第一次使用当前类的时候对设置UITabBarItem的主题
++ (void)initialize
+{
+    UITabBarItem *tabBarItem = [UITabBarItem appearanceWhenContainedInInstancesOfClasses:@[self]];
+    //设置文字
+    [tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:10*SizeScale],NSFontAttributeName, [UIColor colorWithHexString:kDarkGrey],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+    [tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:10*SizeScale],NSFontAttributeName, [UIColor colorWithHexString:kBlueColor],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self addAllChidViewController];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+
+    [self setUpAllChildVc];
+    
+    //创建自己的tabbar，然后用kvc将自己的tabbar和系统的tabBar替换下
+    LBTabBar *tabbar = [[LBTabBar alloc] init];
+    tabbar.myDelegate = self;
+    //kvc实质是修改了系统的_tabBar
+    [self setValue:tabbar forKeyPath:@"tabBar"];
+    
+    
 }
-- (void)addAllChidViewController {
-    //tabbar的背景颜色
-    UIView *bgView = [[UIView alloc] initWithFrame:self.tabBar.bounds];
-    [self.tabBar insertSubview:bgView atIndex:0];
-    bgView.userInteractionEnabled = YES;
-    bgView.backgroundColor = [UIColor whiteColor];
-    self.tabBar.opaque = YES;
-    //设置状态栏字体颜色
-    //UIStatusBarStyleDefault  黑色
-    //UIStatusBarStyleLightContent 白色
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-    //创建主页面四个分类
+
+
+#pragma mark - ------------------------------------------------------------------
+#pragma mark - 初始化tabBar上除了中间按钮之外所有的按钮
+
+- (void)setUpAllChildVc
+{
     //创建一个单例 存储四个分类 在整个工程都能用
     HomePageVC*   homePageVC = [[HomePageVC alloc] initWithNibName:@"HomePageVC" bundle:nil];
-    MyInfoVC* myInfoVC = [[MyInfoVC alloc] initWithNibName:@"MyInfoVC" bundle:nil];
-    [self addOneChildVc:homePageVC title:@"首页" imageName:@"首页" selectedImageName:@"首页－点击"];
-    [self addOneChildVc:myInfoVC title:@"我的" imageName:@"我的" selectedImageName:@"我的－点击"];
+    CardPackageVC* cardPackageVC = [[CardPackageVC alloc] initWithNibName:@"CardPackageVC" bundle:nil];
+    BillVC*   billVC = [[BillVC alloc] initWithNibName:@"BillVC" bundle:nil];
+    MyInfoVC* myInfoVC1 = [[MyInfoVC alloc] initWithNibName:@"MyInfoVC" bundle:nil];
+    [self setUpOneChildVcWithVc:homePageVC Image:@"首页" selectedImage:@"首页1" title:@"首页"];
+    [self setUpOneChildVcWithVc:cardPackageVC Image:@"卡包1" selectedImage:@"卡包" title:@"卡包"];
+    [self setUpOneChildVcWithVc:billVC Image:@"账单" selectedImage:@"账单蓝" title:@"账单"];
+    [self setUpOneChildVcWithVc:myInfoVC1 Image:@"我的" selectedImage:@"我的蓝" title:@"我的"];
+    
    
     
-    //添加导航控制器
-    BaseNavigationVC *nav1 = [[BaseNavigationVC alloc] initWithRootViewController:homePageVC];
-    BaseNavigationVC *nav2 = [[BaseNavigationVC alloc] initWithRootViewController:myInfoVC];
-    self.viewControllers = @[nav1, nav2];
-}
-
-- (void)addOneChildVc:(BaseViewController *)childVc title:(NSString *)title imageName:(NSString *)imageN selectedImageName:(NSString *)selectedImageN {
-    //设置标题
-    childVc.title = title;
-    //设置图标
-    childVc.tabBarItem.image = [[UIImage imageNamed:imageN] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    //设置选中图标
-    UIImage *selectedImage = [[UIImage imageNamed:selectedImageN] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    childVc.tabBarItem.selectedImage = selectedImage;
-    //设置文字
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:10*SizeScale],NSFontAttributeName, [UIColor colorWithHexString:kDarkGrey],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:10*SizeScale],NSFontAttributeName, [UIColor colorWithHexString:kRedColor],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
-//    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                                       [UIColor whiteColor], UITextAttributeTextColor,
-//                                                       nil] forState:UIControlStateNormal];
-//    UIColor *titleHighlightedColor = [UIColor greenColor];
-//    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                                       titleHighlightedColor, UITextAttributeTextColor,
-//                                                       nil] forState:UIControlStateSelected];
-
-    //添加导航控制器
 }
 
+#pragma mark - 初始化设置tabBar上面单个按钮的方法
 
+/**
+ *  @author li bo, 16/05/10
+ *
+ *  设置单个tabBarButton
+ *
+ *  @param Vc            每一个按钮对应的控制器
+ *  @param image         每一个按钮对应的普通状态下图片
+ *  @param selectedImage 每一个按钮对应的选中状态下的图片
+ *  @param title         每一个按钮对应的标题
+ */
+- (void)setUpOneChildVcWithVc:(UIViewController *)Vc Image:(NSString *)image selectedImage:(NSString *)selectedImage title:(NSString *)title
+{
+    BaseNavigationVC *nav = [[BaseNavigationVC alloc] initWithRootViewController:Vc];
+    
+    
+    //Vc.view.backgroundColor = [self randomColor];
+    
+    UIImage *myImage = [UIImage imageNamed:image];
+    myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    //tabBarItem，是系统提供模型，专门负责tabbar上按钮的文字以及图片展示
+    Vc.tabBarItem.image = myImage;
+    UIImage *mySelectedImage = [UIImage imageNamed:selectedImage];
+    mySelectedImage = [mySelectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    Vc.tabBarItem.selectedImage = mySelectedImage;
+    Vc.tabBarItem.title = title;
+    Vc.navigationItem.title = title;
+    [self addChildViewController:nav];
+    
+}
+#pragma mark - ------------------------------------------------------------------
+#pragma mark - LBTabBarDelegate
+//点击中间按钮的代理方法
+- (void)tabBarPlusBtnClick:(LBTabBar *)tabBar
+{
+//    ///是否实名认证
+//    if ([HTTPTool isCertification]) {
+//        return;
+//    }
+    PopupVC* VC = GetVC(PopupVC);
+    VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    VC.PopupVCBlock = ^(NSInteger tag){
+        switch (tag) {
+            case 0:
+            {
+                
+                break;
+            }
+                
+            case 1:
+            {
+                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                ///是否实名认证
+//                                if ([HTTPTool isCertification]) {
+//                                    return;
+//                                }
+                                //新增信用卡
+                                AddDebitCard * VC =  GetVC(AddDebitCard);
+                                
+                                [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
+                                
+                });
+               
+                break;
+            }
+                
+            case 2:
+            {
+                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    ///是否实名认证
+//                    if ([HTTPTool isCertification]) {
+//                        return;
+                    //}
+                     //新增借记卡
+                    AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
+                    [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
+                    
+                });
+
+               
+                break;
+            }
+                
+                
+            case 3:
+            {
+                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    ///是否实名认证
+//                    if ([HTTPTool isCertification]) {
+//                        return;
+//                    }
+                    //跳转
+                    TopUpVC * VC =  GetVC(TopUpVC);
+                    
+              [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];                    
+                });
+                //快速充值
+                break;
+            }
+            case 4:
+            {
+                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    ///是否实名认证
+//                    if ([HTTPTool isCertification]) {
+//                        return;
+//                    }
+                    //掌上提现 跳转
+                    MyWalletVC * VC = GetVC(MyWalletVC);
+                    [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
+                });
+
+              
+                break;
+            }
+
+            default:{
+                
+                break;
+                
+            }
+        }
+
+    };
+    
+    
+    [[DWAlertTool getCurrentUIVC] presentViewController:VC animated:NO completion:nil];
+    
+    
+    
+}
 /*
 #pragma mark - Navigation
 

@@ -40,25 +40,25 @@
     model.region_id = 1;
     model.position = 1;
     __weak typeof(self) weakSelf = self;
-    [HTTPTool  requestAdWithParm:model  active:YES success:^(BaseResponse * _Nullable baseRes) {
-        NSLog(@"%@", [baseRes yy_modelToJSONObject]);
-        if (baseRes.resultCode == 1) {
-            NSArray * arr = baseRes.data;
-            NSString * image_url = arr[0][@"image_url"];
-            if (((NSString*)[[NSUserDefaults standardUserDefaults]objectForKey:@"ADimage_url"]).length==0) {
-                [[NSUserDefaults standardUserDefaults]setObject:image_url forKey:@"ADimage_url"];
-                [weakSelf.imageView sd_setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults]objectForKey:@"ADimage_url"]] placeholderImage:[UIImage imageNamed:@""]];
-            }else{
-                [[NSUserDefaults standardUserDefaults]setObject:image_url forKey:@"ADimage_url"];
-            }
-            
-        }else {
-            
-        }
-        
-    } faild:^(id  _Nullable error) {
-        
-    } ];
+//    [HTTPTool  requestAdWithParm:model  active:YES success:^(BaseResponse * _Nullable baseRes) {
+//        NSLog(@"%@", [baseRes yy_modelToJSONObject]);
+//        if (baseRes.resultCode == 1) {
+//            NSArray * arr = baseRes.data;
+//            NSString * image_url = arr[0][@"image_url"];
+//            if (((NSString*)[[NSUserDefaults standardUserDefaults]objectForKey:@"ADimage_url"]).length==0) {
+//                [[NSUserDefaults standardUserDefaults]setObject:image_url forKey:@"ADimage_url"];
+//                [weakSelf.imageView sd_setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults]objectForKey:@"ADimage_url"]] placeholderImage:[UIImage imageNamed:@""]];
+//            }else{
+//                [[NSUserDefaults standardUserDefaults]setObject:image_url forKey:@"ADimage_url"];
+//            }
+//            
+//        }else {
+//            
+//        }
+//        
+//    } faild:^(id  _Nullable error) {
+//        
+//    } ];
         
     
 //    __weak typeof(self) weakself = self;

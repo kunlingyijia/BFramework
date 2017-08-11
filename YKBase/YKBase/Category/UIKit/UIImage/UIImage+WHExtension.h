@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (WHExtension)
-
+/**
+ *  根据颜色生成一张图片
+ *  @param imageName 提供的颜色
+ */
++ (UIImage *)imageWithColor:(UIColor *)color;
 /**
  根据颜色生成纯色图片
 

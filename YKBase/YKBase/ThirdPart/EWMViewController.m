@@ -282,7 +282,7 @@
             self.backItem = [[UIBarButtonItem alloc] init];
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             //这是一张“<”的图片，可以让美工给切一张
-            UIImage *image = [UIImage imageNamed:@"夺宝-箭头-左.png"];
+            UIImage *image = [UIImage imageNamed:@"123.png"];
             [btn setImage:image forState:UIControlStateNormal];
             [btn setTitle:@"返回" forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(backNative) forControlEvents:UIControlEventTouchUpInside];

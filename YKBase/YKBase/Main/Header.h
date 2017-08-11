@@ -25,7 +25,7 @@
 #import "UICollectionView+NoData.h"
 #import "DWHelper.h"
 #import "EZTextView.h"
-#import "LineView.h"
+//#import "LineView.h"
 #import "ImageChooseVC.h"
 #import "UIImage+GIF.h"
 #import "NSString+TextHight.h"
@@ -81,6 +81,7 @@
 #import "LoginVC.h"
 #import <WebKit/WebKit.h>
 #import "UITabBar+badge.h"
+/*
 //以下是百度地图
 #import <MapKit/MapKit.h>
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
@@ -92,4 +93,22 @@
 #import <BaiduMapAPI_Radar/BMKRadarComponent.h>//引入周边雷达功能所有的头文件
 #import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
 //以上是百度地图
+*/
+//二维码
+#import "LBXScanWrapper.h"
+#import "LBXScanViewController.h"
+#import "LBXScanView.h"
+#import "LBXScanResult.h"
+#import "LBXScanWrapper.h"
+#import "LBXViewController.h"
+///自定义分段View
+#import "SegmentedView.h"
+#import "Userinfo.h"
+///时间选择器(年月)
+#import "MCDatePickerView.h"
+///银行卡相关
+#import "CardModel.h"
+
+
+
 #endif /* Header_h */

@@ -53,6 +53,7 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             _BaseVC.view.userInteractionEnabled =YES;
             faild(error);
+            NSLog(@"error--%@",error);
             NSString * errorStr =error.localizedDescription;
             [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
             if (![errorStr isEqualToString:@"已取消"]) {

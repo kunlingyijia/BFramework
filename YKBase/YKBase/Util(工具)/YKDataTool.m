@@ -87,7 +87,11 @@
 + (NSString *)getLoginToken {
     return [self readUserDataForKey:@"loginToken"];
 }
-
+///登录手机号
++ (NSString *)getuseraccount{
+     return [self readUserDataForKey:@"useraccount"];
+    
+}
 
 #pragma mark - 配置信息
 +(NSString*)getimage_hostname{

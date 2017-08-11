@@ -11,8 +11,9 @@
 #import "UserGuideViewController.h"
 #import "AdViewController.h"
 #import "VerisonModel.h"
-BMKMapManager* _mapManager;
-@interface AppDelegate ()<BMKGeneralDelegate>
+//BMKMapManager* _mapManager;
+@interface AppDelegate ()
+// <BMKGeneralDelegate>
 
 @end
 
@@ -28,45 +29,64 @@ BMKMapManager* _mapManager;
     [self monitorNetworkStatus];
      //设置所有第三方
     [self initThirdParty:launchOptions];
-    //配置百度地图
-    [self configurationBMKMap];
+//    //配置百度地图
+//    [self configurationBMKMap];
     DWTabBarController* tabbar = [[DWTabBarController alloc]init];
     self.window.rootViewController = tabbar;
     //设置广告页
-    [self initAdvertising];
+   // [self initAdvertising];
+    
+    //是否开启推送
+//    if (IOS8) { //iOS8以上包含iOS8
+//        if ([[UIApplication sharedApplication] currentUserNotificationSettings].types == 0) {
+//            
+//        }else{
+//            
+//        }
+//    }else{ // ios7 一下
+//        if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes]  == UIRemoteNotificationTypeNone) {
+//            
+//        }else{
+//            
+//        }
+//    }
+    
+    
+    
+    
+    
     return YES;
     
 }
 #pragma mark -- 百度地图
 - (void)configurationBMKMap {
-    
-    // 要使用百度地图，请先启动BaiduMapManager
-    _mapManager = [[BMKMapManager alloc] init];
-    BOOL ret = [_mapManager start:BaiDuKey generalDelegate:self];
-    //  测试  XRx7UsnDBANEiNViHTvvDoRt4ATOeqZL    项目id  com.baidu.mapsdk.demo.ylu
-    if (!ret) {
-        NSLog(@"manager start failed!");
-    }
-    
-}
-#pragma mark -- BMKGeneralDelegate
-
-- (void)onGetNetworkState:(int)iError {
-    if (0 == iError) {
-        NSLog(@"联网成功");
-    }else {
-        NSLog(@"onGetNetworkState %d",iError);
-    }
+//    // 要使用百度地图，请先启动BaiduMapManager
+//    _mapManager = [[BMKMapManager alloc] init];
+//    BOOL ret = [_mapManager start:BaiDuKey generalDelegate:self];
+//    //  测试  XRx7UsnDBANEiNViHTvvDoRt4ATOeqZL    项目id  com.baidu.mapsdk.demo.ylu
+//    if (!ret) {
+//        NSLog(@"manager start failed!");
+//    }
     
 }
-
-- (void)onGetPermissionState:(int)iError {
-    if (0 == iError) {
-        NSLog(@"授权成功");
-    }else {
-        NSLog(@"onGetPermissionState %d",iError);
-    }
-}
+//#pragma mark -- BMKGeneralDelegate
+//
+//- (void)onGetNetworkState:(int)iError {
+//    if (0 == iError) {
+//        NSLog(@"联网成功");
+//    }else {
+//        NSLog(@"onGetNetworkState %d",iError);
+//    }
+//    
+//}
+//
+//- (void)onGetPermissionState:(int)iError {
+//    if (0 == iError) {
+//        NSLog(@"授权成功");
+//    }else {
+//        NSLog(@"onGetPermissionState %d",iError);
+//    }
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 }

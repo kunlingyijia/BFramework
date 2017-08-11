@@ -26,5 +26,7 @@ typedef void(^Cancel)(UIAlertAction *cancelaction);
 ///获取当前界面
 +(UIViewController *)getCurrentUIVC;
 
+///验证码
++(void)VerificationCodeBtn:(UIButton*)sender;
 
 @end

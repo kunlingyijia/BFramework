@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="489" id="KGk-i7-Jjw" customClass="HomePageOneCell">
+            <rect key="frame" x="0.0" y="0.0" width="477" height="489"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="477" height="489"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yg9-F2-EHs">
+                        <rect key="frame" x="0.0" y="0.0" width="477" height="191"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Yg9-F2-EHs" secondAttribute="height" multiplier="5:2" id="xPD-sJ-drm"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHD-LI-Qnc">
+                        <rect key="frame" x="0.0" y="191" width="477" height="59.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="CHD-LI-Qnc" secondAttribute="height" multiplier="8" id="Mm7-CT-a9M"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Yg9-F2-EHs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="763-jQ-0EN"/>
+                    <constraint firstItem="CHD-LI-Qnc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DhK-ic-h5b"/>
+                    <constraint firstAttribute="trailing" secondItem="CHD-LI-Qnc" secondAttribute="trailing" id="EDl-sX-U6v"/>
+                    <constraint firstItem="Yg9-F2-EHs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="HB1-XT-Fua"/>
+                    <constraint firstAttribute="trailing" secondItem="Yg9-F2-EHs" secondAttribute="trailing" id="YEn-KJ-3bF"/>
+                    <constraint firstItem="CHD-LI-Qnc" firstAttribute="top" secondItem="Yg9-F2-EHs" secondAttribute="bottom" id="v5j-Mp-AAk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ShufflingImgView" destination="Yg9-F2-EHs" id="HJN-Tt-7Sr"/>
+                <outlet property="ShufflingLabelView" destination="CHD-LI-Qnc" id="AF0-dE-zzz"/>
+            </connections>
+            <point key="canvasLocation" x="112.5" y="276.5"/>
+        </tableViewCell>
+    </objects>
+</document>

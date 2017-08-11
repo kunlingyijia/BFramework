@@ -32,7 +32,8 @@
 + (NSString *)getRegistertoken;
 + (NSString *)getLoginKey;
 + (NSString *)getLoginToken;
-
+///登录手机号
++ (NSString *)getuseraccount;
 +(NSString*)getimage_hostname;
 +(NSString*)getimage_account;
 +(NSString*)getimage_password;

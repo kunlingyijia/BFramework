@@ -23,14 +23,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:kBlueColor];
     self.view.backgroundColor = [UIColor colorWithHexString:kViewBackgroundColor];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"图层-8"] forBarMetrics:UIBarMetricsDefault];
+    
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 
 }
 - (void)showBackBtn{
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 0, 40, 40);
 //    backBtn.backgroundColor = [UIColor redColor];
-    [backBtn setImage:[UIImage imageNamed:@"夺宝-箭头-左.png"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"123.png"] forState:UIControlStateNormal];
     backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [backBtn addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 30)];
@@ -48,7 +52,7 @@
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 0, 40, 40);
     backBtn.backgroundColor = [UIColor clearColor];
-    [backBtn setImage:[UIImage imageNamed:@"夺宝-箭头-左.png"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"123.png"] forState:UIControlStateNormal];
     backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [backBtn addTarget:self action:@selector(doBlockBack:) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 30)];
@@ -59,12 +63,34 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.000002 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.navigationController.interactivePopGestureRecognizer .enabled = NO;
     });
-    self.Back = Back;
+    self.LeftBack = Back;
 }
 - (void)doBlockBack:(id)sender{
-    self.Back();
+    self.LeftBack();
     [self cancelRequest];
 }
+
+#pragma mark - 左侧图片
+- (void)showLeftBtnImage:(NSString*)image Back:(ObjectBack)Back{
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(0, 0, 40, 40);
+    //    backBtn.backgroundColor = [UIColor redColor];
+    [backBtn setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
+    backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [backBtn addTarget:self action:@selector(LeftBtnImage:) forControlEvents:UIControlEventTouchUpInside];
+    [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = backItem;
+    //[self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.navigationController.navigationBar.translucent = NO;
+    self.LeftBack = Back;
+}
+-(void)LeftBtnImage:(id)sender{
+    
+     self.LeftBack();
+    
+}
+
 #pragma mark - 右侧
 -(void)ShowRightBtnTitle:(NSString*)tilte Back:(ObjectBack)Back{
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -77,12 +103,31 @@
     [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 30)];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = backItem;
-    self.Back = Back;
+    self.RightBack = Back;
 }
 #pragma mark - popRootdoBack点击事件
 -(void)RightBtn:(UIButton*)sender{
-     self.Back();
+     self.RightBack();
 }
+
+#pragma mark - 右侧title
+-(void)ShowRightBtnImage:(NSString*)image Back:(ObjectBack)Back{
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(0, 0, 40, 40);
+    //    backBtn.backgroundColor = [UIColor redColor];
+    [backBtn setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
+    backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [backBtn addTarget:self action:@selector(RightBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.rightBarButtonItem = backItem;
+    //[self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.navigationController.navigationBar.translucent = NO;
+    self.RightBack = Back;
+}
+
+
+
 #pragma mark - 取消网络
 -(void)cancelRequest{
     __weak typeof(self) weakSelf = self;
@@ -133,7 +178,7 @@
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 0, 40, 40);
     backBtn.backgroundColor = [UIColor redColor];
-    [backBtn setImage:[UIImage imageNamed:@"夺宝-箭头-左"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"123"] forState:UIControlStateNormal];
     backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [backBtn addTarget:self action:@selector(popRootdoBack:) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 30)];
@@ -177,5 +222,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark - 取消-确定-确定 --居下
+-(void)alertActionSheetWithTitle:(NSString*)title message:(NSString*)message OKWithTitleOne:(NSString*)OKtitleOne OKWithTitleTwo:(NSString*)OKtitleTwo  CancelWithTitle:(NSString*)Canceltitle withOKDefaultOne:(OKDefault)defaultactionOne withOKDefaultTwo:(OKDefault)defaultactionTwo withCancel:(Cancel)cancelaction{
+    UIAlertController * alertC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleActionSheet)];
+    UIAlertAction * OKOne = [UIAlertAction actionWithTitle:OKtitleOne style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        defaultactionOne (action);
+    }];
+    //[OKOne setValue:[UIColor colorWithHexString:kNavigationBgColor] forKey:@"_titleTextColor"];
+    UIAlertAction * OKTwo = [UIAlertAction actionWithTitle:OKtitleTwo style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        defaultactionTwo (action);
+    }];
+    //[OKTwo setValue:[UIColor colorWithHexString:kNavigationBgColor] forKey:@"_titleTextColor"];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:Canceltitle style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+        cancelaction (action);
+    }];
+    //[cancel setValue:[UIColor colorWithHexString:kNavigationBgColor] forKey:@"_titleTextColor"];
+    [alertC addAction:OKOne];
+    [alertC addAction:OKTwo];
+    [alertC addAction:cancel];
+    [self presentViewController:alertC animated:YES completion:nil];
+}
 @end
