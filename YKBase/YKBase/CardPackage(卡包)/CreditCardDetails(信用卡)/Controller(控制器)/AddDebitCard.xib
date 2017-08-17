@@ -43,7 +43,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zb-r8-1QA" customClass="CutView">
                                             <rect key="frame" x="195" y="15" width="165" height="102"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QP7-kv-dCY">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="上次信用卡背面" translatesAutoresizingMaskIntoConstraints="NO" id="QP7-kv-dCY">
                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="102"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="402" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOv-Nv-xvS">
@@ -68,7 +68,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PdF-Uh-Vya" customClass="CutView">
                                             <rect key="frame" x="15" y="15" width="165" height="102"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qlr-bD-XeF">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="上传信用卡正面" translatesAutoresizingMaskIntoConstraints="NO" id="qlr-bD-XeF">
                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="102"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="401" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLL-Wo-f2d">
@@ -557,4 +557,8 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="上传信用卡正面" width="168" height="106"/>
+        <image name="上次信用卡背面" width="168" height="106"/>
+    </resources>
 </document>

@@ -17,11 +17,18 @@
 #import "HomePageThreeCell.h"
 #import "MessageVC.h"
 #import "DebitCardDetailsVC.h"
+#import "HomePageModel.h"
+#import "BillVC.h"
+#import "CardPackageVC.h"
+#import "TopUpVC.h"
 @interface HomePageVC ()<UITableViewDelegate,UITableViewDataSource>
-
 @property(nonatomic,strong)UITableView *tableView;
 ///分页参数
 @property (nonatomic, assign) NSInteger pageIndex;
+///轮播图
+@property (nonatomic,strong)NSMutableArray * imageArray;
+///声明消息
+@property (nonatomic,strong)NSMutableArray * messageArray;
 ///数据
 @property (nonatomic,strong)NSMutableArray * dataArray;
 @end
@@ -55,13 +62,14 @@
 -(void)SET_UI{
     [self ShowRightBtnImage:@"消息" Back:^{
         //跳转
+        if ([HTTPTool isLogin]) {
+            return ;
+        }
         MessageVC * VC =  GetVC(MessageVC);
         PushVC(VC);
     }];
     [self showLeftBtnImage:@"扫一扫" Back:^{
-        //跳转
-        MessageVC * VC =  GetVC(MessageVC);
-        PushVC(VC);
+         [DWAlertTool showToast:@"开发中,敬请期待..."];
     }];
    
     self.title = @"首页";
@@ -83,18 +91,36 @@
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
+    self.imageArray = [NSMutableArray arrayWithCapacity:0];
+    self.messageArray = [NSMutableArray arrayWithCapacity:0];
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     
     
+    HomePageModel * model1 = [HomePageModel new];
+    model1.title = @"我的天啊我的天啊我的天啊我的天啊我的天啊我的天啊我的天啊";
+    [self.messageArray addObject:model1];
+    HomePageModel * model2 = [HomePageModel new];
+    model2.title = @"哈喽美女哈喽美女哈喽美女哈喽美女哈喽美女哈喽美女";
+    [self.messageArray addObject:model2];
+
+    HomePageModel * model3 = [HomePageModel new];
+    model3.title = @"你好你好你好你好你好你好你好你好你好你好";
+    [self.messageArray addObject:model3];
+
+    HomePageModel * model4 = [HomePageModel new];
+    model4.title = @"游泳走起游泳走起游泳走起游泳走起游泳走起游泳走起游泳走起";
+    [self.messageArray addObject:model4];
+
+    [self.tableView reloadData];
     self.pageIndex =1;
 //    [self requestAction];
     //上拉刷新下拉加载
-    [self Refresh];
+    //[self Refresh];
 
     
 }
 -(void)Refresh{
-    __weak typeof(self) weakSelf = self;
+      __weak typeof(self) weakSelf = self;
     [ThirdPartyTool MJRefreshView:self.tableView Header:YES Footer:YES HeaderBlock:^{
         weakSelf.pageIndex =1 ;
         [weakSelf requestAction];
@@ -107,26 +133,43 @@
 }
 #pragma mark - 网络请求
 -(void)requestAction{
-
-    AdModel *model = [[AdModel alloc]init];
-    model.region_id = 1;
-    model.position = 1;
     __weak typeof(self) weakSelf = self;
-//    NSURLSessionDataTask * task =  [HTTPTool  requestAdWithParm:model  active:YES success:^(BaseResponse * _Nullable baseRes) {
-//        //NSLog(@"%@", [baseRes yy_modelToJSONObject]);
-//        if (baseRes.resultCode == 1) {
-//        
-//        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-//
-//        }else {
-//                   }
-//    } faild:^(NSError * _Nonnull error) {
-//        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-//
-//        } ];
-//    if (task) {
-//        [self.sessionArray addObject:task];
-//    }
+    NSURLSessionDataTask * task =  [HTTPTool  requestHomePageWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:NO success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            if (weakSelf.pageIndex == 1) {
+                [weakSelf.imageArray removeAllObjects];
+                [weakSelf.messageArray removeAllObjects];
+                [weakSelf.dataArray removeAllObjects];
+            }
+            NSDictionary * dataDic =baseRes.data;
+            for (NSDictionary * dic in dataDic[@"ad"]) {
+                HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
+                [weakSelf.imageArray addObject:model];
+            }
+            for (NSDictionary * dic in dataDic[@"notice"]) {
+                HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
+                [weakSelf.messageArray addObject:model];
+            }
+            for (NSDictionary * dic in dataDic[@"bank_card"]) {
+                HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
+                [weakSelf.dataArray addObject:model];
+            }
+            //刷新
+            [weakSelf.tableView reloadData];
+        }else{
+            weakSelf.pageIndex > 1 ? weakSelf.pageIndex-- : weakSelf.pageIndex;
+        }
+        
+        
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+
+    } faild:^(NSError * _Nullable error) {
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+        
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
 }
 #pragma tableView 代理方法
 //tab分区个数
@@ -160,11 +203,16 @@
                     cell.HomePageOneCellImgBlock = ^(NSInteger tag){
                         
                     };
+                    //消息
+                    cell.HomePageOneCellLabelBlock = ^(NSInteger tag){
+                        HomePageModel * model = weakSelf.messageArray[tag];
+                        NSLog(@"tag---%ld---%@",tag,model.title);
                     
-                    
-                    
+                    };
                     //cell 赋值
-                    //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+                    [cell cellGetDataWithBanner:self.imageArray];
+                    //cell 赋值
+                    [cell cellGetDataWithWin:self.messageArray];
                     // cell 其他配置
                     return cell;
 
@@ -172,13 +220,10 @@
                     HomePageTwoCell  * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageTwoCell" forIndexPath:indexPath];
                     //选项点击
                     cell.HomePageTwoCellBlock = ^(NSInteger tag){
-                        //跳转
-                        MessageVC * VC =  GetVC(MessageVC);
-                        PushVC(VC);
+                       
+                        [weakSelf HomePageTwoCellBlockAction:tag];
+
                     };
-                    //cell 赋值
-                    //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
-                    // cell 其他配置
                     return cell;
 
                 }
@@ -188,7 +233,7 @@
             {
                 HomePageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageThreeCell" forIndexPath:indexPath];
                 //cell 赋值
-                //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+                cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
                 // cell 其他配置
                 return cell;
 
@@ -200,14 +245,64 @@
                 
             }
         }
-        
-   
-
-    
-    
-    
-   
 }
+#pragma mark - 点击事件
+-(void)HomePageTwoCellBlockAction:( NSInteger )tag{
+    
+    if (tag<4) {
+        ///是否实名认证
+        if ([HTTPTool isCertification]) {
+            return;
+        }
+        switch (tag) {
+            case 1:
+            {
+                ///我的卡包
+                //跳转
+                CardPackageVC * VC =  GetVC(CardPackageVC);
+                [VC showBackBtn];
+                PushVC(VC);
+                
+                break;
+            }
+                
+            case 2:
+            {
+                //我的账单
+                BillVC * VC =  GetVC(BillVC);
+                [VC showBackBtn];
+                PushVC(VC);
+                break;
+            }
+                
+            case 3:
+            {
+                //快速充值
+                TopUpVC * VC =  GetVC(TopUpVC);
+                
+                PushVC(VC);
+                break;
+            }
+                
+                
+                
+            default:{
+                
+                break;
+                
+            }
+        }
+
+        
+       
+    }else{
+        [DWAlertTool showToast:@"开发中,敬请期待..."];
+
+    }
+   
+    
+}
+
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -76,7 +76,7 @@
 //极光
 #define JGKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"d6d378151a2c2ec02e15b83c" : @"5a6a612f0afc228f2dce9fef"
 //友盟
-#define UMKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"57fb592b67e58ead9b000826" : @"57fb592b67e58ead9b000826"
+#define UMKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"598b04535312dd365f000031" : @"598b04535312dd365f000031"
 //微信
 #define WXKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"wxb9bbefcbd98453bd" : @"wxb9bbefcbd98453bd"
 #define WXappSecret [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"3efe957a7146e5249a421791e54ef779" : @"3efe957a7146e5249a421791e54ef779"

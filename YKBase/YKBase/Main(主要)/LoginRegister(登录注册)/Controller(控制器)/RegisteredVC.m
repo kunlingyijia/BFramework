@@ -42,8 +42,10 @@
 }
 #pragma mark - 发送验证码
 - (IBAction)VerificationCodeAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     if ([RegularTool checkTelNumber:self.mobile.text]) {
     [DWAlertTool VerificationCodeBtn:sender];
+     //1-注册 2-找回密码3-修改密码4-绑定手机号
      [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.mobile.text,@"type":@"1"} active:YES success:^(BaseResponse * _Nullable baseRes) {
    } faild:^(NSError * _Nullable error) {
    }];
@@ -63,8 +65,8 @@
         NSURLSessionDataTask * task =  [HTTPTool  requestRegisterWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
             if (baseRes.resultCode ==1) {
                 LoginRegModel *model = [LoginRegModel yy_modelWithJSON:baseRes.data];
-                [YKDataTool saveUserData:model.key forKey:@"registKey"];
-                [YKDataTool saveUserData:model.token forKey:@"registToken"];
+                [YKDataTool saveUserData:model.key forKey:@"key"];
+                [YKDataTool saveUserData:model.token forKey:@"token"];
                 //返回
                 weakSelf.RegisteredVCBlock(weakSelf.mobile.text,weakSelf.password.text);
                 PopVC;

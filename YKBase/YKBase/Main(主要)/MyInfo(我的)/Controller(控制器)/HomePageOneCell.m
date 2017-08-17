@@ -7,13 +7,14 @@
 //
 
 #import "HomePageOneCell.h"
+#import "HomePageModel.h"
 @interface HomePageOneCell ()<SDCycleScrollViewDelegate>
 @property(nonatomic,strong)    SDCycleScrollView *cycleScrollViewImage;
 
 
 ///数据
 @property (nonatomic,strong)NSMutableArray * dataArray;
-@property(nonatomic,strong)UILabel *label;
+@property(nonatomic,strong)DarkGreyLabel *label;
 @end
 
 @implementation HomePageOneCell
@@ -26,7 +27,6 @@
     //Cell右侧箭头
     //self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     self.separatorInset = UIEdgeInsetsMake(0, Width, 0, 0); // ViewWidth  [宏] 指的是手机屏幕的宽度
-
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     [self createView];
 }
@@ -40,11 +40,16 @@
     
     // 轮播文字-- 副文本式
     if (!_label) {
-        self. label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, Width-40, Width*0.1-5)];
+        self. label = [[DarkGreyLabel alloc] initWithFrame:CGRectMake(Width*0.125, 0, Width-Width*0.125, Width*0.125)];
         __block   NSInteger  count = 0;
-        self.label.font = [UIFont systemFontOfSize:12];
-        self.label.tintColor = [UIColor lightGrayColor];
-        self.label.numberOfLines = 1 ;
+//        self.label.font = [UIFont systemFontOfSize:12];
+//        self.label.tintColor = [UIColor lightGrayColor];
+        self.label.numberOfLines = 0 ;
+        self.label.userInteractionEnabled = YES;
+        self.label.tag =count;
+        UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
+        
+        [self.label addGestureRecognizer:labelTapGestureRecognizer];
         [NSTimer scheduledTimerWithTimeInterval:3 repeats:YES block:^(NSTimer*_Nonnulltimer) {
             CATransition*tran = [CATransition animation];
             //tran.type=kCATransitionFade;
@@ -57,18 +62,19 @@
             }
             self.label.attributedText= self.dataArray[count];
             if(count== self.dataArray.count-1) {
-                
                 count=0;
-                
             }else{
-                
                 count=count+1;
             }
+            self.label.tag =count-1;
             
         }];
-        [self.ShufflingLabelView addSubview:  _label];
+        [self.ShufflingLabelView addSubview:_label];
     }
     
+}
+-(void) labelTouchUpInside:(UITapGestureRecognizer *)recognizer{
+    self.HomePageOneCellLabelBlock(self.label.tag !=-1 ?self.label.tag :self.dataArray.count-1);
 }
 
 
@@ -85,53 +91,41 @@
 
 ///轮播图赋值
 -(void)cellGetDataWithBanner:(NSMutableArray*)arr{
-    
-//    // 网络加载图片的轮播器
-//    if (_cycleScrollViewImage) {
-//        NSMutableArray *banner_imageArr = [NSMutableArray arrayWithCapacity:0];
-//        for (IndianaHomeModel * model in arr) {
-//            [banner_imageArr addObject:model.banner_image];
-//        }
-//        _cycleScrollViewImage.imageURLStringsGroup =   banner_imageArr;
-//        
-//    }
-//    
-    
-    
-    
-    
+    NSLog(@"%@",arr);
+    // 网络加载图片的轮播器
+    if (_cycleScrollViewImage) {
+        NSMutableArray *banner_imageArr = [NSMutableArray arrayWithCapacity:0];
+        for ( HomePageModel* model in arr) {
+            [banner_imageArr addObject:model.image_url];
+        }
+        _cycleScrollViewImage.imageURLStringsGroup =   banner_imageArr;
+    }
 }
 ///喇叭赋值
 -(void)cellGetDataWithWin:(NSMutableArray*)arr{
     [self.dataArray removeAllObjects];
-//    for (IndianaHomeModel * model in arr) {
-//        
-//        NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"恭喜 %@ %@获得%@",model.name,model.time_before,model.goods_name]];
-//        [AttributedStr addAttribute:NSFontAttributeName
-//         
-//                              value:[UIFont systemFontOfSize:12]
-//         
-//                              range:NSMakeRange(3, model.name.length+1)];
-//        
-//        [AttributedStr addAttribute:NSForegroundColorAttributeName
-//         
+    for (HomePageModel * model in arr) {
+        NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@",model.title]];
+        [AttributedStr addAttribute:NSFontAttributeName
+         
+                              value:[UIFont systemFontOfSize:13*SizeScale]
+         
+                              range:NSMakeRange(0, model.title.length)];
+        
+       // [AttributedStr addAttribute:NSForegroundColorAttributeName
+         
 //                              value:[UIColor colorWithHexString:@"#1757ae"]
 //         
-//                              range:NSMakeRange(3, model.name.length+1)];
-//        
-//        
-//        [self.dataArray addObject:AttributedStr];
-//        
-//        
-//        // [banner_imageArr addObject:[NSString stringWithFormat:@"恭喜 ""%@"" %@获得%@",model.name,model.time_before,model.goods_name]];
-//        
-//        
-//    }
-//    if (self.dataArray.count==0) {
-//        return;
-//    }
-//    self.label.attributedText= self.dataArray[self.dataArray.count-1];
-//    
+//                              range:NSMakeRange(0, model.title.length)];
+        
+        
+        [self.dataArray addObject:AttributedStr];
+    }
+    if (self.dataArray.count==0) {
+        return;
+    }
+    self.label.attributedText= self.dataArray[self.dataArray.count-1];
+    
     
 }
 

@@ -40,7 +40,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ks7-G4-5tA" customClass="CutView">
                                             <rect key="frame" x="195" y="15" width="165" height="102"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gvR-El-Wp9">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="上传借记卡背面" translatesAutoresizingMaskIntoConstraints="NO" id="gvR-El-Wp9">
                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="102"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="402" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEp-vK-VOI">
@@ -65,7 +65,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcG-XA-gxH" customClass="CutView">
                                             <rect key="frame" x="15" y="15" width="165" height="102"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZAR-rU-Hxk">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="上传借记卡正面" translatesAutoresizingMaskIntoConstraints="NO" id="ZAR-rU-Hxk">
                                                     <rect key="frame" x="0.0" y="0.0" width="165" height="102"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="401" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMA-pZ-mJD">
@@ -201,7 +201,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="返回" translatesAutoresizingMaskIntoConstraints="NO" id="x6E-G4-jjA">
-                                            <rect key="frame" x="349" y="17" width="8" height="15"/>
+                                            <rect key="frame" x="349" y="16" width="8" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="8" id="FhV-af-EEb"/>
                                                 <constraint firstAttribute="height" constant="15" id="VvI-nq-6WV"/>
@@ -400,6 +400,8 @@
         </button>
     </objects>
     <resources>
+        <image name="上传借记卡正面" width="168" height="106"/>
+        <image name="上传借记卡背面" width="168" height="106"/>
         <image name="返回" width="5" height="9"/>
     </resources>
 </document>

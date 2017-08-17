@@ -8,7 +8,7 @@
 
 #import "MessageVC.h"
 #import "MessageOneCell.h"
-
+#import "MessageModel.h"
 
 @interface MessageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -58,6 +58,9 @@
 #pragma mark - 关于数据
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
+//    [self.dataArray addObject:@"111"];
+//    [self.dataArray addObject:@"111"];
+//    [self.dataArray addObject:@"111"];
     self.pageIndex =1;
     [self requestAction];
     //上拉刷新下拉加载
@@ -73,9 +76,32 @@
         [weakSelf requestAction];
     }];
 }
-#pragma mark - 网络请求
+#pragma mark - 消息列表
 -(void)requestAction{
-    
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask * task =  [HTTPTool  requestMessageListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:YES success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            if (weakSelf.pageIndex == 1) {
+                [weakSelf.dataArray removeAllObjects];
+            }
+            for (NSDictionary * dic in (NSMutableArray*)baseRes.data) {
+                MessageModel * model = [MessageModel yy_modelWithJSON:dic];
+                [weakSelf.dataArray addObject:model];
+            }
+            //刷新
+            [weakSelf.tableView reloadData];
+            }else{
+          weakSelf.pageIndex > 1 ? weakSelf.pageIndex-- : weakSelf.pageIndex;
+        }
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+
+    } faild:^(NSError * _Nullable error) {
+           [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
 }
 #pragma tableView 代理方法
 //tab分区个数
@@ -97,11 +123,11 @@
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
        
-                MessageOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"MessageOneCell" forIndexPath:indexPath];
+        MessageOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"MessageOneCell" forIndexPath:indexPath];
                 //cell 赋值
-                //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+        cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
                 // cell 其他配置
-                return cell;
+        return cell;
         
     }
 }
@@ -114,10 +140,10 @@
 }
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    return 80;
-    
-    
+    //用storyboard 进行自适应布局
+    self.tableView.estimatedRowHeight = 500;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    return self.tableView.rowHeight;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

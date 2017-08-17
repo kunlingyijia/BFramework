@@ -42,29 +42,29 @@
 
 #pragma mark - 登录事件
 - (IBAction)LoginAction:(SubmitBtn *)sender {
-    DismissVC
+   // DismissVC
     if ([self IF]) {
-//        LoginRegModel *model = [LoginRegModel new];
-//        model.account = self.account.text;
-//        model.password = self.password.text;
-//        __weak typeof(self) weakSelf = self;
-//        NSURLSessionDataTask * task =  [HTTPTool  requestLoginWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
-//                if (baseRes.resultCode ==1) {
-//                    LoginRegModel *model = [LoginRegModel yy_modelWithJSON:baseRes.data];
-//                    [YKDataTool saveUserData:weakSelf.account.text forKey:@"useraccount"];
-//                    [YKDataTool saveUserData:model.key forKey:@"loginKey"];
-//                    [YKDataTool saveUserData:model.token forKey:@"loginToken"];
-//                    //设置别名
-//                    [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
-//                    [weakSelf  requestUserInfo];
-//                }
-//
-//            } faild:^(NSError * _Nullable error) {
-//                
-//            }];
-//           if (task) {
-//                [self.sessionArray addObject:task];
-//        }
+        LoginRegModel *model = [LoginRegModel new];
+        model.account = self.account.text;
+        model.password = self.password.text;
+        __weak typeof(self) weakSelf = self;
+        NSURLSessionDataTask * task =  [HTTPTool  requestLoginWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+                if (baseRes.resultCode ==1) {
+                    LoginRegModel *model = [LoginRegModel yy_modelWithJSON:baseRes.data];
+                    [YKDataTool saveUserData:weakSelf.account.text forKey:@"useraccount"];
+                    [YKDataTool saveUserData:model.key forKey:@"key"];
+                    [YKDataTool saveUserData:model.token forKey:@"token"];
+                    //设置别名
+                    [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
+                    [weakSelf  requestUserInfo];
+                }
+
+            } faild:^(NSError * _Nullable error) {
+                
+            }];
+           if (task) {
+                [self.sessionArray addObject:task];
+        }
         
     }
 }
@@ -85,7 +85,7 @@
 #pragma mark - 请求个人信息
 -(void)requestUserInfo{
     __weak typeof(self) weakSelf = self;
-    NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
+    NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {        
         if (baseRes.resultCode ==1) {
             //返回
             [weakSelf dismissViewControllerAnimated:YES completion:^{}];
@@ -107,7 +107,6 @@
         weakSelf.password.text = password;
     };
     PushVC(VC)
-    
 }
 #pragma mark - 忘记密码
 - (IBAction)PasswordVCAction:(UIButton *)sender {
@@ -119,7 +118,6 @@
         weakSelf.password.text = password;
     };
     PushVC(VC)
-    
 }
 
 - (IBAction)WXAction:(UIButton *)sender {
@@ -131,7 +129,6 @@
         //QQ登录
         [self requestThirdLoginType:UMSocialPlatformType_QQ];
     }
-    
 }
 #pragma mark - 第三方登录
 -(void)requestThirdLoginType:(UMSocialPlatformType)platformType{
@@ -139,33 +136,36 @@
     __weak typeof(self) weakSelf = self;
     NSString *type ;
     if (platformType ==UMSocialPlatformType_QQ) {
-        type = @"1";
+        type = @"2";
     }
     if (platformType ==UMSocialPlatformType_WechatSession) {
-        type = @"2";
+        type = @"3";
     }
     [ThirdPartyTool ULoginType:platformType ULoginSuccess:^(UMSocialUserInfoResponse *response) {
         LoginRegModel *model = [LoginRegModel new];
         model.open_id = response.openid;
         model.type = type;
         NSURLSessionDataTask * task =  [HTTPTool  requestThirdLoginWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
-            if (baseRes.resultCode ==1) {
-                LoginRegModel *model = [LoginRegModel yy_modelWithJSON:baseRes.data];
-                //0-未绑定 1-已绑定
-                if ([model.is_bind isEqualToString:@"0"] ) {
+        LoginRegModel *Loginmodel = [LoginRegModel yy_modelWithJSON:baseRes.data];
+           if (baseRes.resultCode ==15) {
                     //Push 跳转
                     BindingVC * VC = GetVC(BindingVC)
                     VC.type = type;
                     VC.open_id =response.openid;
+                    VC.BindingVCBlock = ^(){
+                        //返回
+                        [weakSelf dismissViewControllerAnimated:NO completion:^{}];
+                    };
                     PushVC(VC)
-                }
-                if ([model.is_bind isEqualToString:@"1"] ) {
-                    [YKDataTool saveUserData:model.key forKey:@"loginKey"];
-                    [YKDataTool saveUserData:model.token forKey:@"loginToken"];
-                    //设置别名
-                    [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
-                    [weakSelf  requestUserInfo];
-                }
+         
+                
+            }
+            if (baseRes.resultCode ==1 ) {
+                [YKDataTool saveUserData:Loginmodel.key forKey:@"key"];
+                [YKDataTool saveUserData:Loginmodel.token forKey:@"token"];
+                //设置别名
+                [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
+                [weakSelf  requestUserInfo];
             }
             
         } faild:^(NSError * _Nullable error) {

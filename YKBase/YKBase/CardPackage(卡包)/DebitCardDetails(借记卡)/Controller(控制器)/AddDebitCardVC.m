@@ -64,16 +64,16 @@
             VC.zoom= 0.6;
             VC.ImageChooseVCBlock =^(UIImage *image){
                 NSLog(@"%@",image);
-                weakSelf.bank_card_photo.image = image;
                 [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:100 success:^(NSArray *urlArr) {
                     NSDictionary * dic = urlArr[0];
                     weakSelf.bank_card_photoUrl = dic[@"url"];
+                    weakSelf.bank_card_photo.image = image;
+
                 } faild:^(id error) {
                     
                 }];
             };
             [self presentViewController:VC animated:NO completion:nil];
-            
             break;
         }
             
@@ -85,10 +85,11 @@
             VC.zoom= 0.6;
             VC.ImageChooseVCBlock =^(UIImage *image){
                 NSLog(@"%@",image);
-                weakSelf.bank_card_back_photo.image = image;
                 [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:100 success:^(NSArray *urlArr) {
                     NSDictionary * dic = urlArr[0];
                     weakSelf.bank_card_back_photoUrl = dic[@"url"];
+                    weakSelf.bank_card_back_photo.image = image;
+
                     
                 } faild:^(id error) {
                     
@@ -120,6 +121,7 @@
 }
 #pragma mark - 发送验证码
 - (IBAction)VerificationCodeAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     if ([RegularTool checkTelNumber:self.bind_mobile.text]) {
         [DWAlertTool VerificationCodeBtn:sender];
         [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.bind_mobile.text,@"type":@"1"} active:YES success:^(BaseResponse * _Nullable baseRes) {
@@ -132,29 +134,56 @@
 #pragma mark - 提交
 - (IBAction)submitBtn:(SubmitBtn *)sender {
     if ([self IF]) {
-        
-        
-        
-        
-        
-        
-        
+        CardModel *model =[CardModel new];
+        model.bank_card_photo=_bank_card_photoUrl ;
+        model.bank_card_back_photo=_bank_card_back_photoUrl ;
+        model. account_name = self.account_name.text;
+        model.bank_card_no= self.bank_card_no.text;
+        model.bank_name = self.bank_name.text;
+        model.bind_mobile= self.bind_mobile.text ;
+        model.verify_code = self.verify_code.text;
+        __weak typeof(self) weakSelf = self;
+        NSURLSessionDataTask * task =  [HTTPTool requestBankAddDebitCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+            if (baseRes.resultCode==1) {
+                //请求个人信息
+                [weakSelf requestUserInfo];
+            }
+        } faild:^(NSError * _Nullable error) {
+        }];
+        if (task) {
+            [self.sessionArray addObject:task];
+        }
+    
     }
 }
-
+#pragma mark - 请求个人信息
+-(void)requestUserInfo{
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            //返回
+            [weakSelf.navigationController popViewControllerAnimated:YES] ;
+        }
+    } faild:^(NSError * _Nullable error) {
+        
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
+}
 
 #pragma mark - 判断条件
 -(BOOL)IF{
     [self.view endEditing:YES];
     BOOL  Y = YES;
-    //    if (self.bank_card_photoUrl.length==0) {
-    //        [DWAlertTool showToast:@"请选择信用卡正面照片"];
-    //        return NO;
-    //    }
-    //    if (self.bank_card_back_photoUrl.length==0) {
-    //        [DWAlertTool showToast:@"请选择信用卡背面照片"];
-    //        return NO;
-    //    }
+        if (self.bank_card_photoUrl.length==0) {
+            [DWAlertTool showToast:@"请选择借记卡正面照片"];
+            return NO;
+        }
+        if (self.bank_card_back_photoUrl.length==0) {
+            [DWAlertTool showToast:@"请选择借记卡背面照片"];
+            return NO;
+        }
     
     if (self.account_name.text.length==0) {
         [DWAlertTool showToast:@"请输入真实姓名"];

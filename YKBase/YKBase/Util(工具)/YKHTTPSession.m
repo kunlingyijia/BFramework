@@ -45,8 +45,8 @@
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                  if (![responseObject[@"resultCode"]isEqualToString:@"1"]) {
                    _BaseVC.view.userInteractionEnabled =YES;
+                     NSLog(@"错误码:--:%@\n错信息---:%@",responseObject[@"resultCode"],responseObject[@"msg"]);
                  }
-            
             [SVProgressHUD dismiss];
             //[[LoadWaitSingle shareManager] hideLoadWaitView];
             success(responseObject);
@@ -147,7 +147,7 @@ void networkReachabilityStatusReachableViaWWAN()
 
 ///上传图片
 -(void)UPImageToServer:(NSArray*)imageArr toKb:(NSInteger)kb success:(SuccessImageArr)success faild:(FaildCallback)faild{
-    NSString *password = [NSString stringWithFormat:@"%@%@%@",[YKDataTool getimage_account],[YKDataTool getimage_hostname],[YKDataTool getimage_password]];
+    NSString *password = [NSString stringWithFormat:@"%@%@%@",[YKDataTool getimage_account],[YKDataTool getimage_hostname],[[YKDataTool getimage_password]MD5Hash] ];
     NSDictionary * dic = @{@"image_account":[YKDataTool getimage_account],@"image_password":[password MD5Hash]};
     AFHTTPSessionManager *UPmanager = [AFHTTPSessionManager manager];
     UPmanager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
@@ -190,7 +190,7 @@ void networkReachabilityStatusReachableViaWWAN()
  *  拨打电话
  *
  *  @param phoneNumber 要拨打的号码
- *  @param view        拨号所在的页面
+ *  @param selfView        拨号所在的页面
  */
 - (void)CallPhoneNumber:(NSString *)phoneNumber inView:(UIView *)selfView
 {

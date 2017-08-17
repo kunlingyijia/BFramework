@@ -76,48 +76,44 @@
     }
  }
 + (NSString *)getRegisterKey {
-    return [self readUserDataForKey:@"registKey"];
+    return [self readUserDataForKey:@"key"];
 }
 + (NSString *)getRegistertoken {
-    return [self readUserDataForKey:@"registToken"];
+    return [self readUserDataForKey:@"token"];
 }
 + (NSString *)getLoginKey {
-    return [self readUserDataForKey:@"loginKey"];
+    return [self readUserDataForKey:@"key"];
 }
 + (NSString *)getLoginToken {
-    return [self readUserDataForKey:@"loginToken"];
+    return [self readUserDataForKey:@"token"];
 }
+
+#pragma mark - 图片上传地址
++(NSString*)getimage_hostname{
+    return [self readUserDataForKey:@"image_hostname"];
+}
+#pragma mark - 图片上传账号
++(NSString*)getimage_account{
+    return [self readUserDataForKey:@"image_account"];
+}
+#pragma mark - 图片上传密码
++(NSString*)getimage_password{
+    return [self readUserDataForKey:@"image_password"];
+}
+
 ///登录手机号
 + (NSString *)getuseraccount{
      return [self readUserDataForKey:@"useraccount"];
     
 }
 
-#pragma mark - 配置信息
-+(NSString*)getimage_hostname{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults objectForKey:@"image_hostname"];
-}
-+(NSString*)getimage_account{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults objectForKey:@"image_account"];
-}
-+(NSString*)getimage_password{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults objectForKey:@"image_password"];
-    
-}
-+(NSString*)getto_virtual_glod{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    return [userDefaults objectForKey:@"to_virtual_glod"];
-}
 
 
 +(void)moveLoginKey{
-    [self removeUserDataForkey:@"loginKey"];
+    [self removeUserDataForkey:@"key"];
 }
 +(void)moveLoginToken{
-     [self removeUserDataForkey:@"loginToken"];
+     [self removeUserDataForkey:@"token"];
 }
 
 

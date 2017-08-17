@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class MessageModel;
 @interface MessageOneCell : UITableViewCell
+///model
+@property (nonatomic, strong) MessageModel *model ;
+
+
+
 
 @end

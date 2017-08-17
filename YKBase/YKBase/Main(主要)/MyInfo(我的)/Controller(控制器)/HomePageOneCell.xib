@@ -28,9 +28,20 @@
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHD-LI-Qnc">
                         <rect key="frame" x="0.0" y="191" width="477" height="59.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="喇叭-(1)" translatesAutoresizingMaskIntoConstraints="NO" id="OBI-qV-FCL">
+                                <rect key="frame" x="0.0" y="0.0" width="59.5" height="59.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="OBI-qV-FCL" secondAttribute="height" id="F3q-9G-F2E"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="OBI-qV-FCL" firstAttribute="top" secondItem="CHD-LI-Qnc" secondAttribute="top" id="158-sc-iHJ"/>
+                            <constraint firstItem="OBI-qV-FCL" firstAttribute="leading" secondItem="CHD-LI-Qnc" secondAttribute="leading" id="9Yf-Sb-zKP"/>
                             <constraint firstAttribute="width" secondItem="CHD-LI-Qnc" secondAttribute="height" multiplier="8" id="Mm7-CT-a9M"/>
+                            <constraint firstAttribute="bottom" secondItem="OBI-qV-FCL" secondAttribute="bottom" id="g2t-rF-fNc"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -50,4 +61,7 @@
             <point key="canvasLocation" x="112.5" y="276.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="喇叭-(1)" width="15" height="14"/>
+    </resources>
 </document>

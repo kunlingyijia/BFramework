@@ -14,9 +14,12 @@ typedef void(^DataFaild)(NSError * _Nullable error);
 +(BOOL)isLogin;
 #pragma mark - 是否实名认证
 +(BOOL)isCertification;
-
+#pragma mark -  获取验证码
++ (nullable NSURLSessionDataTask *)requestSystemWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  获取验证码
 + (nullable NSURLSessionDataTask *)requestVerifyCodeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  消息列表
++ (nullable NSURLSessionDataTask *)requestMessageListWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  注册
 + (nullable NSURLSessionDataTask *)requestRegisterWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  登录
@@ -29,8 +32,20 @@ typedef void(^DataFaild)(NSError * _Nullable error);
 + (nullable NSURLSessionDataTask *)requesForgottenPasswordWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  获取个人信息
 + (nullable NSURLSessionDataTask *)requestUserInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
-
-
+#pragma mark -  修改个人信息
++ (nullable NSURLSessionDataTask *)requestUpdateUserInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  实名认证
++ (nullable NSURLSessionDataTask *)requestCertifyWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  重新实名认证
++ (nullable NSURLSessionDataTask *)requestUpdateCertifyWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  实名认证查询
++ (nullable NSURLSessionDataTask *)requestCertifyInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  实名添加借记卡
++ (nullable NSURLSessionDataTask *)requestBankAddDebitCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  实名添加信用卡
++ (nullable NSURLSessionDataTask *)requestAddCreditCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  首页轮播图+公告+我的信用卡
++ (nullable NSURLSessionDataTask *)requestHomePageWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 //#pragma mark -  请求广告页
 //+ (nullable NSURLSessionDataTask *)requestAdWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 //#pragma mark -  版本跟新

@@ -50,7 +50,8 @@
 //            
 //        }
 //    }
-    
+    //获取配置信息
+    [self requestSystem];
     
     
     
@@ -58,6 +59,14 @@
     return YES;
     
 }
+#pragma mark - 获取配置信息
+-(void)requestSystem{
+    [HTTPTool requestSystemWithParm:@[] active:YES success:^(BaseResponse * _Nullable baseRes) {
+        
+    } faild:^(NSError * _Nullable error) {
+        
+    }];
+ }
 #pragma mark -- 百度地图
 - (void)configurationBMKMap {
 //    // 要使用百度地图，请先启动BaiduMapManager

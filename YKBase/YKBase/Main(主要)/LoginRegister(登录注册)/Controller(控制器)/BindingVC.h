@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 
 @interface BindingVC : BaseViewController
-
+@property (nonatomic, copy) void(^ BindingVCBlock)();
 ///1-QQ 2-微信
 @property (nonatomic, strong) NSString  *type ;
 ///用户唯一标识

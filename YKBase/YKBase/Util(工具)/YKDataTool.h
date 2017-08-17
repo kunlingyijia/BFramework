@@ -37,7 +37,7 @@
 +(NSString*)getimage_hostname;
 +(NSString*)getimage_account;
 +(NSString*)getimage_password;
-+(NSString*)getto_virtual_glod;
+//+(NSString*)getto_virtual_glod;
 #pragma mark - 移除
 + (void)moveLoginKey;
 + (void)moveLoginToken;

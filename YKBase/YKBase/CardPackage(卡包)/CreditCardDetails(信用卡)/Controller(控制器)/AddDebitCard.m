@@ -44,8 +44,6 @@
 - (IBAction)bankAction:(UIButton *)sender {
     [self.view endEditing:YES];
     __weak typeof(self) weakSelf = self;
-
-    
     switch (sender.tag) {
         case 401:
         {
@@ -55,10 +53,11 @@
             VC.zoom= 0.6;
             VC.ImageChooseVCBlock =^(UIImage *image){
                 NSLog(@"%@",image);
-                weakSelf.bank_card_photo.image = image;
-                [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:100 success:^(NSArray *urlArr) {
+                [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:50 success:^(NSArray *urlArr) {
                     NSDictionary * dic = urlArr[0];
                     weakSelf.bank_card_photoUrl = dic[@"url"];
+                    weakSelf.bank_card_photo.image = image;
+
                 } faild:^(id error) {
                     
                 }];
@@ -76,11 +75,10 @@
             VC.zoom= 0.6;
             VC.ImageChooseVCBlock =^(UIImage *image){
                 NSLog(@"%@",image);
-                weakSelf.bank_card_back_photo.image = image;
                 [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:100 success:^(NSArray *urlArr) {
                     NSDictionary * dic = urlArr[0];
                     weakSelf.bank_card_back_photoUrl = dic[@"url"];
-
+                    weakSelf.bank_card_back_photo.image = image;
                 } faild:^(id error) {
                     
                 }];
@@ -162,6 +160,7 @@
 
 #pragma mark - 发送验证码
 - (IBAction)VerificationCodeAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     if ([RegularTool checkTelNumber:self.bind_mobile.text]) {
         [DWAlertTool VerificationCodeBtn:sender];
         [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.bind_mobile.text,@"type":@"1"} active:YES success:^(BaseResponse * _Nullable baseRes) {
@@ -173,16 +172,47 @@
 }
 #pragma mark - 提交
 - (IBAction)submitBtn:(SubmitBtn *)sender {
-    if ([self IF]) {
-        
-        
-        
-        
-        
-        
-        
+        if ([self IF]) {
+            CardModel *model =[CardModel new];
+            model.bank_card_photo=_bank_card_photoUrl ;
+            model.bank_card_back_photo=_bank_card_back_photoUrl ;
+            model.bank_card_no= self.bank_card_no.text;
+            model.credit_line = self.credit_line.text;
+            model.valid_thru= self.valid_thru.text ;
+            model.cvn2 = self.cvn2.text;
+            model.state_date = self.state_date.text;
+            model.repay_date = self.repay_date.text;
+            model.bind_mobile = self.bind_mobile.text;
+            model.verify_code = self.verify_code.text;
+            __weak typeof(self) weakSelf = self;
+            NSURLSessionDataTask * task =  [HTTPTool requestAddCreditCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+                if (baseRes.resultCode==1) {
+                    //请求个人信息
+                    [weakSelf requestUserInfo];
+                }
+            } faild:^(NSError * _Nullable error) {
+            }];
+            if (task) {
+                [self.sessionArray addObject:task];
+            }
+            
+        }
     }
-}
+#pragma mark - 请求个人信息
+-(void)requestUserInfo{
+        __weak typeof(self) weakSelf = self;
+        NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
+            if (baseRes.resultCode ==1) {
+                //返回
+                [weakSelf.navigationController popViewControllerAnimated:YES] ;
+            }
+        } faild:^(NSError * _Nullable error) {
+            
+        }];
+        if (task) {
+            [self.sessionArray addObject:task];
+        }
+    }
 
 
 #pragma mark - 判断条件

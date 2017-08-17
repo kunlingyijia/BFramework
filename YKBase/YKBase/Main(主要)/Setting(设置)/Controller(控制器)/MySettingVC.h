@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MySettingVC : BaseViewController
-///注释
-@property (nonatomic, strong) NSString  *name;
+@property (weak, nonatomic) IBOutlet DarkGreyLabel *mobile;
+@property (weak, nonatomic) IBOutlet UIImageView *avatar_url;
 @end

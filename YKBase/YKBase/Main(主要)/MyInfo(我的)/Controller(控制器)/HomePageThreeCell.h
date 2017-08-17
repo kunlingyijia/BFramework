@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class HomePageModel;
 @interface HomePageThreeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet CutView *bottomView;
 
 @property (weak, nonatomic) IBOutlet PublicBtn *OneBtn;
-
+///model
+@property (nonatomic, strong) HomePageModel *model ;
 @end

@@ -35,8 +35,10 @@
 }
 #pragma mark - 发送验证码
 - (IBAction)VerificationCodeAction:(UIButton *)sender {
+    [self.view endEditing:YES];
     if ([RegularTool checkTelNumber:self.mobile.text]) {
         [DWAlertTool VerificationCodeBtn:sender];
+        // 1-注册 2-找回密码3-修改密码4-绑定手机号
         [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.mobile.text,@"type":@"1"} active:YES success:^(BaseResponse * _Nullable baseRes) {
         } faild:^(NSError * _Nullable error) {
         }];

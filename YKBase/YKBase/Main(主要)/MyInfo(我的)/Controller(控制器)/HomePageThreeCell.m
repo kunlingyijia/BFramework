@@ -7,7 +7,7 @@
 //
 
 #import "HomePageThreeCell.h"
-
+#import "HomePageModel.h"
 @implementation HomePageThreeCell
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -28,9 +28,9 @@
     //self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     self.separatorInset = UIEdgeInsetsMake(0, Width, 0, 0); // ViewWidth  [宏] 指的是手机屏幕的宽度
 }
-//-(void)setModel:(<#BankModel#> *)model{
-//    if (!model) return;
-//    _model = model;
-//    
-//}
+-(void)setModel:(HomePageModel *)model{
+    if (!model) return;
+    _model = model;
+    
+}
 @end

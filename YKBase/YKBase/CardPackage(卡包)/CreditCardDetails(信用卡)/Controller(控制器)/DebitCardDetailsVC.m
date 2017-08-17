@@ -9,6 +9,7 @@
 #import "DebitCardDetailsVC.h"
 #import "BillVC.h"
 #import "ChangeDebitCardVC.h"
+#import "MakePlanVC.h"
 @interface DebitCardDetailsVC ()
 @property (weak, nonatomic) IBOutlet CutView *bottomView;
 
@@ -59,6 +60,12 @@
         case 3:
         {
             //定制计划
+            //跳转
+            MakePlanVC * VC =  GetVC(MakePlanVC);
+            
+            PushVC(VC);
+            
+            
             break;
         }
         case 4:

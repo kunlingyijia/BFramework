@@ -62,7 +62,7 @@
 }
 #pragma mark - 关于tableView
 -(void)setUpTableView{
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20+40*SizeScale+0.225*Width+10+20, Width, Height-64-20-40*SizeScale-0.225*Width-10-20) style:(UITableViewStylePlain)];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20+40*SizeScale+0.225*Width+10+20, Width, Height-64-20-40*SizeScale-0.225*Width-10-20-40-40*SizeScale) style:(UITableViewStylePlain)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor clearColor];
@@ -191,6 +191,18 @@
     return Width * 0.35;
     
 }
+
+
+#pragma mark - 立即支付
+- (IBAction)submitAction:(SubmitBtn *)sender {
+    
+    
+    
+}
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     

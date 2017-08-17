@@ -12,6 +12,7 @@
 #import "SuggestFeedbackVC.h"
 #import "UpdatePasswordVC.h"
 #import "AdModel.h"
+#import "CurrentVersionVC.h"
 @interface MySettingVC ()
 
 @end
@@ -56,31 +57,60 @@
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
-
+    YKHTTPSession * helper = [YKHTTPSession shareSession];
+    [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:nil];
+    self.mobile.text = [NSString stringWithFormat:@"%@",helper.userinfo.mobile];
+    [self.avatar_url.layer setLaberMasksToBounds:YES cornerRadius:(Width/8-10)/2 borderWidth:1.0*SizeScale borderColor:[UIColor whiteColor]];
 }
 
 #pragma - 按钮事件
 - (IBAction)ButtonAction:(UIButton *)sender {
     switch (sender.tag) {
-            //商务合作
+            //个人头像
         case 101: {
-            BusinessCooperationVC *VC = GetVC(BusinessCooperationVC);
-            
-            
-            
-            
-            PushVC(VC)
+//            BusinessCooperationVC *VC = GetVC(BusinessCooperationVC);
+//                   PushVC(VC)
+            __weak typeof(self) weakSelf = self;
+            ImageChooseVC* VC = [[ImageChooseVC alloc]initWithNibName:@"ImageChooseVC" bundle:nil];
+            VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+            VC.imageType = EditedImage;
+            VC.zoom= 1.0;
+            VC.ImageChooseVCBlock =^(UIImage *image){
+                NSLog(@"%@",image);
+                
+              [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:50 success:^(NSArray *urlArr) {
+                    NSDictionary * dic = urlArr[0];
+                    Userinfo * model = [Userinfo new];
+                    model.avatar_url =dic[@"url"];
+                    NSURLSessionDataTask * task =    [HTTPTool requestUpdateUserInfoWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+                            weakSelf.avatar_url.image = image;
+                            [YKHTTPSession shareSession].userinfo.avatar_url =dic[@"url"];
+                            //设置别名
+                            [YKNotification postNotificationName:@"获取个人信息" object:nil userInfo:nil];
+                     } faild:^(NSError * _Nullable error) {
+                         
+                     }];
+                  if (task) {
+                      [weakSelf.sessionArray addObject:task];
+                  }
+                   
+                } faild:^(id error) {
+                    
+                }];
+                
+            };
+            [self presentViewController:VC animated:NO completion:nil];
         }
             break;
-            //关于我们
+            //个人账号
         case 102: {
-            AboutUsVC *VC = GetVC(AboutUsVC);
-            PushVC(VC)
+//            AboutUsVC *VC = GetVC(AboutUsVC);
+//            PushVC(VC)
         }
             break;
-            //反馈与建议
+            //当前版本
         case 103: {
-            SuggestFeedbackVC *VC = GetVC(SuggestFeedbackVC);
+            CurrentVersionVC *VC = GetVC(CurrentVersionVC);
             PushVC(VC)
             
 
