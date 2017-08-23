@@ -33,10 +33,10 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-       
+    
 }
 - (void)setTitilColor{
-
+    
     NSDictionary * dict= [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica-Bold" size:17*SizeScale],NSFontAttributeName, [UIColor whiteColor],NSForegroundColorAttributeName, nil];
     self.navigationBar.titleTextAttributes = dict;
     

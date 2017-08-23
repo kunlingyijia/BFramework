@@ -8,7 +8,6 @@
 
 #import "DWTabBarController.h"
 #import "LBTabBar.h"
-
 #import "HomePageVC.h"
 #import "CardPackageVC.h"
 #import "BillVC.h"
@@ -30,28 +29,17 @@
     //设置文字
     [tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:10*SizeScale],NSFontAttributeName, [UIColor colorWithHexString:kDarkGrey],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:10*SizeScale],NSFontAttributeName, [UIColor colorWithHexString:kBlueColor],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    
 }
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-
     [self setUpAllChildVc];
-    
     //创建自己的tabbar，然后用kvc将自己的tabbar和系统的tabBar替换下
     LBTabBar *tabbar = [[LBTabBar alloc] init];
     tabbar.myDelegate = self;
     //kvc实质是修改了系统的_tabBar
     [self setValue:tabbar forKeyPath:@"tabBar"];
-    
-    
 }
-
-
 #pragma mark - ------------------------------------------------------------------
 #pragma mark - 初始化tabBar上除了中间按钮之外所有的按钮
 
@@ -66,10 +54,6 @@
     [self setUpOneChildVcWithVc:cardPackageVC Image:@"卡包1" selectedImage:@"卡包" title:@"卡包"];
     [self setUpOneChildVcWithVc:billVC Image:@"账单" selectedImage:@"账单蓝" title:@"账单"];
     [self setUpOneChildVcWithVc:myInfoVC1 Image:@"我的" selectedImage:@"我的蓝" title:@"我的"];
-    
-   
-    
-    
 }
 
 #pragma mark - 初始化设置tabBar上面单个按钮的方法
@@ -87,13 +71,8 @@
 - (void)setUpOneChildVcWithVc:(UIViewController *)Vc Image:(NSString *)image selectedImage:(NSString *)selectedImage title:(NSString *)title
 {
     BaseNavigationVC *nav = [[BaseNavigationVC alloc] initWithRootViewController:Vc];
-    
-    
-    //Vc.view.backgroundColor = [self randomColor];
-    
     UIImage *myImage = [UIImage imageNamed:image];
     myImage = [myImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
     //tabBarItem，是系统提供模型，专门负责tabbar上按钮的文字以及图片展示
     Vc.tabBarItem.image = myImage;
     UIImage *mySelectedImage = [UIImage imageNamed:selectedImage];
@@ -109,113 +88,52 @@
 //点击中间按钮的代理方法
 - (void)tabBarPlusBtnClick:(LBTabBar *)tabBar
 {
-//    ///是否实名认证
-//    if ([HTTPTool isCertification]) {
-//        return;
-//    }
     PopupVC* VC = GetVC(PopupVC);
     VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
     VC.PopupVCBlock = ^(NSInteger tag){
-        switch (tag) {
-            case 0:
-            {
-                
-                break;
+        // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            ///是否实名认证
+            if ([HTTPTool isCertification]) {
+                return;
             }
-                
-            case 1:
-            {
-                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                ///是否实名认证
-//                                if ([HTTPTool isCertification]) {
-//                                    return;
-//                                }
-                                //新增信用卡
-                                AddDebitCard * VC =  GetVC(AddDebitCard);
-                                
-                                [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
-                                
-                });
-               
-                break;
-            }
-                
-            case 2:
-            {
-                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                    ///是否实名认证
-//                    if ([HTTPTool isCertification]) {
-//                        return;
-                    //}
-                     //新增借记卡
+            switch (tag) {
+                case 1:
+                {
+                    //新增信用卡
+                    AddDebitCard * VC =  GetVC(AddDebitCard);
+                    [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
+                    break;
+                }
+                case 2:
+                {
+                    //新增借记卡
                     AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
-                    
-                });
-
-               
-                break;
-            }
-                
-                
-            case 3:
-            {
-                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    ///是否实名认证
-//                    if ([HTTPTool isCertification]) {
-//                        return;
-//                    }
-                    //跳转
+                    break;
+                }
+                case 3:
+                {
+                    //快速充值
                     TopUpVC * VC =  GetVC(TopUpVC);
-                    
-              [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];                    
-                });
-                //快速充值
-                break;
-            }
-            case 4:
-            {
-                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                    ///是否实名认证
-//                    if ([HTTPTool isCertification]) {
-//                        return;
-//                    }
+                    [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
+                    break;
+                }
+                case 4:
+                {
                     //掌上提现 跳转
                     MyWalletVC * VC = GetVC(MyWalletVC);
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
-                });
-
-              
-                break;
+                    break;
+                }
+                default:{
+                    break;
+                }
             }
-
-            default:{
-                
-                break;
-                
-            }
-        }
-
+        });
     };
-    
-    
     [[DWAlertTool getCurrentUIVC] presentViewController:VC animated:NO completion:nil];
-    
-    
-    
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

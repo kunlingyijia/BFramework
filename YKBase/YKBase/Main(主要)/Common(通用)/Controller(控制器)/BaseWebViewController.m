@@ -45,7 +45,7 @@
     
     [self addLeftButton];
     a = 1;
-
+    
 }
 
 //加载URL
@@ -62,10 +62,10 @@
 {
     NSString* scheme = [[request URL] scheme];
     [_progressLayer startLoad];
-
+    
     //判断是不是https
     if ([scheme isEqualToString:@"https"]) {
-
+        
         //如果是https:的话，那么就用NSURLConnection来重发请求。从而在请求的过程当中吧要请求的URL做信任处理。
         if (!self.isAuthed) {
             NSURLConnection* conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -78,7 +78,7 @@
 }
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    [_progressLayer finishedLoad];    
+    [_progressLayer finishedLoad];
     [_progressLayer startLoad];
     
     
@@ -115,7 +115,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {    [_progressLayer startLoad];
-
+    
     self.isAuthed = YES;
     //webview 重新加载请求。
     [self.webView loadRequest:self.request];
@@ -139,7 +139,7 @@
         //同时设置返回按钮和关闭按钮为导航栏左边的按钮
         self.navigationItem.leftBarButtonItems = @[self.backItem, self.closeItem];
         [self.navigationItem.leftBarButtonItems[1] setTintColor:[UIColor colorWithHexString:ksubTitleColor]];
-
+        
     } else {
         [self closeNative];
     }
@@ -163,8 +163,8 @@
         [btn setImage:image forState:UIControlStateNormal];
         //[btn setTitle:@"返回" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(backNative) forControlEvents:UIControlEventTouchUpInside];
-//        [btn.titleLabel setFont:[UIFont systemFontOfSize:17]];
-//        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        //        [btn.titleLabel setFont:[UIFont systemFontOfSize:17]];
+        //        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         //字体的多少为btn的大小
         [btn sizeToFit];
         //左对齐
@@ -200,13 +200,13 @@
     NSLog(@"i am dealloc");
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

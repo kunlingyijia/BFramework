@@ -184,7 +184,7 @@
     return self;
 }
 -(void)SetUpSize {
-//    self.textColor = [UIColor whiteColor];
+    //    self.textColor = [UIColor whiteColor];
     self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
 }
 
@@ -220,7 +220,7 @@
     return self;
 }
 -(void)SetUpSize {
-   // self.titleLabel. textColor = [UIColor colorWithHexString:kDarkGrey];
+    // self.titleLabel. textColor = [UIColor colorWithHexString:kDarkGrey];
     self.titleLabel.font = [UIFont systemFontOfSize:self.titleLabel.font.pointSize* SizeScale];
 }
 @end
@@ -336,9 +336,9 @@
     return self;
 }
 -(void)SetUpSize {
-     self. textColor = [UIColor colorWithHexString:kDarkGrey];
-     // self.tintColor = [UIColor redColor];
-     self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
+    self. textColor = [UIColor colorWithHexString:kDarkGrey];
+    // self.tintColor = [UIColor redColor];
+    self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
 }
 
 @end

@@ -39,7 +39,7 @@
 #pragma mark - 发送验证码
 - (IBAction)VerificationCodeAction:(UIButton *)sender {
     [self.view endEditing:YES];
-   // 1-注册 2-找回密码3-修改密码4-绑定手机号
+    // 1-注册 2-找回密码3-修改密码4-绑定手机号
     __weak typeof(self) weakSelf = self;
     if ([RegularTool checkTelNumber:self.mobile.text]) {
         [DWAlertTool VerificationCodeBtn:sender];
@@ -47,17 +47,17 @@
             if (baseRes.resultCode ==16) {
                 
                 //[DWAlertTool alertWithTitle:@"尚未注册,是否注册?" message:nil OKWithTitle:@"注册"CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
-                    //Push 跳转
-                    RegisteredVC * VC = GetVC(RegisteredVC)
-                    VC.RegisteredVCBlock = ^(NSString  *account ,NSString  *password){
-                        weakSelf.mobile.text = account;
-                    };
-                    PushVC(VC)
-//                } withCancel:^(UIAlertAction *cancelaction) {
-//                    
-//                }];
+                //Push 跳转
+                RegisteredVC * VC = GetVC(RegisteredVC)
+                VC.RegisteredVCBlock = ^(NSString  *account ,NSString  *password){
+                    weakSelf.mobile.text = account;
+                };
+                PushVC(VC)
+                //                } withCancel:^(UIAlertAction *cancelaction) {
+                //
+                //                }];
             }
-            } faild:^(NSError * _Nullable error) {
+        } faild:^(NSError * _Nullable error) {
         }];
     }else{
         [DWAlertTool showToast:@"手机号码输入有误"];
@@ -65,7 +65,7 @@
 }
 #pragma mark - 绑定事件
 - (IBAction)BtnAction:(SubmitBtn *)sender {
-     if ([self IF]) {
+    if ([self IF]) {
         LoginRegModel *model = [LoginRegModel new];
         model.mobile = self.mobile.text;
         model.verify_code = self.verify_code.text;
@@ -80,7 +80,7 @@
                 //设置别名
                 [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
                 [weakSelf  requestUserInfo];
-        }
+            }
         } faild:^(NSError * _Nullable error) {
         }];
         if (task) {
@@ -107,8 +107,8 @@
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
-             weakSelf.BindingVCBlock();
-             //设置别名
+            weakSelf.BindingVCBlock();
+            //设置别名
             [YKNotification postNotificationName:@"刷新一级界面" object:nil userInfo:nil];
         }
     } faild:^(NSError * _Nullable error) {

@@ -221,9 +221,6 @@
 }
 #pragma mark - AES格式
 +(nullable NSURLSessionDataTask *)AESrequestWithParm:(nullable id)parm act:( nonnull NSString *)actName showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
-    
-    
-    
     if ([self isLogin]) {
         return nil;
     }else{
@@ -250,7 +247,6 @@
         }];
     }
 }
-
 #pragma mark - 是否登录
 +(BOOL)isLogin{
     NSString *Token =[YKDataTool getLoginToken];
@@ -260,14 +256,10 @@
         LoginVC * VC=  GetVC(LoginVC)
         BaseNavigationVC * Nav = [[BaseNavigationVC alloc]initWithRootViewController:VC];
         [[DWAlertTool getCurrentUIVC] presentViewController:Nav animated:YES completion:nil];
-
         return  YES;
     }
     return NO;
 }
-
-
-
 #pragma mark - 是否实名认证
 +(BOOL)isCertification{
     if ([self isLogin]) {

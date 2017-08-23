@@ -286,13 +286,12 @@
 }
 #pragma mark - 设置APP静态图片引导页
 - (void)setStaticGuidePage {
-    NSArray *imageNameArray = @[@"guideImage1.jpg",@"guideImage2.jpg",@"guideImage3.jpg",@"guideImage4.jpg",@"guideImage5.jpg"];
+    NSArray *imageNameArray = @[@"1",@"2",@"3"];
     DHGuidePageHUD *guidePage = [[DHGuidePageHUD alloc] dh_initWithFrame:[UIScreen mainScreen].bounds imageNameArray:imageNameArray buttonIsHidden:NO];
     guidePage.slideInto = YES;
     AppDelegate * del = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [del.window addSubview:guidePage];
 }
-
 #pragma mark - 设置APP动态图片引导页
 - (void)setDynamicGuidePage {
     NSArray *imageNameArray = @[@"guideImage6.gif",@"guideImage7.gif",@"guideImage8.gif"];

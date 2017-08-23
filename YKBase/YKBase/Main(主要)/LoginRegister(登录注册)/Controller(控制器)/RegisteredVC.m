@@ -44,14 +44,14 @@
 - (IBAction)VerificationCodeAction:(UIButton *)sender {
     [self.view endEditing:YES];
     if ([RegularTool checkTelNumber:self.mobile.text]) {
-    [DWAlertTool VerificationCodeBtn:sender];
-     //1-注册 2-找回密码3-修改密码4-绑定手机号
-     [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.mobile.text,@"type":@"1"} active:YES success:^(BaseResponse * _Nullable baseRes) {
-   } faild:^(NSError * _Nullable error) {
-   }];
-  }else{
-     [DWAlertTool showToast:@"手机号码输入有误"];
-   }
+        [DWAlertTool VerificationCodeBtn:sender];
+        //1-注册 2-找回密码3-修改密码4-绑定手机号
+        [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.mobile.text,@"type":@"1"} active:YES success:^(BaseResponse * _Nullable baseRes) {
+        } faild:^(NSError * _Nullable error) {
+        }];
+    }else{
+        [DWAlertTool showToast:@"手机号码输入有误"];
+    }
 }
 - (IBAction)registeredAction:(PublicBtn *)sender {
     
@@ -77,7 +77,7 @@
             [self.sessionArray addObject:task];
         }
     }
- }
+}
 #pragma mark - 判断条件
 -(BOOL)IF{
     [self.view endEditing:YES];
@@ -117,13 +117,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

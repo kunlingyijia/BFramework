@@ -8,10 +8,6 @@
 
 #import "MyInfoVC.h"
 #import "MySettingVC.h"
-#import "AdModel.h"
-#import "AppDelegate.h"
-#import "SharePanelVC.h"
-#import "BaseWKWebviewVC.h"
 #import "MyWalletVC.h"
 #import "MessageVC.h"
 #import "BillVC.h"
@@ -19,14 +15,11 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHight;
-
 @end
 
 @implementation MyInfoVC
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //[self requestUserInfo];
-    NSLog(@"---%f---%f",self.avatar_url.frame.size.width/2,(Width/3-30)/2);
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,7 +29,6 @@
     [self SET_UI];
     //数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
@@ -53,33 +45,28 @@
         MessageVC * VC =  GetVC(MessageVC);
         PushVC(VC);
     }];
-    
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
-   
     [self requestUserInfo];
     //上拉刷新下拉加载
     [self Refresh];
-    
-    
 }
 -(void)Refresh{
     __weak typeof(self) weakSelf = self;
     [ThirdPartyTool MJRefreshView:self.scrollView Header:YES Footer:NO HeaderBlock:^{
         [weakSelf requestUserInfo];
     } FooterBlock:^{
+        
     }];
 }
 #pragma mark - 请求个人信息
 -(void)requestUserInfo{
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:YES success:^(BaseResponse * _Nullable baseRes) {
-        
         [ThirdPartyTool MJRefreshEndRefreView:weakSelf.scrollView];
     } faild:^(NSError * _Nullable error) {
         [ThirdPartyTool MJRefreshEndRefreView:weakSelf.scrollView];
-
     }];
     if (task) {
         [self.sessionArray addObject:task];
@@ -93,16 +80,15 @@
     self.amount.text =helper.userinfo.amount;
     self.frozen_amount.text = helper.userinfo.frozen_amount;
     self.bank_card_num.text = [NSString stringWithFormat:@"%@",helper.userinfo.bank_card_num];
-   ///0-未认证 1-认证中2-认证成功3-认证失败
+    ///0-未认证 1-认证中2-认证成功3-认证失败
     _certificationStatus.text = [[YKHTTPSession shareSession].userinfo.certify_status isEqualToString:@"2"] ? @"已认证":@"";
 }
 #pragma mark - 点击事件
 - (IBAction)BtnAction:(UIButton *)sender {
-    
     switch (sender.tag) {
         case 101:
         {
-//            ///是否实名认证
+            ///是否实名认证
             if ([HTTPTool isCertification]) {
                 return;
             }
@@ -111,7 +97,6 @@
             PushVC(VC)
             break;
         }
-            
         case 102:
         {
             ///是否实名认证
@@ -124,80 +109,43 @@
             PushVC(VC);
             break;
         }
-            
         case 103:
         {
             ///是否实名认证
             if ([HTTPTool isCertification]) {
                 return;
             }
-            
             break;
         }
-         case 104:
+        case 104:
         {
-            ///是否实名认证
-            if ([HTTPTool isCertification]) {
-                return;
-            }
             //我的保单
             [DWAlertTool showToast:@"开发中,敬请期待..."];
             break;
         }
         case 105:
         {
+            //判断登录
+            if ([HTTPTool isLogin]) {
+                return ;
+            }
             //设置
             MySettingVC * VC = GetVC(MySettingVC);
             PushVC(VC)
             break;
         }
-            
         default:{
             break;
-            
         }
     }
-
-    
-    
-    
 }
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    
-}
-
-
 //只要拖拽就会触发(scrollView 的偏移量发生改变)
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    
-    if (scrollView.contentOffset.y>0) {
-        self.view.backgroundColor = [UIColor colorWithHexString:kViewBackgroundColor
-                                     ];
-    }else{
-        self.view.backgroundColor = [UIColor colorWithHexString:kBlueColor];
-    }
-    NSLog(@"%f",scrollView.contentOffset.y);
-   
+    self.view.backgroundColor = [UIColor colorWithHexString:scrollView.contentOffset.y>0?kViewBackgroundColor:kBlueColor];
 }
-
-
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - dealloc
+- (void)dealloc
+{
+    NSLog(@"%@销毁了", [self class]);
 }
-*/
-
 @end

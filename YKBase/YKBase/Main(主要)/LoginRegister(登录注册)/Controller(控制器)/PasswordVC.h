@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 
 @interface PasswordVC : BaseViewController
+
 @property (nonatomic, copy) void(^ PasswordVCBlock)(NSString  *account ,NSString  *password);
 
 @end

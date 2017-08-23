@@ -28,12 +28,12 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"图层-8"] forBarMetrics:UIBarMetricsDefault];
     
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-
+    
 }
 - (void)showBackBtn{
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 0, 40, 40);
-//    backBtn.backgroundColor = [UIColor redColor];
+    //    backBtn.backgroundColor = [UIColor redColor];
     [backBtn setImage:[UIImage imageNamed:@"123.png"] forState:UIControlStateNormal];
     backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [backBtn addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
@@ -87,7 +87,7 @@
 }
 -(void)LeftBtnImage:(id)sender{
     
-     self.LeftBack();
+    self.LeftBack();
     
 }
 
@@ -107,7 +107,7 @@
 }
 #pragma mark - popRootdoBack点击事件
 -(void)RightBtn:(UIButton*)sender{
-     self.RightBack();
+    self.RightBack();
 }
 
 #pragma mark - 右侧image
@@ -143,7 +143,7 @@
             [weakSelf.sessionArray removeAllObjects];
         });
     });
-
+    
 }
 
 -(void)ShowNodataView{
@@ -160,19 +160,19 @@
             imageView.clipsToBounds  = YES;
             [_baseBottomView addSubview:imageView];
         } ];
-           }
+    }
 }
 -(void)HiddenNodataView{
     if (_baseBottomView) {
- __weak typeof(self) weakSelf = self;
+        __weak typeof(self) weakSelf = self;
         [UIView animateWithDuration:0.1 animations:^{
             [_baseBottomView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             weakSelf.baseBottomView.alpha = 0.0;
         } completion:^(BOOL finished) {
-             [weakSelf.baseBottomView removeFromSuperview];
+            [weakSelf.baseBottomView removeFromSuperview];
             weakSelf.baseBottomView = nil;
         }];
-       }
+    }
 }
 - (void)popRootshowBackBtn{
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -206,8 +206,8 @@
     self.view.userInteractionEnabled = YES;
     self.navigationController.interactivePopGestureRecognizer .enabled = YES;
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-
-
+    
+    
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];

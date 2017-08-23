@@ -21,25 +21,14 @@
     [self SET_UI];
     //数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
-//    [self showBackBtn];
-    [self showBackBtn:^{
-        for (BaseViewController * VC in self.navigationController.viewControllers) {
-            NSLog(@"%@",VC);
-            if ([VC isKindOfClass:[MyInfoVC class]]) {
-                [self.navigationController popToViewController:VC animated:YES];
-            }
-        }
-        //
-        
-    }];
-
+    [self showBackBtn];
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
+    
 }
 #pragma mark - 发送验证码
 - (IBAction)VerificationCodeAction:(UIButton *)sender {
@@ -95,7 +84,6 @@
         [DWAlertTool showToast:@"密码输入有误"];
         return NO;
     }
-
     return Y;
 }
 
