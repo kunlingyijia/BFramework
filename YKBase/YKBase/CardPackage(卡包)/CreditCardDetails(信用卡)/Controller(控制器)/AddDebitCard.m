@@ -44,58 +44,41 @@
 - (IBAction)bankAction:(UIButton *)sender {
     [self.view endEditing:YES];
     __weak typeof(self) weakSelf = self;
-    switch (sender.tag) {
-        case 401:
-        {
-            ImageChooseVC* VC = [[ImageChooseVC alloc]initWithNibName:@"ImageChooseVC" bundle:nil];
-            VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-            VC.imageType = EditedImage;
-            VC.zoom= 0.6;
-            VC.ImageChooseVCBlock =^(UIImage *image){
-                NSLog(@"%@",image);
-                [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:50 success:^(NSArray *urlArr) {
-                    NSDictionary * dic = urlArr[0];
+    ImageChooseVC* VC = [[ImageChooseVC alloc]initWithNibName:@"ImageChooseVC" bundle:nil];
+    VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    VC.imageType = EditedImage;
+    VC.zoom= 0.6;
+    VC.ImageChooseVCBlock =^(UIImage *image){
+        NSLog(@"%@",image);
+        [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:100 success:^(NSArray *urlArr) {
+            NSDictionary * dic = urlArr[0];
+            switch (sender.tag) {
+                case 401:
+                {
                     weakSelf.bank_card_photoUrl = dic[@"url"];
                     weakSelf.bank_card_photo.image = image;
-
-                } faild:^(id error) {
-                    
-                }];
-            };
-            [self presentViewController:VC animated:NO completion:nil];
-           
-            break;
-        }
-            
-        case 402:
-        {
-            ImageChooseVC* VC = [[ImageChooseVC alloc]initWithNibName:@"ImageChooseVC" bundle:nil];
-            VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-            VC.imageType = EditedImage;
-            VC.zoom= 0.6;
-            VC.ImageChooseVCBlock =^(UIImage *image){
-                NSLog(@"%@",image);
-                [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:100 success:^(NSArray *urlArr) {
-                    NSDictionary * dic = urlArr[0];
+                    break;
+                }
+                case 402:
+                {
                     weakSelf.bank_card_back_photoUrl = dic[@"url"];
                     weakSelf.bank_card_back_photo.image = image;
-                } faild:^(id error) {
+                    break;
+                }
                     
-                }];
-            };
-            [self presentViewController:VC animated:NO completion:nil];
-
-           
-            break;
-        }
+                default:{
+                    
+                    break;
+                }
+            }
             
-        default:{
+        } faild:^(id error) {
             
-            break;
-            
-        }
-    }
-
+        }];
+    };
+    [self presentViewController:VC animated:NO completion:nil];
+    
+    
     
 }
 
@@ -104,7 +87,7 @@
 #pragma mark - 日期选择
 - (IBAction)DataAction:(PublicBtn *)sender {
     __weak typeof(self) weakSelf = self;
-
+    
     switch (sender.tag) {
             
         case 301:
@@ -114,8 +97,8 @@
                 weakSelf.valid_thru.text = resultstr;
             }];
             [YYMMView show];
-        
-
+            
+            
             break;
         }
             
@@ -124,11 +107,11 @@
             //账单日
             MCDatePickerView *dayView = [[MCDatePickerView alloc] initWithFrame:CGRectZero type:XMGStyleTypeDay MCDateSuccessBack:^(NSString *resultstr) {
                 weakSelf.state_date.text = resultstr;
-
+                
                 NSLog(@"天天---%@",resultstr);
             }];
             [dayView show];
-
+            
             break;
         }
             
@@ -139,10 +122,10 @@
             MCDatePickerView *dayView = [[MCDatePickerView alloc] initWithFrame:CGRectZero type:XMGStyleTypeDay MCDateSuccessBack:^(NSString *resultstr) {
                 NSLog(@"天天---%@",resultstr);
                 weakSelf.repay_date.text = resultstr;
-
+                
             }];
             [dayView show];
-
+            
             break;
         }
             
@@ -152,7 +135,7 @@
             
         }
     }
-
+    
     
     
 }
@@ -172,61 +155,64 @@
 }
 #pragma mark - 提交
 - (IBAction)submitBtn:(SubmitBtn *)sender {
-        if ([self IF]) {
-            CardModel *model =[CardModel new];
-            model.bank_card_photo=_bank_card_photoUrl ;
-            model.bank_card_back_photo=_bank_card_back_photoUrl ;
-            model.bank_card_no= self.bank_card_no.text;
-            model.credit_line = self.credit_line.text;
-            model.valid_thru= self.valid_thru.text ;
-            model.cvn2 = self.cvn2.text;
-            model.state_date = self.state_date.text;
-            model.repay_date = self.repay_date.text;
-            model.bind_mobile = self.bind_mobile.text;
-            model.verify_code = self.verify_code.text;
-            __weak typeof(self) weakSelf = self;
-            NSURLSessionDataTask * task =  [HTTPTool requestAddCreditCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
-                if (baseRes.resultCode==1) {
-                    //请求个人信息
-                    [weakSelf requestUserInfo];
-                }
-            } faild:^(NSError * _Nullable error) {
-            }];
-            if (task) {
-                [self.sessionArray addObject:task];
-            }
-            
-        }
-    }
-#pragma mark - 请求个人信息
--(void)requestUserInfo{
+    if ([self IF]) {
+        CardModel *model =[CardModel new];
+        model.bank_card_photo=_bank_card_photoUrl ;
+        model.bank_card_back_photo=_bank_card_back_photoUrl ;
+        model.bank_card_no= self.bank_card_no.text;
+        model.credit_line = self.credit_line.text;
+        model.valid_thru= self.valid_thru.text ;
+        model.cvn2 = self.cvn2.text;
+        model.state_date = self.state_date.text;
+        model.repay_date = self.repay_date.text;
+        model.bind_mobile = self.bind_mobile.text;
+        model.verify_code = self.verify_code.text;
         __weak typeof(self) weakSelf = self;
-        NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
-            if (baseRes.resultCode ==1) {
-                //返回
-                [weakSelf.navigationController popViewControllerAnimated:YES] ;
+        NSURLSessionDataTask * task =  [HTTPTool requestAddCreditCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+            if (baseRes.resultCode==1) {
+                //请求个人信息
+                [weakSelf requestUserInfo];
             }
         } faild:^(NSError * _Nullable error) {
-            
         }];
         if (task) {
             [self.sessionArray addObject:task];
         }
+        
     }
+}
+#pragma mark - 请求个人信息
+-(void)requestUserInfo{
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //返回
+                [weakSelf.navigationController popViewControllerAnimated:YES] ;
+            });
+            
+        }
+    } faild:^(NSError * _Nullable error) {
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
+}
 
 
 #pragma mark - 判断条件
 -(BOOL)IF{
     [self.view endEditing:YES];
     BOOL  Y = YES;
-//    if (self.bank_card_photoUrl.length==0) {
-//        [DWAlertTool showToast:@"请选择信用卡正面照片"];
-//        return NO;
-//    }
-//    if (self.bank_card_back_photoUrl.length==0) {
-//        [DWAlertTool showToast:@"请选择信用卡背面照片"];
-//        return NO;
-//    }
+    if (self.bank_card_photoUrl.length==0) {
+        [DWAlertTool showToast:@"请选择信用卡正面照片"];
+        return NO;
+    }
+    if (self.bank_card_back_photoUrl.length==0) {
+        [DWAlertTool showToast:@"请选择信用卡背面照片"];
+        return NO;
+    }
     if (![RegularTool checkBankNumber:_bank_card_no.text]) {
         [DWAlertTool showToast:@"信用卡号输入有误"];
         return NO;

@@ -12,7 +12,7 @@
 
 @end
 
-/////               标签***************************************************************************************************************************************************************************************************////
+/////***********************************************************标签***************************************////
 
 @implementation DarkGreyLabel
 #pragma mark - 深灰标签
@@ -376,9 +376,7 @@
 }
 
 @end
-
-
-/////               输入栏***************************************************************************************************************************************************************************************************////
+/////              ************************************************* 输入栏**********************************************************************************************////
 @implementation DarkGreyTV
 #pragma mark - 深灰输入栏
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -386,7 +384,6 @@
     self = [super initWithCoder:coder];
     if (self) {
         [self SetUpSize];
-        
     }
     return self;
 }
@@ -395,7 +392,6 @@
     self = [super init];
     if (self) {
         [self SetUpSize];
-        
     }
     return self;
 }
@@ -412,8 +408,6 @@
     self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
     self.tintColor = [UIColor redColor];
 }
-
-
 @end
 
 @implementation LightGreyTV
@@ -442,16 +436,12 @@
     }
     return self;
 }
--(void)SetUpSize {
+-(void)SetUpSize{
     self. textColor = [UIColor colorWithHexString:kLightGrey];
     self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
     self.tintColor = [UIColor redColor];
 }
-
-
 @end
-
-
 @implementation LineView
 #pragma mark - 线视图
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -467,7 +457,6 @@
     self = [super init];
     if (self) {
         [self addSubview];
-        
     }
     return self;
 }
@@ -484,11 +473,9 @@
 }
 -(void)layoutSubviews{
     CGRect  Frame= self.frame;
-    Frame.size.height =0.3*SizeScale;
+    Frame.size.height =0.4*SizeScale;
     self.frame= Frame;
 }
-
-
 @end
 
 @implementation CutView
@@ -506,7 +493,6 @@
     self = [super init];
     if (self) {
         [self addSubview];
-        
     }
     return self;
 }
@@ -519,12 +505,8 @@
     return self;
 }
 -(void)addSubview{
-//    self.backgroundColor = [UIColor colorWithHexString:kLineColor];
-    [self.layer setLaberMasksToBounds:YES cornerRadius:10.0*SizeScale borderWidth:0.0 borderColor:nil];
+    [self.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:0.0 borderColor:nil];
 }
-
-
-
 @end
 
 

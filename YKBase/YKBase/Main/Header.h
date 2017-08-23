@@ -95,21 +95,19 @@
 //以上是百度地图
 */
 //二维码
-#import "LBXScanWrapper.h"
-#import "LBXScanViewController.h"
-#import "LBXScanView.h"
-#import "LBXScanResult.h"
-#import "LBXScanWrapper.h"
-#import "LBXViewController.h"
+#import "JQScanViewController.h"
 ///自定义分段View
 #import "SegmentedView.h"
 #import "Userinfo.h"
 ///时间选择器(年月)
 #import "MCDatePickerView.h"
+#import "HZQDatePickerView.h"
+
 ///银行卡相关
 #import "CardModel.h"
 ///系统配置相关
 #import "SystemModel.h"
+
 
 
 #endif /* Header_h */

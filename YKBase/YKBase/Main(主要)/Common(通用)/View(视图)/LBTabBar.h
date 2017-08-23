@@ -18,8 +18,8 @@
 
 @interface LBTabBar : UITabBar
 /** plus按钮 */
-@property (nonatomic, weak) UIButton *plusBtn ;
+@property (nonatomic, strong) UIButton *plusBtn ;
 /** tabbar的代理 */
-@property (nonatomic, weak) id<LBTabBarDelegate> myDelegate ;
+@property (nonatomic, assign) id<LBTabBarDelegate> myDelegate ;
 
 @end

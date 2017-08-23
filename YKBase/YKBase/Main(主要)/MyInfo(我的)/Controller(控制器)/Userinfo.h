@@ -21,7 +21,7 @@
 ///冻结资金
 @property (nonatomic, strong) NSString  *frozen_amount ;
 ///0-未认证 1-认证中2-认证成功3-认证失败
-@property (nonatomic, strong) NSString  *is_certification ;
+@property (nonatomic, strong) NSString  *certify_status ;
 ///银行数量
 @property (nonatomic, strong) NSString  *bank_card_num ;
 

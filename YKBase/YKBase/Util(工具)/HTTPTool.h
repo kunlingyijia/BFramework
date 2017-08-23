@@ -16,6 +16,8 @@ typedef void(^DataFaild)(NSError * _Nullable error);
 +(BOOL)isCertification;
 #pragma mark -  获取验证码
 + (nullable NSURLSessionDataTask *)requestSystemWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  获取系统配置
++ (nullable NSURLSessionDataTask *)requestVersionCheckWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  获取验证码
 + (nullable NSURLSessionDataTask *)requestVerifyCodeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  消息列表
@@ -36,8 +38,6 @@ typedef void(^DataFaild)(NSError * _Nullable error);
 + (nullable NSURLSessionDataTask *)requestUpdateUserInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  实名认证
 + (nullable NSURLSessionDataTask *)requestCertifyWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
-#pragma mark -  重新实名认证
-+ (nullable NSURLSessionDataTask *)requestUpdateCertifyWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  实名认证查询
 + (nullable NSURLSessionDataTask *)requestCertifyInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  实名添加借记卡

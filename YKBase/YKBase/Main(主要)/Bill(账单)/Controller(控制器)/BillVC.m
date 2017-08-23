@@ -9,6 +9,8 @@
 #import "BillVC.h"
 #import "BillOneCell.h"
 #import "BillHeaderView.h"
+#import "BillSubModel.h"
+#import "BillModel.h"
 @interface BillVC ()<UITableViewDelegate,UITableViewDataSource>
 {
     BillHeaderView * header;
@@ -33,6 +35,7 @@
 #pragma mark -  载入完成
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [YKNotification addObserver:self selector:@selector(requestAction) name:@"刷新一级界面" object:nil];
     //关于UI
     [self SET_UI];
     //关于数据
@@ -63,9 +66,9 @@
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
-    [self requestAction];
-    //上拉刷新下拉加载
-    [self Refresh];
+//    [self requestAction];
+//    //上拉刷新下拉加载
+//    [self Refresh];
 }
 -(void)Refresh{
     //下拉刷新
@@ -82,82 +85,70 @@
 }
 #pragma mark - 网络请求
 -(void)requestAction{
-    //    NSString *Token =[AuthenticationModel getLoginToken];
-    //    NSMutableDictionary *dic  =[ @{@"pageIndex":@(self.pageIndex),@"pageCount":@(10)}mutableCopy];
-    //    __weak typeof(self) weakself = self;
-    //    if (Token.length!= 0) {
-    //        /*
-    //         BaseRequest *baseReq = [[BaseRequest alloc] init];
-    //         baseReq.encryptionType = RequestMD5;
-    //         baseReq.data =dic;
-    //         [[DWHelper shareHelper] requestDataWithParm:[baseReq yy_modelToJSONString] act:@"<#act=Api/Homepage/requestHomepage#>" sign:[[baseReq.data yy_modelToJSONString] MD5Hash] requestMethod:GET PushVC:self success:^(id response) {
-    //         */
-    //
-    //        BaseRequest *baseReq = [[BaseRequest alloc] init];
-    //        baseReq.token = [AuthenticationModel getLoginToken];
-    //        baseReq.encryptionType = AES;
-    //        baseReq.data = [AESCrypt encrypt:[dic yy_modelToJSONString] password:[AuthenticationModel getLoginKey]];
-    //        [[DWHelper shareHelper] requestDataWithParm:[baseReq yy_modelToJSONString] act:@"<#act=Api/Score/requestScoreList#>" sign:[baseReq.data MD5Hash] requestMethod:GET PushVC:self success:^(id response) {
-    //            BaseResponse *baseRes = [BaseResponse yy_modelWithJSON:response];            if (weakself.pageIndex == 1) {
-    //                [weakself.dataArray removeAllObjects];
-    //            }
-    //            if (baseRes.resultCode ==1) {
-    //                NSMutableArray *arr = baseRes.data;
-    //                for (NSDictionary *dicData in arr) {
-    //                    <#ScoreRecordModel#> *model = [<#ScoreRecordModel#> yy_modelWithJSON:dicData];
-    //                    [weakself.dataArray addObject:model];
-    //                }
-    //                //刷新
-    //                [weakself.tableView reloadData];
-    //            }else{
-    //                [weakself showToast:baseRes.msg];
-    //                weakself.pageIndex > 1 ? weakself.pageIndex-- : weakself.pageIndex;
-    //
-    //            }
-    //
-    //            // 进入刷新状态后会自动调用这个block
-    //            [weakself.tableView.mj_header endRefreshing];
-    //            [weakself.tableView.mj_footer endRefreshing];
-    //        } faild:^(id error) {
-    //            NSLog(@"%@", error);
-    //            // 进入刷新状态后会自动调用这个block
-    //            [weakself.tableView.mj_header endRefreshing];
-    //            [weakself.tableView.mj_footer endRefreshing];
-    //            weakself.pageIndex > 1 ? weakself.pageIndex-- : weakself.pageIndex;
-    //
-    //        }];
-    //    }else {
-    //
-    //    }
+    [self  dataProcessing ];
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask * task =  [HTTPTool  requestHomePageWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:YES success :^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            if (weakSelf.pageIndex == 1) {
+                [YKDataTool setValue:baseRes forkey:@"我的账单"];
+                [weakSelf.dataArray removeAllObjects];
+            }
+            [weakSelf  dataProcessing ];
+        }else{
+            weakSelf.pageIndex > 1 ? weakSelf.pageIndex-- : weakSelf.pageIndex;
+        }
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+        
+    } faild:^(NSError * _Nullable error) {
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+        
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
     
+}
+#pragma mark - 数据处理
+-(void)dataProcessing{
+    NSMutableArray * Info = [YKDataTool objectForKey:@"我的账单"];
+    if (Info.count!=0) {
+        for (NSDictionary * dic in Info) {
+            BillModel * model = [BillModel yy_modelWithJSON:dic];
+            // [self.dataArray addObject:model];
+        }
+        //刷新
+        [self.tableView reloadData];
+    }
 }
 #pragma tableView 代理方法
 //tab分区个数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     //分区个数
-    return 1;
+     [tableView tableViewDisplayWitimage:nil ifNecessaryForRowCount:self.dataArray.count];
+    return self.dataArray.count;
 }
 ///tab个数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    [tableView tableViewDisplayWitimage:nil ifNecessaryForRowCount:self.dataArray.count];
-    return 0;
+   
+    BillModel *model=self.dataArray[section];
+    return ((NSMutableArray*)model.billSubModel).count;
 }
 //tab设置
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //分割线
-    tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    __weak typeof(self) weakSelf = self;
-//    if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
-//        return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-//    }else{
+    //tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    if (indexPath.section>self.dataArray.count-1||self.dataArray.count==0) {
+        return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    }else{
     
         BillOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"BillOneCell" forIndexPath:indexPath];
         //cell 赋值
-        // cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+         BillModel *model=self.dataArray[indexPath. section];
+        cell.model = indexPath.section >= self.dataArray.count ? nil : model.billSubModel[indexPath.row];
         // cell 其他配置
         return cell;
         
-    //}
+    }
 }
 #pragma mark - 分区页眉
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -166,11 +157,7 @@
     
     // }
     if (header) {
-        
-//        HeaderModel *headerM = self.dataArray[section];
-//        
-//        [header headerGetData:headerM];
-        
+         header.model = section >= self.dataArray.count ? nil : self.dataArray[section];
     }
     return header;
     

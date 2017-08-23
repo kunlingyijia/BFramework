@@ -13,7 +13,6 @@
 @implementation YKHTTPSession{
     UIWebView *callPhoneWebview;
 }
-
 + (YKHTTPSession *)shareSession; {
     static YKHTTPSession *session = nil;
     static dispatch_once_t onceToken;
@@ -22,6 +21,7 @@
     });
     return session;
 }
+
 //网络请求
 - (nullable NSURLSessionDataTask *)requestDataWithParm:(nullable id)parm act:( nonnull NSString *)actName sign:(nullable id)sign method:(YKRequestMethod)method  showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable YKSuccessCallback)success faild:(nullable YKFaildCallback)faild {
     //showHUD ==YES ?[[LoadWaitSingle shareManager]showLoadWaitViewImage:@"兑富宝加载等待图"] :nil;
@@ -40,11 +40,13 @@
     NSString *url = [NSString stringWithFormat:@"%@%@&sign=%@",kServerUrl,ACTName,sign];
     YKAppClient*  manager = [YKAppClient sharedClient];
     _BaseVC.view.userInteractionEnabled = active;
+    [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = active;
     if (method == HTTPSRequestTypeGET) {
      return   [manager GET:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                  if (![responseObject[@"resultCode"]isEqualToString:@"1"]) {
                    _BaseVC.view.userInteractionEnabled =YES;
+                     [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = YES;
                      NSLog(@"错误码:--:%@\n错信息---:%@",responseObject[@"resultCode"],responseObject[@"msg"]);
                  }
             [SVProgressHUD dismiss];
@@ -52,6 +54,7 @@
             success(responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             _BaseVC.view.userInteractionEnabled =YES;
+            [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = YES;
             faild(error);
             NSLog(@"error--%@",error);
             NSString * errorStr =error.localizedDescription;
@@ -74,7 +77,6 @@
 +(void)AFNetworkStatus
 {
     //1.创建网络监测者
-   
     /*枚举里面四个状态  分别对应 未知 无网络 数据 WiFi
      typedef NS_ENUM(NSInteger, AFNetworkReachabilityStatus) {
      AFNetworkReachabilityStatusUnknown          = -1,      未知
@@ -85,7 +87,6 @@
      */
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [[AFNetworkReachabilityManager sharedManager ] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-    
         //这里是监测到网络改变的block  可以写成switch方便
         //在里面可以随便写事件
         switch (status) {
@@ -96,17 +97,13 @@
                 NSLog(@"无网络");
                 networkReachabilityStatusUnknown();
                 break;
-                
             case AFNetworkReachabilityStatusReachableViaWWAN:
                 NSLog(@"蜂窝数据网");
-                networkReachabilityStatusReachableViaWWAN();
+              //  networkReachabilityStatusReachableViaWWAN();
                 break;
-                
             case AFNetworkReachabilityStatusReachableViaWiFi:
                 NSLog(@"WiFi网络");
-                
                 break;
-                
             default:
                 break;
         }
@@ -115,36 +112,28 @@
 }
 void networkReachabilityStatusUnknown()
 {
-    
-    
-    [DWAlertTool alertWithTitle:@"已经”VRMAX“关闭蜂窝移动数据" message:@"您可以在”设置“中为此应用程序打开蜂窝移动数据." OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+    [DWAlertTool alertWithTitle:@"”巧巧信用卡“关闭蜂窝移动数据" message:@"您可以在”设置“中为此应用程序打开蜂窝移动数据." OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
         NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if([[UIApplication sharedApplication] canOpenURL:url]) {
             NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
             [[UIApplication sharedApplication] openURL:url];
-            
         }
-
     } withCancel:^(UIAlertAction *cancelaction) {
-        
     }];
     
 }
-
 void networkReachabilityStatusReachableViaWWAN()
 {
-    
-    [DWAlertTool alertWithTitle:@"“VRMAX”正在使用流量，确定要如此土豪吗？" message:@"建议开启WIFI后观看视频。" OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
-        NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        if([[UIApplication sharedApplication] canOpenURL:url]) {
-            NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            [[UIApplication sharedApplication] openURL:url];
-        }
-    } withCancel:^(UIAlertAction *cancelaction) {
-    }];
-
+     [DWAlertTool showToast:@"蜂窝数据网"];
+//    [DWAlertTool alertWithTitle:@"“VRMAX”正在使用流量，确定要如此土豪吗？" message:@"建议开启WIFI后观看视频。" OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+//        NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+//        if([[UIApplication sharedApplication] canOpenURL:url]) {
+//            NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
+//            [[UIApplication sharedApplication] openURL:url];
+//        }
+//    } withCancel:^(UIAlertAction *cancelaction) {
+//    }];
 }
-
 ///上传图片
 -(void)UPImageToServer:(NSArray*)imageArr toKb:(NSInteger)kb success:(SuccessImageArr)success faild:(FaildCallback)faild{
     NSString *password = [NSString stringWithFormat:@"%@%@%@",[YKDataTool getimage_account],[YKDataTool getimage_hostname],[[YKDataTool getimage_password]MD5Hash] ];
@@ -204,7 +193,4 @@ void networkReachabilityStatusReachableViaWWAN()
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [callPhoneWebview loadRequest:request];
 }
-
-
-
 @end

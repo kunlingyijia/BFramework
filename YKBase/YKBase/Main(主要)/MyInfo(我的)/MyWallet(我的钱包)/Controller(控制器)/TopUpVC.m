@@ -43,7 +43,8 @@
 -(void)SET_UI{
     self.title = @"快速充值";
     [self showBackBtn];
-    [self.OneView.layer setLaberMasksToBounds:YES cornerRadius:10.0 borderWidth:2.0 borderColor:[UIColor colorWithHexString:kLineColor]];
+    
+    [self.OneView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
     [self.segmented titleArr:[@[@"我的信用卡(1)",@"我的借记卡(2)"]mutableCopy]];
     __weak typeof(self) weakSelf = self;
     self.segmented.SegmentedViewBlock = ^(NSInteger tag){
@@ -196,8 +197,17 @@
 #pragma mark - 立即支付
 - (IBAction)submitAction:(SubmitBtn *)sender {
     
+    if ([self IF]) {
+        
+    }
     
+}
+#pragma mark - 判断条件
+-(BOOL)IF{
+    [self.view endEditing:YES];
+    BOOL  Y = YES;
     
+    return Y;
 }
 
 

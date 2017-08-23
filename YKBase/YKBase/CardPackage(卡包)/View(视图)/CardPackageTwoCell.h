@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class CardModel;
 @interface CardPackageTwoCell : UITableViewCell
-
+///model
+@property (nonatomic, strong) CardModel *model ;
 @end

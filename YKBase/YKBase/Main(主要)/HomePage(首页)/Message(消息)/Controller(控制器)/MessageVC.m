@@ -25,7 +25,6 @@
 #pragma mark - 视图已在屏幕上渲染完成
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
 }
 #pragma mark -  载入完成
 - (void)viewDidLoad {
@@ -34,14 +33,12 @@
     [self SET_UI];
     //关于数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
     self.title = @"消息";
     [self showBackBtn];
     [self setUpTableView];
-    
 }
 #pragma mark - 关于tableView
 -(void)setUpTableView{
@@ -52,15 +49,11 @@
     _tableView.tableFooterView = [UIView new];
     [self.view addSubview:_tableView];
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
-   [_tableView tableViewregisterNibArray:@[@"MessageOneCell"]];
-    
+    [_tableView tableViewregisterNibArray:@[@"MessageOneCell"]];
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
-//    [self.dataArray addObject:@"111"];
-//    [self.dataArray addObject:@"111"];
-//    [self.dataArray addObject:@"111"];
     self.pageIndex =1;
     [self requestAction];
     //上拉刷新下拉加载
@@ -90,14 +83,14 @@
             }
             //刷新
             [weakSelf.tableView reloadData];
-            }else{
-          weakSelf.pageIndex > 1 ? weakSelf.pageIndex-- : weakSelf.pageIndex;
+        }else{
+            weakSelf.pageIndex > 1 ? weakSelf.pageIndex-- : weakSelf.pageIndex;
         }
         [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-
+        
     } faild:^(NSError * _Nullable error) {
-           [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+        
     }];
     if (task) {
         [self.sessionArray addObject:task];
@@ -122,11 +115,11 @@
     if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
-       
+        
         MessageOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"MessageOneCell" forIndexPath:indexPath];
-                //cell 赋值
+        //cell 赋值
         cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
-                // cell 其他配置
+        // cell 其他配置
         return cell;
         
     }
@@ -134,16 +127,10 @@
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
-    
 }
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //用storyboard 进行自适应布局
-    self.tableView.estimatedRowHeight = 500;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    return self.tableView.rowHeight;
+    return 0.15*Width;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

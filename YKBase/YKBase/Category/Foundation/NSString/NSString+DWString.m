@@ -281,7 +281,7 @@
 -(NSString*)HtmlToString{
     NSMutableAttributedString * attrString =[[NSMutableAttributedString alloc] initWithData:[self dataUsingEncoding:NSUnicodeStringEncoding]options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType}documentAttributes:nil error:nil];
     NSString *str = [attrString string];
-
+    
     return str;
 }
 
@@ -371,5 +371,14 @@
     return [addresses count] ? addresses : nil;
 }
 
+-(NSString*)timeStampString{
+     // iOS 生成的时间戳是10位
+    NSTimeInterval interval    =[self doubleValue];
+    NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    return [formatter stringFromDate: date];
+    
+}
 
 @end

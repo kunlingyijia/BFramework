@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>LBXScan.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>LXMButtonImagePosition.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,37 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>211F1D1F6933B7F2372A19D75D9B9F4C</key>
+		<key>39F3F7F4AC6BCDB4BC6EB33C26C13997</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>23C07D42138BFA90FC48DD867F07F6CA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2A06DCE32E413643BF98836235CE8D81</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5700D8DB63D0F2A972BD7F787C684D8F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>695CC512BB920DB2DF2D1ABDF434F3BD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>881572C636BD5DD46BE51FAE91397140</key>
+		<key>464A592377607B7946D7F4B5FA676ED7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>904F4F27FD314010A3812EB2A9306183</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9482ED889DBAC72BD41FA53B30E6AF0C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,12 +97,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B5B813203209B51D91C54CA37F709CF9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B61FDFFD9A2609EBC280C737D8057928</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F282FFAD50E19D56368B1A29DD8E48A3</key>
+		<key>C7CC5A8A7FEE6BBF58FCA47712F460D6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C8DCE14EB1308DF6F2F42206FD2F315A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

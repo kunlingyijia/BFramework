@@ -87,6 +87,8 @@
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {        
         if (baseRes.resultCode ==1) {
+            //设置别名
+            [YKNotification postNotificationName:@"刷新一级界面" object:nil userInfo:nil];
             //返回
             [weakSelf dismissViewControllerAnimated:YES completion:^{}];
         }
@@ -112,6 +114,7 @@
 - (IBAction)PasswordVCAction:(UIButton *)sender {
     //Push 跳转
     PasswordVC * VC = GetVC(PasswordVC)
+    VC.title = @"找回密码";
     __weak typeof(self) weakSelf = self;
     VC.PasswordVCBlock = ^(NSString  *account ,NSString  *password){
         weakSelf.account.text = account;

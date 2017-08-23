@@ -190,9 +190,9 @@ static float PickerViewH  = 200;
     NSString *day = self.day[self.selectDayRow];
     NSString *resultDate;
     if (self.type == XMGStyleTypeDay) {
-        resultDate = [NSString stringWithFormat:@"%@",day];
+        resultDate = [NSString stringWithFormat:@"%@日",day];
     }else{
-        resultDate = [NSString stringWithFormat:@"%@/%@",month, [year substringToIndex:2]];
+        resultDate = [NSString stringWithFormat:@"%@/%@",month, [year substringFromIndex:2]];
     }
     
     self.SuccessBack(resultDate);

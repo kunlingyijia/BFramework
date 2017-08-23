@@ -44,7 +44,7 @@
 ///获取IP
 #pragma mark - 获取设备当前网络IP地址
 + (NSString *)getIPAddress:(BOOL)preferIPv4;
-
-
+///获取 年-月-日
+-(NSString*)timeStampString;
 
 @end

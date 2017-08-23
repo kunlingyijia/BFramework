@@ -27,13 +27,13 @@
 -(void)SET_UI{
     [self showBackBtn];
     
-//    __weak typeof(self) weakSelf = self;
-//    [self showBackBtn:^{
-//        for (BaseViewController * VC in self.navigationController.viewControllers) {
-//            NSLog(@"%@",VC);
-//        }
-//       // [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-//    }];
+    __weak typeof(self) weakSelf = self;
+    [self showBackBtn:^{
+        for (BaseViewController * VC in self.navigationController.viewControllers) {
+            NSLog(@"%@",VC);
+        }
+    [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+    }];
      self.title = @"商务合作";
 //        AdModel *model = [[AdModel alloc]init];
 //        model.region_id = 1;

@@ -59,13 +59,27 @@
 -(void)SET_DATA{
    
     [self requestUserInfo];
+    //上拉刷新下拉加载
+    [self Refresh];
     
+    
+}
+-(void)Refresh{
+    __weak typeof(self) weakSelf = self;
+    [ThirdPartyTool MJRefreshView:self.scrollView Header:YES Footer:NO HeaderBlock:^{
+        [weakSelf requestUserInfo];
+    } FooterBlock:^{
+    }];
 }
 #pragma mark - 请求个人信息
 -(void)requestUserInfo{
+    __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:YES success:^(BaseResponse * _Nullable baseRes) {
-    } faild:^(NSError * _Nullable error) {
         
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.scrollView];
+    } faild:^(NSError * _Nullable error) {
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.scrollView];
+
     }];
     if (task) {
         [self.sessionArray addObject:task];
@@ -76,13 +90,11 @@
     YKHTTPSession * helper = [YKHTTPSession shareSession];
     [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:nil];
     self.mobile.text = [NSString stringWithFormat:@"账号:  %@",helper.userinfo.mobile];
-    self.amount.text = [NSString stringWithFormat:@"%.2f",[helper.userinfo.amount floatValue]];
-    self.frozen_amount.text = [NSString stringWithFormat:@"%.2f",[helper.userinfo.frozen_amount floatValue]];
+    self.amount.text =helper.userinfo.amount;
+    self.frozen_amount.text = helper.userinfo.frozen_amount;
     self.bank_card_num.text = [NSString stringWithFormat:@"%@",helper.userinfo.bank_card_num];
    ///0-未认证 1-认证中2-认证成功3-认证失败
-    if ([[YKHTTPSession shareSession].userinfo.is_certification isEqualToString:@"2"]) {
-     _certificationStatus.text = @"已认证";
-    }
+    _certificationStatus.text = [[YKHTTPSession shareSession].userinfo.certify_status isEqualToString:@"2"] ? @"已认证":@"";
 }
 #pragma mark - 点击事件
 - (IBAction)BtnAction:(UIButton *)sender {

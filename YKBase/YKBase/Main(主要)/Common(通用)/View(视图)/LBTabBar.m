@@ -10,8 +10,11 @@
 #import <objc/runtime.h>
 #import "UIView+LBExtension.h"
 #define LBMagin 10
+#define LBWidth 60
 @interface LBTabBar ()
-
+{
+    NSInteger  index;
+}
 @end
 
 @implementation LBTabBar
@@ -19,17 +22,17 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self=[super initWithFrame:frame]) {
-
+        index =0;
         self.backgroundColor = [UIColor whiteColor];
         [self setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
-        UIButton *plusBtn = [[UIButton alloc] init];
-        [plusBtn setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
-        [plusBtn setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateHighlighted];
+        self.plusBtn  = [[UIButton alloc] init];
+        [self.plusBtn setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
+        [self.plusBtn setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateHighlighted];
 
-        self.plusBtn = plusBtn;
-        [plusBtn addTarget:self action:@selector(plusBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+//         plusBtn;
+        [self.plusBtn addTarget:self action:@selector(plusBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
 
-        [self addSubview:plusBtn];
+        [self addSubview:self.plusBtn];
 
 
 
@@ -42,35 +45,41 @@
     [super layoutSubviews];
     //系统自带的按钮类型是UITabBarButton，找出这些类型的按钮，然后重新排布位置，空出中间的位置
     Class class = NSClassFromString(@"UITabBarButton");
-
-    self.plusBtn.centerX = self.frame.size.width/2-30;
-    //调整发布按钮的中线点Y值
-    self.plusBtn.centerY = 0 -30;
-    self.plusBtn.size = CGSizeMake(60, 60);
+    if (index==0) {
+        index++;
+        self.plusBtn.centerX = self.frame.size.width/2-LBWidth/2;
+        //调整发布按钮的中线点Y值
+        self.plusBtn.centerY = 0 -LBWidth/2;
+    }else{
+        self.plusBtn.centerX = self.frame.size.width/2;
+        //调整发布按钮的中线点Y值
+        self.plusBtn.centerY = 0 ;
+    }
+        self.plusBtn.size = CGSizeMake(LBWidth, LBWidth);
         UILabel *label = [[UILabel alloc] init];
         label.text = @"发布";
         label.font = [UIFont systemFontOfSize:11];
         [label sizeToFit];
         label.textColor = [UIColor grayColor];
-       // [self addSubview:label];
+        // [self addSubview:label];
         label.centerX = self.plusBtn.centerX;
         label.centerY = CGRectGetMaxY(self.plusBtn.frame) + LBMagin ;
-    int btnIndex = 0;
-    for (UIView *btn in self.subviews) {//遍历tabbar的子控件
-        if ([btn isKindOfClass:class]) {//如果是系统的UITabBarButton，那么就调整子控件位置，空出中间位置
-            //每一个按钮的宽度==tabbar的五分之一
-            btn.width = self.width / 5;
-            btn.x = btn.width * btnIndex;
-            btnIndex++;
-            //如果是索引是2(从0开始的)，直接让索引++，目的就是让消息按钮的位置向右移动，空出来发布按钮的位置
-            if (btnIndex == 2) {
+        int btnIndex = 0;
+        for (UIView *btn in self.subviews) {//遍历tabbar的子控件
+            if ([btn isKindOfClass:class]) {//如果是系统的UITabBarButton，那么就调整子控件位置，空出中间位置
+                //每一个按钮的宽度==tabbar的五分之一
+                btn.width = self.width / 5;
+                btn.x = btn.width * btnIndex;
                 btnIndex++;
+                //如果是索引是2(从0开始的)，直接让索引++，目的就是让消息按钮的位置向右移动，空出来发布按钮的位置
+                if (btnIndex == 2) {
+                    btnIndex++;
+                }
             }
-            
         }
-    }
-    
-    [self bringSubviewToFront:self.plusBtn];
+        [self bringSubviewToFront:self.plusBtn];
+   
+
 }
 
 //点击了发布按钮

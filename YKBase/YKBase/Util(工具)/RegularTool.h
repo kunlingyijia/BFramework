@@ -51,6 +51,6 @@
 + (BOOL) checkAmount:(NSString *) amount;
 /// 正则匹配6位正整数
 + (BOOL)checkNumber6:(NSString *) number;
-#pragma mark - 正则匹配3位正整数
+/// 正则匹配3位正整数(cvn)
 + (BOOL)checkNumber3:(NSString *) number;
 @end

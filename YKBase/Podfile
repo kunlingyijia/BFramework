@@ -16,7 +16,7 @@ pod 'SVProgressHUD'
 pod 'MJRefresh'
 pod 'JPush'
 # pod 'BaiduMapKit' #百度地图SDK
-pod 'LBXScan','~> 1.1.1'
+pod "ZXingObjC"
 
 
 end

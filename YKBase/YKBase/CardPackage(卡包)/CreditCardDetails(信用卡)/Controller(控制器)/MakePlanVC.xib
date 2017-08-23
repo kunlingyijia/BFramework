@@ -284,7 +284,7 @@
                                                                 <constraint firstAttribute="width" constant="15" id="iFw-NW-zCV"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIp-hQ-LqZ">
+                                                        <button opaque="NO" tag="301" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIp-hQ-LqZ">
                                                             <rect key="frame" x="0.0" y="0.0" width="158" height="40.5"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
@@ -322,9 +322,12 @@
                                                                 <constraint firstAttribute="width" constant="15" id="t7h-J6-TVx"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9it-UH-l44">
+                                                        <button opaque="NO" tag="302" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9it-UH-l44">
                                                             <rect key="frame" x="0.0" y="0.0" width="157" height="40.5"/>
                                                             <state key="normal" title="Button"/>
+                                                            <connections>
+                                                                <action selector="timeAction:" destination="-1" eventType="touchUpInside" id="ICT-ad-CZ2"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

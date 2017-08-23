@@ -56,7 +56,7 @@
     
     __weak typeof(self) weakSelf = self;
     
-    [self alertActionSheetWithTitle:@"获取图片" message:nil OKWithTitleOne:@"相册" OKWithTitleTwo:@"拍照" CancelWithTitle:@"取消" withOKDefaultOne:^(UIAlertAction *defaultaction) {
+    [self alertActionSheetWithTitle:nil message:nil OKWithTitleOne:@"相册" OKWithTitleTwo:@"拍照" CancelWithTitle:@"取消" withOKDefaultOne:^(UIAlertAction *defaultaction) {
         //判断相册权限
         
         ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];

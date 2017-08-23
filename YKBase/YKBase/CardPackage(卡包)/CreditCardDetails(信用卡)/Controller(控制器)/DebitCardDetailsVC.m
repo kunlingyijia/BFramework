@@ -10,6 +10,7 @@
 #import "BillVC.h"
 #import "ChangeDebitCardVC.h"
 #import "MakePlanVC.h"
+#import "TopUpSingleVC.h"
 @interface DebitCardDetailsVC ()
 @property (weak, nonatomic) IBOutlet CutView *bottomView;
 
@@ -36,8 +37,6 @@
 #pragma mark - 关于数据
 -(void)SET_DATA{
     
-    
-    
 }
 #pragma mark - 点击事件
 - (IBAction)BtnAction:(PublicBtn *)sender {
@@ -47,7 +46,7 @@
         {
             //查看流水
             BillVC * VC =  GetVC(BillVC);
-            
+            [VC showBackBtn];
             PushVC(VC);
             break;
         }
@@ -60,7 +59,6 @@
         case 3:
         {
             //定制计划
-            //跳转
             MakePlanVC * VC =  GetVC(MakePlanVC);
             
             PushVC(VC);
@@ -71,7 +69,11 @@
         case 4:
         {
             //卡片充值
+       
+            TopUpSingleVC * VC =  GetVC(TopUpSingleVC);
             
+            PushVC(VC);
+
             break;
         }
         case 5:

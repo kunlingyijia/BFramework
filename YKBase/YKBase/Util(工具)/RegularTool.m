@@ -339,9 +339,10 @@
     BOOL flag = [phoneTest evaluateWithObject:number];
     return flag;
 }
-#pragma mark - 正则匹配3位正整数
+#pragma mark - 正则匹配3位正整数(cvn)
 + (BOOL)checkNumber3:(NSString *) number{
-    NSString *stringRegex = @"^[1-9]\\d{0,2}$";
+   // @"^[0-9]\\d{0,2}$"
+    NSString *stringRegex =  @"(\\+)?([0-9]\\d{0,2})?";
     NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
     BOOL flag = [phoneTest evaluateWithObject:number];
     return flag;

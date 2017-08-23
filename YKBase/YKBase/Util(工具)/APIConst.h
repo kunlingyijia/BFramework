@@ -14,6 +14,8 @@ extern  NSString * const kServerUrl;
 extern  NSString * const ACT_API;
 ///获取系统配置
 extern NSString * const  Request_System ;
+///版本检测
+extern NSString * const  Request_VersionCheck ;
 ///消息列表
 extern NSString * const  Request_MessageList ;
 ///请求验证码
@@ -34,12 +36,8 @@ extern NSString * const  Request_UpdatePassword ;
 extern NSString * const  Request_UserInfo ;
 ///修改个人信息
 extern NSString * const  Request_UpdateUserInfo ;
-
 ///实名认证
 extern NSString * const  Request_Certify ;
-///重新实名认证
-extern NSString * const  Request_UpdateCertify ;
-
 ///实名认证查询
 extern NSString * const  Request_CertifyInfo ;
 ///消息列表
@@ -69,5 +67,25 @@ extern NSString * const  Request_Withdraw ;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*---------------------------------数据---------------------------------*/
+///返回时间
+extern  CGFloat  const backTime;
+///切角
+extern  CGFloat  const cutRadius;
+///边宽
+extern  CGFloat  const borderW;
 
 

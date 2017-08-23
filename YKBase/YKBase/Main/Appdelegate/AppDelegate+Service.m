@@ -216,7 +216,9 @@
     // 获取友盟social版本号
     //NSLog(@"UMeng social version: %@", [UMSocialGlobal umSocialSDKVersion]);
     //设置微信的appKey和appSecret
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:WXKey appSecret:WXappSecret redirectURL:@"http://mobile.umeng.com/social"];
+    //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:WXKey appSecret:WXappSecret redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxb1b2bfe44501f201" appSecret:@"5c9d1be2f5dc4cc975c248f9efd7b608" redirectURL:@"http://mobile.umeng.com/social"];
+    
 //    //设置分享到QQ互联的appKey和appSecret
   //  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:QQKey  appSecret:QQappSecret redirectURL:@"http://mobile.umeng.com/social"];
      [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105466760"  appSecret:@"ZhkBC58lGdVq4kaw" redirectURL:@"http://mobile.umeng.com/social"];

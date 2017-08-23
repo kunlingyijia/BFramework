@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class BillModel;
 @interface BillHeaderView : UITableViewHeaderFooterView
 ///title
 @property (nonatomic, strong)  DarkGreyLabel *title ;
 
-
+///model
+@property (nonatomic, strong) BillModel *model ;
 @end

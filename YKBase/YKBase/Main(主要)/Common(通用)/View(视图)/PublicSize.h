@@ -10,8 +10,6 @@
 @interface PublicSize : NSObject
 
 @end
-
-
 /**
  深灰标签
  */
@@ -19,7 +17,6 @@
 ///indexPath
 @property (nonatomic, strong) NSIndexPath  *indexPath ;
 @end
-
 /**
  浅灰标签
  */
@@ -28,7 +25,6 @@
 @property (nonatomic, strong) NSIndexPath  *indexPath ;
 
 @end
-
 /**
  白色标签
  */
@@ -37,17 +33,13 @@
 @property (nonatomic, strong) NSIndexPath  *indexPath ;
 
 @end
-
-
 /**
  蓝色标签
  */
 @interface BlueLabel : UILabel
 ///indexPath
 @property (nonatomic, strong) NSIndexPath  *indexPath ;
-
 @end
-
 /**
  公共标签
  */
@@ -100,17 +92,12 @@
 @interface LightGreyTV : EZTextView
 
 @end
-
-
-
-
 /**
  线视图
  */
 @interface LineView : UIView
 
 @end
-
 /**
  圆角视图
  */

@@ -74,6 +74,7 @@
         __weak typeof(self) weakSelf = self;
         NSURLSessionDataTask * task =  [HTTPTool  requesThirdLoginBindMobileWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
             if (baseRes.resultCode ==1) {
+                LoginRegModel *model = [LoginRegModel yy_modelWithJSON:baseRes.data];
                 [YKDataTool saveUserData:model.key forKey:@"key"];
                 [YKDataTool saveUserData:model.token forKey:@"token"];
                 //设置别名
@@ -107,6 +108,8 @@
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
              weakSelf.BindingVCBlock();
+             //设置别名
+            [YKNotification postNotificationName:@"刷新一级界面" object:nil userInfo:nil];
         }
     } faild:^(NSError * _Nullable error) {
         

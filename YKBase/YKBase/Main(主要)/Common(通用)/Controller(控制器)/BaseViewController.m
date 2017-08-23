@@ -78,7 +78,7 @@
     [backBtn setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
     backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [backBtn addTarget:self action:@selector(LeftBtnImage:) forControlEvents:UIControlEventTouchUpInside];
-    [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 18)];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.leftBarButtonItem = backItem;
     //[self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -110,7 +110,7 @@
      self.RightBack();
 }
 
-#pragma mark - 右侧title
+#pragma mark - 右侧image
 -(void)ShowRightBtnImage:(NSString*)image Back:(ObjectBack)Back{
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 0, 40, 40);
@@ -118,7 +118,7 @@
     [backBtn setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
     backBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [backBtn addTarget:self action:@selector(RightBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [backBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 18, 0, 0)];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.rightBarButtonItem = backItem;
     //[self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -205,6 +205,8 @@
     [MobClick beginLogPageView:@"PageOne"];//("PageOne"为页面名称，可自定义)
     self.view.userInteractionEnabled = YES;
     self.navigationController.interactivePopGestureRecognizer .enabled = YES;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
 
 }
 -(void)viewWillDisappear:(BOOL)animated{

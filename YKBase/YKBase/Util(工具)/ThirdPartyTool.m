@@ -65,7 +65,6 @@
             [self sheetAction:@"高德地图"];
         }
     } withCancel:^(UIAlertAction *cancelaction) {
-        
     }];
 
 }
@@ -88,9 +87,7 @@
 }
 + (void)sheetAction:(NSString *)title {
     [DWAlertTool alertWithTitle:[NSString stringWithFormat:@"您还未安装%@客户端,请安装", title] message:nil OKWithTitle:@"确定" withOKDefault:^(UIAlertAction *defaultaction) {
-        
     }];
-    
 }
 #pragma mark - 更新版本
 +(void)updateVerison{
@@ -99,17 +96,17 @@
     //代码实现获得应用的Verison号：
     NSString *oldVerison = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     __weak typeof(self) weakSelf = self;
-//    [HTTPTool requestVersionUWithParm:model active:YES success:^(BaseResponse * _Nullable baseRes) {
-//        if (baseRes.resultCode == 1) {
-//        VerisonModel* model =[VerisonModel yy_modelWithDictionary:((NSDictionary*)baseRes.data)];
-//        if ([oldVerison compare:model.versionCode]==NSOrderedAscending) {
-//        //NSOrderedAscending (升序)
-//        [weakSelf addMandatoryAlertAction:model];
-//        }
-//    }
-//    } faild:^(id  _Nullable error) {
-//        
-//    }];
+    [HTTPTool requestVersionCheckWithParm:model active:YES success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode == 1) {
+        VerisonModel* model =[VerisonModel yy_modelWithDictionary:((NSDictionary*)baseRes.data)];
+        if ([oldVerison compare:model.version_code]==NSOrderedAscending) {
+        //NSOrderedAscending (升序)
+        [weakSelf addMandatoryAlertAction:model];
+        }
+    }
+    } faild:^(id  _Nullable error) {
+        
+    }];
 }
 #pragma mark - 强制更新
 +(void)addMandatoryAlertAction:(VerisonModel*)model{
@@ -124,17 +121,15 @@
     UIAlertAction * cancel= [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
     }];
     UIAlertAction * OK = [UIAlertAction actionWithTitle:@"我要去升级" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://fir.im/l874"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.download_url]];
         [weakSelf addMandatoryAlertAction:model];
-        
     }];
-    if (![model.is_update isEqualToString:@"1"]) {
+    //1-否，2-是
+    if (![model.forced_update  isEqualToString:@"2"]) {
         [alertC addAction:cancel];
     }
     [alertC addAction:OK];
     [[DWAlertTool getCurrentUIVC] presentViewController:alertC animated:YES completion:nil];
-    
 }
 #pragma mark - 刷新加载
 +(void)MJRefreshView:(id)view  Header:(BOOL)header Footer:(BOOL)footer  HeaderBlock:(MJRefreshBlock)headerBlock FooterBlock:(MJRefreshBlock)footerBlock{
@@ -149,7 +144,6 @@
         [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             footerBlock();
         }] : nil;
-
     }
     if ([view isKindOfClass:[UIScrollView class]]) {
         UIScrollView * scrollView = view;
@@ -176,7 +170,6 @@
             footerBlock();
         }] : nil;
     }
-    
     if ([view isKindOfClass:[WKWebView class]]) {
         WKWebView * webView = view;
         //下拉刷新
@@ -199,11 +192,11 @@
         UITableView * tableView = view;
         [tableView.mj_header beginRefreshing];
     }
-    if ([view isKindOfClass:[UITableView class]]) {
+    if ([view isKindOfClass:[UIScrollView class]]) {
         UIScrollView * scrollView = view;
         [scrollView.mj_header beginRefreshing];
     }
-    if ([view isKindOfClass:[UITableView class]]) {
+    if ([view isKindOfClass:[UICollectionView class]]) {
         UICollectionView * collectionView = view;
         [collectionView.mj_header beginRefreshing];
     }
@@ -214,17 +207,19 @@
 }
 #pragma mark - 结束加载
 +(void)MJRefreshEndRefreView:(id)view{
+    
+    
     if ([view isKindOfClass:[UITableView class]]) {
         UITableView * tableView = view;
         [tableView.mj_header endRefreshing];
         [tableView.mj_footer endRefreshing];
     }
-    if ([view isKindOfClass:[UITableView class]]) {
+    if ([view isKindOfClass:[UIScrollView class]]) {
         UIScrollView * scrollView = view;
         [scrollView.mj_header endRefreshing];
         [scrollView.mj_footer endRefreshing];
     }
-    if ([view isKindOfClass:[UITableView class]]) {
+    if ([view isKindOfClass:[UICollectionView class]]) {
         UICollectionView * collectionView = view;
         [collectionView.mj_header endRefreshing];
         [collectionView.mj_footer endRefreshing];

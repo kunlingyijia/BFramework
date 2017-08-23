@@ -32,8 +32,8 @@
 -(void)SET_UI{
     [self showBackBtn];
      _bottomView.backgroundColor = [UIColor colorWithHexString:kBlueColor];
-    [self.OneView.layer setLaberMasksToBounds:YES cornerRadius:10.0 borderWidth:2.0 borderColor:[UIColor colorWithHexString:kLineColor]];
-     [self.TwoView.layer setLaberMasksToBounds:YES cornerRadius:10.0 borderWidth:2.0 borderColor:[UIColor colorWithHexString:kLineColor]];
+    [self.OneView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
+     [self.TwoView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
     self.title = @"我的钱包";
     
     

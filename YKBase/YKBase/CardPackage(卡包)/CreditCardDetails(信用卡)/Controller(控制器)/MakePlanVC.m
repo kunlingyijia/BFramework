@@ -8,7 +8,11 @@
 
 #import "MakePlanVC.h"
 #import "MakePlanDetailtsVC.h"
-@interface MakePlanVC ()
+@interface MakePlanVC ()<HZQDatePickerViewDelegate> {
+    
+    HZQDatePickerView *_pikerView;
+}
+
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIView *oneView;
 @property (weak, nonatomic) IBOutlet UIView *TwoView;
@@ -32,10 +36,10 @@
     [self showBackBtn];
     self.title = @"招商银行";
     self.bottomView.backgroundColor = [UIColor colorWithHexString:kBlueColor];
-    [self.oneView.layer setLaberMasksToBounds:YES cornerRadius:10.0 borderWidth:2.0 borderColor:[UIColor colorWithHexString:kLineColor]];
-    [self.TwoView.layer setLaberMasksToBounds:YES cornerRadius:10.0 borderWidth:2.0 borderColor:[UIColor colorWithHexString:kLineColor]];
-    [self.ThreeView.layer setLaberMasksToBounds:YES cornerRadius:10.0 borderWidth:2.0 borderColor:[UIColor colorWithHexString:kLineColor]];
-    [self.FourView.layer setLaberMasksToBounds:YES cornerRadius:10.0 borderWidth:2.0 borderColor:[UIColor colorWithHexString:kLineColor]];
+    [self.oneView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
+    [self.TwoView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
+    [self.ThreeView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
+    [self.FourView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
     
 }
 #pragma mark - 关于数据
@@ -57,7 +61,42 @@
 #pragma mark - 选择时间
 - (IBAction)timeAction:(UIButton *)sender {
     [self.view endEditing:YES];
+    
+    _pikerView = [HZQDatePickerView instanceDatePickerView];
+    _pikerView.frame = CGRectMake(0, 0, Width , Height + 20);
+    [_pikerView setBackgroundColor:[UIColor clearColor]];
+    _pikerView.delegate = self;
+    if (sender.tag==301) {
+        _pikerView.type = DateTypeOfStart;
 
+    }
+    if (sender.tag==302) {
+        _pikerView.type = DateTypeOfEnd;
+    }
+    // 今天开始往后的日期
+    [_pikerView.datePickerView setMinimumDate:[NSDate date]];
+    // 在今天之前的日期
+    //    [_pikerView.datePickerView setMaximumDate:[NSDate date]];
+    [self.view addSubview:_pikerView];
+
+}
+- (void)getSelectDate:(NSString *)date type:(DateType)type {
+    NSLog(@"%d - %@", type, date);
+    
+    switch (type) {
+        case DateTypeOfStart:{
+            
+            break;
+        }
+            
+        case DateTypeOfEnd:{
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 #pragma mark - 提交
 - (IBAction)submitAction:(SubmitBtn *)sender {

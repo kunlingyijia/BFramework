@@ -13,6 +13,8 @@
 #import "UpdatePasswordVC.h"
 #import "AdModel.h"
 #import "CurrentVersionVC.h"
+#import "PasswordVC.h"
+#import "MyInfoVC.h"
 @interface MySettingVC ()
 
 @end
@@ -24,6 +26,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //用户信息赋值
+    [YKNotification addObserver:self selector:@selector(UserInfoForControls:) name:@"获取个人信息" object:nil];
+
     //UI
     [self SET_UI];
     //数据
@@ -32,29 +37,8 @@
 #pragma mark - 关于UI
 -(void)SET_UI{
     self.title = @"我的设置";
-    [self showBackBtn];
-//    __block int A6 =1;
-//    __block int A3 =1;
-//    __block int A7 =1;
-//    for (int i=0; i<100; i++) {
-//        AdModel *model = [[AdModel alloc]init];
-//        model.region_id = 1;
-//        model.position = 1;
-//        NSURLSessionDataTask * task =  [HTTPTool  requestAdWithParm:model  active:YES success:^(BaseResponse * _Nullable baseRes) {
-//            //NSLog(@"%@", [baseRes yy_modelToJSONObject]);
-//            if (baseRes.resultCode == 1) {
-//                NSLog(@"6-----%d",A6++);
-//            }else {
-//                NSLog(@"7-----%d",A7++);
-//            }
-//        } faild:^(NSError * _Nonnull error) {
-//            NSLog(@"3-----%d",A3++);
-//        } ];
-//       if (task) {
-//            [self.sessionArray addObject:task];
-//        }
-//    }
-}
+  [self showBackBtn];
+  }
 #pragma mark - 关于数据
 -(void)SET_DATA{
     YKHTTPSession * helper = [YKHTTPSession shareSession];
@@ -62,14 +46,17 @@
     self.mobile.text = [NSString stringWithFormat:@"%@",helper.userinfo.mobile];
     [self.avatar_url.layer setLaberMasksToBounds:YES cornerRadius:(Width/8-10)/2 borderWidth:1.0*SizeScale borderColor:[UIColor whiteColor]];
 }
-
+#pragma mark - 用户赋值
+-(void)UserInfoForControls:(NSNotification*)sender{
+    YKHTTPSession * helper = [YKHTTPSession shareSession];
+    [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:nil];
+    self.mobile.text = [NSString stringWithFormat:@"%@",helper.userinfo.mobile];
+}
 #pragma - 按钮事件
 - (IBAction)ButtonAction:(UIButton *)sender {
     switch (sender.tag) {
             //个人头像
         case 101: {
-//            BusinessCooperationVC *VC = GetVC(BusinessCooperationVC);
-//                   PushVC(VC)
             __weak typeof(self) weakSelf = self;
             ImageChooseVC* VC = [[ImageChooseVC alloc]initWithNibName:@"ImageChooseVC" bundle:nil];
             VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
@@ -77,7 +64,6 @@
             VC.zoom= 1.0;
             VC.ImageChooseVCBlock =^(UIImage *image){
                 NSLog(@"%@",image);
-                
               [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:50 success:^(NSArray *urlArr) {
                     NSDictionary * dic = urlArr[0];
                     Userinfo * model = [Userinfo new];
@@ -93,7 +79,6 @@
                   if (task) {
                       [weakSelf.sessionArray addObject:task];
                   }
-                   
                 } faild:^(id error) {
                     
                 }];
@@ -112,33 +97,45 @@
         case 103: {
             CurrentVersionVC *VC = GetVC(CurrentVersionVC);
             PushVC(VC)
-            
-
-        }
+            }
             break;
             //修改密码
         case 104: {
-            UpdatePasswordVC *VC = GetVC(UpdatePasswordVC);
+            //Push 跳转
+            PasswordVC * VC = GetVC(PasswordVC)
+            VC.title = @"修改密码";
+            __weak typeof(self) weakSelf = self;
+            VC.PasswordVCBlock = ^(NSString  *account ,NSString  *password){
+                //退出登录
+                [weakSelf logout];
+            };
             PushVC(VC)
-    
         }
             break;
             //修改密码
         case 108: {
-            //设置别名
-            [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
             //退出登录
-            [YKNotification postNotificationName:@"退出账号" object:nil userInfo:nil];
-//            if ([HTTPTool isLogin]){
-//                return;
-//            }
-            
+            [self logout];
         }
             break;
         default:
             break;
     }
 }
+#pragma mark - 退出登录
+-(void)logout{
+    //设置别名
+    [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
+    //退出登录
+    [YKNotification postNotificationName:@"退出账号" object:nil userInfo:nil];
+    //            if ([HTTPTool isLogin]){
+    //                return;
+    //            }
+
+}
+
+
+
 #pragma mark - dealloc
 - (void)dealloc
 {   

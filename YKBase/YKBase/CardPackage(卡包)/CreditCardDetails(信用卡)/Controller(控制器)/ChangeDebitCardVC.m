@@ -25,6 +25,7 @@
 #pragma mark - 关于UI
 -(void)SET_UI{
     [self showBackBtn];
+    self.title= @"修改信用卡";
     
     
 }
@@ -40,7 +41,8 @@
 #pragma mark - 日期选择
 - (IBAction)DataAction:(PublicBtn *)sender {
     __weak typeof(self) weakSelf = self;
-    
+    [self.view endEditing:YES];
+
     switch (sender.tag) {
             
         case 302:

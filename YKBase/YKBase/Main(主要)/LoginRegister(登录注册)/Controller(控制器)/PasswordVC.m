@@ -8,15 +8,13 @@
 
 #import "PasswordVC.h"
 #import "LoginRegModel.h"
+#import "MyInfoVC.h"
 @interface PasswordVC ()
 @property (weak, nonatomic) IBOutlet DarkGreyTF *mobile;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *verify_code;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *password;
-
 @end
-
 @implementation PasswordVC
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     //UI
@@ -27,8 +25,18 @@
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
-    [self showBackBtn];
-    self.title = @"修改密码";
+//    [self showBackBtn];
+    [self showBackBtn:^{
+        for (BaseViewController * VC in self.navigationController.viewControllers) {
+            NSLog(@"%@",VC);
+            if ([VC isKindOfClass:[MyInfoVC class]]) {
+                [self.navigationController popToViewController:VC animated:YES];
+            }
+        }
+        //
+        
+    }];
+
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -39,7 +47,7 @@
     if ([RegularTool checkTelNumber:self.mobile.text]) {
         [DWAlertTool VerificationCodeBtn:sender];
         // 1-注册 2-找回密码3-修改密码4-绑定手机号
-        [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.mobile.text,@"type":@"1"} active:YES success:^(BaseResponse * _Nullable baseRes) {
+        [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.mobile.text,@"type":@"2"} active:YES success:^(BaseResponse * _Nullable baseRes) {
         } faild:^(NSError * _Nullable error) {
         }];
     }else{
@@ -48,7 +56,6 @@
 }
 #pragma mark - 确定事件
 - (IBAction)BtnAction:(SubmitBtn *)sender {
-    
     if ([self IF]) {
         LoginRegModel *model = [LoginRegModel new];
         model.mobile = self.mobile.text;
@@ -57,8 +64,13 @@
         __weak typeof(self) weakSelf = self;
         NSURLSessionDataTask * task =  [HTTPTool  requesForgottenPasswordWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
             if (baseRes.resultCode ==1) {
-                weakSelf.PasswordVCBlock(weakSelf.mobile.text,weakSelf.password.text);
-                [weakSelf.navigationController popViewControllerAnimated:YES];
+                [DWAlertTool showToast:@"密码设置成功"];
+                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    weakSelf.PasswordVCBlock(weakSelf.mobile.text,weakSelf.password.text);
+                    //返回
+                    [weakSelf.navigationController popViewControllerAnimated:YES] ;
+                });
             }
         } faild:^(NSError * _Nullable error) {
         }];
@@ -90,7 +102,6 @@
 #pragma mark - dealloc
 - (void)dealloc
 {
-    
     NSLog(@"%@销毁了", [self class]);
 }
 @end

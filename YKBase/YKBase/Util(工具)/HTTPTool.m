@@ -22,6 +22,17 @@
         faild(error);
     }];
 }
+#pragma mark -  获取系统配置
++ (nullable NSURLSessionDataTask *)requestVersionCheckWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self MD5requestWithParm:parm act:Request_VersionCheck showHUD:NO active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+        }
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+
 #pragma mark -  消息列表
 + (nullable NSURLSessionDataTask *)requestMessageListWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_MessageList showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -85,13 +96,20 @@
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
-    
 }
 
 #pragma mark -  获取个人信息
 + (nullable NSURLSessionDataTask *)requestUserInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    NSMutableDictionary * Info = [YKDataTool objectForKey:@"个人信息"];
+    if (Info.count!=0) {
+        Userinfo *userinfo = [Userinfo yy_modelWithJSON:Info];
+        [YKHTTPSession shareSession].userinfo =userinfo;
+        //设置别名
+        [YKNotification postNotificationName:@"获取个人信息" object:nil userInfo:nil];
+    }
        return [self AESrequestWithParm:parm act:Request_UserInfo showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
+            [YKDataTool setValue:baseRes forkey:@"个人信息"];
             Userinfo *userinfo = [Userinfo yy_modelWithJSON:baseRes.data];
             NSLog(@"个人信息--%@",[baseRes yy_modelToJSONObject]);
             [YKHTTPSession shareSession].userinfo =userinfo;
@@ -112,7 +130,6 @@
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
-    
 }
 #pragma mark -  实名认证
 + (nullable NSURLSessionDataTask *)requestCertifyWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
@@ -121,16 +138,6 @@
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
-    
-}
-#pragma mark -  重新实名认证
-+ (nullable NSURLSessionDataTask *)requestUpdateCertifyWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
-    return [self AESrequestWithParm:parm act:Request_UpdateCertify showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
-        success(baseRes);
-    } faild:^(NSError *  _Nullable error) {
-        faild(error);
-    }];
-    
 }
 #pragma mark -  实名认证查询
 + (nullable NSURLSessionDataTask *)requestCertifyInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
@@ -214,6 +221,9 @@
 }
 #pragma mark - AES格式
 +(nullable NSURLSessionDataTask *)AESrequestWithParm:(nullable id)parm act:( nonnull NSString *)actName showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    
+    
+    
     if ([self isLogin]) {
         return nil;
     }else{
@@ -265,7 +275,7 @@
     }else{
         ///0-未认证 1-认证中 2-认证成功 3-认证失败
         NSString * type =
-        [YKHTTPSession shareSession].userinfo.is_certification;
+        [YKHTTPSession shareSession].userinfo.certify_status;
         if ([type isEqualToString:@"0"]) {
             //尚未认证
             CertificationVC* VC = GetVC(CertificationVC)

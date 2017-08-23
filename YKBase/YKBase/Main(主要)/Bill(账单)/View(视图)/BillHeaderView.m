@@ -7,7 +7,7 @@
 //
 
 #import "BillHeaderView.h"
-
+#import "BillModel.h"
 @implementation BillHeaderView
 
 -(instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
@@ -23,12 +23,15 @@
 
 -(void)addSubviews{
     self.title = [[DarkGreyLabel alloc]initWithFrame:CGRectMake(15, 0, Width-15, Width*0.1)];
-    self.title .text = @"1991-02-06";
     self.title.backgroundColor = [UIColor clearColor];
-    self.title.font = [UIFont systemFontOfSize:15.0];
+    self.title.font = [UIFont systemFontOfSize:15.0*SizeScale];
     [self.contentView addSubview:_title];
     
 }
-
+-(void)setModel:(BillModel *)model{
+    if (!model) return;
+    _model = model;
+     self.title .text = @"1991-02-06";
+}
 
 @end

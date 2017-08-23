@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class BillSubModel;
 @interface BillOneCell : UITableViewCell
-
+///model
+@property (nonatomic, strong) BillSubModel *model ;
 @end
