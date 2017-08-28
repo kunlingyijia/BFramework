@@ -265,7 +265,8 @@
 #pragma mark - 正则匹配URL
 + (BOOL)checkURL : (NSString *) url
 {
-    NSString *pattern = @"^[0-9A-Za-z]{1,50}";
+     //NSString *pattern = @"^[0-9A-Za-z]{1,50}";
+    NSString *pattern =@"((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
     BOOL isMatch = [pred evaluateWithObject:url];
     return isMatch;

@@ -15,7 +15,11 @@
             <connections>
                 <outlet property="OneView" destination="W6S-bT-0FD" id="14m-lR-BT2"/>
                 <outlet property="TwoView" destination="Nfx-gE-wWq" id="S9L-D8-ixQ"/>
+                <outlet property="amount" destination="bTd-4s-q8V" id="Ser-Dc-tFh"/>
+                <outlet property="bankName" destination="ScD-Gz-dxz" id="oiM-mG-6PA"/>
                 <outlet property="bottomView" destination="bOW-lg-37a" id="QBV-eJ-0cU"/>
+                <outlet property="frozen_amount" destination="b3A-zC-wZh" id="0tb-1o-n4S"/>
+                <outlet property="money" destination="SSW-Ke-EVF" id="GIP-ZI-1Ra"/>
                 <outlet property="scrollView" destination="njc-0I-hso" id="JRg-0p-vWb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -114,6 +118,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="NMo-68-Zg8"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -66,7 +66,7 @@
         }
     } withCancel:^(UIAlertAction *cancelaction) {
     }];
-
+    
 }
 + (void)openMap:(NSString *)urlString {
     NSString *string = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -98,12 +98,12 @@
     __weak typeof(self) weakSelf = self;
     [HTTPTool requestVersionCheckWithParm:model active:YES success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode == 1) {
-        VerisonModel* model =[VerisonModel yy_modelWithDictionary:((NSDictionary*)baseRes.data)];
-        if ([oldVerison compare:model.version_code]==NSOrderedAscending) {
-        //NSOrderedAscending (升序)
-        [weakSelf addMandatoryAlertAction:model];
+            VerisonModel* model =[VerisonModel yy_modelWithDictionary:((NSDictionary*)baseRes.data)];
+            if ([oldVerison compare:model.version_code]==NSOrderedAscending) {
+                //NSOrderedAscending (升序)
+                [weakSelf addMandatoryAlertAction:model];
+            }
         }
-    }
     } faild:^(id  _Nullable error) {
         
     }];
@@ -135,12 +135,12 @@
 +(void)MJRefreshView:(id)view  Header:(BOOL)header Footer:(BOOL)footer  HeaderBlock:(MJRefreshBlock)headerBlock FooterBlock:(MJRefreshBlock)footerBlock{
     if ([view isKindOfClass:[UITableView class]]) {
         UITableView * tableView = view;
-     //下拉刷新
-     header ==YES ? tableView.mj_header =[MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        headerBlock();
-     }]:nil;
+        //下拉刷新
+        header ==YES ? tableView.mj_header =[MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            headerBlock();
+        }]:nil;
         //上拉加载
-     footer == YES ?   tableView. mj_footer=
+        footer == YES ?   tableView. mj_footer=
         [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             footerBlock();
         }] : nil;
@@ -182,9 +182,6 @@
             footerBlock();
         }] : nil;
     }
-
-    
-    
 }
 #pragma mark - 开始加载
 +(void)MJRefreshBeginRefreView:(id)view{
@@ -201,14 +198,12 @@
         [collectionView.mj_header beginRefreshing];
     }
     if ([view isKindOfClass:[WKWebView class]]) {
-         WKWebView * webView = view;
-         [webView.scrollView.mj_header beginRefreshing];
+        WKWebView * webView = view;
+        [webView.scrollView.mj_header beginRefreshing];
     }
 }
 #pragma mark - 结束加载
 +(void)MJRefreshEndRefreView:(id)view{
-    
-    
     if ([view isKindOfClass:[UITableView class]]) {
         UITableView * tableView = view;
         [tableView.mj_header endRefreshing];
@@ -228,10 +223,7 @@
         WKWebView * webView = view;
         [webView.scrollView.mj_header endRefreshing];
         [webView.scrollView.mj_footer endRefreshing];
-
     }
-
-    
 }
 
 
@@ -281,45 +273,42 @@
             //        order.productDescription = explain; //商品描述
             //        order.amount = [NSString stringWithFormat:@"%.2f",price]; //商品价格.2f 其他值不行 会失败
             //        order.notifyURL =  url; //回调URL
-            //
             //        //以下信息是默认信息 不需要更改
             //        order.service = @"mobile.securitypay.pay";
             //        order.paymentType = @"1";
             //        order.inputCharset = @"utf-8";
             //        order.itBPay = @"30m";
             //        order.showUrl = @"m.alipay.com";
-            //
             //        //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
             //        //标识 支付后根据这个值跳转到这个App (要在info中设置 见图片http://blog.sina.com.cn/s/blog_6f72ff900102v4vp.html)
-         
             [[AlipaySDK defaultService] payOrder:model.prealipay fromScheme:appScheme callback:^(NSDictionary *resultDic) {
                 NSLog(@"reslut = %@",resultDic);
                 NSInteger orderState=[resultDic[@"resultStatus"]integerValue];
                 if (orderState==9000) {
-                [YKNotification postNotificationName:@"支付成功" object:@"支付成功" userInfo:@{}];
+                    [YKNotification postNotificationName:@"支付成功" object:@"支付成功" userInfo:@{}];
                 }else{
-                switch (orderState) {
-                    case 8000:{
-                        [DWAlertTool showToast:@"支付宝-订单正在处理中"];
-                        break;
-                    }
-                    case 4000:{
-                        [DWAlertTool showToast:@"支付宝-订单支付失败"];
-                        break;
-                    }
-                    case 6001:{
-                        [DWAlertTool showToast:@"支付宝-订单取消"];
-                        break;
-                    }
-                    case 6002:{
-                        [DWAlertTool showToast:@"支付宝-网络连接出错"];
-                        break;
-                    }
-                    default:{
-                        break;
+                    switch (orderState) {
+                        case 8000:{
+                            [DWAlertTool showToast:@"支付宝-订单正在处理中"];
+                            break;
+                        }
+                        case 4000:{
+                            [DWAlertTool showToast:@"支付宝-订单支付失败"];
+                            break;
+                        }
+                        case 6001:{
+                            [DWAlertTool showToast:@"支付宝-订单取消"];
+                            break;
+                        }
+                        case 6002:{
+                            [DWAlertTool showToast:@"支付宝-网络连接出错"];
+                            break;
+                        }
+                        default:{
+                            break;
+                        }
                     }
                 }
-            }
             }];
         }
     }
@@ -339,21 +328,19 @@
             //商家根据微信开放平台文档对数据做的签名: 是一种加密方式 所有的支付都需要加密
             request.sign= model.sign;
             [WXApi sendReq:request];
-           }else{
+        }else{
             [DWAlertTool showToast:@"尚未安装微信"];
         }
-
     }
-
 }
 #pragma mark - 友盟分享
 ///友盟 分享
-+(void)UShareType:(YKShareType)shareType LayoutType:(YKLayoutType)layoutType ShareModel:(ShareModel*)model;{
-   NSMutableArray * dataArray = [NSMutableArray arrayWithCapacity:0];
-   if ([WXApi isWXAppInstalled]&&[WXApi isWXAppSupportApi]) {
++(void)UShareType:(YKShareType)shareType LayoutType:(YKLayoutType)layoutType ShareModel:(ShareModel*)model{
+    NSMutableArray * dataArray = [NSMutableArray arrayWithCapacity:0];
+    if ([WXApi isWXAppInstalled]&&[WXApi isWXAppSupportApi]) {
         SharePanelModel *WechatSession =[SharePanelModel new];
         WechatSession.title = @"微信好友";
-        WechatSession.image = @"微信";
+        WechatSession.image = @"微信好友";
         WechatSession.platformType = UMSocialPlatformType_WechatSession;
         SharePanelModel *WechatTimeLine =[SharePanelModel new];
         WechatTimeLine.title = @"朋友圈";
@@ -366,19 +353,18 @@
         [dataArray addObject:WechatSession];
         [dataArray addObject:WechatTimeLine];
         [dataArray addObject:WechatFavorite];
-       }
-     if ([QQApiInterface isQQInstalled]&&[QQApiInterface isQQSupportApi]) {
-    SharePanelModel *QQ =[SharePanelModel new];
-    QQ.title = @"QQ好友";
-    QQ.image = @"QQ好友";
-    QQ.platformType = UMSocialPlatformType_QQ;
-    SharePanelModel *Qzone =[SharePanelModel new];
-    Qzone.title = @"QQ空间";
-    Qzone.image = @"QQ空间";
-    Qzone.platformType = UMSocialPlatformType_Qzone;
-    
-    [dataArray addObject:QQ];
-    [dataArray addObject:Qzone];
+    }
+    if ([QQApiInterface isQQInstalled]&&[QQApiInterface isQQSupportApi]) {
+        SharePanelModel *QQ =[SharePanelModel new];
+        QQ.title = @"QQ好友";
+        QQ.image = @"QQ好友";
+        QQ.platformType = UMSocialPlatformType_QQ;
+        SharePanelModel *Qzone =[SharePanelModel new];
+        Qzone.title = @"QQ空间";
+        Qzone.image = @"QQ空间";
+        Qzone.platformType = UMSocialPlatformType_Qzone;
+        [dataArray addObject:QQ];
+        [dataArray addObject:Qzone];
     }
     //新浪微博
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"sinaweibo://"]]) {
@@ -388,107 +374,95 @@
         Sina.platformType = UMSocialPlatformType_Sina;
         [dataArray addObject:Sina];
     }
-  
-  
     if (layoutType ==LayoutType_Pop_up) {
-           BaseSendTextView* textView = [[BaseSendTextView alloc]initWithFrame:[DWAlertTool getCurrentUIVC].view.bounds andButtonTitleAndImages:dataArray withColumnNums:3 withBlock:^(id btnInfo, NSInteger index) {
-                [UIView animateWithDuration:0.7 * (dataArray.count+1) animations:^{
-                } completion:^(BOOL finished) {
-                    [textView  removeFromSuperview];
-                    if (index>-1) {
-                        SharePanelModel * panelModel = dataArray[index];
-                        [self ShareType:shareType formType:panelModel.platformType ShareModel:model];
-                    }
-                }];
+        BaseSendTextView* textView = [[BaseSendTextView alloc]initWithFrame:[DWAlertTool getCurrentUIVC].view.bounds andButtonTitleAndImages:dataArray withColumnNums:3 withBlock:^(id btnInfo, NSInteger index) {
+            [UIView animateWithDuration:0.7 * (dataArray.count+1) animations:^{
+            } completion:^(BOOL finished) {
+                [textView  removeFromSuperview];
+                if (index>-1) {
+                    SharePanelModel * panelModel = dataArray[index];
+                    [self ShareType:shareType formType:panelModel.platformType ShareModel:model];
+                }
             }];
-            [[DWAlertTool getCurrentUIVC].view addSubview:textView];
-            [textView showSendTextView];
+        }];
+        [[DWAlertTool getCurrentUIVC].view addSubview:textView];
+        [textView showSendTextView];
     }
     if (layoutType ==LayoutType_Draw) {
-    SharePanelVC *VC = GetVC(SharePanelVC);
-    VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-    VC.dataArray = dataArray;
-    __weak typeof(self) weakSelf = self;
-    VC.SharePanelVCBlock =^(UMSocialPlatformType platformType){
-         [weakSelf ShareType:shareType formType:platformType ShareModel:model];
-    };
-    [[DWAlertTool getCurrentUIVC] presentViewController:VC animated:YES completion:^{}];
+        SharePanelVC *VC = GetVC(SharePanelVC);
+        VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+        VC.dataArray = dataArray;
+        __weak typeof(self) weakSelf = self;
+        VC.SharePanelVCBlock =^(UMSocialPlatformType platformType){
+            [weakSelf ShareType:shareType formType:platformType ShareModel:model];
+        };
+        [[DWAlertTool getCurrentUIVC] presentViewController:VC animated:YES completion:^{}];
     }
-
 }
-
 +(void)ShareType:(YKShareType)Type formType:(UMSocialPlatformType)platformType ShareModel:(ShareModel*)model{
-    
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     if (Type ==ShareTypeText) {
         //设置文本
         messageObject.text = model.text ? model.text :nil;
     }else
-    if (Type ==ShareTypeImageAndText) {
-        //设置文本
-        messageObject.text = model.text ? model.text :nil;
-        //创建图片内容对象
-        UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
-        //如果有缩略图，则设置缩略图
-        shareObject.thumbImage = model.thumbImage ? [UIImage imageNamed:[NSString stringWithFormat:@"%@",model.thumbImage]]:nil;
-        [shareObject setShareImage:model.shareImage];
-        //分享消息对象设置分享内容对象
-        messageObject.shareObject = shareObject;
-    }else
-    if (Type ==ShareTypeUrl) {
-        //创建网页内容对象
-        UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:model.text descr:model.descr thumImage:model.thumImage];
-        //设置网页地址
-        shareObject.webpageUrl =model.webpageUrl;
-        //分享消息对象设置分享内容对象
-        messageObject.shareObject = shareObject;
-    }else{
-        
-    }
-     //调用分享接口
+        if (Type ==ShareTypeImageAndText) {
+            //设置文本
+            messageObject.text = model.text ? model.text :nil;
+            //创建图片内容对象
+            UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+            //如果有缩略图，则设置缩略图
+            shareObject.thumbImage = model.thumbImage ? [UIImage imageNamed:[NSString stringWithFormat:@"%@",model.thumbImage]]:nil;
+            [shareObject setShareImage:model.shareImage];
+            //分享消息对象设置分享内容对象
+            messageObject.shareObject = shareObject;
+        }else
+            if (Type ==ShareTypeUrl) {
+                //创建网页内容对象
+                UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:model.text descr:model.descr thumImage:model.thumImage];
+                //设置网页地址
+                shareObject.webpageUrl =model.webpageUrl;
+                //分享消息对象设置分享内容对象
+                messageObject.shareObject = shareObject;
+            }else{
+            }
+    //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:[DWAlertTool getCurrentUIVC] completion:^(id data, NSError *error) {
         if (error) {
             NSLog(@"************Share fail with error %@*********",error);
             NSDictionary *userInfo=            error.userInfo;
             [DWAlertTool showToast:userInfo[@"message"]];
         }else{
-//            NSLog(@"response data is %@",data);
-//            UMSocialShareResponse *response = data;
+            //NSLog(@"response data is %@",data);
+            //UMSocialShareResponse *response = data;
         }
     }];
 }
 #pragma mark - 第三方登录
 ///第三方登录
 +(void)ULoginType:(UMSocialPlatformType)platformType ULoginSuccess:(ULoginSuccess )loginSuccess;{
-     [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:[DWAlertTool getCurrentUIVC] completion:^(id result, NSError *error) {
-      
-         if (error) {
-             NSDictionary *userInfo=            error.userInfo;
-             [DWAlertTool showToast:userInfo[@"message"]];
-
-         }else {
-             
-             UMSocialUserInfoResponse *resp = result;
-             // 第三方登录数据(为空表示平台未提供)
-             // 授权数据
-             NSLog(@" uid: %@", resp.uid);
-             NSLog(@" openid: %@", resp.openid);
-             NSLog(@" accessToken: %@", resp.accessToken);
-             NSLog(@" refreshToken: %@", resp.refreshToken);
-             NSLog(@" expiration: %@", resp.expiration);
-             // 用户数据
-             NSLog(@" name: %@", resp.name);
-             NSLog(@" iconurl: %@", resp.iconurl);
-             NSLog(@" gender: %@", resp.gender);
-             // 第三方平台SDK原始数据
-             NSLog(@" originalResponse: %@", resp.originalResponse);
-             loginSuccess(resp);
-         }
-     
-     
-     }];
-    
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:[DWAlertTool getCurrentUIVC] completion:^(id result, NSError *error) {
+        if (error) {
+            NSDictionary *userInfo=            error.userInfo;
+            [DWAlertTool showToast:userInfo[@"message"]];
+        }else {
+            UMSocialUserInfoResponse *resp = result;
+            // 第三方登录数据(为空表示平台未提供)
+            // 授权数据
+            NSLog(@" uid: %@", resp.uid);
+            NSLog(@" openid: %@", resp.openid);
+            NSLog(@" accessToken: %@", resp.accessToken);
+            NSLog(@" refreshToken: %@", resp.refreshToken);
+            NSLog(@" expiration: %@", resp.expiration);
+            // 用户数据
+            NSLog(@" name: %@", resp.name);
+            NSLog(@" iconurl: %@", resp.iconurl);
+            NSLog(@" gender: %@", resp.gender);
+            // 第三方平台SDK原始数据
+            NSLog(@" originalResponse: %@", resp.originalResponse);
+            loginSuccess(resp);
+        }
+    }];
 }
 
 @end

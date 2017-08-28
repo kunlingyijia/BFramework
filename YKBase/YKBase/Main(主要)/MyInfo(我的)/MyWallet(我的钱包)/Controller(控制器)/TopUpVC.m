@@ -12,9 +12,7 @@
 @interface TopUpVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *OneView;
-
 @property (weak, nonatomic) IBOutlet SegmentedView *segmented;
-
 ///分页参数
 @property (nonatomic, assign) NSInteger pageIndex;
 ///数据
@@ -28,7 +26,6 @@
 #pragma mark - 视图已在屏幕上渲染完成
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
 }
 #pragma mark -  载入完成
 - (void)viewDidLoad {
@@ -37,26 +34,23 @@
     [self SET_UI];
     //关于数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
     self.title = @"快速充值";
     [self showBackBtn];
-    
     [self.OneView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
     [self.segmented titleArr:[@[@"我的信用卡(1)",@"我的借记卡(2)"]mutableCopy]];
     __weak typeof(self) weakSelf = self;
     self.segmented.SegmentedViewBlock = ^(NSInteger tag){
         [weakSelf.view endEditing:YES];
-
+        
         if (tag==0) {
             
         }
         if (tag==1) {
             
         }
-        
     };
     [self setUpTableView];
     
@@ -79,7 +73,6 @@
     [self.dataArray addObject:@"1"];
     [self.dataArray addObject:@"1"];
     [self.dataArray addObject:@"1"];
-    
     self.pageIndex =1;
     [self requestAction];
     //上拉刷新下拉加载
@@ -96,7 +89,6 @@
         NSLog(@"%ld",(long)weakself.pageIndex);
         [weakself requestAction];
     }];
-    
 }
 #pragma mark - 网络请求
 -(void)requestAction{
@@ -168,39 +160,26 @@
     if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
-        
-        
-            CardPackageTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageTwoCell" forIndexPath:indexPath];
-            //cell 赋值
-            // cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
-            // cell 其他配置
-            return cell;
-            
-        
-        
+        CardPackageTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageTwoCell" forIndexPath:indexPath];
+        //cell 赋值
+        // cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+        // cell 其他配置
+        return cell;
     }
 }
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
-    
 }
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Width * 0.35;
-    
 }
-
-
 #pragma mark - 立即支付
 - (IBAction)submitAction:(SubmitBtn *)sender {
-    
     if ([self IF]) {
         
     }
-    
 }
 #pragma mark - 判断条件
 -(BOOL)IF{
@@ -209,20 +188,10 @@
     
     return Y;
 }
-
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
-    
-    
 }
-
-
-
-
 #pragma mark - dealloc
 - (void)dealloc
 {

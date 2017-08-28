@@ -75,7 +75,7 @@
 #pragma mark - 用户赋值
 -(void)UserInfoForControls:(NSNotification*)sender{
     YKHTTPSession * helper = [YKHTTPSession shareSession];
-    [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:nil];
+    [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:@"60"];
     self.mobile.text = [NSString stringWithFormat:@"账号:  %@",helper.userinfo.mobile];
     self.amount.text =helper.userinfo.amount;
     self.frozen_amount.text = helper.userinfo.frozen_amount;
@@ -121,6 +121,10 @@
         {
             //我的保单
             [DWAlertTool showToast:@"开发中,敬请期待..."];
+            ShareModel *model =[ShareModel new];
+            model.title = @"韩一帆❤️魏威 单身狗们,出来吃狗粮了";
+            model.text = @"韩一帆❤️魏威 单身狗们,出来吃狗粮了";
+            [ThirdPartyTool UShareType:ShareTypeText LayoutType:LayoutType_Draw ShareModel:model];
             break;
         }
         case 105:

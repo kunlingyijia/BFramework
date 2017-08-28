@@ -44,6 +44,8 @@ NSString * const  Request_Certify = @"/User/certify";
 NSString * const  Request_CertifyInfo = @"/User/info";
 ///首页轮播图+公告+我的信用卡
 NSString * const  Request_Home_requestAd = @"/HomePage/allInfo";
+///获取文章内容
+NSString * const  Request_Home_articleInfo = @"/HomePage/articleInfo";
 ///查看计划
 NSString * const  Request_PlanList = @"/Plan/planList";
 ///删除计划
@@ -60,6 +62,12 @@ NSString * const  Request_BankAddDebitCard = @"/Bank/addDebitCard";
 NSString * const  Request_AddCreditCard = @"/Bank/addCreditCard";
 ///提现
 NSString * const  Request_Withdraw = @"/Bank/withdraw";
+///快捷签约
+NSString * const  Request_quickSign = @"/Pay/quickSign";
+
+
+
+
 
 
 

@@ -22,10 +22,10 @@
 +(id)readUserDataForKey:(NSString*)key;
 /// 删除用户偏好设置
 +(void)removeUserDataForkey:(NSString*)key;
-///保存json字符串
-+(void)setValue:(id)response forkey:(NSString*)key;
-///获取数据
-+(id)objectForKey:(NSString*)key;
+/////保存json字符串
+//+(void)setValue:(id)response forkey:(NSString*)key;
+/////获取数据
+//+(id)objectForKey:(NSString*)key;
 
 
 + (NSString *)getRegisterKey;

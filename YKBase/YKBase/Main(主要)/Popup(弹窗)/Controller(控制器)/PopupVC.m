@@ -26,7 +26,7 @@
     [super viewDidAppear:animated];
    
     [UIView animateWithDuration:0.3 animations:^{
-       _imageView.transform = CGAffineTransformRotate(_imageView.transform, DEGREES_TO_RADIANS(180));
+       _imageView.transform = CGAffineTransformRotate(_imageView.transform, DEGREES_TO_RADIANS(135));
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.3 animations:^{
             _bottomView.alpha =1.0;
@@ -58,24 +58,20 @@
 
     
 }
-
 - (IBAction)BackAction:(UIButton *)sender {
     self.view.userInteractionEnabled = NO;
     [UIView animateWithDuration:0.3 animations:^{
-       _imageView.transform = CGAffineTransformRotate(_imageView.transform, DEGREES_TO_RADIANS(180));
-        
+       _imageView.transform = CGAffineTransformRotate(_imageView.transform, DEGREES_TO_RADIANS(-135));
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.2 animations:^{
             _imageView.alpha = 0.0;
              _bottomView.alpha =0.0;
-//            _imageView.alpha = 0.2;
         }completion:^(BOOL finished) {
             self.PopupVCBlock(sender.tag-100);
             [self dismissViewControllerAnimated:NO completion:^{}];
         }];
     }];
 
-         //
 }
 
 

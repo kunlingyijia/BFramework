@@ -27,8 +27,6 @@
 }
 //网络请求
 - (void)requestDataWithParm:(id)parm act:(NSString *)actName sign:(id)sign requestMethod:(RequestMethod)method PushVC:(BaseViewController*)VC success:(SuccessCallback)success faild:(FaildCallback)faild {
-    
-    
     [[LoadWaitSingle shareManager]showLoadWaitViewImage:@"兑富宝加载等待图"];
     NSUserDefaults *defaults=  [NSUserDefaults standardUserDefaults];
     NSString*  lat = [defaults   objectForKey:@"Headerlat"];

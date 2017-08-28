@@ -31,24 +31,22 @@
     }
     return self;
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     //UI
     [self SET_UI];
     //数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
     self.edgesForExtendedLayout = UIRectEdgeNone;
     //    [self showBackBtn:<#^(void)Back#>];
     [self addLeftButton];
-    WKWebView *webView=[[WKWebView alloc]initWithFrame:self.view.bounds];
+    WKWebView *webView=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, Width, Height-64)];
     webView.UIDelegate=self;
     webView.navigationDelegate=self;
-    webView.backgroundColor = [UIColor whiteColor];
+    webView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:webView];
     _webView = webView;
     //添加属性监听
@@ -58,10 +56,9 @@
     UIView *progress = [[UIView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 3)];
     progress.backgroundColor = [UIColor clearColor];
     [self.view addSubview:progress];
-    
     CALayer *layer = [CALayer layer];
     layer.frame = CGRectMake(0, 0, 0, 3);
-    layer.backgroundColor = [UIColor greenColor].CGColor;
+    layer.backgroundColor = [UIColor redColor].CGColor;
     [progress.layer addSublayer:layer];
     _progresslayer = layer;
     NSURL *url=[NSURL URLWithString:self.urlStr];
@@ -69,8 +66,6 @@
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
-    
-    
     
 }
 #pragma mark - 添加关闭按钮
@@ -89,13 +84,11 @@
         [self.webView goBack];
         //同时设置返回按钮和关闭按钮为导航栏左边的按钮
         self.navigationItem.leftBarButtonItems = @[self.backItem, self.closeItem];
-        [self.navigationItem.leftBarButtonItems[1] setTintColor:[UIColor colorWithHexString:ksubTitleColor]];
-        
+        [self.navigationItem.leftBarButtonItems[1] setTintColor:[UIColor whiteColor]];
     } else {
         [self closeNative];
     }
 }
-
 //关闭H5页面，直接回到原生页面
 - (void)closeNative
 {
@@ -112,63 +105,51 @@
         //这是一张“<”的图片，可以让美工给切一张
         UIImage *image = [UIImage imageNamed:@"123.png"];
         [btn setImage:image forState:UIControlStateNormal];
-        //[btn setTitle:@"返回" forState:UIControlStateNormal];
+        btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [btn addTarget:self action:@selector(backNative) forControlEvents:UIControlEventTouchUpInside];
-        //        [btn.titleLabel setFont:[UIFont systemFontOfSize:17]];
-        //        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         //字体的多少为btn的大小
-        [btn sizeToFit];
+        //[btn sizeToFit];
         //左对齐
-        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        //btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         //让返回按钮内容继续向左边偏移15，如果不设置的话，就会发现返回按钮离屏幕的左边的距离有点儿大，不美观
-        btn.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        [btn setImageEdgeInsets:UIEdgeInsetsMake
+         (0, 0, 0, 30)];
         btn.frame = CGRectMake(0, 0, 40, 40);
         _backItem.customView = btn;
     }
     return _backItem;
 }
-
 - (UIBarButtonItem *)closeItem
 {
     if (!_closeItem) {
         self.closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeNative)];
         [self.closeItem setTintColor:[UIColor colorWithHexString:ksubTitleColor]];
-        
     }
     return _closeItem;
 }
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 #pragma mark---WKNavigationDelegate
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     
 }
-
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
     
 }
-
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
 }
-
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     //如果是跳转一个新页面
     if (navigationAction.targetFrame == nil) {
         [webView loadRequest:navigationAction.request];
     }
-    
     decisionHandler(WKNavigationActionPolicyAllow);
 }
-
-
 //加载失败调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     //    [_activityIndicator stopAnimating];
@@ -188,8 +169,6 @@
         _bottomView.hidden = NO;
     }
 }
-
-
 /** 观察加载进度 */
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
@@ -209,20 +188,17 @@
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
-
 - (void)action {
     _bottomView.hidden = YES;
     if (!_webView.isLoading) {
         [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
     }
 }
-
-
-
-- (void)dealloc{
-    NSLog(@"%@", NSStringFromClass([self class]));
+#pragma mark - dealloc
+- (void)dealloc
+{
+    NSLog(@"%@销毁了", [self class]);
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
     [self.webView removeObserver:self forKeyPath:@"title"];
 }
-
 @end

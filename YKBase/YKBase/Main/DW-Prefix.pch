@@ -66,7 +66,8 @@
 #define IMG_Name(imgName)        [UIImage imageNamed:(imgName)]
 #define IMG_ImgWidth(img)        ((img).size.width)
 #define IMG_ImgHeight(img)       ((img).size.height)
-#define  appScheme @"我要测试"
+#define  appScheme @"QiaoBank"
+#define  appName @"巧巧科技"
 ///唯一标示
 #define BundleId @"com.flxt.qqcredit"
 //高德地图

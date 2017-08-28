@@ -188,6 +188,7 @@
         if (baseRes.resultCode ==1) {
             // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                weakSelf.AddDebitCardVCBlock();
                 //返回
                 [weakSelf.navigationController popViewControllerAnimated:YES] ;
             });

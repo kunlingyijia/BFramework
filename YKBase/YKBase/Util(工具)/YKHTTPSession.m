@@ -112,7 +112,8 @@
 }
 void networkReachabilityStatusUnknown()
 {
-    [DWAlertTool alertWithTitle:@"”巧巧信用卡“关闭蜂窝移动数据" message:@"您可以在”设置“中为此应用程序打开蜂窝移动数据." OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+
+    [DWAlertTool alertWithTitle:[NSString stringWithFormat:@"%@关闭蜂窝移动数据",appName] message:@"您可以在”设置“中为此应用程序打开蜂窝移动数据." OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
         NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if([[UIApplication sharedApplication] canOpenURL:url]) {
             NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
@@ -193,4 +194,7 @@ void networkReachabilityStatusReachableViaWWAN()
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [callPhoneWebview loadRequest:request];
 }
+
+
+
 @end

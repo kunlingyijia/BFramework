@@ -144,29 +144,21 @@
 +(UIViewController *)getCurrentUIVC
 {
     UIViewController  *superVC = [self getCurrentVC];
-    
     if ([superVC isKindOfClass:[UITabBarController class]]) {
-        
         UIViewController  *tabSelectVC = ((UITabBarController*)superVC).selectedViewController;
-        
         if ([tabSelectVC isKindOfClass:[UINavigationController class]]) {
-            
             return ((UINavigationController*)tabSelectVC).viewControllers.lastObject;
         }
         return tabSelectVC;
     }else
         if ([superVC isKindOfClass:[UINavigationController class]]) {
-            
             return ((UINavigationController*)superVC).viewControllers.lastObject;
         }
     return superVC;
 }
 
-
 +(UIViewController *)getCurrentVC{
-    
     UIViewController *result = nil;
-    
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     if (window.windowLevel != UIWindowLevelNormal)
     {
@@ -180,7 +172,6 @@
             }
         }
     }
-    
     UIView *frontView = [[window subviews] objectAtIndex:0];
     id nextResponder = [frontView nextResponder];
     
@@ -191,8 +182,6 @@
     
     return result;
 }
-
-
 ///验证码
 +(void)VerificationCodeBtn:(UIButton*)sender{
     UIButton *btn = sender;
@@ -222,8 +211,6 @@
         }
     });
     dispatch_resume(_timer);
-
 }
-
 
 @end

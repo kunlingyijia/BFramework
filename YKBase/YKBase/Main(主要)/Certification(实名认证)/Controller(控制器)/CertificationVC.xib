@@ -36,7 +36,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rqr-94-BSY">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="700.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="713.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcz-3B-iME">
                                     <rect key="frame" x="0.0" y="10" width="375" height="47"/>
@@ -322,13 +322,13 @@
                                     <rect key="frame" x="0.0" y="418.5" width="375" height="117"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u7u-Yg-HGd" customClass="CutView">
-                                            <rect key="frame" x="195" y="16" width="165" height="102"/>
+                                            <rect key="frame" x="195" y="15.5" width="165" height="102"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="上传银行卡正面" translatesAutoresizingMaskIntoConstraints="NO" id="y5G-jl-STX">
-                                                    <rect key="frame" x="0.0" y="1" width="165" height="102"/>
+                                                    <rect key="frame" x="0.0" y="0.5" width="165" height="102"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="404" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Glm-oA-QS7">
-                                                    <rect key="frame" x="0.0" y="1" width="165" height="102"/>
+                                                    <rect key="frame" x="0.0" y="0.5" width="165" height="102"/>
                                                     <connections>
                                                         <action selector="bankAction:" destination="-1" eventType="touchUpInside" id="Fqx-sc-m7x"/>
                                                     </connections>
@@ -347,13 +347,13 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Vy-OZ-xcM" customClass="CutView">
-                                            <rect key="frame" x="15" y="16" width="165" height="102"/>
+                                            <rect key="frame" x="15" y="15.5" width="165" height="102"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="上传手持身份证" translatesAutoresizingMaskIntoConstraints="NO" id="5cX-TX-xfa">
-                                                    <rect key="frame" x="0.0" y="1" width="165" height="102"/>
+                                                    <rect key="frame" x="0.0" y="0.5" width="165" height="102"/>
                                                 </imageView>
                                                 <button opaque="NO" tag="403" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zm8-Lh-isD">
-                                                    <rect key="frame" x="0.0" y="1" width="165" height="102"/>
+                                                    <rect key="frame" x="0.0" y="0.5" width="165" height="102"/>
                                                     <connections>
                                                         <action selector="bankAction:" destination="-1" eventType="touchUpInside" id="gRk-eM-Imy"/>
                                                     </connections>
@@ -385,7 +385,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14n-jh-7Nl" customClass="SubmitBtn">
-                                    <rect key="frame" x="15" y="640.5" width="345" height="30"/>
+                                    <rect key="frame" x="15" y="653.5" width="345" height="30"/>
                                     <state key="normal" title="验证"/>
                                     <connections>
                                         <action selector="submitBtn:" destination="-1" eventType="touchUpInside" id="cWN-6Q-hXv"/>
@@ -501,7 +501,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Rqr-94-BSY" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1.05" id="FYV-mg-ZbS"/>
+                <constraint firstItem="Rqr-94-BSY" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1.07" id="FYV-mg-ZbS"/>
                 <constraint firstAttribute="bottom" secondItem="u75-IF-HtR" secondAttribute="bottom" id="LDv-6W-Vsh"/>
                 <constraint firstItem="u75-IF-HtR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aZ8-eQ-cSg"/>
                 <constraint firstItem="u75-IF-HtR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xHg-SI-cDj"/>

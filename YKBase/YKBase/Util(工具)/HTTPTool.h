@@ -14,9 +14,9 @@ typedef void(^DataFaild)(NSError * _Nullable error);
 +(BOOL)isLogin;
 #pragma mark - 是否实名认证
 +(BOOL)isCertification;
-#pragma mark -  获取验证码
-+ (nullable NSURLSessionDataTask *)requestSystemWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  获取系统配置
++ (nullable NSURLSessionDataTask *)requestSystemWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  版本检测
 + (nullable NSURLSessionDataTask *)requestVersionCheckWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  获取验证码
 + (nullable NSURLSessionDataTask *)requestVerifyCodeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
@@ -44,11 +44,13 @@ typedef void(^DataFaild)(NSError * _Nullable error);
 + (nullable NSURLSessionDataTask *)requestBankAddDebitCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  实名添加信用卡
 + (nullable NSURLSessionDataTask *)requestAddCreditCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  提现
++ (nullable NSURLSessionDataTask *)requestWithdrawWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  快捷签约
++ (nullable NSURLSessionDataTask *)requestQuickSignWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  首页轮播图+公告+我的信用卡
 + (nullable NSURLSessionDataTask *)requestHomePageWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
-//#pragma mark -  请求广告页
-//+ (nullable NSURLSessionDataTask *)requestAdWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
-//#pragma mark -  版本跟新
-//+ (nullable NSURLSessionDataTask *)requestVersionUWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  首页 获取文章内容
++ (nullable NSURLSessionDataTask *)requestHome_articleInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 
 @end

@@ -24,7 +24,6 @@
 #pragma mark - 视图已在屏幕上渲染完成
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
 }
 #pragma mark -  载入完成
 - (void)viewDidLoad {
@@ -33,14 +32,12 @@
     [self SET_UI];
     //关于数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
-    self.title = @"选择到付的储蓄卡";
+    self.title = @"选择到款的储蓄卡";
     [self showBackBtn];
     [self setUpTableView];
-    
 }
 #pragma mark - 关于tableView
 -(void)setUpTableView{
@@ -52,7 +49,6 @@
     [self.view addSubview:_tableView];
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
     [_tableView tableViewregisterNibArray:@[@"CardPackageTwoCell"]];
-    
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -60,9 +56,7 @@
     self.pageIndex =1;
     [self.dataArray addObject:@"1"];
     [self.dataArray addObject:@"1"];
-
     [self.dataArray addObject:@"1"];
-
     [self requestAction];
     //上拉刷新下拉加载
     [self Refresh];
@@ -78,7 +72,6 @@
         NSLog(@"%ld",(long)weakself.pageIndex);
         [weakself requestAction];
     }];
-    
 }
 #pragma mark - 网络请求
 -(void)requestAction{
@@ -103,30 +96,20 @@
     if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
-        
         CardPackageTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageTwoCell" forIndexPath:indexPath];
-                //cell 赋值
-                //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
-                // cell 其他配置
-                return cell;
-        
-        
-        
+        //cell 赋值
+        //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+        // cell 其他配置
+        return cell;
     }
 }
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
-    
 }
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-   
     return Width*0.35;
-    
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -66,7 +66,7 @@
             
             if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)) {
                 
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"照片权限被禁用" message:@"请在iPhone的'设置-隐私-照片'中允许兑富宝访问你的照片" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"照片权限被禁用" message:[NSString stringWithFormat:@"请在iPhone的'设置-隐私-照片'中允许%@访问你的照片",appName] preferredStyle:UIAlertControllerStyleAlert];
                 
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                     //跳入当前App设置界面,
@@ -83,7 +83,7 @@
                 
             }else{
                 
-                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"照片权限被禁用" message:@"请在iPhone的'设置-隐私-照片'中允许兑富宝访问你的照片" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"照片权限被禁用" message:[NSString stringWithFormat:@"请在iPhone的'设置-隐私-照片'中允许%@访问你的照片",appName] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 
                 [alertView show];
                 
@@ -111,7 +111,7 @@
             
             if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)) {
                 
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"相机被禁用" message:@"请在iPhone的'设置-隐私-相机'中允许兑富宝访问你的相机" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"相机被禁用" message:[NSString stringWithFormat:@"请在iPhone的'设置-隐私-照片'中允许%@问你的相机",appName] preferredStyle:UIAlertControllerStyleAlert];
                 
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                     //跳入当前App设置界面,
@@ -129,7 +129,7 @@
                 
             }else{
                 
-                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"相机被禁用" message:@"请在iPhone的'设置-隐私-相机'中允许兑富宝访问你的相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"相机被禁用" message:[NSString stringWithFormat:@"请在iPhone的'设置-隐私-照片'中允许%@问你的相机",appName] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 
                 [alertView show];
                 

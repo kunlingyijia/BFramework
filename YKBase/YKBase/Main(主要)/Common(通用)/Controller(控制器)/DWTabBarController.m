@@ -31,6 +31,7 @@
     [tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:10*SizeScale],NSFontAttributeName, [UIColor colorWithHexString:kBlueColor],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
 }
 - (void)viewDidLoad {
+   
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setUpAllChildVc];
@@ -102,6 +103,9 @@
                 {
                     //新增信用卡
                     AddDebitCard * VC =  GetVC(AddDebitCard);
+                    VC.AddDebitCardVCBlock = ^(){
+                        
+                    };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;
                 }
@@ -109,6 +113,9 @@
                 {
                     //新增借记卡
                     AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
+                    VC.AddDebitCardVCBlock = ^(){
+                        
+                    };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;
                 }

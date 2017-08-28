@@ -19,6 +19,9 @@
 @property (nonatomic, strong) NSString  *article_id ;
 ///文章标题
 @property (nonatomic, strong) NSString  *title ;
+///文章内容
+@property (nonatomic, strong) NSString  *content ;
+
 
 ///开户银行
 @property (nonatomic, strong) NSString  *bank_name ;

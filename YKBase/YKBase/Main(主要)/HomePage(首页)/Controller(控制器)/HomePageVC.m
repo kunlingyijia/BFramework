@@ -5,13 +5,7 @@
 //  Created by 席亚坤 on 2017/7/20.
 //  Copyright © 2017年 bianming. All rights reserved.
 //
-//设置APP引导页
-//[(AppDelegate *)[UIApplication sharedApplication].delegate initUserGuidePage];
-
 #import "HomePageVC.h"
-#import "AppDelegate.h"
-#import "AdModel.h"
-#import "TouchTool.h"
 #import "HomePageOneCell.h"
 #import "HomePageTwoCell.h"
 #import "HomePageThreeCell.h"
@@ -22,7 +16,9 @@
 #import "CardPackageVC.h"
 #import "TopUpVC.h"
 #import "JQScanViewController.h"
-#import "SXHeadLine.h"
+#import "ArticleVC.h"
+#import "BaseWKWebviewVC.h"
+
 @interface HomePageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 ///分页参数
@@ -38,8 +34,6 @@
 #pragma mark -  视图将出现在屏幕之前
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //更新版本
-    [ThirdPartyTool updateVerison];
 }
 #pragma mark - 视图已在屏幕上渲染完成
 -(void)viewDidAppear:(BOOL)animated{
@@ -68,14 +62,22 @@
     [self showLeftBtnImage:@"扫一扫" Back:^{
         JQScanViewController *VC = [JQScanViewController new];
         VC.JQScanVCBlock = ^(JQScanResult* strResult){
-            
+            //  [DWAlertTool showToast:strResult.strScanned];
+            if ([RegularTool checkURL:strResult.strScanned]) {
+                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    BaseWKWebviewVC * VC = [[BaseWKWebviewVC alloc]initWithUrl:strResult.strScanned];
+                    PushVC(VC);
+                });
+            }else{
+                [DWAlertTool showToast:@"网址不合法"];
+            }
         };
-         PushVC(VC)
-          }];
+        PushVC(VC)
+    }];
     self.title = @"首页";
     [(AppDelegate*)[UIApplication sharedApplication].delegate initUserGuidePage];
     [self setUpTableView];
-    
 }
 #pragma mark - 关于tableView
 -(void)setUpTableView{
@@ -87,7 +89,6 @@
     [self.view addSubview:_tableView];
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
     [_tableView tableViewregisterNibArray:@[@"HomePageOneCell",@"HomePageTwoCell",@"HomePageThreeCell"]];
-    
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -95,12 +96,15 @@
     self.messageArray = [NSMutableArray arrayWithCapacity:0];
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
-    [self requestAction];
+    //更新版本
+    [ThirdPartyTool updateVerison];
+    //请求个人信息
+    [self requestUserInfo];
     //上拉刷新下拉加载
     [self Refresh];
 }
 -(void)Refresh{
-      __weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [ThirdPartyTool MJRefreshView:self.tableView Header:YES Footer:NO HeaderBlock:^{
         weakSelf.pageIndex =1 ;
         [weakSelf requestAction];
@@ -109,6 +113,19 @@
         [weakSelf requestAction];
     }];
 }
+#pragma mark - 请求个人信息
+-(void)requestUserInfo{
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:YES success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode==1) {
+            [weakSelf requestAction];
+        }
+    } faild:^(NSError * _Nullable error) {
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
+}
 #pragma mark - 网络请求
 -(void)requestAction{
     [self  dataProcessing];
@@ -116,12 +133,13 @@
     NSURLSessionDataTask * task =  [HTTPTool  requestHomePageWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:YES success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             if (weakSelf.pageIndex == 1) {
-                [YKDataTool setValue:baseRes forkey:@"首页"];
+                [YKDataTool saveObject:baseRes.data byFileName:@"首页信息"];
+                NSLog(@"%@",NSHomeDirectory());
                 [weakSelf.imageArray removeAllObjects];
                 [weakSelf.messageArray removeAllObjects];
                 [weakSelf.dataArray removeAllObjects];
             }
-           [weakSelf  dataProcessing ];
+            [weakSelf  dataProcessing];
         }else{
             weakSelf.pageIndex > 1 ? weakSelf.pageIndex-- : weakSelf.pageIndex;
         }
@@ -135,23 +153,23 @@
 }
 #pragma mark - 数据处理
 -(void)dataProcessing{
-     NSMutableDictionary * Info = [YKDataTool objectForKey:@"首页"];
-     if (Info.count!=0) {
-    for (NSDictionary * dic in Info[@"ad"]) {
-        HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
-        [self.imageArray addObject:model];
+    NSMutableDictionary * Info = [YKDataTool getObjectByFileName:@"首页信息"];
+    if (Info.count!=0) {
+        for (NSDictionary * dic in Info[@"ad"]) {
+            HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
+            [self.imageArray addObject:model];
+        }
+        for (NSDictionary * dic in Info[@"notice"]) {
+            HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
+            [self.messageArray addObject:model];
+        }
+        for (NSDictionary * dic in Info[@"bank_card"]) {
+            HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
+            [self.dataArray addObject:model];
+        }
+        //刷新
+        [self.tableView reloadData];
     }
-    for (NSDictionary * dic in Info[@"notice"]) {
-        HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
-        [self.messageArray addObject:model];
-    }
-    for (NSDictionary * dic in Info[@"bank_card"]) {
-        HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
-        [self.dataArray addObject:model];
-    }
-    //刷新
-    [self.tableView reloadData];
-   }
 }
 #pragma tableView 代理方法
 //tab分区个数
@@ -172,59 +190,61 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     __weak typeof(self) weakSelf = self;
-        switch (indexPath.section) {
-            case 0:
-            {
-                if (indexPath.row ==0) {
-                    HomePageOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageOneCell" forIndexPath:indexPath];
-                    //轮播图
-                    cell.HomePageOneCellImgBlock = ^(NSInteger tag){
-                        
-                    };
-                    //消息
-                    cell.HomePageOneCellLabelBlock = ^(NSInteger tag){
-                        HomePageModel * model = weakSelf.messageArray[tag];
-                        NSLog(@"tag---%ld---%@",tag,model.title);
-                        //跳转
-                        DebitCardDetailsVC * VC =  GetVC(DebitCardDetailsVC);
-                        PushVC(VC);
-                    };
-                    //cell 赋值
-                    [cell cellGetDataWithBanner:self.imageArray];
-                    //cell 赋值
-                    if (self.messageArray.count>0) {
-                    [cell cellGetDataWithWin:self.messageArray];
-                    }
-                    // cell 其他配置
-                    return cell;
-                }else{
-                    HomePageTwoCell  * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageTwoCell" forIndexPath:indexPath];
-                    //选项点击
-                    cell.HomePageTwoCellBlock = ^(NSInteger tag){
-                    [weakSelf HomePageTwoCellBlockAction:tag];
-                    };
-                    return cell;
-                }
-                break;
-            }
-            case 1:
-            {
-                HomePageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageThreeCell" forIndexPath:indexPath];
+    switch (indexPath.section) {
+        case 0:
+        {
+            if (indexPath.row ==0) {
+                HomePageOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageOneCell" forIndexPath:indexPath];
+                //轮播图
+                cell.HomePageOneCellImgBlock = ^(NSInteger tag){
+                    HomePageModel * model = weakSelf.imageArray[tag];
+                    BaseWKWebviewVC * VC = [[BaseWKWebviewVC alloc]initWithUrl:model.link_url];
+                    PushVC(VC);
+                };
+                //消息
+                cell.HomePageOneCellLabelBlock = ^(NSInteger tag){
+                    HomePageModel * model = weakSelf.messageArray[tag];
+                    //[DWAlertTool showToast:@"开发中,敬请期待..."];
+                    //跳转
+                    ArticleVC * VC =  GetVC(ArticleVC);
+                    VC.article_id = model.article_id;
+                    PushVC(VC);
+                };
                 //cell 赋值
-                cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+                [cell cellGetDataWithBanner:self.imageArray];
+                //cell 赋值
+                if (self.messageArray.count>0) {
+                    [cell cellGetDataWithWin:self.messageArray];
+                }
                 // cell 其他配置
                 return cell;
-                break;
+            }else{
+                HomePageTwoCell  * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageTwoCell" forIndexPath:indexPath];
+                //选项点击
+                cell.HomePageTwoCellBlock = ^(NSInteger tag){
+                    [weakSelf HomePageTwoCellBlockAction:tag];
+                };
+                return cell;
             }
-            default:{
-                return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-                break;
-            }
+            break;
         }
+        case 1:
+        {
+            HomePageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageThreeCell" forIndexPath:indexPath];
+            //cell 赋值
+            cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+            // cell 其他配置
+            return cell;
+            break;
+        }
+        default:{
+            return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+            break;
+        }
+    }
 }
 #pragma mark - 点击事件
 -(void)HomePageTwoCellBlockAction:( NSInteger )tag{
-    
     if (tag<4) {
         ///是否实名认证
         if ([HTTPTool isCertification]) {
@@ -237,7 +257,6 @@
                 CardPackageVC * VC =  GetVC(CardPackageVC);
                 [VC showBackBtn];
                 PushVC(VC);
-                
                 break;
             }
             case 2:
@@ -269,7 +288,7 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section==1) {
         //跳转
-        DebitCardDetailsVC * VC =  GetVC(DebitCardDetailsVC);
+        //DebitCardDetailsVC * VC =  GetVC(DebitCardDetailsVC);
         //PushVC(VC);
     }
 }
@@ -283,7 +302,7 @@
             }else{
                 return 0.40*Width;
             }
-               break;
+            break;
         }
         case 1:
         {

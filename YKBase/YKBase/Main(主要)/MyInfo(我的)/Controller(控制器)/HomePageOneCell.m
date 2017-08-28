@@ -11,13 +11,9 @@
 #import "SXHeadLine.h"
 @interface HomePageOneCell ()<SDCycleScrollViewDelegate>
 @property(nonatomic,strong)    SDCycleScrollView *cycleScrollViewImage;
-
-
 ///数据
 @property (nonatomic,strong)NSMutableArray * dataArray;
 @property(nonatomic,strong)DarkGreyLabel *label;
-
-
 @property(nonatomic,strong)SXHeadLine *headLine3;
 @end
 

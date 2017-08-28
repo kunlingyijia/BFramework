@@ -73,7 +73,7 @@ typedef void(^JWDispatch_asyncBlock)(UIImage *image, NSURL *url, NSData *data);
  *  异步加载网络图片+缓存
  *
  *  @param url            图片url
- *  @param placeholder    默认图片
+ *  @param placeholderImage    默认图片
  *  @param completedBlock 加载完成回调
  */
 - (void)jw_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholderImage completed:(JWWebImageCompletionBlock)completedBlock;
@@ -82,7 +82,7 @@ typedef void(^JWDispatch_asyncBlock)(UIImage *image, NSURL *url, NSData *data);
  *  异步加载网络图片+缓存
  *
  *  @param url            图片url
- *  @param placeholder    默认图片
+ *  @param placeholderImage    默认图片
  *  @param options        缓存机制
  *  @param completedBlock 加载完成回调
  */

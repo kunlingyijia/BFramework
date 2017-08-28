@@ -16,9 +16,7 @@
 @property (nonatomic, copy) void(^HomePageOneCellImgBlock)(NSInteger tag);
 ///消息
 @property (nonatomic, copy) void(^HomePageOneCellLabelBlock)(NSInteger tag);
-
 @property (weak, nonatomic) IBOutlet UIView *ShufflingImgView;
-
 @property (weak, nonatomic) IBOutlet UIView *ShufflingLabelView;
 //轮播图赋值
 -(void)cellGetDataWithBanner:(NSMutableArray*)arr;

@@ -60,21 +60,21 @@
 }
 
 
-#pragma mark -  数据存储
-+(void)setValue:(id)response forkey:(NSString*)key{
-    [[NSUserDefaults standardUserDefaults]setObject:[response yy_modelToJSONString] forKey:key];
-}
-+(id)objectForKey:(NSString*)key{
-    NSString * str = [[NSUserDefaults standardUserDefaults]objectForKey:key];
-    if (str.length!=0) {
-        NSData * data= [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-        NSMutableDictionary * dic =[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-        return dic[@"data"];
-        
-    }else{
-        return nil;
-    }
- }
+//#pragma mark -  数据存储
+//+(void)setValue:(id)response forkey:(NSString*)key{
+//    [[NSUserDefaults standardUserDefaults]setObject:[response yy_modelToJSONString] forKey:key];
+//}
+//+(id)objectForKey:(NSString*)key{
+//    NSString * str = [[NSUserDefaults standardUserDefaults]objectForKey:key];
+//    if (str.length!=0) {
+//        NSData * data= [str dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+//        NSMutableDictionary * dic =[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+//        return dic[@"data"];
+//        
+//    }else{
+//        return nil;
+//    }
+// }
 + (NSString *)getRegisterKey {
     return [self readUserDataForKey:@"key"];
 }

@@ -2,8 +2,8 @@
 //  MySettingVC.h
 //  ManagementOfMoney
 //
-//  Created by 月美 刘 on 17/7/20.
-//  Copyright © 2017年 月美 刘. All rights reserved.
+//  Created by 亚坤 席 on 17/7/20.
+//  Copyright © 2017年 亚坤 席. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

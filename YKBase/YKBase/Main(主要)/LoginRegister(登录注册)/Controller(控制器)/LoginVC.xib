@@ -32,7 +32,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y31-vt-0Cw">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="172.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="巧巧信用卡" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNk-UR-xo5" customClass="DarkGreyLabel">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="巧巧科技" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNk-UR-xo5" customClass="DarkGreyLabel">
                                             <rect key="frame" x="0.0" y="147.5" width="375" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="DOH-Ar-btv"/>
@@ -41,7 +41,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eoh-kb-QKz">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="60" translatesAutoresizingMaskIntoConstraints="NO" id="Eoh-kb-QKz">
                                             <rect key="frame" x="136.5" y="30" width="102.5" height="102.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Eoh-kb-QKz" secondAttribute="height" id="UP3-BF-L58"/>
@@ -320,6 +320,7 @@
         </view>
     </objects>
     <resources>
+        <image name="60" width="60" height="60"/>
         <image name="QQ" width="41" height="40"/>
         <image name="password" width="20" height="25"/>
         <image name="person" width="18" height="20"/>

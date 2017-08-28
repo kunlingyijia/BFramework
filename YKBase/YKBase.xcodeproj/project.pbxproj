@@ -137,8 +137,8 @@
 		BD1280261F2AD18700DD9A8F /* QQ空间@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F0F1F2AD18600DD9A8F /* QQ空间@3x.png */; };
 		BD1280271F2AD18700DD9A8F /* 信息@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F101F2AD18600DD9A8F /* 信息@2x.png */; };
 		BD1280281F2AD18700DD9A8F /* 信息@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F111F2AD18600DD9A8F /* 信息@3x.png */; };
-		BD1280291F2AD18700DD9A8F /* 微信@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F121F2AD18600DD9A8F /* 微信@2x.png */; };
-		BD12802A1F2AD18700DD9A8F /* 微信@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F131F2AD18600DD9A8F /* 微信@3x.png */; };
+		BD1280291F2AD18700DD9A8F /* 微信好友@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F121F2AD18600DD9A8F /* 微信好友@2x.png */; };
+		BD12802A1F2AD18700DD9A8F /* 微信好友@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F131F2AD18600DD9A8F /* 微信好友@3x.png */; };
 		BD12802B1F2AD18700DD9A8F /* 微博@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F141F2AD18600DD9A8F /* 微博@2x.png */; };
 		BD12802C1F2AD18700DD9A8F /* 微博@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F151F2AD18600DD9A8F /* 微博@3x.png */; };
 		BD12802D1F2AD18700DD9A8F /* 朋友圈@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD127F161F2AD18600DD9A8F /* 朋友圈@2x.png */; };
@@ -230,6 +230,8 @@
 		BD3787F71F38A10300CB3561 /* CardPackageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD3787F51F38A10300CB3561 /* CardPackageVC.xib */; };
 		BD3787FB1F38A11800CB3561 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3787F91F38A11800CB3561 /* BillVC.m */; };
 		BD3787FC1F38A11800CB3561 /* BillVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD3787FA1F38A11800CB3561 /* BillVC.xib */; };
+		BD5C28531F53EA1100D53678 /* SigningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C28511F53EA1100D53678 /* SigningVC.m */; };
+		BD5C28541F53EA1100D53678 /* SigningVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5C28521F53EA1100D53678 /* SigningVC.xib */; };
 		BD7046EA1F4412C600DBC85E /* CurrentVersionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7046E81F4412C600DBC85E /* CurrentVersionVC.m */; };
 		BD7046EB1F4412C600DBC85E /* CurrentVersionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD7046E91F4412C600DBC85E /* CurrentVersionVC.xib */; };
 		BD7046EE1F4419C100DBC85E /* SystemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7046ED1F4419C100DBC85E /* SystemModel.m */; };
@@ -253,6 +255,8 @@
 		BD8A6A091F3D484A006BA4FF /* PasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8A6A071F3D484A006BA4FF /* PasswordVC.m */; };
 		BD8A6A0A1F3D484A006BA4FF /* PasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8A6A081F3D484A006BA4FF /* PasswordVC.xib */; };
 		BD8A6A0D1F3D53DF006BA4FF /* CardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8A6A0C1F3D53DF006BA4FF /* CardModel.m */; };
+		BD961C7A1F4FB4C6003FECC2 /* CardPackageThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD961C781F4FB4C6003FECC2 /* CardPackageThreeCell.m */; };
+		BD961C7B1F4FB4C6003FECC2 /* CardPackageThreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD961C791F4FB4C6003FECC2 /* CardPackageThreeCell.xib */; };
 		BD96D5EC1F386E2900EE6CC5 /* RegisteredVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD96D5EA1F386E2900EE6CC5 /* RegisteredVC.m */; };
 		BD96D5ED1F386E2900EE6CC5 /* RegisteredVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD96D5EB1F386E2900EE6CC5 /* RegisteredVC.xib */; };
 		BD9E39D21F3A722F00DF3374 /* CertificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9E39D01F3A722F00DF3374 /* CertificationVC.m */; };
@@ -330,6 +334,8 @@
 		BDFC8A0F1F3551B100692E5D /* LBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFC8A0E1F3551B100692E5D /* LBTabBar.m */; };
 		BDFC8A121F35524400692E5D /* UIView+LBExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFC8A111F35524400692E5D /* UIView+LBExtension.m */; };
 		BDFC8A141F3554D200692E5D /* post_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFC8A131F3554D200692E5D /* post_normal@2x.png */; };
+		BDFE0F4E1F4E71F3008AB7DF /* ArticleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFE0F4C1F4E71F3008AB7DF /* ArticleVC.m */; };
+		BDFE0F4F1F4E71F3008AB7DF /* ArticleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDFE0F4D1F4E71F3008AB7DF /* ArticleVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -675,8 +681,8 @@
 		BD127F0F1F2AD18600DD9A8F /* QQ空间@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QQ空间@3x.png"; sourceTree = "<group>"; };
 		BD127F101F2AD18600DD9A8F /* 信息@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "信息@2x.png"; sourceTree = "<group>"; };
 		BD127F111F2AD18600DD9A8F /* 信息@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "信息@3x.png"; sourceTree = "<group>"; };
-		BD127F121F2AD18600DD9A8F /* 微信@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "微信@2x.png"; sourceTree = "<group>"; };
-		BD127F131F2AD18600DD9A8F /* 微信@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "微信@3x.png"; sourceTree = "<group>"; };
+		BD127F121F2AD18600DD9A8F /* 微信好友@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "微信好友@2x.png"; sourceTree = "<group>"; };
+		BD127F131F2AD18600DD9A8F /* 微信好友@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "微信好友@3x.png"; sourceTree = "<group>"; };
 		BD127F141F2AD18600DD9A8F /* 微博@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "微博@2x.png"; sourceTree = "<group>"; };
 		BD127F151F2AD18600DD9A8F /* 微博@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "微博@3x.png"; sourceTree = "<group>"; };
 		BD127F161F2AD18600DD9A8F /* 朋友圈@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "朋友圈@2x.png"; sourceTree = "<group>"; };
@@ -830,6 +836,9 @@
 		BD3787F81F38A11800CB3561 /* BillVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		BD3787F91F38A11800CB3561 /* BillVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
 		BD3787FA1F38A11800CB3561 /* BillVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillVC.xib; sourceTree = "<group>"; };
+		BD5C28501F53EA1100D53678 /* SigningVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigningVC.h; sourceTree = "<group>"; };
+		BD5C28511F53EA1100D53678 /* SigningVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigningVC.m; sourceTree = "<group>"; };
+		BD5C28521F53EA1100D53678 /* SigningVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SigningVC.xib; sourceTree = "<group>"; };
 		BD7046E71F4412C600DBC85E /* CurrentVersionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentVersionVC.h; sourceTree = "<group>"; };
 		BD7046E81F4412C600DBC85E /* CurrentVersionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentVersionVC.m; sourceTree = "<group>"; };
 		BD7046E91F4412C600DBC85E /* CurrentVersionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentVersionVC.xib; sourceTree = "<group>"; };
@@ -868,6 +877,9 @@
 		BD8A6A081F3D484A006BA4FF /* PasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordVC.xib; sourceTree = "<group>"; };
 		BD8A6A0B1F3D53DF006BA4FF /* CardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardModel.h; sourceTree = "<group>"; };
 		BD8A6A0C1F3D53DF006BA4FF /* CardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardModel.m; sourceTree = "<group>"; };
+		BD961C771F4FB4C6003FECC2 /* CardPackageThreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardPackageThreeCell.h; path = "View(视图)/CardPackageThreeCell.h"; sourceTree = "<group>"; };
+		BD961C781F4FB4C6003FECC2 /* CardPackageThreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardPackageThreeCell.m; path = "View(视图)/CardPackageThreeCell.m"; sourceTree = "<group>"; };
+		BD961C791F4FB4C6003FECC2 /* CardPackageThreeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardPackageThreeCell.xib; path = "View(视图)/CardPackageThreeCell.xib"; sourceTree = "<group>"; };
 		BD96D5E91F386E2900EE6CC5 /* RegisteredVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredVC.h; sourceTree = "<group>"; };
 		BD96D5EA1F386E2900EE6CC5 /* RegisteredVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredVC.m; sourceTree = "<group>"; };
 		BD96D5EB1F386E2900EE6CC5 /* RegisteredVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisteredVC.xib; sourceTree = "<group>"; };
@@ -1000,6 +1012,9 @@
 		BDFC8A101F35524400692E5D /* UIView+LBExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LBExtension.h"; sourceTree = "<group>"; };
 		BDFC8A111F35524400692E5D /* UIView+LBExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LBExtension.m"; sourceTree = "<group>"; };
 		BDFC8A131F3554D200692E5D /* post_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "post_normal@2x.png"; sourceTree = "<group>"; };
+		BDFE0F4B1F4E71F3008AB7DF /* ArticleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleVC.h; sourceTree = "<group>"; };
+		BDFE0F4C1F4E71F3008AB7DF /* ArticleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleVC.m; sourceTree = "<group>"; };
+		BDFE0F4D1F4E71F3008AB7DF /* ArticleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1491,6 +1506,9 @@
 				BD127E271F2AD18600DD9A8F /* HomePageVC.h */,
 				BD127E281F2AD18600DD9A8F /* HomePageVC.m */,
 				BD127E291F2AD18600DD9A8F /* HomePageVC.xib */,
+				BDFE0F4B1F4E71F3008AB7DF /* ArticleVC.h */,
+				BDFE0F4C1F4E71F3008AB7DF /* ArticleVC.m */,
+				BDFE0F4D1F4E71F3008AB7DF /* ArticleVC.xib */,
 			);
 			path = "Controller(控制器)";
 			sourceTree = "<group>";
@@ -1976,8 +1994,8 @@
 				BD127F0F1F2AD18600DD9A8F /* QQ空间@3x.png */,
 				BD127F101F2AD18600DD9A8F /* 信息@2x.png */,
 				BD127F111F2AD18600DD9A8F /* 信息@3x.png */,
-				BD127F121F2AD18600DD9A8F /* 微信@2x.png */,
-				BD127F131F2AD18600DD9A8F /* 微信@3x.png */,
+				BD127F121F2AD18600DD9A8F /* 微信好友@2x.png */,
+				BD127F131F2AD18600DD9A8F /* 微信好友@3x.png */,
 				BD127F141F2AD18600DD9A8F /* 微博@2x.png */,
 				BD127F151F2AD18600DD9A8F /* 微博@3x.png */,
 				BD127F161F2AD18600DD9A8F /* 朋友圈@2x.png */,
@@ -2313,6 +2331,9 @@
 				BD32BD0F1F3C098600EBC853 /* AddDebitCardVC.h */,
 				BD32BD101F3C098600EBC853 /* AddDebitCardVC.m */,
 				BD32BD111F3C098600EBC853 /* AddDebitCardVC.xib */,
+				BD5C28501F53EA1100D53678 /* SigningVC.h */,
+				BD5C28511F53EA1100D53678 /* SigningVC.m */,
+				BD5C28521F53EA1100D53678 /* SigningVC.xib */,
 			);
 			path = "Controller(控制器)";
 			sourceTree = "<group>";
@@ -2537,6 +2558,9 @@
 				BD855A0D1F3C5EDA008143C3 /* CardPackageTwoCell.h */,
 				BD855A0E1F3C5EDA008143C3 /* CardPackageTwoCell.m */,
 				BD855A0F1F3C5EDA008143C3 /* CardPackageTwoCell.xib */,
+				BD961C771F4FB4C6003FECC2 /* CardPackageThreeCell.h */,
+				BD961C781F4FB4C6003FECC2 /* CardPackageThreeCell.m */,
+				BD961C791F4FB4C6003FECC2 /* CardPackageThreeCell.xib */,
 			);
 			name = "View(视图)";
 			sourceTree = "<group>";
@@ -2828,7 +2852,7 @@
 				BD1280191F2AD18700DD9A8F /* region.json in Resources */,
 				BD12804A1F2AD18700DD9A8F /* RegionViewController.xib in Resources */,
 				BD12802E1F2AD18700DD9A8F /* 朋友圈@3x.png in Resources */,
-				BD12802A1F2AD18700DD9A8F /* 微信@3x.png in Resources */,
+				BD12802A1F2AD18700DD9A8F /* 微信好友@3x.png in Resources */,
 				BD127FD81F2AD18700DD9A8F /* guideImage5.jpg in Resources */,
 				BD1280311F2AD18700DD9A8F /* SharePanelOneCell.xib in Resources */,
 				BD127FF31F2AD18700DD9A8F /* UpdatePasswordVC.xib in Resources */,
@@ -2844,6 +2868,7 @@
 				BDBA1E331F4A865900ED633B /* CodeScan.bundle in Resources */,
 				BDC5175F1F2ADDDB00E1821E /* AdViewController.xib in Resources */,
 				BDC5176E1F2ADE5D00E1821E /* Main.storyboard in Resources */,
+				BD5C28541F53EA1100D53678 /* SigningVC.xib in Resources */,
 				BD12802D1F2AD18700DD9A8F /* 朋友圈@2x.png in Resources */,
 				BD32BD131F3C098600EBC853 /* AddDebitCardVC.xib in Resources */,
 				BDC5176F1F2ADE5D00E1821E /* Info.plist in Resources */,
@@ -2856,6 +2881,7 @@
 				BD127FE71F2AD18700DD9A8F /* LoginVC.xib in Resources */,
 				BD127FF11F2AD18700DD9A8F /* SuggestFeedbackVC.xib in Resources */,
 				BD8A276B1F3B3E4700204AB2 /* MessageOneCell.xib in Resources */,
+				BD961C7B1F4FB4C6003FECC2 /* CardPackageThreeCell.xib in Resources */,
 				BD12804E1F2AD18700DD9A8F /* 密码1@3x.png in Resources */,
 				BD2A24DB1F3D8C5500B8E76B /* TopUpVC.xib in Resources */,
 				BD127FDB1F2AD18700DD9A8F /* guideImage8.gif in Resources */,
@@ -2905,8 +2931,9 @@
 				BDB44A571F39501B009AA91F /* PopupVC.xib in Resources */,
 				BD127FD61F2AD18700DD9A8F /* guideImage3.jpg in Resources */,
 				BD127FD01F2AD18700DD9A8F /* PublicViewController.xib in Resources */,
-				BD1280291F2AD18700DD9A8F /* 微信@2x.png in Resources */,
+				BD1280291F2AD18700DD9A8F /* 微信好友@2x.png in Resources */,
 				BD1280331F2AD18700DD9A8F /* SharePanelVC.xib in Resources */,
+				BDFE0F4F1F4E71F3008AB7DF /* ArticleVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3045,6 +3072,7 @@
 				BDBA1E461F4AB43600ED633B /* BillModel.m in Sources */,
 				BDBA1E3A1F4A865900ED633B /* JQScanNative.m in Sources */,
 				BD127FC41F2AD18700DD9A8F /* RequestHeaderModel.m in Sources */,
+				BD5C28531F53EA1100D53678 /* SigningVC.m in Sources */,
 				BD127FBA1F2AD18700DD9A8F /* UITextField+WHPlaceholder.m in Sources */,
 				BD12804B1F2AD18700DD9A8F /* LxGridViewFlowLayout.m in Sources */,
 				BDB6D71E1F3B0496009C7A5B /* BillOneCell.m in Sources */,
@@ -3122,6 +3150,7 @@
 				BD127FC11F2AD18700DD9A8F /* BaseResponse.m in Sources */,
 				BD127FC01F2AD18700DD9A8F /* BaseRequest.m in Sources */,
 				BD1280201F2AD18700DD9A8F /* SGHelperTool.m in Sources */,
+				BD961C7A1F4FB4C6003FECC2 /* CardPackageThreeCell.m in Sources */,
 				BD12803B1F2AD18700DD9A8F /* README.md in Sources */,
 				BD1280431F2AD18700DD9A8F /* ProgressView.m in Sources */,
 				BD1280301F2AD18700DD9A8F /* SharePanelOneCell.m in Sources */,
@@ -3139,6 +3168,7 @@
 				BD12805B1F2AD18700DD9A8F /* GKImagePicker.m in Sources */,
 				BDC064311F3468C7000FCDB5 /* UIImageView+SD.m in Sources */,
 				BD12803E1F2AD18700DD9A8F /* WHC_GestureDragPlateView.m in Sources */,
+				BDFE0F4E1F4E71F3008AB7DF /* ArticleVC.m in Sources */,
 				BD9E39D21F3A722F00DF3374 /* CertificationVC.m in Sources */,
 				BDC0642E1F3468A4000FCDB5 /* UIColor+DWColor.m in Sources */,
 				BD127FBD1F2AD18700DD9A8F /* UITableView+NoData.m in Sources */,

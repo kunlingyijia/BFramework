@@ -44,6 +44,8 @@ extern NSString * const  Request_CertifyInfo ;
 extern NSString * const  Request_MessageList ;
 ///首页轮播图+公告+我的信用卡
 extern NSString * const  Request_Home_requestAd ;
+///获取文章内容
+extern NSString * const  Request_Home_articleInfo ;
 ///查看计划
 extern NSString * const  Request_PlanList ;
 ///删除计划
@@ -60,8 +62,8 @@ extern NSString * const  Request_BankAddDebitCard ;
 extern NSString * const  Request_AddCreditCard ;
 ///提现
 extern NSString * const  Request_Withdraw ;
-
-
+///快捷签约
+extern NSString * const  Request_quickSign ;
 
 
 

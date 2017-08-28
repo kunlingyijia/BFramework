@@ -46,5 +46,6 @@
 + (NSString *)getIPAddress:(BOOL)preferIPv4;
 ///获取 年-月-日
 -(NSString*)timeStampString;
-
+//json格式字符串转字典：
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 @end

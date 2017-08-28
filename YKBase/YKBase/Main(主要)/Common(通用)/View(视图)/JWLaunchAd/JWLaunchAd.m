@@ -67,12 +67,13 @@
 }
 
 - (void)addInWindow{
+     [[[UIApplication sharedApplication].delegate window] addSubview:self];
     //监测DidFinished通知
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         //等DidFinished方法结束后,将其添加至window上(不然会检测是否有rootViewController)
-        dispatch_async(dispatch_get_main_queue(), ^{
+        //dispatch_async(dispatch_get_main_queue(), ^{
             [[[UIApplication sharedApplication].delegate window] addSubview:self];
-        });
+        //});
     }];
 }
 

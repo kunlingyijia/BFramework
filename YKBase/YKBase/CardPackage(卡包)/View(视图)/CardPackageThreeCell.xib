@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="336" id="KGk-i7-Jjw" customClass="CardPackageThreeCell">
+            <rect key="frame" x="0.0" y="0.0" width="518" height="336"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="518" height="336"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8K1-oU-08G" customClass="CutView">
+                        <rect key="frame" x="15" y="15" width="488" height="320.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QQ空间.png" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cAC-9G-8RV">
+                                <rect key="frame" x="0.0" y="0.0" width="488" height="320"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cAC-9G-8RV" secondAttribute="trailing" id="2j7-SS-L6R"/>
+                            <constraint firstAttribute="bottom" secondItem="cAC-9G-8RV" secondAttribute="bottom" id="FuQ-h2-ns7"/>
+                            <constraint firstItem="cAC-9G-8RV" firstAttribute="leading" secondItem="8K1-oU-08G" secondAttribute="leading" id="ZS3-n3-25C"/>
+                            <constraint firstItem="cAC-9G-8RV" firstAttribute="top" secondItem="8K1-oU-08G" secondAttribute="top" id="dwf-hW-Od9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="8K1-oU-08G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Nli-zy-9fW"/>
+                    <constraint firstAttribute="bottom" secondItem="8K1-oU-08G" secondAttribute="bottom" id="NzZ-ex-Qle"/>
+                    <constraint firstItem="8K1-oU-08G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="VGg-GJ-FdE"/>
+                    <constraint firstAttribute="trailing" secondItem="8K1-oU-08G" secondAttribute="trailing" constant="15" id="c5U-JR-eyP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imageV" destination="cAC-9G-8RV" id="jqg-gZ-bfk"/>
+            </connections>
+            <point key="canvasLocation" x="133" y="200"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="QQ空间.png" width="70" height="70"/>
+    </resources>
+</document>

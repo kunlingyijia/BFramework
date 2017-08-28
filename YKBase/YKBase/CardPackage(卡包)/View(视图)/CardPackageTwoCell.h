@@ -11,4 +11,7 @@
 @interface CardPackageTwoCell : UITableViewCell
 ///model
 @property (nonatomic, strong) CardModel *model ;
+
+
+
 @end

@@ -90,7 +90,7 @@
     NSURLSessionDataTask * task =  [HTTPTool  requestHomePageWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             if (weakSelf.pageIndex == 1) {
-                [YKDataTool setValue:baseRes forkey:@"我的账单"];
+                [YKDataTool saveObject:baseRes.data byFileName:@"我的账单"];
                 [weakSelf.dataArray removeAllObjects];
             }
             [weakSelf  dataProcessing ];
@@ -110,7 +110,7 @@
 }
 #pragma mark - 数据处理
 -(void)dataProcessing{
-    NSMutableArray * Info = [YKDataTool objectForKey:@"我的账单"];
+    NSMutableArray * Info = [YKDataTool getObjectByFileName:@"我的账单"];
     if (Info.count!=0) {
         for (NSDictionary * dic in Info) {
             BillModel * model = [BillModel yy_modelWithJSON:dic];

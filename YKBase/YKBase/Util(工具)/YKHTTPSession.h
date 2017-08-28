@@ -36,6 +36,7 @@ typedef enum : NSUInteger {
 
 //网络请求
 - (nullable NSURLSessionDataTask *)requestDataWithParm:(nullable id)parm act:( nonnull NSString *)actName sign:(nullable id)sign method:(YKRequestMethod)method  showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable YKSuccessCallback)success faild:(nullable YKFaildCallback)faild;
+
 ///网络监测者
 + (void)AFNetworkStatus;
 //上传图片

@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, SkipShowType)
  *  初始化启动页广告
  *
  *  @param adDuration  停留时间
- *  @param hideSkip    是否隐藏跳过
+ *  @param showSkipType    是否隐藏跳过
  *  @param setLaunchAd launchAdView
  *
  *  @return self

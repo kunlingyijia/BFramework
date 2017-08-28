@@ -22,17 +22,14 @@
         faild(error);
     }];
 }
-#pragma mark -  获取系统配置
+#pragma mark -  版本检测
 + (nullable NSURLSessionDataTask *)requestVersionCheckWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self MD5requestWithParm:parm act:Request_VersionCheck showHUD:NO active:active success:^(BaseResponse * _Nullable baseRes) {
-        if (baseRes.resultCode ==1) {
-        }
         success(baseRes);
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
 }
-
 #pragma mark -  消息列表
 + (nullable NSURLSessionDataTask *)requestMessageListWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_MessageList showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -40,9 +37,7 @@
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
-    
 }
-
 #pragma mark -  获取验证码
 + (nullable NSURLSessionDataTask *)requestVerifyCodeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self MD5requestWithParm:parm act:Request_VerifyCode showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -69,7 +64,6 @@
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
-    
 }
 #pragma mark -  第三方登录
 + (nullable NSURLSessionDataTask *)requestThirdLoginWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
@@ -78,7 +72,6 @@
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
-    
 }
 #pragma mark -  第三方登录绑定手机号
 + (nullable NSURLSessionDataTask *)requesThirdLoginBindMobileWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
@@ -87,7 +80,6 @@
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
-    
 }
 #pragma mark - 找回密码
 + (nullable NSURLSessionDataTask *)requesForgottenPasswordWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
@@ -97,10 +89,9 @@
         faild(error);
     }];
 }
-
 #pragma mark -  获取个人信息
 + (nullable NSURLSessionDataTask *)requestUserInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
-    NSMutableDictionary * Info = [YKDataTool objectForKey:@"个人信息"];
+    NSMutableDictionary * Info = [YKDataTool getObjectByFileName:@"个人信息"];
     if (Info.count!=0) {
         Userinfo *userinfo = [Userinfo yy_modelWithJSON:Info];
         [YKHTTPSession shareSession].userinfo =userinfo;
@@ -109,7 +100,7 @@
     }
        return [self AESrequestWithParm:parm act:Request_UserInfo showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
-            [YKDataTool setValue:baseRes forkey:@"个人信息"];
+            [YKDataTool saveObject:baseRes.data byFileName:@"个人信息"];
             Userinfo *userinfo = [Userinfo yy_modelWithJSON:baseRes.data];
             NSLog(@"个人信息--%@",[baseRes yy_modelToJSONObject]);
             [YKHTTPSession shareSession].userinfo =userinfo;
@@ -120,9 +111,7 @@
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
-    
 }
-
 #pragma mark -  修改个人信息
 + (nullable NSURLSessionDataTask *)requestUpdateUserInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_UpdateUserInfo showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -146,7 +135,6 @@
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
-    
 }
 #pragma mark -  实名添加借记卡
 + (nullable NSURLSessionDataTask *)requestBankAddDebitCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
@@ -164,6 +152,23 @@
         faild(error);
     }];
 }
+#pragma mark -  提现
++ (nullable NSURLSessionDataTask *)requestWithdrawWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_Withdraw showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+#pragma mark -  快捷签约
++ (nullable NSURLSessionDataTask *)requestQuickSignWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_quickSign showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+
 #pragma mark -  首页轮播图+公告+我的信用卡
 + (nullable NSURLSessionDataTask *)requestHomePageWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_Home_requestAd showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -173,32 +178,14 @@
     }];
 }
 
-
-
-
-//#pragma mark -  请求广告页
-//+ (nullable NSURLSessionDataTask *)requestAdWithParm:(nullable id)parm  active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
-//    return [self MD5requestWithParm:parm act:Request_Ad showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
-//        success(baseRes);
-//    } faild:^(NSError *  _Nullable error) {
-//        faild(error);
-//    }];
-//}
-//#pragma mark -  版本跟新
-//+ (nullable NSURLSessionDataTask *)requestVersionUWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
-//    return [self MD5requestWithParm:parm act:Request_VersionUpdate showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
-//        success(baseRes);
-//    } faild:^(NSError *  _Nullable error) {
-//        faild(error);
-//    }];
-//
-//}
-
-
-
-
-
-
+#pragma mark -  首页 获取文章内容
++ (nullable NSURLSessionDataTask *)requestHome_articleInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self MD5requestWithParm:parm act:Request_Home_articleInfo showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
 
 #pragma mark - MD5格式
 +(nullable NSURLSessionDataTask *)MD5requestWithParm:(nullable id)parm act:( nonnull NSString *)actName showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
@@ -209,7 +196,6 @@
     return [[YKHTTPSession shareSession] requestDataWithParm:[baseReq yy_modelToJSONString] act:actName sign:[[baseReq.data yy_modelToJSONString] MD5Hash] method:HTTPSRequestTypeGET showHUD:showHUD active:active success:^(NSDictionary * _Nullable response) {
         if (response) {
             BaseResponse *baseRes = [BaseResponse yy_modelWithJSON:response];
-            
             success(baseRes);
             if (baseRes.resultCode != 1) {
                 [DWAlertTool showToast:baseRes.msg];
@@ -231,16 +217,17 @@
         return [[YKHTTPSession shareSession] requestDataWithParm:[baseReq yy_modelToJSONString] act:actName sign:[baseReq.data  MD5Hash] method:HTTPSRequestTypeGET showHUD:showHUD active:active success:^(NSDictionary * _Nullable response) {
             if (response) {
                 BaseResponse *baseRes = [BaseResponse yy_modelWithJSON:response];
+                if (baseRes.resultCode != 1) {
+                    [DWAlertTool showToast:baseRes.msg];
+                }
                 if(baseRes.resultCode ==14) {
                     //设置别名
                     [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
                     //退出登录
                     [YKNotification postNotificationName:@"退出账号" object:nil userInfo:nil];
                 }
+               
                 success(baseRes);
-                if (baseRes.resultCode != 1) {
-                    [DWAlertTool showToast:baseRes.msg];
-                }
             }
         } faild:^(NSError * _Nullable error) {
             faild(error);
@@ -252,7 +239,7 @@
     NSString *Token =[YKDataTool getLoginToken];
     NSLog(@"----%@",Token);
     if (Token.length == 0) {
-        [DWAlertTool showToast:@"请先登录"];
+       // [DWAlertTool showToast:@"请先登录"];
         LoginVC * VC=  GetVC(LoginVC)
         BaseNavigationVC * Nav = [[BaseNavigationVC alloc]initWithRootViewController:VC];
         [[DWAlertTool getCurrentUIVC] presentViewController:Nav animated:YES completion:nil];

@@ -9,5 +9,9 @@
 #import "BaseViewController.h"
 
 @interface MyWalletVC : BaseViewController
+@property (weak, nonatomic) IBOutlet WhiteLabel *amount;
+@property (weak, nonatomic) IBOutlet WhiteLabel *frozen_amount;
+@property (weak, nonatomic) IBOutlet DarkGreyTF *money;
+@property (weak, nonatomic) IBOutlet DarkGreyTF *bankName;
 
 @end

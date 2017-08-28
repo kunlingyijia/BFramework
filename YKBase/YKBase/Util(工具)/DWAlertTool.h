@@ -25,7 +25,6 @@ typedef void(^Cancel)(UIAlertAction *cancelaction);
 +(void)alertActionSheetWithTitle:(NSString*)title message:(NSString*)message OKWithTitleOne:(NSString*)OKtitleOne OKWithTitleTwo:(NSString*)OKtitleTwo OKWithTitleThree:(NSString*)OKtitleThree  CancelWithTitle:(NSString*)Canceltitle withOKDefaultOne:(OKDefault)defaultactionOne withOKDefaultTwo:(OKDefault)defaultactionTwo withOKDefaultThree:(OKDefault)defaultactionThree withCancel:(Cancel)cancelaction;
 ///获取当前界面
 +(UIViewController *)getCurrentUIVC;
-
 ///验证码
 +(void)VerificationCodeBtn:(UIButton*)sender;
 

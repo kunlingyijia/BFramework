@@ -25,7 +25,6 @@
     [self  SET_DATA];
     //创建观察者
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(Bank_Region_Bank_BranchAction:) name:@"Bank_Region_Bank_Branch" object:nil];
-    
 }
 #pragma mark - 创建观察者返回数据
 -(void)Bank_Region_Bank_BranchAction:(NSNotification*)sender{
@@ -70,7 +69,6 @@
             [self.sessionArray addObject:task];
         }
     }
-    
 }
 
 #pragma mark - 选择图片
@@ -187,7 +185,6 @@
         [self.sessionArray addObject:task];
     }
 }
-
 #pragma mark - 判断条件
 -(BOOL)IF{
     [self.view endEditing:YES];

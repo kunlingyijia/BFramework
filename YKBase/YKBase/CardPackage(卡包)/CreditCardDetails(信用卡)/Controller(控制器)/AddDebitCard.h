@@ -9,6 +9,9 @@
 #import "BaseViewController.h"
 
 @interface AddDebitCard : BaseViewController
+@property (nonatomic, copy) void(^ AddDebitCardVCBlock)();
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *bank_card_photo;
 @property (weak, nonatomic) IBOutlet UIImageView *bank_card_back_photo;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *bank_card_no;

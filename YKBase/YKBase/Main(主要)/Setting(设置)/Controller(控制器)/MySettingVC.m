@@ -2,8 +2,8 @@
 //  MySettingVC.m
 //  ManagementOfMoney
 //
-//  Created by 月美 刘 on 17/7/20.
-//  Copyright © 2017年 月美 刘. All rights reserved.
+//  Created by 亚坤 席 on 17/7/20.
+//  Copyright © 2017年 亚坤 席. All rights reserved.
 //
 
 #import "MySettingVC.h"
@@ -42,14 +42,14 @@
 #pragma mark - 关于数据
 -(void)SET_DATA{
     YKHTTPSession * helper = [YKHTTPSession shareSession];
-    [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:nil];
+    [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:@"60"];
     self.mobile.text = [NSString stringWithFormat:@"%@",helper.userinfo.mobile];
     [self.avatar_url.layer setLaberMasksToBounds:YES cornerRadius:(Width/8-10)/2 borderWidth:1.0*SizeScale borderColor:[UIColor whiteColor]];
 }
 #pragma mark - 用户赋值
 -(void)UserInfoForControls:(NSNotification*)sender{
     YKHTTPSession * helper = [YKHTTPSession shareSession];
-    [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:nil];
+    [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:@"60"];
     self.mobile.text = [NSString stringWithFormat:@"%@",helper.userinfo.mobile];
 }
 #pragma - 按钮事件

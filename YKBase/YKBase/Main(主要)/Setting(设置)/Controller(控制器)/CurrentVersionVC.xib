@@ -31,7 +31,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nmO-V1-a1i">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UNe-Kh-eft">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="60" translatesAutoresizingMaskIntoConstraints="NO" id="UNe-Kh-eft">
                                             <rect key="frame" x="142.5" y="30" width="90" height="90"/>
                                             <color key="backgroundColor" red="0.97647058819999999" green="0.2666666667" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -47,7 +47,7 @@
                                         <constraint firstAttribute="width" secondItem="nmO-V1-a1i" secondAttribute="height" multiplier="5:2" id="fTr-nK-h8R"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="巧巧信用卡" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ev-Ns-Rz0" customClass="DarkGreyLabel">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="巧巧科技" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ev-Ns-Rz0" customClass="DarkGreyLabel">
                                     <rect key="frame" x="0.0" y="160" width="375" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="hr6-Vd-f69"/>
@@ -102,4 +102,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="60" width="60" height="60"/>
+    </resources>
 </document>
