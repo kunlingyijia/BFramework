@@ -14,15 +14,12 @@
 @property (nonatomic, strong) NSString  *link_url ;
 ///原图
 @property (nonatomic, strong) NSString  *image_url ;
-
 ///文章ID
 @property (nonatomic, strong) NSString  *article_id ;
 ///文章标题
 @property (nonatomic, strong) NSString  *title ;
 ///文章内容
 @property (nonatomic, strong) NSString  *content ;
-
-
 ///开户银行
 @property (nonatomic, strong) NSString  *bank_name ;
 ///银行卡号

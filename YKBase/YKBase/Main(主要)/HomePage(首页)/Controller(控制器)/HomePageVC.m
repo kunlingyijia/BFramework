@@ -11,7 +11,7 @@
 #import "HomePageThreeCell.h"
 #import "MessageVC.h"
 #import "DebitCardDetailsVC.h"
-#import "HomePageModel.h"
+#import "CardModel.h"
 #import "BillVC.h"
 #import "CardPackageVC.h"
 #import "TopUpVC.h"
@@ -44,11 +44,13 @@
     [super viewDidLoad];
     //用户信息赋值
     [YKNotification addObserver:self selector:@selector(requestAction) name:@"刷新一级界面" object:nil];
+    [YKNotification addObserver:self selector:@selector(requestAction) name:@"添加银行卡" object:nil];
     //关于UI
     [self SET_UI];
     //关于数据
     [self  SET_DATA];
 }
+
 #pragma mark - 关于UI
 -(void)SET_UI{
     [self ShowRightBtnImage:@"消息" Back:^{
@@ -135,9 +137,9 @@
             if (weakSelf.pageIndex == 1) {
                 [YKDataTool saveObject:baseRes.data byFileName:@"首页信息"];
                 NSLog(@"%@",NSHomeDirectory());
-                [weakSelf.imageArray removeAllObjects];
-                [weakSelf.messageArray removeAllObjects];
-                [weakSelf.dataArray removeAllObjects];
+//                [weakSelf.imageArray removeAllObjects];
+//                [weakSelf.messageArray removeAllObjects];
+//                [weakSelf.dataArray removeAllObjects];
             }
             [weakSelf  dataProcessing];
         }else{
@@ -153,18 +155,21 @@
 }
 #pragma mark - 数据处理
 -(void)dataProcessing{
+    [self.imageArray removeAllObjects];
+    [self.messageArray removeAllObjects];
+    [self.dataArray removeAllObjects];
     NSMutableDictionary * Info = [YKDataTool getObjectByFileName:@"首页信息"];
     if (Info.count!=0) {
         for (NSDictionary * dic in Info[@"ad"]) {
-            HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
+            CardModel * model = [CardModel yy_modelWithJSON:dic];
             [self.imageArray addObject:model];
         }
         for (NSDictionary * dic in Info[@"notice"]) {
-            HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
+            CardModel * model = [CardModel yy_modelWithJSON:dic];
             [self.messageArray addObject:model];
         }
         for (NSDictionary * dic in Info[@"bank_card"]) {
-            HomePageModel * model = [HomePageModel yy_modelWithJSON:dic];
+            CardModel * model = [CardModel yy_modelWithJSON:dic];
             [self.dataArray addObject:model];
         }
         //刷新
@@ -183,7 +188,7 @@
     if (section ==0) {
         return 2;
     }else{
-        return 1;
+        return self.dataArray.count;
     }
 }
 //tab设置
@@ -197,14 +202,14 @@
                 HomePageOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageOneCell" forIndexPath:indexPath];
                 //轮播图
                 cell.HomePageOneCellImgBlock = ^(NSInteger tag){
-                    HomePageModel * model = weakSelf.imageArray[tag];
+                    CardModel * model = weakSelf.imageArray[tag];
                     BaseWKWebviewVC * VC = [[BaseWKWebviewVC alloc]initWithUrl:model.link_url];
                     PushVC(VC);
                 };
                 //消息
                 cell.HomePageOneCellLabelBlock = ^(NSInteger tag){
-                    HomePageModel * model = weakSelf.messageArray[tag];
-                    //[DWAlertTool showToast:@"开发中,敬请期待..."];
+                    CardModel * model = weakSelf.messageArray[tag];
+                    //[DWAlertTool showToast:@"敬请期待..."];
                     //跳转
                     ArticleVC * VC =  GetVC(ArticleVC);
                     VC.article_id = model.article_id;
@@ -253,10 +258,12 @@
         switch (tag) {
             case 1:
             {
-                ///我的卡包
-                CardPackageVC * VC =  GetVC(CardPackageVC);
-                [VC showBackBtn];
-                PushVC(VC);
+//                ///我的卡包
+//                CardPackageVC * VC =  GetVC(CardPackageVC);
+//                [VC showBackBtn];
+//                PushVC(VC);
+                [YKNotification postNotificationName:@"添加银行卡" object:nil userInfo:nil];
+                [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 1;
                 break;
             }
             case 2:
@@ -279,7 +286,7 @@
             }
         }
     }else{
-        [DWAlertTool showToast:@"开发中,敬请期待..."];
+        [DWAlertTool showToast:@"敬请期待..."];
     }
 }
 
@@ -288,8 +295,9 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section==1) {
         //跳转
-        //DebitCardDetailsVC * VC =  GetVC(DebitCardDetailsVC);
-        //PushVC(VC);
+        DebitCardDetailsVC * VC =  GetVC(DebitCardDetailsVC);
+        VC.cardModel = (CardModel*)self.dataArray[indexPath.row];
+        PushVC(VC);
     }
 }
 #pragma mark - Cell的高度

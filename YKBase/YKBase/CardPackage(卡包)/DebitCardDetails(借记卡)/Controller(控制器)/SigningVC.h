@@ -9,5 +9,9 @@
 #import "BaseViewController.h"
 
 @interface SigningVC : BaseViewController
+@property (nonatomic, copy) void(^ SigningVCBlock)();
+///form_data
+@property (nonatomic, strong) NSString  *form_data ;
+
 
 @end

@@ -7,16 +7,23 @@
 //
 
 #import "BaseViewController.h"
-
+@class CardModel;
 @interface ChangeDebitCardVC : BaseViewController
+@property (nonatomic, copy) void(^ ChangeDebitCardVCBlock)();
 @property (weak, nonatomic) IBOutlet UIImageView *bank_card_photo;
 @property (weak, nonatomic) IBOutlet UIImageView *bank_card_back_photo;
+@property (weak, nonatomic) IBOutlet DarkGreyTF *account_name;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *bank_card_no;
+@property (weak, nonatomic) IBOutlet DarkGreyTF *bank_name;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *credit_line;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *valid_thru;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *cvn2;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *state_date;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *repay_date;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *bind_mobile;
+///model
+@property (nonatomic, strong) CardModel *cardModel ;
+
+
 
 @end

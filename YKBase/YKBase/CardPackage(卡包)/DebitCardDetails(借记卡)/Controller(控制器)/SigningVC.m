@@ -76,7 +76,8 @@
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
-    [self requestAction];
+   // [self requestAction];
+    [_webview loadHTMLString:self. form_data baseURL:nil];
 }
 #pragma mark - 商品网络请求
 -(void)requestAction{
@@ -87,7 +88,7 @@
             // [_webview loadHTMLString:[response[@"data"][@"content"] HtmlToString]baseURL:nil];
             NSDictionary * dic =   [NSString dictionaryWithJsonString:baseRes.data];
             [_webview loadHTMLString:dic[@"form_data"] baseURL:nil];
-            
+            //            [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
         }
     } faild:^(NSError * _Nullable error) {
         
@@ -161,17 +162,48 @@
 
 ////在这个方法中捕获到图片的点击事件和被点击图片的url
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if (navigationType == UIWebViewNavigationTypeOther)
-    {
+    
+    
+    
+    
+    
+//    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+//    {
+//        
+    
+        
         NSString *url = [request.URL absoluteString];
         //拦截链接跳转到货源圈的动态详情
-        if ([url rangeOfString:@"https://mcashier.95516.com/mobile/authPay"].location != NSNotFound)
+        if ([url rangeOfString:@"http://www.baidu.com"].location != NSNotFound)
         {
+            
+            __weak typeof(self) weakSelf = self;
+//            [HTTPTool requestQuickSmsWithParm:@[] active:YES success:^(BaseResponse * _Nullable baseRes) {
+//                if (baseRes.resultCode ==1) {
+                    [weakSelf requestUserInfo];
+//                }
+//            } faild:^(NSError * _Nullable error) {
+//            }];
             
             return NO; //返回NO，此页面的链接点击不会继续执行，只会执行跳转到你想跳转的页面
         }
-    }
+   // }
     return YES;
+}
+#pragma mark - 请求个人信息
+-(void)requestUserInfo{
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            //返回
+            [weakSelf.navigationController popViewControllerAnimated:NO] ;
+            weakSelf.SigningVCBlock();
+        }
+    } faild:^(NSError * _Nullable error) {
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
 }
 
 - (NSData *)getImageDataWithUrl:(NSString *)url

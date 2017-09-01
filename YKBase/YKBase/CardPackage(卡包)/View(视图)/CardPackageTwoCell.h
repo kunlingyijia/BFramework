@@ -11,7 +11,10 @@
 @interface CardPackageTwoCell : UITableViewCell
 ///model
 @property (nonatomic, strong) CardModel *model ;
-
+@property (weak, nonatomic) IBOutlet UIImageView *BankImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *BagImageView;
+@property (weak, nonatomic) IBOutlet WhiteLabel *bank_name;
+@property (weak, nonatomic) IBOutlet UIImageView *selectedImage;
 
 
 @end

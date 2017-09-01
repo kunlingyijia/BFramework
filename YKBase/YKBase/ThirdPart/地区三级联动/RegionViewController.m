@@ -92,6 +92,7 @@
                 }
             }
         }else {
+            
             self.firstRegionID = model.regionId;
             for (CityModel *addressModel in self.secondDataSource) {
                 if (addressModel.superId == model.regionId) {
@@ -174,7 +175,7 @@
     self.secondIndex = 0;
     self.thirdIndex = 0;
     
-    for (NSDictionary *dic in [DWHelper getCityData]) {
+    for (NSDictionary *dic in [YKHTTPSession getCityData]) {
         CityModel *model = [CityModel yy_modelWithDictionary:dic];
         if (model.regionType == 1) {
             [self.firstDataSource addObject:model];

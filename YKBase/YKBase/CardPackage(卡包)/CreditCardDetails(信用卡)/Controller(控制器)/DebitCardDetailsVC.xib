@@ -13,7 +13,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DebitCardDetailsVC">
             <connections>
+                <outlet property="BankImageView" destination="WtT-8J-Yha" id="aKx-D9-1W4"/>
+                <outlet property="bank_name" destination="H9y-qc-3Ih" id="prU-vA-9qG"/>
                 <outlet property="bottomView" destination="wjo-iF-KWL" id="VWh-l7-6s7"/>
+                <outlet property="credit_line" destination="u5r-ZU-KNg" id="kkT-jS-N57"/>
+                <outlet property="repay_date" destination="Ai7-hM-mlX" id="hnf-Qe-dDU"/>
+                <outlet property="state_date" destination="T1X-pf-J7H" id="rVA-j0-ZYc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

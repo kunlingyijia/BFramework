@@ -61,7 +61,7 @@ typedef enum : NSUInteger {
 typedef enum : NSUInteger {
     LayoutType_Pop_up,  //弹出动画
     LayoutType_Draw //滑动
-
+    
 }YKLayoutType;
 //设置刷新
 typedef void(^MJRefreshBlock)();

@@ -26,6 +26,8 @@
 #pragma mark -  视图将出现在屏幕之前
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self requestAction];
+
 }
 #pragma mark - 视图已在屏幕上渲染完成
 -(void)viewDidAppear:(BOOL)animated{
@@ -35,7 +37,7 @@
 #pragma mark -  载入完成
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [YKNotification addObserver:self selector:@selector(requestAction) name:@"刷新一级界面" object:nil];
+    //[YKNotification addObserver:self selector:@selector(requestAction) name:@"刷新一级界面" object:nil];
     //关于UI
     [self SET_UI];
     //关于数据
@@ -66,9 +68,9 @@
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
-//    [self requestAction];
 //    //上拉刷新下拉加载
-//    [self Refresh];
+    [self Refresh];
+    [self  dataProcessing];
 }
 -(void)Refresh{
     //下拉刷新
@@ -85,7 +87,6 @@
 }
 #pragma mark - 网络请求
 -(void)requestAction{
-    [self  dataProcessing ];
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestHomePageWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
@@ -93,7 +94,12 @@
                 [YKDataTool saveObject:baseRes.data byFileName:@"我的账单"];
                 [weakSelf.dataArray removeAllObjects];
             }
-            [weakSelf  dataProcessing ];
+            for (NSDictionary * dic in baseRes.data) {
+                BillModel * model = [BillModel yy_modelWithJSON:dic];
+                 [weakSelf.dataArray addObject:model];
+            }
+            //刷新
+            [weakSelf.tableView reloadData];
         }else{
             weakSelf.pageIndex > 1 ? weakSelf.pageIndex-- : weakSelf.pageIndex;
         }
@@ -114,7 +120,7 @@
     if (Info.count!=0) {
         for (NSDictionary * dic in Info) {
             BillModel * model = [BillModel yy_modelWithJSON:dic];
-            // [self.dataArray addObject:model];
+             //[self.dataArray addObject:model];
         }
         //刷新
         [self.tableView reloadData];

@@ -18,7 +18,8 @@
 @interface CardPackageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property (weak, nonatomic) IBOutlet SegmentedView *segmented;
-//银行卡类型 1-借记卡 2-贷记卡 3-结算卡
+//银行卡类型 1-借记卡（储蓄卡） 2-贷记卡（信用卡） 3-结算卡(储蓄卡
+
 @property(nonatomic,strong)NSString * type;
 ///分页参数
 @property (nonatomic, assign) NSInteger pageIndex;
@@ -38,7 +39,9 @@
 #pragma mark -  载入完成
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [YKNotification addObserver:self selector:@selector(requestAction) name:@"刷新一级界面" object:nil];
+    [YKNotification addObserver:self selector:@selector(addBankAction) name:@"添加银行卡" object:nil];
+    //用户信息赋值
+    [YKNotification addObserver:self selector:@selector(addBankAction) name:@"刷新一级界面" object:nil];
     //关于UI
     [self SET_UI];
     //关于数据
@@ -51,7 +54,7 @@
     [self segmentedData];
     self.segmented.SegmentedViewBlock = ^(NSInteger tag){
         weakSelf.pageIndex = 1;
-        weakSelf.type = tag == 0? @"1":@"2";
+        weakSelf.type = tag == 0 ?  @"2":@"1";
         [weakSelf requestAction];
     };
     [self setUpTableView];
@@ -78,16 +81,16 @@
 #pragma mark - 关于数据
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
-    self.type = @"1";
+    self.type = @"2";
     self.pageIndex =1;
-    //    [self requestAction];
-    //    //上拉刷新下拉加载
-    //    [self Refresh];
+    [self requestAction];
+    //上拉刷新下拉加载
+    [self Refresh];
 }
 -(void)Refresh{
     //下拉刷新
     __weak typeof(self) weakself = self;
-    [ThirdPartyTool MJRefreshView:self.tableView Header:YES Footer:YES HeaderBlock:^{
+    [ThirdPartyTool MJRefreshView:self.tableView Header:YES Footer:NO HeaderBlock:^{
         weakself.pageIndex =1 ;
         [weakself requestAction];
     } FooterBlock:^{
@@ -95,26 +98,32 @@
         NSLog(@"%ld",(long)weakself.pageIndex);
         [weakself requestAction];
     }];
-    
+}
+#pragma mark - 通知
+-(void)addBankAction{
+    [self requestAction];
+    [self segmentedData];
 }
 #pragma mark - 网络请求
 -(void)requestAction{
-    [self  dataProcessing ];
+    [self  dataProcessing];
     __weak typeof(self) weakSelf = self;
-    NSURLSessionDataTask * task =  [HTTPTool  requestHomePageWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10",@"type":self.type} active:YES success :^(BaseResponse * _Nullable baseRes) {
+    NSURLSessionDataTask * task =  [HTTPTool  requestBankCardListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10",@"type":self.type} active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             if (weakSelf.pageIndex == 1) {
-                if ([self.type isEqualToString:@"1"]) {
-                    [YKDataTool saveObject:baseRes.data byFileName:@"我的卡包"];
+                if ([weakSelf.type isEqualToString:@"2"]) {
+                    [YKDataTool saveObject:baseRes.data byFileName:@"我的信用卡"];
                 }
-                [weakSelf.dataArray removeAllObjects];
+                if ([weakSelf.type isEqualToString:@"1"]) {
+                    [YKDataTool saveObject:baseRes.data byFileName:@"我的借记卡"];
+                }
+                
             }
             [weakSelf  dataProcessing];
         }else{
             weakSelf.pageIndex > 1 ? weakSelf.pageIndex -- : weakSelf.pageIndex;
         }
         [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-        
     } faild:^(NSError * _Nullable error) {
         [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
     }];
@@ -124,12 +133,22 @@
 }
 #pragma mark - 数据处理
 -(void)dataProcessing{
-    NSMutableArray * Info = [YKDataTool getObjectByFileName:@"我的卡包"];
+    NSMutableArray * Info = [NSMutableArray arrayWithCapacity:0];
+    if ([self.type isEqualToString:@"2"]) {
+        Info = [YKDataTool getObjectByFileName:@"我的信用卡"];
+    }
+    if ([self.type isEqualToString:@"1"]) {
+        Info = [YKDataTool getObjectByFileName:@"我的借记卡"];
+    }
+    [self.dataArray removeAllObjects];
     if (Info.count!=0) {
         for (NSDictionary * dic in Info) {
             CardModel * model = [CardModel yy_modelWithJSON:dic];
-            // [self.dataArray addObject:model];
+            [self.dataArray addObject:model];
         }
+        //刷新
+        [self.tableView reloadData];
+    }else{
         //刷新
         [self.tableView reloadData];
     }
@@ -155,14 +174,15 @@
         cell.type = self.type;
         return cell;
     }else{
-        if (indexPath.row==0) {
-            HomePageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageThreeCell" forIndexPath:indexPath];
+        //银行卡类型 1-借记卡（储蓄卡） 2-贷记卡（信用卡） 3-结算卡(储蓄卡
+        if ([self.type isEqualToString:@"1"]) {
+            CardPackageTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageTwoCell" forIndexPath:indexPath];
             //cell赋值
             cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
             //cell其他配置
             return cell;
         }else{
-            CardPackageTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageTwoCell" forIndexPath:indexPath];
+            HomePageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageThreeCell" forIndexPath:indexPath];
             //cell赋值
             cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
             //cell其他配置
@@ -179,8 +199,8 @@
         if ([HTTPTool isCertification]) {
             return;
         }
-        //银行卡类型 1-借记卡 2-贷记卡 3-结算卡
-        if ([_type isEqualToString:@"1"]) {
+        //银行卡类型 1-借记卡（储蓄卡） 2-贷记卡（信用卡） 3-结算卡(储蓄卡）
+        if ([_type isEqualToString:@"2"]) {
             //新增信用卡
             AddDebitCard * VC =  GetVC(AddDebitCard);
             VC.AddDebitCardVCBlock = ^(){
@@ -190,8 +210,8 @@
             };
             PushVC(VC)
         }
-        //银行卡类型 1-借记卡 2-贷记卡 3-结算卡
-        if ([_type isEqualToString:@"2"]) {
+        //银行卡类型 1-借记卡（储蓄卡） 2-贷记卡（信用卡） 3-结算卡(储蓄卡）
+        if ([_type isEqualToString:@"1"]) {
             //新增借记卡
             AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
             VC.AddDebitCardVCBlock = ^(){
@@ -202,15 +222,17 @@
             PushVC(VC)
         }
     }else{
-        //银行卡类型 1-借记卡 2-贷记卡 3-结算卡
-        if ([_type isEqualToString:@"1"]) {
+        //银行卡类型 1-借记卡（储蓄卡） 2-贷记卡（信用卡） 3-结算卡(储蓄卡）
+        if ([_type isEqualToString:@"2"]) {
             //跳转
             DebitCardDetailsVC * VC =  GetVC(DebitCardDetailsVC);
+            
+            VC.cardModel = self.dataArray[indexPath.row];
             PushVC(VC);
         }
-        //银行卡类型 1-借记卡 2-贷记卡 3-结算卡
-        if ([_type isEqualToString:@"2"]) {
-            [DWAlertTool showToast:@"开发中,敬请期待..."];
+        //银行卡类型 1-借记卡（储蓄卡） 2-贷记卡（信用卡） 3-结算卡(储蓄卡）
+        if ([_type isEqualToString:@"1"]) {
+            [DWAlertTool showToast:@"敬请期待..."];
         }
     }
 }

@@ -255,6 +255,12 @@
 		BD8A6A091F3D484A006BA4FF /* PasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8A6A071F3D484A006BA4FF /* PasswordVC.m */; };
 		BD8A6A0A1F3D484A006BA4FF /* PasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8A6A081F3D484A006BA4FF /* PasswordVC.xib */; };
 		BD8A6A0D1F3D53DF006BA4FF /* CardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8A6A0C1F3D53DF006BA4FF /* CardModel.m */; };
+		BD8EDB4E1F58EAD0003A9949 /* PlanRunWaterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8EDB4C1F58EAD0003A9949 /* PlanRunWaterVC.m */; };
+		BD8EDB4F1F58EAD0003A9949 /* PlanRunWaterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8EDB4D1F58EAD0003A9949 /* PlanRunWaterVC.xib */; };
+		BD8EDB531F58F39E003A9949 /* PlanDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8EDB511F58F39E003A9949 /* PlanDetailsVC.m */; };
+		BD8EDB541F58F39E003A9949 /* PlanDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8EDB521F58F39E003A9949 /* PlanDetailsVC.xib */; };
+		BD8EDB581F58F7C5003A9949 /* PlanDetailsOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8EDB561F58F7C5003A9949 /* PlanDetailsOneCell.m */; };
+		BD8EDB591F58F7C5003A9949 /* PlanDetailsOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8EDB571F58F7C5003A9949 /* PlanDetailsOneCell.xib */; };
 		BD961C7A1F4FB4C6003FECC2 /* CardPackageThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD961C781F4FB4C6003FECC2 /* CardPackageThreeCell.m */; };
 		BD961C7B1F4FB4C6003FECC2 /* CardPackageThreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD961C791F4FB4C6003FECC2 /* CardPackageThreeCell.xib */; };
 		BD96D5EC1F386E2900EE6CC5 /* RegisteredVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD96D5EA1F386E2900EE6CC5 /* RegisteredVC.m */; };
@@ -262,6 +268,8 @@
 		BD9E39D21F3A722F00DF3374 /* CertificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9E39D01F3A722F00DF3374 /* CertificationVC.m */; };
 		BD9E39D31F3A722F00DF3374 /* CertificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD9E39D11F3A722F00DF3374 /* CertificationVC.xib */; };
 		BDA012BF1F3B4A1E008E7EFA /* SegmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA012BE1F3B4A1E008E7EFA /* SegmentedView.m */; };
+		BDA978EF1F55624B006AD490 /* ChargeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA978ED1F55624B006AD490 /* ChargeVC.m */; };
+		BDA978F01F55624B006AD490 /* ChargeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDA978EE1F55624B006AD490 /* ChargeVC.xib */; };
 		BDAA45DD1F4C03D8008C635C /* SXColorGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAA45D01F4C03D8008C635C /* SXColorGradientView.m */; };
 		BDAA45DE1F4C03D8008C635C /* SXColorLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAA45D21F4C03D8008C635C /* SXColorLabel.m */; };
 		BDAA45DF1F4C03D8008C635C /* SXHeadLine.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAA45D41F4C03D8008C635C /* SXHeadLine.m */; };
@@ -271,6 +279,8 @@
 		BDAA45E31F4C03D8008C635C /* UILabel+Wonderful.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAA45DC1F4C03D8008C635C /* UILabel+Wonderful.m */; };
 		BDB44A561F39501B009AA91F /* PopupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB44A541F39501B009AA91F /* PopupVC.m */; };
 		BDB44A571F39501B009AA91F /* PopupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDB44A551F39501B009AA91F /* PopupVC.xib */; };
+		BDB4D73A1F564EEA00798E1F /* PlanListOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4D7381F564EEA00798E1F /* PlanListOneCell.m */; };
+		BDB4D73B1F564EEA00798E1F /* PlanListOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDB4D7391F564EEA00798E1F /* PlanListOneCell.xib */; };
 		BDB6D7021F3A7EC3009C7A5B /* Userinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB6D7011F3A7EC3009C7A5B /* Userinfo.m */; };
 		BDB6D7091F3AE36F009C7A5B /* HomePageOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB6D7071F3AE36F009C7A5B /* HomePageOneCell.m */; };
 		BDB6D70A1F3AE36F009C7A5B /* HomePageOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDB6D7081F3AE36F009C7A5B /* HomePageOneCell.xib */; };
@@ -318,6 +328,10 @@
 		BDC5176E1F2ADE5D00E1821E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDC517661F2ADE5D00E1821E /* Main.storyboard */; };
 		BDC5176F1F2ADE5D00E1821E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDC517681F2ADE5D00E1821E /* Info.plist */; };
 		BDC517711F2ADE5D00E1821E /* YKBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDC5176A1F2ADE5D00E1821E /* YKBase.xcdatamodeld */; };
+		BDC5BF101F56A28C00E1B1FA /* BankCardListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC5BF0E1F56A28C00E1B1FA /* BankCardListVC.m */; };
+		BDC5BF111F56A28C00E1B1FA /* BankCardListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDC5BF0F1F56A28C00E1B1FA /* BankCardListVC.xib */; };
+		BDC5BF151F56A2A800E1B1FA /* BankCardListOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC5BF131F56A2A800E1B1FA /* BankCardListOneCell.m */; };
+		BDC5BF161F56A2A800E1B1FA /* BankCardListOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDC5BF141F56A2A800E1B1FA /* BankCardListOneCell.xib */; };
 		BDC9ADCF1F34521700DC25BF /* libc++abi.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC9ADCE1F34521700DC25BF /* libc++abi.tbd */; };
 		BDCB58A21F2F02A300E2424E /* CoreJPush.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCB58A11F2F02A300E2424E /* CoreJPush.m */; };
 		BDE0E1C41F46C9B100086E6D /* HZQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE0E1C01F46C9B100086E6D /* HZQDatePickerView.m */; };
@@ -877,6 +891,15 @@
 		BD8A6A081F3D484A006BA4FF /* PasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordVC.xib; sourceTree = "<group>"; };
 		BD8A6A0B1F3D53DF006BA4FF /* CardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardModel.h; sourceTree = "<group>"; };
 		BD8A6A0C1F3D53DF006BA4FF /* CardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardModel.m; sourceTree = "<group>"; };
+		BD8EDB4B1F58EAD0003A9949 /* PlanRunWaterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanRunWaterVC.h; sourceTree = "<group>"; };
+		BD8EDB4C1F58EAD0003A9949 /* PlanRunWaterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanRunWaterVC.m; sourceTree = "<group>"; };
+		BD8EDB4D1F58EAD0003A9949 /* PlanRunWaterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlanRunWaterVC.xib; sourceTree = "<group>"; };
+		BD8EDB501F58F39E003A9949 /* PlanDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanDetailsVC.h; sourceTree = "<group>"; };
+		BD8EDB511F58F39E003A9949 /* PlanDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanDetailsVC.m; sourceTree = "<group>"; };
+		BD8EDB521F58F39E003A9949 /* PlanDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlanDetailsVC.xib; sourceTree = "<group>"; };
+		BD8EDB551F58F7C5003A9949 /* PlanDetailsOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanDetailsOneCell.h; sourceTree = "<group>"; };
+		BD8EDB561F58F7C5003A9949 /* PlanDetailsOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanDetailsOneCell.m; sourceTree = "<group>"; };
+		BD8EDB571F58F7C5003A9949 /* PlanDetailsOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlanDetailsOneCell.xib; sourceTree = "<group>"; };
 		BD961C771F4FB4C6003FECC2 /* CardPackageThreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardPackageThreeCell.h; path = "View(视图)/CardPackageThreeCell.h"; sourceTree = "<group>"; };
 		BD961C781F4FB4C6003FECC2 /* CardPackageThreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardPackageThreeCell.m; path = "View(视图)/CardPackageThreeCell.m"; sourceTree = "<group>"; };
 		BD961C791F4FB4C6003FECC2 /* CardPackageThreeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardPackageThreeCell.xib; path = "View(视图)/CardPackageThreeCell.xib"; sourceTree = "<group>"; };
@@ -888,6 +911,9 @@
 		BD9E39D11F3A722F00DF3374 /* CertificationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CertificationVC.xib; sourceTree = "<group>"; };
 		BDA012BD1F3B4A1E008E7EFA /* SegmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedView.h; sourceTree = "<group>"; };
 		BDA012BE1F3B4A1E008E7EFA /* SegmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedView.m; sourceTree = "<group>"; };
+		BDA978EC1F55624B006AD490 /* ChargeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChargeVC.h; sourceTree = "<group>"; };
+		BDA978ED1F55624B006AD490 /* ChargeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChargeVC.m; sourceTree = "<group>"; };
+		BDA978EE1F55624B006AD490 /* ChargeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChargeVC.xib; sourceTree = "<group>"; };
 		BDAA45CF1F4C03D8008C635C /* SXColorGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXColorGradientView.h; sourceTree = "<group>"; };
 		BDAA45D01F4C03D8008C635C /* SXColorGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXColorGradientView.m; sourceTree = "<group>"; };
 		BDAA45D11F4C03D8008C635C /* SXColorLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXColorLabel.h; sourceTree = "<group>"; };
@@ -905,6 +931,9 @@
 		BDB44A531F39501B009AA91F /* PopupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupVC.h; sourceTree = "<group>"; };
 		BDB44A541F39501B009AA91F /* PopupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupVC.m; sourceTree = "<group>"; };
 		BDB44A551F39501B009AA91F /* PopupVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupVC.xib; sourceTree = "<group>"; };
+		BDB4D7371F564EEA00798E1F /* PlanListOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlanListOneCell.h; sourceTree = "<group>"; };
+		BDB4D7381F564EEA00798E1F /* PlanListOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlanListOneCell.m; sourceTree = "<group>"; };
+		BDB4D7391F564EEA00798E1F /* PlanListOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlanListOneCell.xib; sourceTree = "<group>"; };
 		BDB6D7001F3A7EC3009C7A5B /* Userinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Userinfo.h; path = "YKBase/Main(主要)/MyInfo(我的)/Controller(控制器)/Userinfo.h"; sourceTree = SOURCE_ROOT; };
 		BDB6D7011F3A7EC3009C7A5B /* Userinfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Userinfo.m; path = "YKBase/Main(主要)/MyInfo(我的)/Controller(控制器)/Userinfo.m"; sourceTree = SOURCE_ROOT; };
 		BDB6D7061F3AE36F009C7A5B /* HomePageOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomePageOneCell.h; path = "YKBase/Main(主要)/MyInfo(我的)/Controller(控制器)/HomePageOneCell.h"; sourceTree = SOURCE_ROOT; };
@@ -984,6 +1013,12 @@
 		BDC517671F2ADE5D00E1821E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BDC517681F2ADE5D00E1821E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDC5176B1F2ADE5D00E1821E /* YKBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YKBase.xcdatamodel; sourceTree = "<group>"; };
+		BDC5BF0D1F56A28C00E1B1FA /* BankCardListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardListVC.h; sourceTree = "<group>"; };
+		BDC5BF0E1F56A28C00E1B1FA /* BankCardListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardListVC.m; sourceTree = "<group>"; };
+		BDC5BF0F1F56A28C00E1B1FA /* BankCardListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankCardListVC.xib; sourceTree = "<group>"; };
+		BDC5BF121F56A2A800E1B1FA /* BankCardListOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardListOneCell.h; sourceTree = "<group>"; };
+		BDC5BF131F56A2A800E1B1FA /* BankCardListOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardListOneCell.m; sourceTree = "<group>"; };
+		BDC5BF141F56A2A800E1B1FA /* BankCardListOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankCardListOneCell.xib; sourceTree = "<group>"; };
 		BDC9ADCE1F34521700DC25BF /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		BDCB589E1F2F029800E2424E /* CoreJPushProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreJPushProtocol.h; sourceTree = "<group>"; };
 		BDCB589F1F2F029800E2424E /* CoreJPushSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreJPushSingleton.h; sourceTree = "<group>"; };
@@ -2292,9 +2327,15 @@
 				BDE797C01F457533005BBAE9 /* PlanListVC.h */,
 				BDE797C11F457533005BBAE9 /* PlanListVC.m */,
 				BDE797C21F457533005BBAE9 /* PlanListVC.xib */,
+				BD8EDB501F58F39E003A9949 /* PlanDetailsVC.h */,
+				BD8EDB511F58F39E003A9949 /* PlanDetailsVC.m */,
+				BD8EDB521F58F39E003A9949 /* PlanDetailsVC.xib */,
 				BDBA1DCE1F4A71E900ED633B /* TopUpSingleVC.h */,
 				BDBA1DCF1F4A71E900ED633B /* TopUpSingleVC.m */,
 				BDBA1DD01F4A71E900ED633B /* TopUpSingleVC.xib */,
+				BD8EDB4B1F58EAD0003A9949 /* PlanRunWaterVC.h */,
+				BD8EDB4C1F58EAD0003A9949 /* PlanRunWaterVC.m */,
+				BD8EDB4D1F58EAD0003A9949 /* PlanRunWaterVC.xib */,
 			);
 			path = "Controller(控制器)";
 			sourceTree = "<group>";
@@ -2311,6 +2352,12 @@
 		BD32BD001F3BF39400EBC853 /* View(视图) */ = {
 			isa = PBXGroup;
 			children = (
+				BDB4D7371F564EEA00798E1F /* PlanListOneCell.h */,
+				BDB4D7381F564EEA00798E1F /* PlanListOneCell.m */,
+				BDB4D7391F564EEA00798E1F /* PlanListOneCell.xib */,
+				BD8EDB551F58F7C5003A9949 /* PlanDetailsOneCell.h */,
+				BD8EDB561F58F7C5003A9949 /* PlanDetailsOneCell.m */,
+				BD8EDB571F58F7C5003A9949 /* PlanDetailsOneCell.xib */,
 			);
 			path = "View(视图)";
 			sourceTree = "<group>";
@@ -2466,6 +2513,9 @@
 				BD9E39CF1F3A722F00DF3374 /* CertificationVC.h */,
 				BD9E39D01F3A722F00DF3374 /* CertificationVC.m */,
 				BD9E39D11F3A722F00DF3374 /* CertificationVC.xib */,
+				BDC5BF0D1F56A28C00E1B1FA /* BankCardListVC.h */,
+				BDC5BF0E1F56A28C00E1B1FA /* BankCardListVC.m */,
+				BDC5BF0F1F56A28C00E1B1FA /* BankCardListVC.xib */,
 			);
 			path = "Controller(控制器)";
 			sourceTree = "<group>";
@@ -2482,6 +2532,9 @@
 		BD9E39CE1F3A720900DF3374 /* View(视图) */ = {
 			isa = PBXGroup;
 			children = (
+				BDC5BF121F56A2A800E1B1FA /* BankCardListOneCell.h */,
+				BDC5BF131F56A2A800E1B1FA /* BankCardListOneCell.m */,
+				BDC5BF141F56A2A800E1B1FA /* BankCardListOneCell.xib */,
 			);
 			path = "View(视图)";
 			sourceTree = "<group>";
@@ -2587,6 +2640,9 @@
 				BD855A121F3C6304008143C3 /* ChooseDebitCardVC.h */,
 				BD855A131F3C6304008143C3 /* ChooseDebitCardVC.m */,
 				BD855A141F3C6304008143C3 /* ChooseDebitCardVC.xib */,
+				BDA978EC1F55624B006AD490 /* ChargeVC.h */,
+				BDA978ED1F55624B006AD490 /* ChargeVC.m */,
+				BDA978EE1F55624B006AD490 /* ChargeVC.xib */,
 			);
 			path = "Controller(控制器)";
 			sourceTree = "<group>";
@@ -2840,6 +2896,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA978F01F55624B006AD490 /* ChargeVC.xib in Resources */,
 				BD96D5ED1F386E2900EE6CC5 /* RegisteredVC.xib in Resources */,
 				BD127FD31F2AD18700DD9A8F /* GuideImage.bundle in Resources */,
 				BD12805E1F2AD18700DD9A8F /* ImageChooseVC.xib in Resources */,
@@ -2852,9 +2909,11 @@
 				BD1280191F2AD18700DD9A8F /* region.json in Resources */,
 				BD12804A1F2AD18700DD9A8F /* RegionViewController.xib in Resources */,
 				BD12802E1F2AD18700DD9A8F /* 朋友圈@3x.png in Resources */,
+				BDB4D73B1F564EEA00798E1F /* PlanListOneCell.xib in Resources */,
 				BD12802A1F2AD18700DD9A8F /* 微信好友@3x.png in Resources */,
 				BD127FD81F2AD18700DD9A8F /* guideImage5.jpg in Resources */,
 				BD1280311F2AD18700DD9A8F /* SharePanelOneCell.xib in Resources */,
+				BD8EDB4F1F58EAD0003A9949 /* PlanRunWaterVC.xib in Resources */,
 				BD127FF31F2AD18700DD9A8F /* UpdatePasswordVC.xib in Resources */,
 				BDE0E1C51F46C9B100086E6D /* HZQDatePickerView.xib in Resources */,
 				BD127FF81F2AD18700DD9A8F /* AlipaySDK.bundle in Resources */,
@@ -2894,6 +2953,7 @@
 				BD1280241F2AD18700DD9A8F /* QQ好友@3x.png in Resources */,
 				BD7046EB1F4412C600DBC85E /* CurrentVersionVC.xib in Resources */,
 				BD2A24D21F3D86FE00B8E76B /* DWProvinceViewController.xib in Resources */,
+				BDC5BF161F56A2A800E1B1FA /* BankCardListOneCell.xib in Resources */,
 				BD127FE51F2AD18700DD9A8F /* HomePageVC.xib in Resources */,
 				BD127FEB1F2AD18700DD9A8F /* AboutUsVC.xib in Resources */,
 				BDC5176D1F2ADE5D00E1821E /* LaunchScreen.storyboard in Resources */,
@@ -2920,6 +2980,7 @@
 				BD127FDC1F2AD18700DD9A8F /* mqr.mp4 in Resources */,
 				BDC5176C1F2ADE5D00E1821E /* Assets.xcassets in Resources */,
 				BD1280261F2AD18700DD9A8F /* QQ空间@3x.png in Resources */,
+				BD8EDB541F58F39E003A9949 /* PlanDetailsVC.xib in Resources */,
 				BD32BD0E1F3BF46800EBC853 /* DebitCardDetailsVC.xib in Resources */,
 				BD1280521F2AD18700DD9A8F /* 密码3@2x.png in Resources */,
 				BD1280611F2AD18700DD9A8F /* dfb_bankt.sqlite in Resources */,
@@ -2928,11 +2989,13 @@
 				BD127FEF1F2AD18700DD9A8F /* MySettingVC.xib in Resources */,
 				BDE797C91F45887F005BBAE9 /* MakePlanDetailtsVC.xib in Resources */,
 				BD127FD41F2AD18700DD9A8F /* guideImage1.jpg in Resources */,
+				BD8EDB591F58F7C5003A9949 /* PlanDetailsOneCell.xib in Resources */,
 				BDB44A571F39501B009AA91F /* PopupVC.xib in Resources */,
 				BD127FD61F2AD18700DD9A8F /* guideImage3.jpg in Resources */,
 				BD127FD01F2AD18700DD9A8F /* PublicViewController.xib in Resources */,
 				BD1280291F2AD18700DD9A8F /* 微信好友@2x.png in Resources */,
 				BD1280331F2AD18700DD9A8F /* SharePanelVC.xib in Resources */,
+				BDC5BF111F56A28C00E1B1FA /* BankCardListVC.xib in Resources */,
 				BDFE0F4F1F4E71F3008AB7DF /* ArticleVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3064,12 +3127,14 @@
 				BD127FFD1F2AD18700DD9A8F /* base64.m in Sources */,
 				BD1280051F2AD18700DD9A8F /* DFBPickerView.m in Sources */,
 				BD127FAB1F2AD18700DD9A8F /* NSMutableDictionary+WHBlock.m in Sources */,
+				BD8EDB581F58F7C5003A9949 /* PlanDetailsOneCell.m in Sources */,
 				BD1280671F2AD18700DD9A8F /* DWAlertTool.m in Sources */,
 				BDE5204E1F452CE300E2CDA7 /* MessageModel.m in Sources */,
 				BD127FB31F2AD18700DD9A8F /* UIBarButtonItem+WHBadge.m in Sources */,
 				BD127FA91F2AD18700DD9A8F /* NSFileManager+WHExtension.m in Sources */,
 				BD1280181F2AD18700DD9A8F /* PickerView.m in Sources */,
 				BDBA1E461F4AB43600ED633B /* BillModel.m in Sources */,
+				BDB4D73A1F564EEA00798E1F /* PlanListOneCell.m in Sources */,
 				BDBA1E3A1F4A865900ED633B /* JQScanNative.m in Sources */,
 				BD127FC41F2AD18700DD9A8F /* RequestHeaderModel.m in Sources */,
 				BD5C28531F53EA1100D53678 /* SigningVC.m in Sources */,
@@ -3094,6 +3159,7 @@
 				BD96D5EC1F386E2900EE6CC5 /* RegisteredVC.m in Sources */,
 				BD12805D1F2AD18700DD9A8F /* ImageChooseVC.m in Sources */,
 				BD127FEE1F2AD18700DD9A8F /* MySettingVC.m in Sources */,
+				BDA978EF1F55624B006AD490 /* ChargeVC.m in Sources */,
 				BD127FBE1F2AD18700DD9A8F /* AddressModel.m in Sources */,
 				BD12801B1F2AD18700DD9A8F /* SDPhotoBrowser.m in Sources */,
 				BDAA45E31F4C03D8008C635C /* UILabel+Wonderful.m in Sources */,
@@ -3103,6 +3169,7 @@
 				BD2A24CD1F3D86FE00B8E76B /* DWBankViewController.m in Sources */,
 				BD1280541F2AD18700DD9A8F /* BricklayingCell.m in Sources */,
 				BD1280581F2AD18700DD9A8F /* GKImageCropOverlayView.m in Sources */,
+				BD8EDB531F58F39E003A9949 /* PlanDetailsVC.m in Sources */,
 				BD127FB61F2AD18700DD9A8F /* UIButton+WHCountDown.m in Sources */,
 				BD1280011F2AD18700DD9A8F /* NSDataEx.m in Sources */,
 				BD7995811F2B20B800FA0CBF /* TouchTool.m in Sources */,
@@ -3150,6 +3217,7 @@
 				BD127FC11F2AD18700DD9A8F /* BaseResponse.m in Sources */,
 				BD127FC01F2AD18700DD9A8F /* BaseRequest.m in Sources */,
 				BD1280201F2AD18700DD9A8F /* SGHelperTool.m in Sources */,
+				BDC5BF101F56A28C00E1B1FA /* BankCardListVC.m in Sources */,
 				BD961C7A1F4FB4C6003FECC2 /* CardPackageThreeCell.m in Sources */,
 				BD12803B1F2AD18700DD9A8F /* README.md in Sources */,
 				BD1280431F2AD18700DD9A8F /* ProgressView.m in Sources */,
@@ -3162,6 +3230,7 @@
 				BD8A27651F3B3D2D00204AB2 /* MessageVC.m in Sources */,
 				BD12805F1F2AD18700DD9A8F /* UIImage+DWImage.m in Sources */,
 				BD127FC81F2AD18700DD9A8F /* AppDelegate+Service.m in Sources */,
+				BDC5BF151F56A2A800E1B1FA /* BankCardListOneCell.m in Sources */,
 				BD2A24D31F3D86FE00B8E76B /* DWBankCell.m in Sources */,
 				BD1280091F2AD18700DD9A8F /* EWMViewController.m in Sources */,
 				BD127FCD1F2AD18700DD9A8F /* BaseWKWebviewVC.m in Sources */,
@@ -3177,6 +3246,7 @@
 				BD2A24CF1F3D86FE00B8E76B /* DWCityViewController.m in Sources */,
 				BD12803A1F2AD18700DD9A8F /* WYWebProgressLayer.m in Sources */,
 				BD1280221F2AD18700DD9A8F /* BaseSendTextView.m in Sources */,
+				BD8EDB4E1F58EAD0003A9949 /* PlanRunWaterVC.m in Sources */,
 				BD127FD21F2AD18700DD9A8F /* DHGuidePageHUD.m in Sources */,
 				BD127FB71F2AD18700DD9A8F /* UIButton+WHImagePosition.m in Sources */,
 				BD127FF21F2AD18700DD9A8F /* UpdatePasswordVC.m in Sources */,

@@ -35,20 +35,18 @@
     showHUD == YES ?  [SVProgressHUD showImage: [UIImage sd_animatedGIFWithData:data] status:@""] : nil;
     [SVProgressHUD setForegroundColor :[UIColor colorWithHexString:kDarkGrey]];
     [SVProgressHUD setFont:[UIFont systemFontOfSize:14.0*SizeScale]];
-    NSString * str = [actName substringWithRange:NSMakeRange(0, 3)];
-    NSString * ACTName = [str isEqualToString:@"act"] ? actName :[NSString stringWithFormat:@"%@%@",ACT_API,actName];
-    NSString *url = [NSString stringWithFormat:@"%@%@&sign=%@",kServerUrl,ACTName,sign];
+    NSString *url = [NSString stringWithFormat:@"%@%@%@&sign=%@",kServerUrl,ACT_API,actName,sign];
     YKAppClient*  manager = [YKAppClient sharedClient];
     _BaseVC.view.userInteractionEnabled = active;
     [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = active;
     if (method == HTTPSRequestTypeGET) {
-     return   [manager GET:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
+        return   [manager GET:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                 if (![responseObject[@"resultCode"]isEqualToString:@"1"]) {
-                   _BaseVC.view.userInteractionEnabled =YES;
-                     [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = YES;
-                     NSLog(@"错误码:--:%@\n错信息---:%@",responseObject[@"resultCode"],responseObject[@"msg"]);
-                 }
+            if (![responseObject[@"resultCode"]isEqualToString:@"1"]) {
+                _BaseVC.view.userInteractionEnabled =YES;
+                [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = YES;
+                NSLog(@"错误码:--:%@\n错信息---:%@",responseObject[@"resultCode"],responseObject[@"msg"]);
+            }
             [SVProgressHUD dismiss];
             //[[LoadWaitSingle shareManager] hideLoadWaitView];
             success(responseObject);
@@ -60,16 +58,15 @@
             NSString * errorStr =error.localizedDescription;
             [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
             if (![errorStr isEqualToString:@"已取消"]) {
-            if (errorStr.length>1) {
-            [SVProgressHUD showErrorWithStatus:  [error.localizedDescription   substringToIndex:error.localizedDescription.length-1]];
-            }else{
-                [SVProgressHUD showErrorWithStatus:@"网络连接失败"];
+                if (errorStr.length>1) {
+                    [SVProgressHUD showErrorWithStatus:  [error.localizedDescription   substringToIndex:error.localizedDescription.length-1]];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:@"网络连接失败"];
+                }
             }
-        }
             //[[LoadWaitSingle shareManager] hideLoadWaitView];
         }];
     }
-    
     return  nil;
 }
 
@@ -99,7 +96,7 @@
                 break;
             case AFNetworkReachabilityStatusReachableViaWWAN:
                 NSLog(@"蜂窝数据网");
-              //  networkReachabilityStatusReachableViaWWAN();
+                //  networkReachabilityStatusReachableViaWWAN();
                 break;
             case AFNetworkReachabilityStatusReachableViaWiFi:
                 NSLog(@"WiFi网络");
@@ -107,12 +104,10 @@
             default:
                 break;
         }
-        
     }] ;
 }
 void networkReachabilityStatusUnknown()
 {
-
     [DWAlertTool alertWithTitle:[NSString stringWithFormat:@"%@关闭蜂窝移动数据",appName] message:@"您可以在”设置“中为此应用程序打开蜂窝移动数据." OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
         NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if([[UIApplication sharedApplication] canOpenURL:url]) {
@@ -121,19 +116,18 @@ void networkReachabilityStatusUnknown()
         }
     } withCancel:^(UIAlertAction *cancelaction) {
     }];
-    
 }
 void networkReachabilityStatusReachableViaWWAN()
 {
-     [DWAlertTool showToast:@"蜂窝数据网"];
-//    [DWAlertTool alertWithTitle:@"“VRMAX”正在使用流量，确定要如此土豪吗？" message:@"建议开启WIFI后观看视频。" OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
-//        NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-//        if([[UIApplication sharedApplication] canOpenURL:url]) {
-//            NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
-//            [[UIApplication sharedApplication] openURL:url];
-//        }
-//    } withCancel:^(UIAlertAction *cancelaction) {
-//    }];
+    [DWAlertTool showToast:@"蜂窝数据网"];
+    //    [DWAlertTool alertWithTitle:@"“VRMAX”正在使用流量，确定要如此土豪吗？" message:@"建议开启WIFI后观看视频。" OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+    //        NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    //        if([[UIApplication sharedApplication] canOpenURL:url]) {
+    //            NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    //            [[UIApplication sharedApplication] openURL:url];
+    //        }
+    //    } withCancel:^(UIAlertAction *cancelaction) {
+    //    }];
 }
 ///上传图片
 -(void)UPImageToServer:(NSArray*)imageArr toKb:(NSInteger)kb success:(SuccessImageArr)success faild:(FaildCallback)faild{
@@ -194,7 +188,28 @@ void networkReachabilityStatusReachableViaWWAN()
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [callPhoneWebview loadRequest:request];
 }
-
+///获取城市列表
++ (nullable NSMutableArray *)getCityData
+{
+    NSArray *jsonArray = [[NSArray alloc]init];
+    NSData *fileData = [[NSData alloc]init];
+    NSUserDefaults *UD = [NSUserDefaults standardUserDefaults];
+    if ([UD objectForKey:@"city"] == nil) {
+        NSString *path;
+        path = [[NSBundle mainBundle] pathForResource:@"region" ofType:@"json"];
+        fileData = [NSData dataWithContentsOfFile:path];
+        [UD setObject:fileData forKey:@"city"];
+        [UD synchronize];
+    }else {
+        fileData = [UD objectForKey:@"city"];
+    }
+    NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
+    jsonArray = [NSJSONSerialization JSONObjectWithData:fileData options:NSJSONReadingMutableLeaves error:nil];
+    for (NSDictionary *dict in jsonArray) {
+        [array addObject:dict];
+    }
+    return array;
+}
 
 
 @end

@@ -238,7 +238,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="BankImageView" destination="cyu-US-SGt" id="wbc-6w-Mbs"/>
+                <outlet property="bank_name" destination="VWV-JD-t2i" id="ljg-k7-4xJ"/>
                 <outlet property="bottomView" destination="hp4-yg-cT6" id="db5-eL-VsK"/>
+                <outlet property="credit_line" destination="6Gx-zg-laP" id="UFH-Si-mSz"/>
+                <outlet property="repay_date" destination="zPd-31-4fc" id="ct4-y1-DTU"/>
+                <outlet property="state_date" destination="fnY-WK-j1E" id="v4z-4z-Bav"/>
             </connections>
             <point key="canvasLocation" x="174.5" y="141"/>
         </tableViewCell>

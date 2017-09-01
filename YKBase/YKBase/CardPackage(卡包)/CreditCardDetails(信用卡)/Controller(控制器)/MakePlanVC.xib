@@ -13,11 +13,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MakePlanVC">
             <connections>
+                <outlet property="BankImageView" destination="PCU-ST-BOm" id="wld-lt-kf8"/>
                 <outlet property="FourView" destination="HMN-pe-Jso" id="kVc-KT-KKY"/>
                 <outlet property="ThreeView" destination="XOE-i0-rPy" id="G9T-IE-zOI"/>
                 <outlet property="TwoView" destination="fto-DO-Yy3" id="HPc-GV-GyK"/>
+                <outlet property="bank_name" destination="h5K-K6-eSs" id="cXZ-AM-cfR"/>
+                <outlet property="begin_time" destination="cG0-0h-qpH" id="QBu-Gh-8ZS"/>
+                <outlet property="bond" destination="gsg-MS-Zsd" id="H7w-x1-yhS"/>
                 <outlet property="bottomView" destination="WPb-uf-kQc" id="zLY-K1-G9y"/>
+                <outlet property="credit_line" destination="xrv-E5-HKU" id="sV1-sr-o25"/>
+                <outlet property="end_time" destination="Fko-CI-3aB" id="8b2-Gp-Vph"/>
+                <outlet property="fee" destination="2rY-Uh-2xb" id="Rx0-2M-825"/>
                 <outlet property="oneView" destination="MfN-oc-5b9" id="vP9-uJ-7XZ"/>
+                <outlet property="repay_date" destination="t5y-CQ-AOb" id="Lzv-il-zNQ"/>
+                <outlet property="state_date" destination="aw1-Ya-yzv" id="J4U-qg-m1e"/>
+                <outlet property="total_money" destination="qgZ-oY-jba" id="n6I-uu-SHi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -211,6 +221,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-1" id="TTv-Yk-9mT"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -242,6 +255,9 @@
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                            <connections>
+                                                                <outlet property="delegate" destination="-1" id="0jv-ET-pZl"/>
+                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -272,13 +288,13 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="157.5" height="40.5"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="计划开始时间" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cG0-0h-qpH" customClass="DarkGreyTF">
-                                                            <rect key="frame" x="5" y="0.0" width="127.5" height="40"/>
+                                                            <rect key="frame" x="5" y="0.0" width="122.5" height="40"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GGG-uF-bxY">
-                                                            <rect key="frame" x="137.5" y="16" width="15" height="8"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="向下箭头" translatesAutoresizingMaskIntoConstraints="NO" id="GGG-uF-bxY">
+                                                            <rect key="frame" x="132.5" y="16" width="15" height="8"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="8" id="DbJ-2R-3SF"/>
                                                                 <constraint firstAttribute="width" constant="15" id="iFw-NW-zCV"/>
@@ -286,7 +302,6 @@
                                                         </imageView>
                                                         <button opaque="NO" tag="301" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIp-hQ-LqZ">
                                                             <rect key="frame" x="0.0" y="0.0" width="158" height="40.5"/>
-                                                            <state key="normal" title="Button"/>
                                                             <connections>
                                                                 <action selector="timeAction:" destination="-1" eventType="touchUpInside" id="mO6-iL-7F6"/>
                                                             </connections>
@@ -298,7 +313,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="zIp-hQ-LqZ" secondAttribute="trailing" id="Bqb-HO-xma"/>
                                                         <constraint firstAttribute="bottom" secondItem="zIp-hQ-LqZ" secondAttribute="bottom" id="D2o-vD-pUA"/>
                                                         <constraint firstItem="zIp-hQ-LqZ" firstAttribute="leading" secondItem="XOE-i0-rPy" secondAttribute="leading" id="Oiy-oa-aej"/>
-                                                        <constraint firstAttribute="trailing" secondItem="GGG-uF-bxY" secondAttribute="trailing" constant="5" id="TkE-wV-8yo"/>
+                                                        <constraint firstAttribute="trailing" secondItem="GGG-uF-bxY" secondAttribute="trailing" constant="10" id="TkE-wV-8yo"/>
                                                         <constraint firstItem="zIp-hQ-LqZ" firstAttribute="top" secondItem="XOE-i0-rPy" secondAttribute="top" id="Uqb-oJ-Lv1"/>
                                                         <constraint firstItem="GGG-uF-bxY" firstAttribute="centerY" secondItem="XOE-i0-rPy" secondAttribute="centerY" id="X29-1k-miB"/>
                                                         <constraint firstAttribute="bottom" secondItem="cG0-0h-qpH" secondAttribute="bottom" id="hbx-zk-h8i"/>
@@ -310,13 +325,13 @@
                                                     <rect key="frame" x="167.5" y="0.0" width="157.5" height="40.5"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="计划结束时间" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fko-CI-3aB" customClass="DarkGreyTF">
-                                                            <rect key="frame" x="5" y="0.0" width="132" height="40.5"/>
+                                                            <rect key="frame" x="5" y="0.0" width="122.5" height="40.5"/>
                                                             <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="93c-2R-ski">
-                                                            <rect key="frame" x="142" y="16" width="15" height="8"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="向下箭头" translatesAutoresizingMaskIntoConstraints="NO" id="93c-2R-ski">
+                                                            <rect key="frame" x="132.5" y="16" width="15" height="8"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="8" id="Bie-LL-3Nq"/>
                                                                 <constraint firstAttribute="width" constant="15" id="t7h-J6-TVx"/>
@@ -324,7 +339,6 @@
                                                         </imageView>
                                                         <button opaque="NO" tag="302" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9it-UH-l44">
                                                             <rect key="frame" x="0.0" y="0.0" width="157" height="40.5"/>
-                                                            <state key="normal" title="Button"/>
                                                             <connections>
                                                                 <action selector="timeAction:" destination="-1" eventType="touchUpInside" id="ICT-ad-CZ2"/>
                                                             </connections>
@@ -340,7 +354,7 @@
                                                         <constraint firstItem="9it-UH-l44" firstAttribute="leading" secondItem="HMN-pe-Jso" secondAttribute="leading" id="h4J-JZ-kmK"/>
                                                         <constraint firstItem="Fko-CI-3aB" firstAttribute="top" secondItem="HMN-pe-Jso" secondAttribute="top" id="lru-HF-YI7"/>
                                                         <constraint firstAttribute="bottom" secondItem="Fko-CI-3aB" secondAttribute="bottom" id="rX6-Wd-RQg"/>
-                                                        <constraint firstAttribute="trailing" secondItem="93c-2R-ski" secondAttribute="trailing" constant="0.5" id="uYb-YG-eGx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="93c-2R-ski" secondAttribute="trailing" constant="10" id="uYb-YG-eGx"/>
                                                         <constraint firstItem="9it-UH-l44" firstAttribute="top" secondItem="HMN-pe-Jso" secondAttribute="top" id="zEv-17-a59"/>
                                                     </constraints>
                                                 </view>
@@ -450,4 +464,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="向下箭头" width="14" height="8"/>
+    </resources>
 </document>

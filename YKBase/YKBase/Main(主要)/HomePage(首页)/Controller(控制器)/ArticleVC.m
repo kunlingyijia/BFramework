@@ -78,7 +78,6 @@
 }
 #pragma mark - 商品网络请求
 -(void)requestAction{
-    
     __weak typeof(self) weakSelf = self;
         NSURLSessionDataTask * task =  [HTTPTool  requestHome_articleInfoWithParm:@{@"article_id":self.article_id} active:YES success:^(BaseResponse * _Nullable baseRes) {
             if (baseRes.resultCode==1) {
@@ -89,12 +88,10 @@
                 weakSelf.title =model.title;
             }
         } faild:^(NSError * _Nullable error) {
-            
         }];
         if (task) {
             [self.sessionArray addObject:task];
         }
-    
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [[LoadWaitSingle shareManager] hideLoadWaitView];
@@ -127,7 +124,6 @@
      [webView stringByEvaluatingJavaScriptFromString:js];
      [webView stringByEvaluatingJavaScriptFromString:@"ResizeImages();"];
      */
-    
     //这里是js，主要目的实现对url的获取
     static  NSString * const jsGetImages =
     @"function getImages(){\
@@ -138,7 +134,6 @@
     };\
     return imgScr;\
     };";
-    
     [webView stringByEvaluatingJavaScriptFromString:jsGetImages];//注入js方法
     NSString *urlResurlt = [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
     self.dataArray = [NSMutableArray arrayWithArray:[urlResurlt componentsSeparatedByString:@"+"]];
@@ -157,11 +152,7 @@
      }\
      }"];
     [webView stringByEvaluatingJavaScriptFromString:@"registerImageClickAction();"];
-    
-    
-    
 }
-
 
 ////在这个方法中捕获到图片的点击事件和被点击图片的url
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {    
@@ -171,9 +162,7 @@
         NSLog(@"%@",path);
         path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSLog(@"%@",path);
-        
         int index =0;
-        
         for (int i=0; i<self.dataArray.count; i++) {
             if ([path isEqualToString:self.dataArray[i]]) {
                 index =i;
@@ -191,7 +180,6 @@
             //[cycleScrollView ImageContentOffset:CGPointMake(index*Width,0)];
             
         };
-        
         [photoVC setCompletedBlock:^(void){
             //        [_coverView removeFromSuperview];
             //        _coverView = nil;

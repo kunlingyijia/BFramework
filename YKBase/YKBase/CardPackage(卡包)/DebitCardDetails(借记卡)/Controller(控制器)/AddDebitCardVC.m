@@ -9,7 +9,7 @@
 #import "AddDebitCardVC.h"
 #import "DWBankViewController.h"
 #import "Bank_Region_Bank_Branch.h"
-#import "SigningVC.h"
+#import "BankCardListVC.h"
 @interface AddDebitCardVC ()
 @property(nonatomic,strong)NSString * bank_card_photoUrl;
 @property(nonatomic,strong)NSString * bank_card_back_photoUrl;
@@ -21,15 +21,6 @@
     [self SET_UI];
     //数据
     [self  SET_DATA];
-    //创建观察者
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(Bank_Region_Bank_BranchAction:) name:@"Bank_Region_Bank_Branch" object:nil];
-    
-}
-#pragma mark - 创建观察者返回数据
--(void)Bank_Region_Bank_BranchAction:(NSNotification*)sender{
-    NSDictionary * dic = [sender.userInfo objectForKey:@"Bank_Region_Bank_Branch"];
-    Bank_Region_Bank_BranchModel * model = [Bank_Region_Bank_BranchModel yy_modelWithJSON:dic];
-    self.bank_name.text = model.bank_name;
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
@@ -38,9 +29,8 @@
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
-    
-    
-    
+    YKHTTPSession * helper = [YKHTTPSession shareSession];
+    self.account_name.text = helper.userinfo.real_name;
 }
 #pragma mark - 选择图片
 - (IBAction)bankAction:(UIButton *)sender {
@@ -77,47 +67,41 @@
     };
     [self presentViewController:VC animated:NO completion:nil];
 }
-
 #pragma mark - 选择银行卡
 - (IBAction)BankNameAction:(UIButton *)sender {
     [self.view endEditing:YES];
-    //Push 跳转
-    //    DWBankViewController * VC = [[DWBankViewController alloc]initWithNibName:@"DWBankViewController" bundle:nil];
-    //    [self.navigationController  pushViewController:VC animated:YES];
+    //跳转
+    BankCardListVC * VC =  GetVC(BankCardListVC);
+    __weak typeof(self) weakSelf = self;
+    VC.BankCardListVCBlock =^(NSString * bankName){
+        weakSelf.bank_name.text = bankName;
+    };
+    PushVC(VC);
     
-}
-#pragma mark - 发送验证码
-- (IBAction)VerificationCodeAction:(UIButton *)sender {
-    [self.view endEditing:YES];
-    if ([RegularTool checkTelNumber:self.bind_mobile.text]) {
-        [DWAlertTool VerificationCodeBtn:sender];
-        [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.bind_mobile.text,@"type":@"1"} active:YES success:^(BaseResponse * _Nullable baseRes) {
-        } faild:^(NSError * _Nullable error) {
-        }];
-    }else{
-        [DWAlertTool showToast:@"手机号码输入有误"];
-    }
 }
 #pragma mark - 提交
 - (IBAction)submitBtn:(SubmitBtn *)sender {
-     //跳转
-    SigningVC * VC =  GetVC(SigningVC);
-    PushVC(VC);
+    self.AddDebitCardVCBlock();
+    //返回
+    [self.navigationController popViewControllerAnimated:YES] ;
+    
+    
 //    if ([self IF]) {
 //        CardModel *model =[CardModel new];
-//        model.bank_card_photo=_bank_card_photoUrl ;
-//        model.bank_card_back_photo=_bank_card_back_photoUrl ;
+//        model.bank_card_photo = _bank_card_photoUrl ;
+//        model.bank_card_back_photo = _bank_card_back_photoUrl ;
 //        model. account_name = self.account_name.text;
-//        model.bank_card_no= self.bank_card_no.text;
+//        model.bank_card_no = self.bank_card_no.text;
 //        model.bank_name = self.bank_name.text;
-//        model.bind_mobile= self.bind_mobile.text ;
-//        model.verify_code = self.verify_code.text;
+//        model.bind_mobile = self.bind_mobile.text ;
 //        __weak typeof(self) weakSelf = self;
 //        NSURLSessionDataTask * task =  [HTTPTool requestBankAddDebitCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
 //            if (baseRes.resultCode==1) {
+//                [DWAlertTool showToast:@"借记卡添加成功"];
 //                //请求个人信息
 //                [weakSelf requestUserInfo];
 //            }
+//            
 //        } faild:^(NSError * _Nullable error) {
 //        }];
 //        if (task) {
@@ -133,6 +117,7 @@
             // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 weakSelf.AddDebitCardVCBlock();
+                
                 //返回
                 [weakSelf.navigationController popViewControllerAnimated:YES] ;
             });
@@ -167,14 +152,12 @@
         [DWAlertTool showToast:@"请选择发卡银行"];
         return NO;
     }
+    
     if (![RegularTool checkTelNumber:self.bind_mobile.text]) {
         [DWAlertTool showToast:@"手机号码输入有误"];
         return NO;
     }
-    if (self.verify_code.text.length==0) {
-        [DWAlertTool showToast:@"请输入验证码"];
-        return NO;
-    }
+    
     return Y;
 }
 #pragma mark - dealloc

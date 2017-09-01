@@ -371,7 +371,7 @@
 }
 -(void)SetUpSize {
     self. textColor = [UIColor colorWithHexString:kLightGrey];
-    self.tintColor = [UIColor redColor];
+//    self.tintColor = [UIColor redColor];
     self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
 }
 
@@ -406,7 +406,7 @@
 -(void)SetUpSize {
     self. textColor = [UIColor colorWithHexString:kDarkGrey];
     self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
-    self.tintColor = [UIColor redColor];
+//    self.tintColor = [UIColor redColor];
 }
 @end
 
@@ -439,7 +439,7 @@
 -(void)SetUpSize{
     self. textColor = [UIColor colorWithHexString:kLightGrey];
     self.font = [UIFont systemFontOfSize:self.font.pointSize* SizeScale];
-    self.tintColor = [UIColor redColor];
+//    self.tintColor = [UIColor redColor];
 }
 @end
 @implementation LineView

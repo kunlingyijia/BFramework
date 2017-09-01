@@ -54,7 +54,6 @@
                 [weakSelf  requestUserInfo];
             }
         } faild:^(NSError * _Nullable error) {
-            
         }];
         if (task) {
             [self.sessionArray addObject:task];

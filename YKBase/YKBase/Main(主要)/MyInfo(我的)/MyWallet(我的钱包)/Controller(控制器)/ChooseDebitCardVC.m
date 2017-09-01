@@ -54,9 +54,6 @@
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
-    [self.dataArray addObject:@"1"];
-    [self.dataArray addObject:@"1"];
-    [self.dataArray addObject:@"1"];
     [self requestAction];
     //上拉刷新下拉加载
     [self Refresh];
@@ -64,7 +61,7 @@
 -(void)Refresh{
     //下拉刷新
     __weak typeof(self) weakself = self;
-    [ThirdPartyTool MJRefreshView:self.tableView Header:YES Footer:YES HeaderBlock:^{
+    [ThirdPartyTool MJRefreshView:self.tableView Header:YES Footer:NO HeaderBlock:^{
         weakself.pageIndex =1 ;
         [weakself requestAction];
     } FooterBlock:^{
@@ -75,8 +72,32 @@
 }
 #pragma mark - 网络请求
 -(void)requestAction{
-    
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask * task =  [HTTPTool  requestBankCardListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10",@"type":@"1"} active:YES success :^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            if (weakSelf.pageIndex == 1) {
+                [weakSelf.dataArray removeAllObjects];
+            }
+            for (NSDictionary * dic in baseRes.data) {
+                CardModel * model = [CardModel yy_modelWithJSON:dic];
+                model.selected = [weakSelf.bank_id isEqualToString:model.bank_id] ? YES : NO;
+                [weakSelf.dataArray addObject:model];
+            }
+            //刷新
+            [weakSelf.tableView reloadData];
+        }else{
+            weakSelf.pageIndex > 1 ? weakSelf.pageIndex -- : weakSelf.pageIndex;
+        }
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+    } faild:^(NSError * _Nullable error) {
+        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
 }
+
+
 #pragma tableView 代理方法
 //tab分区个数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -92,13 +113,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //分割线
     tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    __weak typeof(self) weakSelf = self;
     if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
         CardPackageTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageTwoCell" forIndexPath:indexPath];
         //cell 赋值
-        //cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+        cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
         // cell 其他配置
         return cell;
     }
@@ -106,7 +126,22 @@
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    CardModel*  model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+    self.bank_id = model.bank_id;
+    for (CardModel*  model in self.dataArray) {
+        model.selected = [self.bank_id isEqualToString:model.bank_id] ? YES : NO;
+    }
+    self.ChooseDebitCardVCBlock(model.bank_name,model.bank_card_no,model.bank_id);
+    [self.tableView reloadData];
+    self.view.userInteractionEnabled = NO;
+    // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //返回
+        [weakSelf.navigationController popViewControllerAnimated:YES] ;
+    });
 }
+
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Width*0.35;

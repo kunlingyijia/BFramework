@@ -27,10 +27,10 @@
 -(void)setType:(NSString *)type{
     if (!type) return;
     _type = type;
-    if ([type isEqualToString:@"1"]) {
+    if ([type isEqualToString:@"2"]) {
         _imageV.image = IMG_Name(@"添加信用卡");
     }
-    if ([type isEqualToString:@"2"]) {
+    if ([type isEqualToString:@"1"]) {
         _imageV.image = IMG_Name(@"添加借记卡");
     }
 

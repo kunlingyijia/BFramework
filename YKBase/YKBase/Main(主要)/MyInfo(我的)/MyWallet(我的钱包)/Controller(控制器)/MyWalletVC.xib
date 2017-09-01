@@ -150,7 +150,6 @@
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHi-JO-GRA">
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="42"/>
-                                            <state key="normal" title="Button"/>
                                             <connections>
                                                 <action selector="ChooseDebitCardAction:" destination="-1" eventType="touchUpInside" id="V7y-ls-vyV"/>
                                             </connections>

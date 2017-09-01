@@ -10,6 +10,8 @@
 #import "DWBankViewController.h"
 #import "Bank_Region_Bank_Branch.h"
 #import "CertificationModel.h"
+#import "BankCardListVC.h"
+#import "RegionViewController.h"
 @interface CertificationVC ()
 @property(nonatomic,strong) NSString *id_card_photoUrl;
 @property(nonatomic,strong)NSString * id_card_back_photoUrl;
@@ -37,6 +39,7 @@
 -(void)SET_UI{
     [self showBackBtn];
     self.title = @"实名认证";
+    self.address.placeholder = @"请输入详细地址(包括省市区/县)";
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -54,6 +57,7 @@
                 weakSelf.bank_card_no.text = model.bank_card_no;
                 weakSelf.bank_name.text = model.bank_name;
                 weakSelf.bind_mobile.text = model.bind_mobile;
+                weakSelf.address.text = model.address;
                 [_id_card_photo SD_WebimageUrlStr:model.id_card_photo placeholderImage:nil];
                 _id_card_photoUrl =model.id_card_photo;
                 [_id_card_back_photo SD_WebimageUrlStr:model.id_card_back_photo placeholderImage:nil];
@@ -122,23 +126,33 @@
 #pragma mark - 选择银行卡
 - (IBAction)BankNameAction:(UIButton *)sender {
     [self.view endEditing:YES];
-    //Push 跳转
-    //    DWBankViewController * VC = [[DWBankViewController alloc]initWithNibName:@"DWBankViewController" bundle:nil];
-    //    [self.navigationController  pushViewController:VC animated:YES];
-    
+    //跳转
+    BankCardListVC * VC =  GetVC(BankCardListVC);
+    __weak typeof(self) weakSelf = self;
+    VC.BankCardListVCBlock =^(NSString * bankName){
+        weakSelf.bank_name.text = bankName;
+    };
+    PushVC(VC);
 }
-#pragma mark - 发送验证码
-- (IBAction)VerificationCodeAction:(UIButton *)sender {
+#pragma mark - 选择地区
+- (IBAction)ChooseZoneAction:(UIButton *)sender {
     [self.view endEditing:YES];
-    if ([RegularTool checkTelNumber:self.bind_mobile.text]) {
-        [DWAlertTool VerificationCodeBtn:sender];
-        [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.bind_mobile.text,@"type":@"1"} active:YES success:^(BaseResponse * _Nullable baseRes) {
-        } faild:^(NSError * _Nullable error) {
-        }];
-    }else{
-        [DWAlertTool showToast:@"手机号码输入有误"];
-    }
+    //跳转
+    RegionViewController * VC =  GetVC(RegionViewController);
+    VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.1];
+    [VC ReqionReturn:^(NSDictionary *reqionDic) {
+        NSLog(@"---------------------%@",reqionDic);
+        //        [self.zone setTitle:reqionDic[@"name"] forState:(UIControlStateNormal)];
+        //        self.MCModel.zone =reqionDic[@"name"];
+        //        self.MCModel. province_id = reqionDic[@"province_id"];
+        //        self.MCModel.city_id = reqionDic[@"city_id"];
+        //        self.MCModel.region_id = reqionDic[@"region_id"];
+        
+    }];
+    PresentVC(VC)
 }
+
+
 #pragma mark - 提交
 - (IBAction)submitBtn:(SubmitBtn *)sender {
     if ([self IF]) {
@@ -148,7 +162,7 @@
         model.bank_card_no= self.bank_card_no.text;
         model.bank_name = self.bank_name.text;
         model.bind_mobile= self.bind_mobile.text ;
-        model.verify_code = self.verify_code.text;
+        model.address = self.address.text;
         model.id_card_photo=_id_card_photoUrl ;
         model.id_card_back_photo=_id_card_back_photoUrl ;
         model.hand_id_card_photo=_hand_id_card_photoUrl ;
@@ -209,8 +223,8 @@
         [DWAlertTool showToast:@"手机号码输入有误"];
         return NO;
     }
-    if (self.verify_code.text.length==0) {
-        [DWAlertTool showToast:@"请输入验证码"];
+    if (self.address.text.length==0) {
+        [DWAlertTool showToast:@"请输入详细地址"];
         return NO;
     }
     if (self.id_card_photoUrl.length==0) {

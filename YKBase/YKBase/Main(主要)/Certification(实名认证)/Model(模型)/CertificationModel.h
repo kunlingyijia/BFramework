@@ -34,6 +34,12 @@
 @property (nonatomic, strong) NSString  *remark ;
 ///认证id
 @property (nonatomic, strong) NSString  *certify_id ;
+///详细地址
+@property (nonatomic, strong) NSString  *address ;
+
+
+
+
 
 
 

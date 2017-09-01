@@ -17,6 +17,7 @@
 #import "AddDebitCardVC.h"
 #import "MyWalletVC.h"
 #import "TopUpVC.h"
+#import "ChargeVC.h"
 @interface DWTabBarController ()<LBTabBarDelegate>
 
 @end
@@ -91,6 +92,8 @@
 {
     PopupVC* VC = GetVC(PopupVC);
     VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    __weak typeof(self) weakSelf = self;
+
     VC.PopupVCBlock = ^(NSInteger tag){
         // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -105,6 +108,8 @@
                     AddDebitCard * VC =  GetVC(AddDebitCard);
                     VC.AddDebitCardVCBlock = ^(){
                         
+                        [YKNotification postNotificationName:@"添加银行卡" object:nil userInfo:nil];
+                        [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 1;
                     };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;
@@ -114,7 +119,12 @@
                     //新增借记卡
                     AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
                     VC.AddDebitCardVCBlock = ^(){
+                         [YKNotification postNotificationName:@"添加银行卡" object:nil userInfo:nil];
+                         [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 1;
                         
+
+
+                       
                     };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;
@@ -122,7 +132,7 @@
                 case 3:
                 {
                     //快速充值
-                    TopUpVC * VC =  GetVC(TopUpVC);
+                    ChargeVC * VC =  GetVC(ChargeVC);
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;
                 }

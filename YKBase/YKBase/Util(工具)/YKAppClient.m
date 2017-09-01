@@ -7,8 +7,7 @@
 //
 
 #import "YKAppClient.h"
-static NSString * const APIBaseURLString = @"xxxxx";
-
+static NSString * const APIBaseURLString = @"http://www.baidu.com";
 @implementation YKAppClient
 
 + (instancetype)sharedClient
@@ -16,9 +15,7 @@ static NSString * const APIBaseURLString = @"xxxxx";
     static YKAppClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
         _sharedClient = [[YKAppClient alloc] initWithBaseURL:[NSURL URLWithString:APIBaseURLString]];
-        
     });
     
     return _sharedClient;
@@ -27,12 +24,10 @@ static NSString * const APIBaseURLString = @"xxxxx";
 #pragma mark - 重写initWithBaseURL
 /**
  *
- *
  *  @param url baseUrl
  *
  *  @return 通过重写夫类的initWithBaseURL方法,返回网络请求类的实例
  */
-
 -(instancetype)initWithBaseURL:(NSURL *)url
 {
     if (self = [super initWithBaseURL:url]) {
@@ -62,7 +57,6 @@ static NSString * const APIBaseURLString = @"xxxxx";
         NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
         //设备类型
         NSString * phoneModel =[[UIDevice currentDevice] model];
-        //
         NSString *appVersion =    [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         NSString *deviceNo = [[UIDevice currentDevice].identifierForVendor UUIDString];
         // 设置超时时间
@@ -101,8 +95,6 @@ static NSString * const APIBaseURLString = @"xxxxx";
         [self.requestSerializer
          setValue:phoneModel
          forHTTPHeaderField:@"phoneModel"];
-
-             
     }
     
     return self;

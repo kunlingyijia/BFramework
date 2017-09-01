@@ -11,6 +11,7 @@
 #import "MyWalletVC.h"
 #import "MessageVC.h"
 #import "BillVC.h"
+#import "RegionViewController.h"
 @interface MyInfoVC ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -90,10 +91,16 @@
         {
             ///是否实名认证
             if ([HTTPTool isCertification]) {
-                return;
+                return ;
             }
             //我的钱包
             MyWalletVC * VC = GetVC(MyWalletVC);
+            VC.MyWalletVCBlock = ^(){
+                //我的账单
+                BillVC * VC =  GetVC(BillVC);
+                [VC showBackBtn];
+                PushVC(VC);
+            };
             PushVC(VC)
             break;
         }
@@ -101,30 +108,51 @@
         {
             ///是否实名认证
             if ([HTTPTool isCertification]) {
-                return;
+                return ;
             }
             //我的账单
             BillVC * VC =  GetVC(BillVC);
             [VC showBackBtn];
             PushVC(VC);
-            break;
+            break ;
         }
         case 103:
         {
             ///是否实名认证
             if ([HTTPTool isCertification]) {
-                return;
+                return ;
             }
             break;
         }
         case 104:
         {
-            //我的保单
-            [DWAlertTool showToast:@"开发中,敬请期待..."];
-            ShareModel *model =[ShareModel new];
-            model.title = @"韩一帆❤️魏威 单身狗们,出来吃狗粮了";
-            model.text = @"韩一帆❤️魏威 单身狗们,出来吃狗粮了";
-            [ThirdPartyTool UShareType:ShareTypeText LayoutType:LayoutType_Draw ShareModel:model];
+            
+            
+            
+            [DWAlertTool showToast:@"敬请期待..."];
+//            NSMutableArray * marr =[@[@"1",@"2",@"3",@"4"]mutableCopy];
+//            NSMutableArray * AfterMArray = [NSMutableArray arrayWithArray:marr];
+//            //插入数据到第二位
+//            [AfterMArray insertObject:@"3" atIndex:0];
+//            //去重
+//            NSMutableArray *listAry = [[NSMutableArray alloc]init];
+//            for (NSString *str in AfterMArray) {
+//                if (![listAry containsObject:str]) {
+//                    [listAry addObject:str];
+//                }
+//            }
+//            [YKDataTool saveUserData:[NSArray arrayWithArray:listAry] forKey:@"信用卡信息"];
+//            NSArray * arr =[YKDataTool readUserDataForKey:@"信用卡信息"];
+//            NSMutableArray * Marr =    [NSMutableArray arrayWithArray:arr];
+//            for (int i=0; i<Marr.count; i++) {
+//                NSLog(@"Marr----%@",Marr[i]);
+//
+//            }
+            
+            //ShareModel *model =[ShareModel new];
+            //model.title = @"韩一帆❤️魏威 单身狗们,出来吃狗粮了";
+            //model.text = @"韩一帆❤️魏威 单身狗们,出来吃狗粮了";
+            //[ThirdPartyTool UShareType:ShareTypeText LayoutType:LayoutType_Draw ShareModel:model];
             break;
         }
         case 105:
@@ -145,7 +173,7 @@
 }
 //只要拖拽就会触发(scrollView 的偏移量发生改变)
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    self.view.backgroundColor = [UIColor colorWithHexString:scrollView.contentOffset.y>0?kViewBackgroundColor:kBlueColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:scrollView.contentOffset.y> 0 ? kViewBackgroundColor:kBlueColor];
 }
 #pragma mark - dealloc
 - (void)dealloc

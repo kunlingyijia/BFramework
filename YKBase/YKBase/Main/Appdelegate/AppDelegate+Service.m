@@ -26,9 +26,6 @@
     if ([HTTPTool isLogin]) {
         return;
     }
-//    [DWAlertTool showToast:@"请先登录"];
-//    LoginVC * VC=  GetVC(LoginVC)
-//    [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES];
 }
 //#pragma mark -  设置别名
 //-(void)SetUpAlias:(NSNotification*)sender{

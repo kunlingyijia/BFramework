@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIView *OneView;
 @property (weak, nonatomic) IBOutlet UIView *TwoView;
+///银行卡id
+@property (nonatomic, strong) NSString  *bank_id ;
 @end
 
 @implementation MyWalletVC
@@ -44,25 +46,42 @@
     [self.view endEditing:YES];
     //跳转
     ChooseDebitCardVC * VC =  GetVC(ChooseDebitCardVC);
+    VC.bank_id = self.bank_id;
+    __weak typeof(self) weakSelf = self;
+    VC.ChooseDebitCardVCBlock = ^(NSString * bankName,NSString * bank_card_no,NSString  *bank_id){
+        weakSelf.bank_id = bank_id;
+        if(bank_card_no.length>=4){
+            bank_card_no =
+            [bank_card_no substringFromIndex:bank_card_no.length-4];
+        }else{
+            bank_card_no =
+            bank_card_no;
+        }
+          weakSelf.bankName.text  = [NSString stringWithFormat:@"%@(%@)",bankName,bank_card_no];
+      
+        
+        
+    };
     PushVC(VC);
 }
 #pragma mark - 确认支付
 - (IBAction)BtnAction:(SubmitBtn *)sender {
 
     if ([self IF]) {
-//        Userinfo *model =[Userinfo new];
-//        model.money = self.money.text;
-//        __weak typeof(self) weakSelf = self;
-//        NSURLSessionDataTask * task =  [HTTPTool requestWithdrawWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
-//            if (baseRes.resultCode==1) {
-//                [weakSelf  requestUserInfo];
-//            }
-//        } faild:^(NSError * _Nullable error) {
-//            
-//        }];
-//        if (task) {
-//            [self.sessionArray addObject:task];
-//        }
+        Userinfo *model =[Userinfo new];
+        model.money = self.money.text;
+        model.bank_id = self.bank_id;
+        __weak typeof(self) weakSelf = self;
+        NSURLSessionDataTask * task =  [HTTPTool requestWithdrawWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+            if (baseRes.resultCode==1) {
+                [weakSelf  requestUserInfo];
+            }
+        } faild:^(NSError * _Nullable error) {
+            
+        }];
+        if (task) {
+            [self.sessionArray addObject:task];
+        }
     }
 }
 #pragma mark - 请求个人信息
@@ -74,6 +93,8 @@
             YKHTTPSession * helper = [YKHTTPSession shareSession];
             weakSelf.amount.text =helper.userinfo.amount;
             weakSelf.frozen_amount.text = helper.userinfo.frozen_amount;
+            [weakSelf.navigationController popViewControllerAnimated:NO];
+            weakSelf.MyWalletVCBlock();
         }
     } faild:^(NSError * _Nullable error) {
     }];

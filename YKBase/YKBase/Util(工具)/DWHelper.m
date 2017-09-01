@@ -50,7 +50,7 @@
     AFSecurityPolicy *securityPolicy = [[AFSecurityPolicy alloc] init];
     [securityPolicy setAllowInvalidCertificates:YES];
     
-  AFHTTPSessionManager*  manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager*  manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html",@"application/x-www-form-urlencoded", nil];
     // 设置超时时间
     [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
@@ -91,7 +91,7 @@
      forHTTPHeaderField:@"phoneModel"];
     // manager.requestSerializer = [AFJSONRequestSerializer serializer];
     if (method == GET) {
-  [manager GET:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
+        [manager GET:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if([responseObject[@"resultCode"]isEqualToString:@"14"]) {
@@ -104,10 +104,10 @@
                     [YKDataTool moveLoginToken];
                     [YKDataTool moveLoginKey];
                     
-//                    LoginController * LoginVC = [[LoginController alloc]initWithNibName:@"LoginController" bundle:nil];
-//                    [LoginVC LoginRefreshAction:^{
-//                    }];
-//                    [VC.navigationController  pushViewController:LoginVC animated:YES];
+                    //                    LoginController * LoginVC = [[LoginController alloc]initWithNibName:@"LoginController" bundle:nil];
+                    //                    [LoginVC LoginRefreshAction:^{
+                    //                    }];
+                    //                    [VC.navigationController  pushViewController:LoginVC animated:YES];
                 }
             }
             success(responseObject);
@@ -119,17 +119,17 @@
             faild(error);
             NSString * errorStr =error.localizedDescription;
             if (errorStr.length>1) {
-                 [SVProgressHUD showErrorWithStatus:  [error.localizedDescription   substringToIndex:error.localizedDescription.length-1]];
+                [SVProgressHUD showErrorWithStatus:  [error.localizedDescription   substringToIndex:error.localizedDescription.length-1]];
             }else{
                 [SVProgressHUD showErrorWithStatus:@"网络连接失败"];
             }
-           // [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+            // [SVProgressHUD showErrorWithStatus:error.localizedDescription];
             [[LoadWaitSingle shareManager] hideLoadWaitView];
         }];
-       
+        
     }else if(method == POST) {
-       
-   [manager POST:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+        [manager POST:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if ([responseObject[@"resultCode"]isEqualToString:@"14"]) {
                 if (VC==nil) {
@@ -139,13 +139,11 @@
                     [YKDataTool moveLoginKey];
                     //设置别名
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
-//                    LoginController * LoginVC = [[LoginController alloc]initWithNibName:@"LoginController" bundle:nil];
-//                    [LoginVC LoginRefreshAction:^{
-//                    }];
-//                    [VC.navigationController  pushViewController:LoginVC animated:YES];
+                    //                    LoginController * LoginVC = [[LoginController alloc]initWithNibName:@"LoginController" bundle:nil];
+                    //                    [LoginVC LoginRefreshAction:^{
+                    //                    }];
+                    //                    [VC.navigationController  pushViewController:LoginVC animated:YES];
                 }
-                
-                
             }
             success(responseObject);
             [SVProgressHUD dismiss];
@@ -153,39 +151,25 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             faild(error);
         }];
-   
+        
     }
 }
-
--(void)error:(NSError * )error{
-    NSLog(@"%@",error.userInfo);
-    NSString * _kCFStreamErrorCodeKey =error.userInfo[@"_kCFStreamErrorCodeKey"];
-    if ([_kCFStreamErrorCodeKey isEqualToString:@"-2102"]) {
-         [SVProgressHUD showErrorWithStatus:@"网络无法连接"];
-    }
-    if ([_kCFStreamErrorCodeKey isEqualToString:@"-1003"]) {
-        [SVProgressHUD showErrorWithStatus:@"网络无法连接"];
-    }
-}
-
-
-
 ///上传图片
 -(void)UPImageToServer:(NSArray*)imageArr toKb:(NSInteger)kb success:(SuccessImageArr)success faild:(FaildCallback)faild{
     NSString *password = [NSString stringWithFormat:@"%@%@%@",[YKDataTool getimage_account],[YKDataTool getimage_hostname],[YKDataTool getimage_password]];
     NSDictionary * dic = @{@"image_account":[YKDataTool getimage_account],@"image_password":[password MD5Hash]};
     AFHTTPSessionManager *UPmanager = [AFHTTPSessionManager manager];
     UPmanager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
-                                                         @"text/html",
-                                                         @"image/jpeg",
-                                                         @"image/png",
-                                                         @"application/octet-stream",
-                                                         @"text/json",
-                                                         nil];
+                                                           @"text/html",
+                                                           @"image/jpeg",
+                                                           @"image/png",
+                                                           @"application/octet-stream",
+                                                           @"text/json",
+                                                           nil];
     [[LoadWaitSingle shareManager]showLoadWaitViewImage:@"兑富宝加载等待图"];
     [UPmanager POST:[YKDataTool getimage_hostname] parameters:[dic yy_modelToJSONObject] constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         for (int i= 0; i< imageArr.count; i++) {
-           UIImage * image =  [UIImage scaleImageAtPixel:imageArr [i] pixel:1024];
+            UIImage * image =  [UIImage scaleImageAtPixel:imageArr [i] pixel:1024];
             //1.把图片转换成二进制流
             NSData *imageData= [ UIImage scaleImage:image toKb:kb];
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -195,25 +179,23 @@
             //2.上传图片
             [formData appendPartWithFileData:imageData name:[NSString stringWithFormat:@"file%d",i]fileName:[NSString stringWithFormat:@"%@%d.jpg",fileName, i] mimeType:@"image/jpeg"];
         }
-      
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         //[SVProgressHUD showProgress:uploadProgress.fractionCompleted status:@"上传中"];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-          success(responseObject[@"data"]);
-         [[LoadWaitSingle shareManager] hideLoadWaitView];
+        success(responseObject[@"data"]);
+        [[LoadWaitSingle shareManager] hideLoadWaitView];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         faild(error);
-         [[LoadWaitSingle shareManager] hideLoadWaitView];
-//         [SVProgressHUD showErrorWithStatus:@"图片上传失败"];
+        [[LoadWaitSingle shareManager] hideLoadWaitView];
+        //[SVProgressHUD showErrorWithStatus:@"图片上传失败"];
         NSString * errorStr =error.localizedDescription;
         if (errorStr.length>1) {
             [SVProgressHUD showErrorWithStatus:  [error.localizedDescription   substringToIndex:error.localizedDescription.length-1]];
         }else{
             [SVProgressHUD showErrorWithStatus:@"网络连接失败"];
-            
         }
     }];
-
+    
 }
 
 #pragma mark - 带请求头的 task
@@ -228,10 +210,7 @@
  AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
  manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html",@"application/x-www-form-urlencoded", nil];
  // manager.requestSerializer = [AFJSONRequestSerializer serializer];
- 
- 
  [manager GET:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
- 
  } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;            success(responseObject ,response);
  [SVProgressHUD dismiss];
@@ -240,8 +219,6 @@
  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
  faild(error,response);
  }];
- 
- 
  }else if(method == POST) {
  NSString *url = [NSString stringWithFormat:@"%@%@&sign=%@",kServerUrl, actName,sign];
  AFHTTPSessionManager *Session = [AFHTTPSessionManager manager];
@@ -289,7 +266,7 @@
         [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"敬请期待"]];
     }else{
         if (![urlStr isKindOfClass:[NSNull class]]) {
-             [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",placeholder]]];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",placeholder]]];
         }
     }
 }
@@ -321,7 +298,7 @@
             case 1:
                 // NSLog(@"GPRS网络");
                 yesInter();
-               
+                
                 break;
             case 2:
                 // NSLog(@"wifi网络");
@@ -435,11 +412,10 @@
  *  拨打电话
  *
  *  @param phoneNumber 要拨打的号码
- *  @param view        拨号所在的页面
+ *  @param selfView    拨号所在的页面
  */
 - (void)CallPhoneNumber:(NSString *)phoneNumber inView:(UIView *)selfView
 {
-    
     if (!callPhoneWebview) {
         callPhoneWebview = [[UIWebView alloc] init];
     }

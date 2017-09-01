@@ -16,7 +16,9 @@
 @property (weak, nonatomic) IBOutlet DarkGreyTF *bank_card_no;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *bank_name;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *bind_mobile;
-@property (weak, nonatomic) IBOutlet DarkGreyTF *verify_code;
+@property (weak, nonatomic) IBOutlet DarkGreyTV *address;
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *id_card_photo;
 @property (weak, nonatomic) IBOutlet UIImageView *id_card_back_photo;
 @property (weak, nonatomic) IBOutlet UIImageView *hand_id_card_photo;

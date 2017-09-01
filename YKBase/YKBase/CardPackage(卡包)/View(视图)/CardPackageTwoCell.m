@@ -29,6 +29,26 @@
 -(void)setModel:(CardModel *)model{
     if (!model) return;
     _model = model;
-
+    self.BankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", model.bank_name]];
+    self.BagImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@a", model.bank_name]];
+    NSString *bank_card_no ;
+    if(model.bank_card_no.length>=4){
+        bank_card_no =
+        [model.bank_card_no substringFromIndex:model.bank_card_no.length-4];
+    }else{
+        bank_card_no =
+        model.bank_card_no;
+    }
+    self.bank_name.text = [NSString stringWithFormat:@"%@(%@)",model.bank_name,bank_card_no];
+    
+    if (_model.selected == YES) {
+        self.selectedImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"华夏银行"]];
+    }else{
+        self.selectedImage.image = IMG_Name(@"");
+    }
+    
+    
+    
+    
 }
 @end

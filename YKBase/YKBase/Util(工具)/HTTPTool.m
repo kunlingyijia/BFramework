@@ -15,7 +15,7 @@
             SystemModel * model = [SystemModel yy_modelWithJSON:baseRes.data];
             [YKDataTool saveUserData:model.image_hostname forKey:@"image_hostname"];
             [YKDataTool saveUserData:model.image_account forKey:@"image_account"];
-            [YKDataTool saveUserData:model.	image_password forKey:@"image_password"];
+            [YKDataTool saveUserData:model.image_password forKey:@"image_password"];
         }
         success(baseRes);
     } faild:^(NSError *  _Nullable error) {
@@ -98,7 +98,7 @@
         //设置别名
         [YKNotification postNotificationName:@"获取个人信息" object:nil userInfo:nil];
     }
-       return [self AESrequestWithParm:parm act:Request_UserInfo showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+    return [self AESrequestWithParm:parm act:Request_UserInfo showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             [YKDataTool saveObject:baseRes.data byFileName:@"个人信息"];
             Userinfo *userinfo = [Userinfo yy_modelWithJSON:baseRes.data];
@@ -152,14 +152,7 @@
         faild(error);
     }];
 }
-#pragma mark -  提现
-+ (nullable NSURLSessionDataTask *)requestWithdrawWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
-    return [self AESrequestWithParm:parm act:Request_Withdraw showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
-        success(baseRes);
-    } faild:^(NSError *  _Nullable error) {
-        faild(error);
-    }];
-}
+
 #pragma mark -  快捷签约
 + (nullable NSURLSessionDataTask *)requestQuickSignWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_quickSign showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -168,6 +161,34 @@
         faild(error);
     }];
 }
+#pragma mark -  快捷签约短信
++ (nullable NSURLSessionDataTask *)requestQuickSmsWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_quickSms showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+#pragma mark -  快捷签约查询
++ (nullable NSURLSessionDataTask *)requestQuickQueryWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_quickQuery showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+
+#pragma mark -  提现
++ (nullable NSURLSessionDataTask *)requestWithdrawWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_Withdraw showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+
+
+
 
 #pragma mark -  首页轮播图+公告+我的信用卡
 + (nullable NSURLSessionDataTask *)requestHomePageWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
@@ -177,7 +198,6 @@
         faild(error);
     }];
 }
-
 #pragma mark -  首页 获取文章内容
 + (nullable NSURLSessionDataTask *)requestHome_articleInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self MD5requestWithParm:parm act:Request_Home_articleInfo showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -186,6 +206,74 @@
         faild(error);
     }];
 }
+#pragma mark -  我的银行卡列表
++ (nullable NSURLSessionDataTask *)requestBankCardListWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_BankCardList showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+#pragma mark -  获取银行卡信息
++ (nullable NSURLSessionDataTask *)requestBankCardInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_BankCardInfo showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+
+
+#pragma mark - 下一步（生成计划)
++ (nullable NSURLSessionDataTask *)requestCreatePlanWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_CreatePlan showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+#pragma mark -  计划列表
++ (nullable NSURLSessionDataTask *)requestPlanListWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_PlanList showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+#pragma mark -  删除计划
++ (nullable NSURLSessionDataTask *)requestDeletePlanWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_DeletePlan showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+#pragma mark -  更换计划
++ (nullable NSURLSessionDataTask *)requestReplacePlanWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_ReplacePlan showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+#pragma mark -  计算保证金/手续费
++ (nullable NSURLSessionDataTask *)requestCalculateFeeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_CalculateFee showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - MD5格式
 +(nullable NSURLSessionDataTask *)MD5requestWithParm:(nullable id)parm act:( nonnull NSString *)actName showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
@@ -226,7 +314,6 @@
                     //退出登录
                     [YKNotification postNotificationName:@"退出账号" object:nil userInfo:nil];
                 }
-               
                 success(baseRes);
             }
         } faild:^(NSError * _Nullable error) {
@@ -237,9 +324,8 @@
 #pragma mark - 是否登录
 +(BOOL)isLogin{
     NSString *Token =[YKDataTool getLoginToken];
-    NSLog(@"----%@",Token);
     if (Token.length == 0) {
-       // [DWAlertTool showToast:@"请先登录"];
+        //[DWAlertTool showToast:@"请先登录"];
         LoginVC * VC=  GetVC(LoginVC)
         BaseNavigationVC * Nav = [[BaseNavigationVC alloc]initWithRootViewController:VC];
         [[DWAlertTool getCurrentUIVC] presentViewController:Nav animated:YES completion:nil];
@@ -262,7 +348,7 @@
             return YES;
         }else if([type isEqualToString:@"1"]){
             //审核中
-            [DWAlertTool showToast:@"实名认证审核中.."];
+            [DWAlertTool showToast:@"实名认证审核中..."];
             return YES;
         }else if([type isEqualToString:@"3"]){
             //审核失败
