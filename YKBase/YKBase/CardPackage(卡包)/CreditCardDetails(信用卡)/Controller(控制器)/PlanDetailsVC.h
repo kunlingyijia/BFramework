@@ -9,8 +9,7 @@
 #import "BaseViewController.h"
 @class CardModel;
 @interface PlanDetailsVC : BaseViewController
-
-
+@property (nonatomic, copy) void(^ PlanDetailsVCBlock)();
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *plan_no;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *total_money;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *beginAndend;

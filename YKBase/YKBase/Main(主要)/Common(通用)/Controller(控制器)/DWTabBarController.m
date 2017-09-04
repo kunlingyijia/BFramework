@@ -92,8 +92,6 @@
 {
     PopupVC* VC = GetVC(PopupVC);
     VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-    __weak typeof(self) weakSelf = self;
-
     VC.PopupVCBlock = ^(NSInteger tag){
         // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -107,8 +105,6 @@
                     //新增信用卡
                     AddDebitCard * VC =  GetVC(AddDebitCard);
                     VC.AddDebitCardVCBlock = ^(){
-                        
-                        [YKNotification postNotificationName:@"添加银行卡" object:nil userInfo:nil];
                         [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 1;
                     };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
@@ -119,12 +115,7 @@
                     //新增借记卡
                     AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
                     VC.AddDebitCardVCBlock = ^(){
-                         [YKNotification postNotificationName:@"添加银行卡" object:nil userInfo:nil];
                          [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 1;
-                        
-
-
-                       
                     };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;
@@ -133,6 +124,9 @@
                 {
                     //快速充值
                     ChargeVC * VC =  GetVC(ChargeVC);
+                    VC.ChargeVCBlock = ^(){
+                        [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 2;
+                    };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;
                 }
@@ -140,6 +134,9 @@
                 {
                     //掌上提现 跳转
                     MyWalletVC * VC = GetVC(MyWalletVC);
+                    VC.MyWalletVCBlock = ^(){
+                        [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 2;
+                    };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;
                 }

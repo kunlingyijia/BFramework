@@ -232,6 +232,10 @@
 		BD3787FC1F38A11800CB3561 /* BillVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD3787FA1F38A11800CB3561 /* BillVC.xib */; };
 		BD5C28531F53EA1100D53678 /* SigningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C28511F53EA1100D53678 /* SigningVC.m */; };
 		BD5C28541F53EA1100D53678 /* SigningVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5C28521F53EA1100D53678 /* SigningVC.xib */; };
+		BD69981C1F5A913F001AACEA /* PayPlanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69981A1F5A913F001AACEA /* PayPlanVC.m */; };
+		BD69981D1F5A913F001AACEA /* PayPlanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD69981B1F5A913F001AACEA /* PayPlanVC.xib */; };
+		BD6998211F5A9D18001AACEA /* PayPlanOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69981F1F5A9D18001AACEA /* PayPlanOneCell.m */; };
+		BD6998221F5A9D18001AACEA /* PayPlanOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD6998201F5A9D18001AACEA /* PayPlanOneCell.xib */; };
 		BD7046EA1F4412C600DBC85E /* CurrentVersionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7046E81F4412C600DBC85E /* CurrentVersionVC.m */; };
 		BD7046EB1F4412C600DBC85E /* CurrentVersionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD7046E91F4412C600DBC85E /* CurrentVersionVC.xib */; };
 		BD7046EE1F4419C100DBC85E /* SystemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7046ED1F4419C100DBC85E /* SystemModel.m */; };
@@ -338,7 +342,6 @@
 		BDE0E1C51F46C9B100086E6D /* HZQDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE0E1C11F46C9B100086E6D /* HZQDatePickerView.xib */; };
 		BDE0E1C61F46C9B100086E6D /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE0E1C31F46C9B100086E6D /* UIColor+HexString.m */; };
 		BDE5204E1F452CE300E2CDA7 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE5204D1F452CE300E2CDA7 /* MessageModel.m */; };
-		BDE520511F4532E300E2CDA7 /* HomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE520501F4532E300E2CDA7 /* HomePageModel.m */; };
 		BDE797BE1F4574DC005BBAE9 /* MakePlanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE797BC1F4574DC005BBAE9 /* MakePlanVC.m */; };
 		BDE797BF1F4574DC005BBAE9 /* MakePlanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDE797BD1F4574DC005BBAE9 /* MakePlanVC.xib */; };
 		BDE797C31F457533005BBAE9 /* PlanListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE797C11F457533005BBAE9 /* PlanListVC.m */; };
@@ -853,6 +856,12 @@
 		BD5C28501F53EA1100D53678 /* SigningVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigningVC.h; sourceTree = "<group>"; };
 		BD5C28511F53EA1100D53678 /* SigningVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigningVC.m; sourceTree = "<group>"; };
 		BD5C28521F53EA1100D53678 /* SigningVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SigningVC.xib; sourceTree = "<group>"; };
+		BD6998191F5A913F001AACEA /* PayPlanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPlanVC.h; sourceTree = "<group>"; };
+		BD69981A1F5A913F001AACEA /* PayPlanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayPlanVC.m; sourceTree = "<group>"; };
+		BD69981B1F5A913F001AACEA /* PayPlanVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayPlanVC.xib; sourceTree = "<group>"; };
+		BD69981E1F5A9D18001AACEA /* PayPlanOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPlanOneCell.h; sourceTree = "<group>"; };
+		BD69981F1F5A9D18001AACEA /* PayPlanOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayPlanOneCell.m; sourceTree = "<group>"; };
+		BD6998201F5A9D18001AACEA /* PayPlanOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayPlanOneCell.xib; sourceTree = "<group>"; };
 		BD7046E71F4412C600DBC85E /* CurrentVersionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentVersionVC.h; sourceTree = "<group>"; };
 		BD7046E81F4412C600DBC85E /* CurrentVersionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentVersionVC.m; sourceTree = "<group>"; };
 		BD7046E91F4412C600DBC85E /* CurrentVersionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentVersionVC.xib; sourceTree = "<group>"; };
@@ -1031,8 +1040,6 @@
 		BDE0E1C31F46C9B100086E6D /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
 		BDE5204C1F452CE300E2CDA7 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		BDE5204D1F452CE300E2CDA7 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
-		BDE5204F1F4532E300E2CDA7 /* HomePageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomePageModel.h; path = "YKBase/Main(主要)/HomePage(首页)/Message(消息)/Model(模型)/HomePageModel.h"; sourceTree = SOURCE_ROOT; };
-		BDE520501F4532E300E2CDA7 /* HomePageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomePageModel.m; path = "YKBase/Main(主要)/HomePage(首页)/Message(消息)/Model(模型)/HomePageModel.m"; sourceTree = SOURCE_ROOT; };
 		BDE797BB1F4574DC005BBAE9 /* MakePlanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakePlanVC.h; sourceTree = "<group>"; };
 		BDE797BC1F4574DC005BBAE9 /* MakePlanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakePlanVC.m; sourceTree = "<group>"; };
 		BDE797BD1F4574DC005BBAE9 /* MakePlanVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MakePlanVC.xib; sourceTree = "<group>"; };
@@ -1551,8 +1558,6 @@
 		BD127E2A1F2AD18600DD9A8F /* Model(模型) */ = {
 			isa = PBXGroup;
 			children = (
-				BDE5204F1F4532E300E2CDA7 /* HomePageModel.h */,
-				BDE520501F4532E300E2CDA7 /* HomePageModel.m */,
 			);
 			path = "Model(模型)";
 			sourceTree = "<group>";
@@ -2324,6 +2329,9 @@
 				BDE797C51F45887F005BBAE9 /* MakePlanDetailtsVC.h */,
 				BDE797C61F45887F005BBAE9 /* MakePlanDetailtsVC.m */,
 				BDE797C71F45887F005BBAE9 /* MakePlanDetailtsVC.xib */,
+				BD6998191F5A913F001AACEA /* PayPlanVC.h */,
+				BD69981A1F5A913F001AACEA /* PayPlanVC.m */,
+				BD69981B1F5A913F001AACEA /* PayPlanVC.xib */,
 				BDE797C01F457533005BBAE9 /* PlanListVC.h */,
 				BDE797C11F457533005BBAE9 /* PlanListVC.m */,
 				BDE797C21F457533005BBAE9 /* PlanListVC.xib */,
@@ -2358,6 +2366,9 @@
 				BD8EDB551F58F7C5003A9949 /* PlanDetailsOneCell.h */,
 				BD8EDB561F58F7C5003A9949 /* PlanDetailsOneCell.m */,
 				BD8EDB571F58F7C5003A9949 /* PlanDetailsOneCell.xib */,
+				BD69981E1F5A9D18001AACEA /* PayPlanOneCell.h */,
+				BD69981F1F5A9D18001AACEA /* PayPlanOneCell.m */,
+				BD6998201F5A9D18001AACEA /* PayPlanOneCell.xib */,
 			);
 			path = "View(视图)";
 			sourceTree = "<group>";
@@ -2900,6 +2911,7 @@
 				BD96D5ED1F386E2900EE6CC5 /* RegisteredVC.xib in Resources */,
 				BD127FD31F2AD18700DD9A8F /* GuideImage.bundle in Resources */,
 				BD12805E1F2AD18700DD9A8F /* ImageChooseVC.xib in Resources */,
+				BD6998221F5A9D18001AACEA /* PayPlanOneCell.xib in Resources */,
 				BD127FD51F2AD18700DD9A8F /* guideImage2.jpg in Resources */,
 				BD1280251F2AD18700DD9A8F /* QQ空间@2x.png in Resources */,
 				BD1280281F2AD18700DD9A8F /* 信息@3x.png in Resources */,
@@ -2908,6 +2920,7 @@
 				BDC517611F2ADDDB00E1821E /* UserGuideViewController.xib in Resources */,
 				BD1280191F2AD18700DD9A8F /* region.json in Resources */,
 				BD12804A1F2AD18700DD9A8F /* RegionViewController.xib in Resources */,
+				BD69981D1F5A913F001AACEA /* PayPlanVC.xib in Resources */,
 				BD12802E1F2AD18700DD9A8F /* 朋友圈@3x.png in Resources */,
 				BDB4D73B1F564EEA00798E1F /* PlanListOneCell.xib in Resources */,
 				BD12802A1F2AD18700DD9A8F /* 微信好友@3x.png in Resources */,
@@ -3192,6 +3205,7 @@
 				BD127FB41F2AD18700DD9A8F /* UIBarButtonItem+WHExtension.m in Sources */,
 				BD127FBC1F2AD18700DD9A8F /* UIView+WHGesture.m in Sources */,
 				BD12800D1F2AD18700DD9A8F /* FMDatabasePool.m in Sources */,
+				BD69981C1F5A913F001AACEA /* PayPlanVC.m in Sources */,
 				BD127FC51F2AD18700DD9A8F /* RequestPayATOrderModel.m in Sources */,
 				BD32BD081F3BF45300EBC853 /* AddDebitCard.m in Sources */,
 				BD127FCB1F2AD18700DD9A8F /* BaseViewController.m in Sources */,
@@ -3216,6 +3230,7 @@
 				BD855A0B1F3C5848008143C3 /* BindingVC.m in Sources */,
 				BD127FC11F2AD18700DD9A8F /* BaseResponse.m in Sources */,
 				BD127FC01F2AD18700DD9A8F /* BaseRequest.m in Sources */,
+				BD6998211F5A9D18001AACEA /* PayPlanOneCell.m in Sources */,
 				BD1280201F2AD18700DD9A8F /* SGHelperTool.m in Sources */,
 				BDC5BF101F56A28C00E1B1FA /* BankCardListVC.m in Sources */,
 				BD961C7A1F4FB4C6003FECC2 /* CardPackageThreeCell.m in Sources */,
@@ -3225,7 +3240,6 @@
 				BD127FFC1F2AD18700DD9A8F /* Order.m in Sources */,
 				BD127FE81F2AD18700DD9A8F /* MyInfoVC.m in Sources */,
 				BD1280601F2AD18700DD9A8F /* Bank_Region_Bank_Branch.m in Sources */,
-				BDE520511F4532E300E2CDA7 /* HomePageModel.m in Sources */,
 				BD127FF61F2AD18700DD9A8F /* NSData+CommonCrypto.m in Sources */,
 				BD8A27651F3B3D2D00204AB2 /* MessageVC.m in Sources */,
 				BD12805F1F2AD18700DD9A8F /* UIImage+DWImage.m in Sources */,

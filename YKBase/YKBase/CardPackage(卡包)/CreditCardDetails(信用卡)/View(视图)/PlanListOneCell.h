@@ -12,6 +12,9 @@
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *status;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *plan_no;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *beginAndend;
+@property (weak, nonatomic) IBOutlet PublicLabel *total_money
+;
+
 ///model
 @property (nonatomic, strong) CardModel *model ;
 @end

@@ -42,7 +42,7 @@
     self.bank_name.text = [NSString stringWithFormat:@"%@(%@)",model.bank_name,bank_card_no];
     
     if (_model.selected == YES) {
-        self.selectedImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"华夏银行"]];
+        self.selectedImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"红色打钩"]];
     }else{
         self.selectedImage.image = IMG_Name(@"");
     }

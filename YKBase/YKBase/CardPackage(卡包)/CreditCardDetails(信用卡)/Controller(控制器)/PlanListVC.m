@@ -30,7 +30,6 @@
 #pragma mark -  载入完成
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [YKNotification addObserver:self selector:@selector(requestAction) name:@"刷新一级界面" object:nil];
     //关于UI
     [self SET_UI];
     //关于数据
@@ -61,14 +60,11 @@
 #pragma mark - 关于数据
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
-    [self.dataArray addObject:@"1"];
-    [self.dataArray addObject:@"1"];
-    [self.dataArray addObject:@"1"];
-    [self.dataArray addObject:@"1"];
+    
     self.pageIndex =1;
-    //    [self requestAction];
-    //    //上拉刷新下拉加载
-    //    [self Refresh];
+    [self requestAction];
+    //上拉刷新下拉加载
+    [self Refresh];
 }
 -(void)Refresh{
     //下拉刷新
@@ -85,15 +81,17 @@
 }
 #pragma mark - 网络请求
 -(void)requestAction{
+    NSLog(@"%@",self.cardModel.bank_id);
     __weak typeof(self) weakSelf = self;
-    NSURLSessionDataTask * task =  [HTTPTool  requestPlanListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:YES success :^(BaseResponse * _Nullable baseRes) {
+    NSURLSessionDataTask * task =  [HTTPTool  requestPlanListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10",@"bank_id":self.cardModel.bank_id} active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             if (weakSelf.pageIndex == 1) {
                 [weakSelf.dataArray removeAllObjects];
-                
             }
             for (NSDictionary * dic in baseRes.data) {
                 CardModel * model = [CardModel yy_modelWithJSON:dic];
+                model.repayModel = dic[@"repay"];
+                model.consumeModel = dic[@"consume"];
                 [weakSelf.dataArray addObject:model];
             }
             //刷新
@@ -135,7 +133,7 @@
         
         PlanListOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PlanListOneCell" forIndexPath:indexPath];
         //cell赋值
-        // cell.model = indexPath.section >= self.dataArray.count ? nil :self.dataArray[indexPath.section];
+        cell.model = indexPath.section >= self.dataArray.count ? nil :self.dataArray[indexPath.section];
         //cell其他配置
         return cell;
     }
@@ -147,7 +145,11 @@
     CardModel*  model = indexPath.section >= self.dataArray.count ? nil :self.dataArray[indexPath.section];
     //跳转
     PlanDetailsVC * VC =  GetVC(PlanDetailsVC);
-    
+    VC.PlanDetailsVCBlock = ^(){
+        weakSelf.pageIndex = 1;
+        [weakSelf requestAction];
+    };
+    VC.cardModel = model;
     PushVC(VC);
     
 }
@@ -169,7 +171,9 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO ;
+    CardModel*  model = indexPath.section >= self.dataArray.count ? nil :self.dataArray[indexPath.section];
+    
+    return [model.status isEqualToString:@"1"]? YES :NO ;
 }
 //iOS 8.0 后才有的方法
 -(NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -177,7 +181,7 @@
     __weak typeof(self) weakSelf = self;
     UITableViewRowAction *delete = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDefault) title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         [DWAlertTool alertWithTitle:@"是否删除?" message:nil OKWithTitle:@"删除" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
-            NSURLSessionDataTask * task =  [HTTPTool  requestPlanListWithParm:model active:YES success :^(BaseResponse * _Nullable baseRes) {
+            NSURLSessionDataTask * task =  [HTTPTool  requestDeletePlanWithParm:model active:YES success :^(BaseResponse * _Nullable baseRes) {
                 if (baseRes.resultCode ==1) {
                     [weakSelf.dataArray removeObjectAtIndex:indexPath.section];
                     [weakSelf.tableView reloadData];
@@ -194,7 +198,6 @@
         }];
     }];
     return @[delete];
-    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -75,6 +75,12 @@
 @property (nonatomic, strong) NSArray <CardSubModel *> *repayModel;
 ///消费model数组
 @property (nonatomic, strong) NSArray <CardSubModel *> *consumeModel;
+///充值金额
+@property (nonatomic, strong) NSString  *amount ;
+///卡类型 1：储蓄卡 2：信用卡
+@property (nonatomic, strong) NSString  *type ;
+
+
 
 @end
 

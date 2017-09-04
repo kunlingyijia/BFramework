@@ -8,7 +8,8 @@
 
 #import "ChooseDebitCardVC.h"
 #import "CardPackageTwoCell.h"
-
+#import "CardPackageThreeCell.h"
+#import "AddDebitCardVC.h"
 @interface ChooseDebitCardVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 ///分页参数
@@ -48,7 +49,7 @@
     _tableView.tableFooterView = [UIView new];
     [self.view addSubview:_tableView];
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
-    [_tableView tableViewregisterNibArray:@[@"CardPackageTwoCell"]];
+    [_tableView tableViewregisterNibArray:@[@"CardPackageTwoCell",@"CardPackageThreeCell"]];
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -106,15 +107,18 @@
 }
 ///tab个数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    [tableView tableViewDisplayWitimage:nil ifNecessaryForRowCount:self.dataArray.count];
-    return self.dataArray.count;
+    //[tableView tableViewDisplayWitimage:nil ifNecessaryForRowCount:self.dataArray.count];
+    return self.dataArray.count ==0 ? 1 :self.dataArray.count;
 }
 //tab设置
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //分割线
     tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
-        return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+        CardPackageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageThreeCell" forIndexPath:indexPath];
+        //cell赋值
+        cell.type = @"1";
+        return cell;
     }else{
         CardPackageTwoCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageTwoCell" forIndexPath:indexPath];
         //cell 赋值
@@ -127,6 +131,22 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     CardModel*  model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+    if (self.dataArray.count==0) {
+        ///是否实名认证
+        if ([HTTPTool isCertification]) {
+            return;
+        }
+        
+            //新增借记卡
+        __weak typeof(self) weakSelf = self;
+            AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
+            VC.AddDebitCardVCBlock = ^(){
+                weakSelf.pageIndex = 1;
+                [weakSelf requestAction];
+            };
+            PushVC(VC)
+      
+    }else{
     self.bank_id = model.bank_id;
     for (CardModel*  model in self.dataArray) {
         model.selected = [self.bank_id isEqualToString:model.bank_id] ? YES : NO;
@@ -140,6 +160,7 @@
         //返回
         [weakSelf.navigationController popViewControllerAnimated:YES] ;
     });
+    }
 }
 
 #pragma mark - Cell的高度

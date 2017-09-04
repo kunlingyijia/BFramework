@@ -96,10 +96,12 @@
             //我的钱包
             MyWalletVC * VC = GetVC(MyWalletVC);
             VC.MyWalletVCBlock = ^(){
-                //我的账单
-                BillVC * VC =  GetVC(BillVC);
-                [VC showBackBtn];
-                PushVC(VC);
+//                //我的账单
+//                BillVC * VC =  GetVC(BillVC);
+//                [VC showBackBtn];
+//                PushVC(VC);
+                
+            self. tabBarController.selectedIndex = 2;
             };
             PushVC(VC)
             break;
@@ -110,10 +112,11 @@
             if ([HTTPTool isCertification]) {
                 return ;
             }
-            //我的账单
-            BillVC * VC =  GetVC(BillVC);
-            [VC showBackBtn];
-            PushVC(VC);
+//            //我的账单
+//            BillVC * VC =  GetVC(BillVC);
+//            [VC showBackBtn];
+//            PushVC(VC);
+            self. tabBarController.selectedIndex = 2;
             break ;
         }
         case 103:

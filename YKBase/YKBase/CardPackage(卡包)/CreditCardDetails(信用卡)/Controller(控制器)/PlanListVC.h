@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface PlanListVC : BaseViewController
-
+///model
+@property (nonatomic, strong) CardModel *cardModel ;
 @end

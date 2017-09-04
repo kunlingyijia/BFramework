@@ -21,7 +21,6 @@
     });
     return session;
 }
-
 //网络请求
 - (nullable NSURLSessionDataTask *)requestDataWithParm:(nullable id)parm act:( nonnull NSString *)actName sign:(nullable id)sign method:(YKRequestMethod)method  showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable YKSuccessCallback)success faild:(nullable YKFaildCallback)faild {
     //showHUD ==YES ?[[LoadWaitSingle shareManager]showLoadWaitViewImage:@"兑富宝加载等待图"] :nil;

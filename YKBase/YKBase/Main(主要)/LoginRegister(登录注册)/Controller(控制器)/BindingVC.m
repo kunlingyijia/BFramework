@@ -109,7 +109,9 @@
         if (baseRes.resultCode ==1) {
             weakSelf.BindingVCBlock();
             //设置别名
-            [YKNotification postNotificationName:@"刷新一级界面" object:nil userInfo:nil];
+            [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
+            [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
+            
         }
     } faild:^(NSError * _Nullable error) {
         

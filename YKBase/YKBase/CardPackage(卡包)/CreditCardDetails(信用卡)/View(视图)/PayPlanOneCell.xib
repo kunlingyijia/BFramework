@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="144" id="KGk-i7-Jjw" customClass="PayPlanOneCell">
+            <rect key="frame" x="0.0" y="0.0" width="491" height="144"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="491" height="144"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="钱符号" translatesAutoresizingMaskIntoConstraints="NO" id="yDc-VM-hUl">
+                        <rect key="frame" x="10" y="15" width="113.5" height="113.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="yDc-VM-hUl" secondAttribute="height" id="qCb-gZ-1FZ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账户余额支付" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNu-yo-dRS" customClass="DarkGreyLabel">
+                        <rect key="frame" x="128.5" y="15" width="322.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kf9-ZA-tss" customClass="PublicLabel">
+                        <rect key="frame" x="128.5" y="110.5" width="322.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="1" green="0.1997737953" blue="0.31569344069999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="红色打钩" translatesAutoresizingMaskIntoConstraints="NO" id="yR6-ut-ma2">
+                        <rect key="frame" x="456" y="59.5" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="got-gD-LmQ"/>
+                            <constraint firstAttribute="width" constant="25" id="heZ-a0-chi"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="yDc-VM-hUl" secondAttribute="bottom" constant="15" id="49j-qm-iqe"/>
+                    <constraint firstAttribute="trailing" secondItem="CNu-yo-dRS" secondAttribute="trailing" constant="40" id="CJD-WW-CFP"/>
+                    <constraint firstItem="Kf9-ZA-tss" firstAttribute="bottom" secondItem="yDc-VM-hUl" secondAttribute="bottom" id="Cn2-nZ-a49"/>
+                    <constraint firstItem="yDc-VM-hUl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="KNo-kR-dlF"/>
+                    <constraint firstAttribute="trailing" secondItem="yR6-ut-ma2" secondAttribute="trailing" constant="10" id="LhD-70-fQs"/>
+                    <constraint firstItem="CNu-yo-dRS" firstAttribute="leading" secondItem="yDc-VM-hUl" secondAttribute="trailing" constant="5" id="MxW-21-ki5"/>
+                    <constraint firstItem="yR6-ut-ma2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Sl3-dq-hNA"/>
+                    <constraint firstItem="Kf9-ZA-tss" firstAttribute="leading" secondItem="yDc-VM-hUl" secondAttribute="trailing" constant="5" id="VTG-jE-NZr"/>
+                    <constraint firstAttribute="trailing" secondItem="Kf9-ZA-tss" secondAttribute="trailing" constant="40" id="WVp-qm-Ino"/>
+                    <constraint firstItem="yDc-VM-hUl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="fkq-ai-M36"/>
+                    <constraint firstItem="CNu-yo-dRS" firstAttribute="top" secondItem="yDc-VM-hUl" secondAttribute="top" id="gjv-Ry-eD6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="amount" destination="Kf9-ZA-tss" id="iCv-Zj-vNu"/>
+            </connections>
+            <point key="canvasLocation" x="119.5" y="104"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="红色打钩" width="20" height="20"/>
+        <image name="钱符号" width="35" height="35"/>
+    </resources>
+</document>

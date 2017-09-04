@@ -7,26 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-@class HomePageModel;
 @class CardModel;
 
 
 @interface HomePageThreeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet CutView *bottomView;
-
 @property (weak, nonatomic) IBOutlet PublicBtn *OneBtn;
-
 @property (weak, nonatomic) IBOutlet UIImageView *BankImageView;
-
 @property (weak, nonatomic) IBOutlet WhiteLabel *bank_name;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *credit_line;
-
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *state_date;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *repay_date;
-
-
-///model
-@property (nonatomic, strong) HomePageModel *HPodel ;
 ///model
 @property (nonatomic, strong) CardModel *model ;
 @end

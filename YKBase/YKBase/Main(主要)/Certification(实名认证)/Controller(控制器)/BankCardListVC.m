@@ -58,20 +58,27 @@
 #pragma mark - 关于数据
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
-    [self.dataArray addObject:@"招商银行"];
-    [self.dataArray addObject:@"中国银行"];
-    [self.dataArray addObject:@"工商银行"];
-    [self.dataArray addObject:@"建设银行"];
-    [self.dataArray addObject:@"中信银行"];
-    [self.dataArray addObject:@"农业银行"];
-    [self.dataArray addObject:@"深圳发展银行"];
-    [self.dataArray addObject:@"民生银行"];
-    [self.dataArray addObject:@"兴业银行"];
-    [self.dataArray addObject:@"光大银行"];
-    [self.dataArray addObject:@"华夏银行"];
+    NSMutableArray * arr = [NSMutableArray arrayWithCapacity:0];
+    [arr addObject:@"招商银行"];
+    [arr addObject:@"中国银行"];
+    [arr addObject:@"工商银行"];
+    [arr addObject:@"建设银行"];
+    [arr addObject:@"中信银行"];
+    [arr addObject:@"农业银行"];
+    [arr addObject:@"深圳发展银行"];
+    [arr addObject:@"民生银行"];
+    [arr addObject:@"兴业银行"];
+    [arr addObject:@"光大银行"];
+    [arr addObject:@"华夏银行"];
     
+    for (NSString * bank_name in arr) {
+        CardModel * model = [CardModel new];
+        model.bank_name = bank_name;
+        model.selected = [self.bank_name isEqualToString:bank_name] ? YES : NO;
+        [self.dataArray addObject:model];
+    }
     
-    
+
 }
 
 #pragma tableView 代理方法
@@ -93,8 +100,10 @@
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
         BankCardListOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"BankCardListOneCell" forIndexPath:indexPath];
-        cell.BankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", self.dataArray[indexPath.row]]];
-        cell.Bank_nameLabel.text = self.dataArray[indexPath.row];
+//        cell.BankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", self.dataArray[indexPath.row]]];
+//        cell.Bank_nameLabel.text = self.dataArray[indexPath.row];
+        //cell赋值
+        cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
         // cell 其他配置
         return cell;
     }
@@ -103,11 +112,17 @@
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    CardModel *model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+    self.bank_name = model.bank_name;
+    for (CardModel*  model in self.dataArray) {
+        model.selected = [self.bank_name isEqualToString:model.bank_name] ? YES : NO;
+    }
+    self.BankCardListVCBlock(model.bank_name);    [self.tableView reloadData];
+    self.view.userInteractionEnabled = NO;
     // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
     __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.BankCardListVCBlock(self.dataArray[indexPath.row]);
+       
         //返回
         [weakSelf.navigationController popViewControllerAnimated:YES] ;
     });

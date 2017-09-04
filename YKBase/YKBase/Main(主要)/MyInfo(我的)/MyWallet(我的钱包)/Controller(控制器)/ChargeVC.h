@@ -8,5 +8,8 @@
 
 #import "BaseViewController.h"
 @interface ChargeVC : BaseViewController
+@property (nonatomic, copy) void(^ ChargeVCBlock)();
+@property (weak, nonatomic) IBOutlet DarkGreyTF *amount;
+@property (weak, nonatomic) IBOutlet DarkGreyTF *bank_card_no;
 
 @end

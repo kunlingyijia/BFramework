@@ -7,7 +7,6 @@
 //
 
 #import "HomePageOneCell.h"
-#import "HomePageModel.h"
 #import "SXHeadLine.h"
 @interface HomePageOneCell ()<SDCycleScrollViewDelegate>
 @property(nonatomic,strong)    SDCycleScrollView *cycleScrollViewImage;
@@ -94,7 +93,7 @@
     // 网络加载图片的轮播器
     if (_cycleScrollViewImage) {
         NSMutableArray *banner_imageArr = [NSMutableArray arrayWithCapacity:0];
-        for ( HomePageModel* model in arr) {
+        for ( CardModel* model in arr) {
             [banner_imageArr addObject:model.image_url];
         }
         _cycleScrollViewImage.imageURLStringsGroup =   banner_imageArr;
@@ -129,7 +128,7 @@
         self.headLine3 = [[SXHeadLine alloc]initWithFrame:CGRectMake(0.125*Width , 0,0.875*Width, 0.125*Width)];
         [self.headLine3 setBgColor:[UIColor whiteColor] textColor:[UIColor colorWithHexString:kDarkGrey] textFont:[UIFont systemFontOfSize:15*SizeScale]];
            NSMutableArray *messageArray = [NSMutableArray arrayWithCapacity:0];
-           for (HomePageModel * model in arr) {
+           for (CardModel * model in arr) {
                [messageArray addObject:model.title];
            }
             if (messageArray.count>0) {
@@ -145,7 +144,7 @@
     }
     if (_headLine3) {
         NSMutableArray *messageArray = [NSMutableArray arrayWithCapacity:0];
-        for (HomePageModel * model in arr) {
+        for (CardModel * model in arr) {
             [messageArray addObject:model.title];
         }
         if (messageArray.count>0) {

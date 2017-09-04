@@ -9,16 +9,11 @@
 #import "PlanDetailsVC.h"
 #import "PlanDetailsOneCell.h"
 #import "CardModel.h"
+#import "PayPlanVC.h"
 @interface PlanDetailsVC ()
-
-
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet SegmentedView *segmented;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
-
-
-
 /// 1 还款记录 2 消费记录
 @property(nonatomic,strong) NSString * type;
 ///分页参数
@@ -50,7 +45,7 @@
     self.title = @"计划详情";
     [self showBackBtn];
     __weak typeof(self) weakSelf = self;
-    [self.segmented titleArr:[@[@"还款记录",@"消费记录"]mutableCopy]];
+    [self.segmented titleArr:[@[@"还款计划",@"消费计划"]mutableCopy]];
     self.segmented.SegmentedViewBlock = ^(NSInteger tag){
         weakSelf.pageIndex = 1;
         weakSelf.type = tag == 0 ?  @"1":@"2";
@@ -58,8 +53,19 @@
         [weakSelf tableViewAssignment];
     };
     [self setUpTableView];
-//    self.heightConstraint.constant = 0.01;
-//    [self.submitBtn removeFromSuperview];
+    if (![self.cardModel.status isEqualToString:@"0"]&&![self.cardModel.status isEqualToString:@"1"]) {
+        self.heightConstraint.constant = 0.01;
+        [self.submitBtn removeFromSuperview];
+    }else{
+        self.heightConstraint.constant = 40*SizeScale;
+    }
+    if ([self.cardModel.status isEqualToString:@"0"]) {
+        [self.submitBtn setTitle:@"换一批计划" forState:(0)];
+    }
+    if ([self.cardModel.status isEqualToString:@"1"]) {
+        [self.submitBtn setTitle:@"支付" forState:(0)];
+    }
+    
 }
 #pragma mark - 控件赋值
 -(void)ControlsAssignment{
@@ -94,49 +100,8 @@
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.type = @"1";
     self.pageIndex =1;
-    //[self requestAction];
-    //上拉刷新下拉加载
-    //[self Refresh];
     [self ControlsAssignment];
     [self tableViewAssignment];
-}
--(void)Refresh{
-    //下拉刷新
-    __weak typeof(self) weakself = self;
-    [ThirdPartyTool MJRefreshView:self.tableView Header:YES Footer:NO HeaderBlock:^{
-        weakself.pageIndex =1 ;
-        [weakself requestAction];
-    } FooterBlock:^{
-        weakself.pageIndex ++ ;
-        NSLog(@"%ld",(long)weakself.pageIndex);
-        [weakself requestAction];
-    }];
-}
-
-#pragma mark - 网络请求
--(void)requestAction{
-    
-    __weak typeof(self) weakSelf = self;
-    NSURLSessionDataTask * task =  [HTTPTool  requestBankCardListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10",@"type":self.type} active:YES success :^(BaseResponse * _Nullable baseRes) {
-        if (baseRes.resultCode ==1) {
-            if (weakSelf.pageIndex == 1) {
-                [weakSelf.dataArray removeAllObjects];
-            }
-            for (NSDictionary * dic in baseRes.data) {
-                CardModel * model = [CardModel yy_modelWithJSON:dic];
-                [weakSelf.dataArray addObject:model];
-            }
-            [weakSelf.tableView reloadData];
-        }else{
-            weakSelf.pageIndex > 1 ? weakSelf.pageIndex -- : weakSelf.pageIndex;
-        }
-        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-    } faild:^(NSError * _Nullable error) {
-        [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-    }];
-    if (task) {
-        [self.sessionArray addObject:task];
-    }
 }
 #pragma tableView 代理方法
 //tab分区个数
@@ -177,11 +142,32 @@
 }
 #pragma mark - 提交
 - (IBAction)submitAction:(SubmitBtn *)sender {
+    __weak typeof(self) weakSelf = self;
+    if ([self.cardModel.status isEqualToString:@"0"]) {
+        [self changePlan];
+    }
+    if ([self.cardModel.status isEqualToString:@"1"]) {
+        PayPlanVC *VC = GetVC(PayPlanVC);
+        VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+        VC.cardModel = self.cardModel;
+        //type 1 支付 2 未支付
+        VC.PayPlanVCBlock =^(NSString * type){
+            if ([type isEqualToString:@"1"]) {
+                weakSelf .PlanDetailsVCBlock();
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }
+        };
+        PresentVC(VC);
+    }
+
+}
+///更换计划
+-(void)changePlan{
     
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestReplacePlanWithParm:self.cardModel active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
-        
+            
             NSDictionary * dic =baseRes.data;
             weakSelf.cardModel.repayModel = dic[@"repay"];
             weakSelf.cardModel.consumeModel = dic[@"consume"];
@@ -199,9 +185,10 @@
     }
 
     
-    
-    
 }
+
+
+
 #pragma mark - dealloc
 - (void)dealloc
 {

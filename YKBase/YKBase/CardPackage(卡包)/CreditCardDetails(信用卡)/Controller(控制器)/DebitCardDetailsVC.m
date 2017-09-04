@@ -88,8 +88,8 @@
         {
             //查看计划
             PlanListVC * VC =  GetVC(PlanListVC);
-            
-           // PushVC(VC);
+            VC.cardModel = self.cardModel;
+            PushVC(VC);
             break;
         }
         case 3:
@@ -97,15 +97,7 @@
             //定制计划
             MakePlanVC * VC =  GetVC(MakePlanVC);
             VC.cardModel = self.cardModel;
-            __weak typeof(self) weakSelf = self;
-//            VC.ChangeDebitCardVCBlock =^(CardModel *cardModel){
-//                weakSelf.cardModel = cardModel;
-//                //控件赋值
-//                [weakSelf ControlsAssignment];
-//            };
             PushVC(VC);
-            
-            
             break;
         }
         case 4:
@@ -123,9 +115,6 @@
             VC.cardModel = self.cardModel;
             __weak typeof(self) weakSelf = self;
             VC.ChangeDebitCardVCBlock =^(){
-//                weakSelf.cardModel = cardModel;
-//                //控件赋值
-//                [weakSelf ControlsAssignment];
                 [weakSelf requestAction];
             };
             //PushVC(VC);
@@ -143,11 +132,6 @@
             
         }
     }
-
-    
-    
-    
-    
 }
 
 

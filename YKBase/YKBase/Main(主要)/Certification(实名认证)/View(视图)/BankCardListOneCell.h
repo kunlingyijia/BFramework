@@ -11,5 +11,7 @@
 @interface BankCardListOneCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *Bank_nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *BankImageView;
-
+@property (weak, nonatomic) IBOutlet UIImageView *selectedImage;
+///model
+@property (nonatomic, strong) CardModel *model ;
 @end

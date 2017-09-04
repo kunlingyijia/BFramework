@@ -7,10 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
-
-
 @interface HomePageOneCell : UITableViewCell<SDCycleScrollViewDelegate>
 ///轮播图
 @property (nonatomic, copy) void(^HomePageOneCellImgBlock)(NSInteger tag);

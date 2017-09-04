@@ -93,8 +93,9 @@
             YKHTTPSession * helper = [YKHTTPSession shareSession];
             weakSelf.amount.text =helper.userinfo.amount;
             weakSelf.frozen_amount.text = helper.userinfo.frozen_amount;
-            [weakSelf.navigationController popViewControllerAnimated:NO];
             weakSelf.MyWalletVCBlock();
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+
         }
     } faild:^(NSError * _Nullable error) {
     }];

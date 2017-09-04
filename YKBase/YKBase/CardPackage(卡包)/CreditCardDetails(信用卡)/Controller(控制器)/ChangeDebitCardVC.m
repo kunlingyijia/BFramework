@@ -7,26 +7,21 @@
 //
 
 #import "ChangeDebitCardVC.h"
-
 @interface ChangeDebitCardVC ()
 
 @end
-
 @implementation ChangeDebitCardVC
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     //UI
     [self SET_UI];
     //数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
     [self showBackBtn];
     self.title= @"修改信用卡";
-    
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -60,49 +55,52 @@
             //账单日
             MCDatePickerView *dayView = [[MCDatePickerView alloc] initWithFrame:CGRectZero type:XMGStyleTypeDay MCDateSuccessBack:^(NSString *resultstr) {
                 weakSelf.state_date.text = resultstr;
-                
                 NSLog(@"天天---%@",resultstr);
             }];
             [dayView show];
             
             break;
         }
-            
-            
         case 303:
         {
             //还款日
             MCDatePickerView *dayView = [[MCDatePickerView alloc] initWithFrame:CGRectZero type:XMGStyleTypeDay MCDateSuccessBack:^(NSString *resultstr) {
                 NSLog(@"天天---%@",resultstr);
                 weakSelf.repay_date.text = resultstr;
-                
             }];
             [dayView show];
             break;
         }
         default:{
             break;
-            
         }
     }
 }
-
 #pragma mark - 修改
 - (IBAction)submitBtn:(SubmitBtn *)sender {
     if ([self IF]) {
-        self.cardModel.credit_line = self.credit_line.text;
+        CardModel * model = [CardModel new];
+        model.bank_id = self.cardModel.bank_id;
+        model.credit_line = self.credit_line.text;
         NSString *state_date = [self.state_date.text stringByReplacingOccurrencesOfString:@"日" withString:@""];
-        self.cardModel.state_date = state_date;
+        model.state_date = state_date;
         NSString *repay_date = [self.repay_date.text stringByReplacingOccurrencesOfString:@"日" withString:@""];
-        self.cardModel.repay_date = repay_date;
-        self.ChangeDebitCardVCBlock();
+        model.repay_date = repay_date;
         __weak typeof(self) weakSelf = self;
-        // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [YKNotification postNotificationName:@"添加银行卡" object:nil userInfo:nil];
-            //返回
-            [weakSelf.navigationController popViewControllerAnimated:YES] ;
-        });
+        NSURLSessionDataTask * task =  [HTTPTool requestEditCreditCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+            if (baseRes.resultCode==1) {
+                weakSelf.ChangeDebitCardVCBlock();
+                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    //返回
+                    [weakSelf.navigationController popViewControllerAnimated:YES] ;
+                });
+            }
+        } faild:^(NSError * _Nullable error) {
+        }];
+        if (task) {
+            [self.sessionArray addObject:task];
+        }
     }
 }
 #pragma mark - 判断条件
@@ -113,7 +111,6 @@
         [DWAlertTool showToast:@"信用额度输入有误"];
         return NO;
     }
-    
     return Y;
 }
 
@@ -130,7 +127,6 @@
 #pragma mark - dealloc
 - (void)dealloc
 {
-    
     NSLog(@"%@销毁了", [self class]);
 }
 @end

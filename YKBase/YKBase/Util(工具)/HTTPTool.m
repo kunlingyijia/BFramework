@@ -136,15 +136,18 @@
         faild(error);
     }];
 }
-#pragma mark -  实名添加借记卡
+#pragma mark -  添加借记卡
 + (nullable NSURLSessionDataTask *)requestBankAddDebitCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_BankAddDebitCard showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
+        }
         success(baseRes);
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
 }
-#pragma mark -  实名添加信用卡
+#pragma mark -  添加信用卡
 + (nullable NSURLSessionDataTask *)requestAddCreditCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_AddCreditCard showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
         success(baseRes);
@@ -152,10 +155,12 @@
         faild(error);
     }];
 }
-
-#pragma mark -  快捷签约
-+ (nullable NSURLSessionDataTask *)requestQuickSignWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
-    return [self AESrequestWithParm:parm act:Request_quickSign showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+#pragma mark -  修改资料（信用卡）
++ (nullable NSURLSessionDataTask *)requestEditCreditCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_EditCreditCard showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
+        }
         success(baseRes);
     } faild:^(NSError *  _Nullable error) {
         faild(error);
@@ -169,27 +174,28 @@
         faild(error);
     }];
 }
-#pragma mark -  快捷签约查询
-+ (nullable NSURLSessionDataTask *)requestQuickQueryWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
-    return [self AESrequestWithParm:parm act:Request_quickQuery showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
-        success(baseRes);
-    } faild:^(NSError *  _Nullable error) {
-        faild(error);
-    }];
-}
-
 #pragma mark -  提现
 + (nullable NSURLSessionDataTask *)requestWithdrawWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_Withdraw showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
+        }
         success(baseRes);
     } faild:^(NSError *  _Nullable error) {
         faild(error);
     }];
 }
-
-
-
-
+#pragma mark -  快速充值
++ (nullable NSURLSessionDataTask *)requestQuickRechargeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_QuickRecharge showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
+        }
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
 #pragma mark -  首页轮播图+公告+我的信用卡
 + (nullable NSURLSessionDataTask *)requestHomePageWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_Home_requestAd showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -232,6 +238,14 @@
         faild(error);
     }];
 }
+#pragma mark - 提交计划
++ (nullable NSURLSessionDataTask *)requestSubmitPlanWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_SubmitPlan showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
 #pragma mark -  计划列表
 + (nullable NSURLSessionDataTask *)requestPlanListWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_PlanList showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -251,6 +265,17 @@
 #pragma mark -  更换计划
 + (nullable NSURLSessionDataTask *)requestReplacePlanWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_ReplacePlan showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+#pragma mark -  支付计划
++ (nullable NSURLSessionDataTask *)requestPayPlanWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_PayPlan showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
+        }
         success(baseRes);
     } faild:^(NSError *  _Nullable error) {
         faild(error);

@@ -7,8 +7,6 @@
 //
 
 #import "SigningVC.h"
-
-#import "HomePageModel.h"
 #import "PhotoViewController.h"
 @interface SigningVC ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
@@ -76,28 +74,7 @@
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
-   // [self requestAction];
     [_webview loadHTMLString:self. form_data baseURL:nil];
-}
-#pragma mark - 商品网络请求
--(void)requestAction{
-    
-    NSURLSessionDataTask * task =  [HTTPTool  requestQuickSignWithParm:@[] active:YES success:^(BaseResponse * _Nullable baseRes) {
-        if (baseRes.resultCode==1) {
-            //反编译 [html HtmlToString]
-            // [_webview loadHTMLString:[response[@"data"][@"content"] HtmlToString]baseURL:nil];
-            NSDictionary * dic =   [NSString dictionaryWithJsonString:baseRes.data];
-            [_webview loadHTMLString:dic[@"form_data"] baseURL:nil];
-            //            [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
-        }
-    } faild:^(NSError * _Nullable error) {
-        
-    }];
-    if (task) {
-        [self.sessionArray addObject:task];
-    }
-    
-    
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [[LoadWaitSingle shareManager] hideLoadWaitView];
@@ -162,32 +139,23 @@
 
 ////在这个方法中捕获到图片的点击事件和被点击图片的url
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
-    
-    
-    
-    
-//    if (navigationType == UIWebViewNavigationTypeLinkClicked)
-//    {
-//        
-    
-        
+    __weak typeof(self) weakSelf = self;
         NSString *url = [request.URL absoluteString];
-        //拦截链接跳转到货源圈的动态详情
-        if ([url rangeOfString:@"http://www.baidu.com"].location != NSNotFound)
-        {
-            
-            __weak typeof(self) weakSelf = self;
-//            [HTTPTool requestQuickSmsWithParm:@[] active:YES success:^(BaseResponse * _Nullable baseRes) {
-//                if (baseRes.resultCode ==1) {
-                    [weakSelf requestUserInfo];
-//                }
-//            } faild:^(NSError * _Nullable error) {
-//            }];
-            
-            return NO; //返回NO，此页面的链接点击不会继续执行，只会执行跳转到你想跳转的页面
-        }
-   // }
+    //拦截链接跳转到货源圈的动态详情
+    if ([url rangeOfString:@"http://www.baidu.com"].location != NSNotFound)
+    {         [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
+
+        [weakSelf requestUserInfo];
+        return NO; //返回NO，此页面的链接点击不会继续执行，只会执行跳转到你想跳转的页面
+    }
+    //拦截链接跳转到货源圈的动态详情
+    if ([url rangeOfString:@"https://www.hao123.com"].location != NSNotFound)
+    {
+        [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
+        [weakSelf requestUserInfo];
+        return NO; //返回NO，此页面的链接点击不会继续执行，只会执行跳转到你想跳转的页面
+    }
+    
     return YES;
 }
 #pragma mark - 请求个人信息
@@ -195,6 +163,8 @@
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
+            
+
             //返回
             [weakSelf.navigationController popViewControllerAnimated:NO] ;
             weakSelf.SigningVCBlock();

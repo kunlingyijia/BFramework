@@ -18,7 +18,7 @@
 #import "JQScanViewController.h"
 #import "ArticleVC.h"
 #import "BaseWKWebviewVC.h"
-
+#import "ChargeVC.h"
 @interface HomePageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 ///分页参数
@@ -43,14 +43,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //用户信息赋值
-    [YKNotification addObserver:self selector:@selector(requestAction) name:@"刷新一级界面" object:nil];
-    [YKNotification addObserver:self selector:@selector(requestAction) name:@"添加银行卡" object:nil];
+    [YKNotification addObserver:self selector:@selector(refreshHomePage) name:@"刷新我的卡包" object:nil];
     //关于UI
     [self SET_UI];
     //关于数据
     [self  SET_DATA];
 }
-
+#pragma mark - 刷新
+-(void)refreshHomePage{
+    self.pageIndex =1 ;
+    [self requestAction];
+}
 #pragma mark - 关于UI
 -(void)SET_UI{
     [self ShowRightBtnImage:@"消息" Back:^{
@@ -102,6 +105,7 @@
     [ThirdPartyTool updateVerison];
     //请求个人信息
     [self requestUserInfo];
+    [self requestAction];
     //上拉刷新下拉加载
     [self Refresh];
 }
@@ -137,9 +141,9 @@
             if (weakSelf.pageIndex == 1) {
                 [YKDataTool saveObject:baseRes.data byFileName:@"首页信息"];
                 NSLog(@"%@",NSHomeDirectory());
-//                [weakSelf.imageArray removeAllObjects];
-//                [weakSelf.messageArray removeAllObjects];
-//                [weakSelf.dataArray removeAllObjects];
+                //                [weakSelf.imageArray removeAllObjects];
+                //                [weakSelf.messageArray removeAllObjects];
+                //                [weakSelf.dataArray removeAllObjects];
             }
             [weakSelf  dataProcessing];
         }else{
@@ -250,6 +254,7 @@
 }
 #pragma mark - 点击事件
 -(void)HomePageTwoCellBlockAction:( NSInteger )tag{
+    __weak typeof(self) weakSelf = self;
     if (tag<4) {
         ///是否实名认证
         if ([HTTPTool isCertification]) {
@@ -258,26 +263,32 @@
         switch (tag) {
             case 1:
             {
-//                ///我的卡包
-//                CardPackageVC * VC =  GetVC(CardPackageVC);
-//                [VC showBackBtn];
-//                PushVC(VC);
-                [YKNotification postNotificationName:@"添加银行卡" object:nil userInfo:nil];
-                [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 1;
+                //                ///我的卡包
+                //                CardPackageVC * VC =  GetVC(CardPackageVC);
+                //                [VC showBackBtn];
+                //                PushVC(VC);
+                self.tabBarController.selectedIndex = 1;
                 break;
             }
             case 2:
             {
-                //我的账单
-                BillVC * VC =  GetVC(BillVC);
-                [VC showBackBtn];
-                PushVC(VC);
+                //                //我的账单
+                //                BillVC * VC =  GetVC(BillVC);
+                //                [VC showBackBtn];
+                //                PushVC(VC);
+                self. tabBarController.selectedIndex = 2;
                 break;
             }
             case 3:
             {
                 //快速充值
-                TopUpVC * VC =  GetVC(TopUpVC);
+                //TopUpVC * VC =  GetVC(TopUpVC);
+                //PushVC(VC);
+                //快速充值
+                ChargeVC * VC =  GetVC(ChargeVC);
+                VC.ChargeVCBlock =^(){
+                    weakSelf. tabBarController.selectedIndex = 2;
+                };
                 PushVC(VC);
                 break;
             }

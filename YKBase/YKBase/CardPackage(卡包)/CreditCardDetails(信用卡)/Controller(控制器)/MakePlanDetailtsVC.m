@@ -8,6 +8,8 @@
 
 #import "MakePlanDetailtsVC.h"
 #import "PlanDetailsVC.h"
+#import "PayPlanVC.h"
+#import "DebitCardDetailsVC.h"
 @interface MakePlanDetailtsVC ()
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 
@@ -57,25 +59,29 @@
 }
 #pragma mark - 提交
 - (IBAction)submitAction:(SubmitBtn *)sender {
+    
     if ([self IF]) {
         __weak typeof(self) weakSelf = self;
-        //        NSURLSessionDataTask * task =  [HTTPTool requestCreatePlanWithParm:self.planModel active:NO success:^(BaseResponse * _Nullable baseRes) {
-        //            if (baseRes.resultCode==1) {
-        //                CardModel * model= [CardModel yy_modelWithJSON:baseRes.data];
-        //                //跳转
-        //                MakePlanDetailtsVC * VC =  GetVC(MakePlanDetailtsVC);
-        //                VC.cardModel = weakSelf.cardModel;
-        //                VC.planModel = model;
-        //                [weakSelf.navigationController pushViewController:VC animated:YES];
-        //                //                weakSelf.bond.text = model.bond;
-        //                //                weakSelf.fee.text =[NSString stringWithFormat:@"保证金: %@",  model.fee];
-        //                //                weakSelf.feeStr = model.fee;
-        //            }
-        //        } faild:^(NSError * _Nullable error) {
-        //        }];
-        //        if (task) {
-        //            [self.sessionArray addObject:task];
-        //        }
+        NSURLSessionDataTask * task =  [HTTPTool requestSubmitPlanWithParm:self.planModel active:NO success:^(BaseResponse * _Nullable baseRes) {
+            if (baseRes.resultCode==1) {
+                PayPlanVC *VC = GetVC(PayPlanVC);
+                VC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+                VC.cardModel = weakSelf.planModel;
+                //type 1 支付 2 未支付
+                VC.PayPlanVCBlock =^(NSString * type){
+                    for (BaseViewController * tempVC in weakSelf.navigationController.viewControllers) {
+                        if ([tempVC isKindOfClass:[DebitCardDetailsVC class]]) {
+                            [weakSelf.navigationController popToViewController:tempVC animated:YES];
+                        }
+                    }
+                };
+                PresentVC(VC);
+            }
+        } faild:^(NSError * _Nullable error) {
+        }];
+        if (task) {
+            [self.sessionArray addObject:task];
+        }
         
     }
     

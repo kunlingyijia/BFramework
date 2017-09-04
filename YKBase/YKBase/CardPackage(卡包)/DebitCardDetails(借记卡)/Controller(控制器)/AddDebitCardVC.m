@@ -73,6 +73,7 @@
     //跳转
     BankCardListVC * VC =  GetVC(BankCardListVC);
     __weak typeof(self) weakSelf = self;
+    VC.bank_name = self.bank_name.text;
     VC.BankCardListVCBlock =^(NSString * bankName){
         weakSelf.bank_name.text = bankName;
     };

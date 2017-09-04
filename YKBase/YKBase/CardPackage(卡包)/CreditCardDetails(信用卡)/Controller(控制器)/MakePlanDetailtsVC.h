@@ -20,9 +20,6 @@
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *bond;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *fee;
 @property (weak, nonatomic) IBOutlet PublicLabel *payment_money;
-
-
-
 ///model
 @property (nonatomic, strong) CardModel *cardModel ;
 ///model

@@ -7,7 +7,6 @@
 //
 
 #import "HomePageThreeCell.h"
-#import "HomePageModel.h"
 #import "CardModel.h"
 @implementation HomePageThreeCell
 
@@ -32,8 +31,6 @@
 -(void)setModel:(CardModel *)model{
     if (!model) return;
     _model = model;
-    
-    
     self.BankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", model.bank_name]];
     NSString *bank_card_no ;
     if(model.bank_card_no.length>=4){
@@ -47,32 +44,6 @@
     self.credit_line.text = model.credit_line;
     self.state_date.text =[NSString stringWithFormat:@"%@日", model.state_date];
     self.repay_date.text =[NSString stringWithFormat:@"%@日", model.repay_date] ;    
-}
--(void)setHPodel:(HomePageModel *)HPodel{
-    if (!HPodel) return;
-    _HPodel = HPodel;
-    
-    self.BankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", HPodel.bank_name]];
-    
-    NSString *bank_card_no ;
-    if(HPodel.bank_card_no.length>=4){
-        bank_card_no =
-        [HPodel.bank_card_no substringFromIndex:HPodel.bank_card_no.length-4];
-    }else{
-        bank_card_no =
-        HPodel.bank_card_no;
-    }
-    self.bank_name.text = [NSString stringWithFormat:@"%@(%@)",HPodel.bank_name,bank_card_no];
-    self.credit_line.text = HPodel.credit_line;
-    self.state_date.text =[NSString stringWithFormat:@"%@日", HPodel.state_date];
-    self.repay_date.text =[NSString stringWithFormat:@"%@日", HPodel.repay_date] ;
-    
-    
-    
-    
-    
-    
-
 }
 
 @end

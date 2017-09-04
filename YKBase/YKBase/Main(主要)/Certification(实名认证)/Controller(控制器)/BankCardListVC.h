@@ -10,4 +10,8 @@
 
 @interface BankCardListVC : BaseViewController
 @property (nonatomic, copy) void(^ BankCardListVCBlock)(NSString * bankName);
+///银行名称
+@property (nonatomic, strong) NSString  *bank_name ;
+
+
 @end

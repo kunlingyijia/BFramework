@@ -34,14 +34,12 @@
 #pragma mark - 视图已在屏幕上渲染完成
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
 }
 #pragma mark -  载入完成
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [YKNotification addObserver:self selector:@selector(addBankAction) name:@"添加银行卡" object:nil];
-    //用户信息赋值
-    [YKNotification addObserver:self selector:@selector(addBankAction) name:@"刷新一级界面" object:nil];
+    [YKNotification addObserver:self selector:@selector(refreshMyCardPackage) name:@"刷新我的卡包" object:nil];
+    
     //关于UI
     [self SET_UI];
     //关于数据
@@ -76,7 +74,6 @@
     [self.view addSubview:_tableView];
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
     [_tableView tableViewregisterNibArray:@[@"HomePageThreeCell",@"CardPackageOneCell",@"CardPackageTwoCell",@"CardPackageThreeCell"]];
-    
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -99,8 +96,9 @@
         [weakself requestAction];
     }];
 }
-#pragma mark - 通知
--(void)addBankAction{
+#pragma mark - 刷新我的卡包
+-(void)refreshMyCardPackage{
+    self.pageIndex =1 ;
     [self requestAction];
     [self segmentedData];
 }
@@ -117,7 +115,6 @@
                 if ([weakSelf.type isEqualToString:@"1"]) {
                     [YKDataTool saveObject:baseRes.data byFileName:@"我的借记卡"];
                 }
-                
             }
             [weakSelf  dataProcessing];
         }else{
@@ -204,9 +201,9 @@
             //新增信用卡
             AddDebitCard * VC =  GetVC(AddDebitCard);
             VC.AddDebitCardVCBlock = ^(){
-                [weakSelf segmentedData];
-                weakSelf.pageIndex = 1;
-                [weakSelf requestAction];
+//                [weakSelf segmentedData];
+//                weakSelf.pageIndex = 1;
+//                [weakSelf requestAction];
             };
             PushVC(VC)
         }
@@ -215,9 +212,9 @@
             //新增借记卡
             AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
             VC.AddDebitCardVCBlock = ^(){
-                [weakSelf segmentedData];
-                weakSelf.pageIndex = 1;
-                [weakSelf requestAction];
+//                [weakSelf segmentedData];
+//                weakSelf.pageIndex = 1;
+//                [weakSelf requestAction];
             };
             PushVC(VC)
         }
@@ -226,7 +223,6 @@
         if ([_type isEqualToString:@"2"]) {
             //跳转
             DebitCardDetailsVC * VC =  GetVC(DebitCardDetailsVC);
-            
             VC.cardModel = self.dataArray[indexPath.row];
             PushVC(VC);
         }
@@ -246,6 +242,7 @@
 #pragma mark - dealloc
 - (void)dealloc
 {
+    
     NSLog(@"%@销毁了", [self class]);
 }
 

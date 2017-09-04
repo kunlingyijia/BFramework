@@ -26,8 +26,6 @@
 #pragma mark -  视图将出现在屏幕之前
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self requestAction];
-
 }
 #pragma mark - 视图已在屏幕上渲染完成
 -(void)viewDidAppear:(BOOL)animated{
@@ -37,7 +35,7 @@
 #pragma mark -  载入完成
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //[YKNotification addObserver:self selector:@selector(requestAction) name:@"刷新一级界面" object:nil];
+    [YKNotification addObserver:self selector:@selector(refreshMyBill) name:@"刷新我的账单" object:nil];
     //关于UI
     [self SET_UI];
     //关于数据
@@ -68,6 +66,7 @@
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
+    [self requestAction];
 //    //上拉刷新下拉加载
     [self Refresh];
     [self  dataProcessing];
@@ -85,6 +84,11 @@
     }];
     
 }
+#pragma mark - 刷新我的账单
+-(void)refreshMyBill{
+    self.pageIndex =1 ;
+    [self requestAction];
+}
 #pragma mark - 网络请求
 -(void)requestAction{
     __weak typeof(self) weakSelf = self;
@@ -96,7 +100,7 @@
             }
             for (NSDictionary * dic in baseRes.data) {
                 BillModel * model = [BillModel yy_modelWithJSON:dic];
-                 [weakSelf.dataArray addObject:model];
+                // [weakSelf.dataArray addObject:model];
             }
             //刷新
             [weakSelf.tableView reloadData];

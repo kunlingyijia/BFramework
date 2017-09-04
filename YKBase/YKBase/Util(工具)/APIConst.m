@@ -55,10 +55,17 @@ NSString * const  Request_BankCardInfo = @"/Bank/bankCardInfo";
 
 ///计划列表
 NSString * const  Request_PlanList = @"/Plan/planList";
+///计划流水
+NSString * const  Request_PlanFlowList = @"/Plan/planFlowList";
+
+
 ///删除计划
 NSString * const  Request_DeletePlan = @"/Plan/deletePlan";
 ///下一步（生成计划)
 NSString * const  Request_CreatePlan = @"/Plan/createPlan";
+///提交计划
+NSString * const  Request_SubmitPlan = @"/Plan/submitPlan";
+
 
 ///计算保证金/手续费
 NSString * const  Request_CalculateFee = @"/Plan/calculateFee";
@@ -66,18 +73,27 @@ NSString * const  Request_CalculateFee = @"/Plan/calculateFee";
 NSString * const  Request_PlanInfo = @"/Plan/planInfo";
 ///更换计划
 NSString * const  Request_ReplacePlan = @"/Plan/replacePlan";
+///支付计划
+NSString * const  Request_PayPlan = @"/Plan/payPlan";
+
+
 ///添加借记卡
 NSString * const  Request_BankAddDebitCard = @"/Bank/addDebitCard";
 ///添加信用卡
 NSString * const  Request_AddCreditCard = @"/Bank/addCreditCard";
-///快捷签约
-NSString * const  Request_quickSign = @"/Pay/quickSign";
+///修改资料（信用卡）
+NSString * const  Request_EditCreditCard = @"/Bank/editCreditCard";
+
+
 ///快捷签约短信
 NSString * const  Request_quickSms = @"/Bank/quickSms";
 ///快捷签约查询
 NSString * const  Request_quickQuery = @"/Bank/quickQuery";
 ///提现
 NSString * const  Request_Withdraw = @"/Bank/withdraw";
+///快速充值
+NSString * const  Request_QuickRecharge = @"/UserRecharge/quickRecharge";
+
 
 
 

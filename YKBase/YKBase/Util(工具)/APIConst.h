@@ -51,30 +51,42 @@ extern NSString * const  Request_BankCardList;
 ///获取银行卡信息
 extern NSString * const  Request_BankCardInfo;
 
-///查看计划
+///计划列表
 extern NSString * const  Request_PlanList ;
+///计划流水
+extern NSString * const  Request_PlanFlowList ;
+
+
 ///删除计划
 extern NSString * const  Request_DeletePlan ;
 ///下一步（生成计划)
 extern NSString * const  Request_CreatePlan ;
+///提交计划
+extern NSString * const  Request_SubmitPlan ;
 ///计算保证金/手续费
 extern NSString * const  Request_CalculateFee ;
 ///获取计划信息/预览计划
 extern NSString * const  Request_PlanInfo ;
 ///更换计划
 extern NSString * const  Request_ReplacePlan ;
+///支付计划
+extern NSString * const  Request_PayPlan ;
+
 ///添加借记卡
 extern NSString * const  Request_BankAddDebitCard ;
 ///添加信用卡
 extern NSString * const  Request_AddCreditCard ;
-///快捷签约
-extern NSString * const  Request_quickSign ;
+///修改资料（信用卡）
+extern NSString * const  Request_EditCreditCard ;
+
 ///快捷签约短信
 extern NSString * const  Request_quickSms ;
 ///快捷签约查询
 extern NSString * const  Request_quickQuery ;
 ///提现
 extern NSString * const  Request_Withdraw ;
+///快速充值
+extern NSString * const  Request_QuickRecharge ;
 
 
 

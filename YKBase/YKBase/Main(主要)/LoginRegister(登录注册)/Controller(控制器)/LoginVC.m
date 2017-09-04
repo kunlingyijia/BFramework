@@ -79,8 +79,9 @@
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
-            //设置别名
-            [YKNotification postNotificationName:@"刷新一级界面" object:nil userInfo:nil];
+            
+            [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
+            [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
             //返回
             [weakSelf dismissViewControllerAnimated:YES completion:^{}];
         }

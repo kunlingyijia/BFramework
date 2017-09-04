@@ -74,6 +74,7 @@
     //跳转
     BankCardListVC * VC =  GetVC(BankCardListVC);
     __weak typeof(self) weakSelf = self;
+      VC.bank_name = self.bank_name.text;
     VC.BankCardListVCBlock =^(NSString * bankName){
         weakSelf.bank_name.text = bankName;
     };
@@ -83,7 +84,6 @@
 #pragma mark - 日期选择
 - (IBAction)DataAction:(PublicBtn *)sender {
     [self.view endEditing:YES];
-
     __weak typeof(self) weakSelf = self;
     switch (sender.tag) {
         case 301:
@@ -91,7 +91,6 @@
             MCDatePickerView *YYMMView= [[MCDatePickerView alloc] initWithFrame:CGRectZero type:XMGStyleTypeYearAndMonth MCDateSuccessBack:^(NSString *resultstr) {
                 NSLog(@"年年---%@",resultstr);
                 weakSelf.valid_thru.text = resultstr;
-               
             }];
             [YYMMView show];
             break;
@@ -129,13 +128,11 @@
         return ;
     }
     if (![RegularTool checkTelNumber:self.bind_mobile.text]) {
-        
         [DWAlertTool showToast:@"手机号码输入有误"];
         return;
     }
     [DWAlertTool VerificationCodeBtn:sender];
     [HTTPTool requestQuickSmsWithParm:@{@"bind_mobile":self.bind_mobile.text,@"bank_card_no":self.bank_card_no.text,@"account_name":self.account_name.text} active:YES success:^(BaseResponse * _Nullable baseRes) {
-        
         if (baseRes.resultCode ==1) {
             [DWAlertTool showToast:@"验证码发送成功"];
         }else{
@@ -147,31 +144,31 @@
 }
 #pragma mark - 提交
 - (IBAction)submitBtn:(SubmitBtn *)sender {
-        if ([self IF]) {
-            CardModel *model =[CardModel new];
-            model.bank_card_photo=_bank_card_photoUrl ;
-            model.bank_card_back_photo=_bank_card_back_photoUrl ;
-            model.bank_card_no= self.bank_card_no.text;
-            model.bank_name = self.bank_name.text;
-            model.credit_line = self.credit_line.text;
-            NSString *valid_thru = [self.valid_thru.text stringByReplacingOccurrencesOfString:@"/" withString:@""];
-            model.valid_thru= valid_thru ;
-            model.cvn2 = self.cvn2.text;
-            NSString *state_date = [self.state_date.text stringByReplacingOccurrencesOfString:@"日" withString:@""];
-            model.state_date = state_date;
-            NSString *repay_date = [self.repay_date.text stringByReplacingOccurrencesOfString:@"日" withString:@""];
-            model.repay_date = repay_date;
-            model.bind_mobile = self.bind_mobile.text;
-            model.verify_code = self.verify_code.text;
-            model.account_name = self.account_name.text;
-            __weak typeof(self) weakSelf = self;
-            NSURLSessionDataTask * task =  [HTTPTool requestAddCreditCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
-                    if (baseRes.resultCode==1) {
-                    //                //请求个人信息
-                    //                [weakSelf requestUserInfo];
-//                    //跳转
-                    SigningVC * VC =  GetVC(SigningVC);
-                    NSDictionary * dic = baseRes.data;
+    if ([self IF]) {
+        CardModel *model =[CardModel new];
+        model.bank_card_photo=_bank_card_photoUrl ;
+        model.bank_card_back_photo=_bank_card_back_photoUrl ;
+        model.bank_card_no= self.bank_card_no.text;
+        model.bank_name = self.bank_name.text;
+        model.credit_line = self.credit_line.text;
+        NSString *valid_thru = [self.valid_thru.text stringByReplacingOccurrencesOfString:@"/" withString:@""];
+        model.valid_thru= valid_thru ;
+        model.cvn2 = self.cvn2.text;
+        NSString *state_date = [self.state_date.text stringByReplacingOccurrencesOfString:@"日" withString:@""];
+        model.state_date = state_date;
+        NSString *repay_date = [self.repay_date.text stringByReplacingOccurrencesOfString:@"日" withString:@""];
+        model.repay_date = repay_date;
+        model.bind_mobile = self.bind_mobile.text;
+        model.verify_code = self.verify_code.text;
+        model.account_name = self.account_name.text;
+        __weak typeof(self) weakSelf = self;
+        NSURLSessionDataTask * task =  [HTTPTool requestAddCreditCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+            if (baseRes.resultCode==1) {
+                //跳转
+                SigningVC * VC =  GetVC(SigningVC);
+                NSDictionary * dic = baseRes.data;
+                NSString * op_err_msg = dic[@"op_err_msg"];
+                if ([dic[@"op_ret_code"] isEqualToString:@"000"]) {
                     VC.form_data = dic[@"form_data"];
                     VC.SigningVCBlock = ^(){
                         weakSelf.AddDebitCardVCBlock();
@@ -179,31 +176,19 @@
                         [weakSelf.navigationController popViewControllerAnimated:YES] ;
                     };
                     PushVC(VC);
+                }else{
+                    weakSelf.view.userInteractionEnabled =YES;
+                    if (op_err_msg) {
+                        [DWAlertTool showToast:op_err_msg];
+                    }
                 }
-            } faild:^(NSError * _Nullable error) {
-            }];
-            if (task) {
-                [self.sessionArray addObject:task];
+                
             }
-    
+        } faild:^(NSError * _Nullable error) {
+        }];
+        if (task) {
+            [self.sessionArray addObject:task];
         }
-}
-#pragma mark - 请求个人信息
--(void)requestUserInfo{
-    __weak typeof(self) weakSelf = self;
-    NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
-        if (baseRes.resultCode ==1) {
-            // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                weakSelf.AddDebitCardVCBlock();
-                //返回
-                [weakSelf.navigationController popViewControllerAnimated:YES] ;
-            });
-        }
-    } faild:^(NSError * _Nullable error) {
-    }];
-    if (task) {
-        [self.sessionArray addObject:task];
     }
 }
 #pragma mark - 判断条件

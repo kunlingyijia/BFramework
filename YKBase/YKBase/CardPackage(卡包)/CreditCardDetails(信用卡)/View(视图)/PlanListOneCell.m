@@ -29,8 +29,33 @@
     _model = model;
     
     self.plan_no.text = model.plan_no;
-   // self.total_money.text = model.total_money;
+    self.total_money
+.text = model.total_money
+;
     self.beginAndend.text =[NSString stringWithFormat:@"%@~%@", [model.begin_time timeStampString],[model.end_time timeStampString]];
+    //1-提交中（未支付） 2-确认（已支付）  3-执行中  4-冻结(取消) 5-删除6-已完成
+    if ([model.status isEqualToString:@"1"]) {
+        self.status.text = @"未支付";
+    }
+    if ([model.status isEqualToString:@"2"]) {
+        self.status.text = @"已支付";
+    }
+
+    if ([model.status isEqualToString:@"3"]) {
+        self.status.text = @"执行中";
+    }
+
+    if ([model.status isEqualToString:@"4"]) {
+        self.status.text = @"冻结";
+    }
+    if ([model.status isEqualToString:@"5"]) {
+        self.status.text = @"已删除";
+    }
+    if ([model.status isEqualToString:@"6"]) {
+        self.status.text = @"已完成";
+    }
+   
+
     
 
     

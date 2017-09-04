@@ -60,16 +60,11 @@
     self.state_date.text =[NSString stringWithFormat:@"%@日", self.cardModel.state_date];
     self.repay_date.text =[NSString stringWithFormat:@"%@日", self.cardModel.repay_date] ;
 }
-
-
 -(void)valueChange:(DarkGreyTF*)sender{
     self.bond.text = @"";
     self.fee.text =@"手续费: ";
     self.feeStr = @"";
 }
-
-
-
 #pragma mark - 计算保证金
 - (IBAction)calculateAction:(SubmitBtn *)sender {
     [self.view endEditing:YES];

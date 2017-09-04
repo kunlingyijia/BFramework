@@ -128,10 +128,6 @@
     [YKNotification postNotificationName:@"设置别名" object:nil userInfo:[NSDictionary dictionaryWithObject:@"" forKey:@"pushAlias"]];
     //退出登录
     [YKNotification postNotificationName:@"退出账号" object:nil userInfo:nil];
-    //            if ([HTTPTool isLogin]){
-    //                return;
-    //            }
-
 }
 
 

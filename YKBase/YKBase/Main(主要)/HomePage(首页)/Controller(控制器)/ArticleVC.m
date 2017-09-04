@@ -5,9 +5,7 @@
 //  Created by 席亚坤 on 17/2/8.
 //  Copyright © 2017年 bianming. All rights reserved.
 //
-
 #import "ArticleVC.h"
-#import "HomePageModel.h"
 #import "PhotoViewController.h"
 @interface ArticleVC ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
@@ -33,7 +31,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
-
 #pragma mark - 关于UI
 -(void)SET_UI{
     [self showBackBtn];
@@ -83,7 +80,7 @@
             if (baseRes.resultCode==1) {
                 //反编译 [html HtmlToString]
                 // [_webview loadHTMLString:[response[@"data"][@"content"] HtmlToString]baseURL:nil];
-                HomePageModel * model = [HomePageModel yy_modelWithJSON:baseRes.data];
+                CardModel * model = [CardModel yy_modelWithJSON:baseRes.data];
                 [_webview loadHTMLString:model.content baseURL:nil];
                 weakSelf.title =model.title;
             }
