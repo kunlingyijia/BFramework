@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [YKNotification addObserver:self selector:@selector(refreshMyCardPackage) name:@"刷新我的卡包" object:nil];
-    
+    [YKNotification addObserver:self selector:@selector(segmentedData) name:@"获取个人信息" object:nil];
     //关于UI
     [self SET_UI];
     //关于数据
@@ -47,7 +47,7 @@
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
-    self.title = @"卡包";
+    
     __weak typeof(self) weakSelf = self;
     [self segmentedData];
     self.segmented.SegmentedViewBlock = ^(NSInteger tag){
@@ -66,7 +66,13 @@
 }
 #pragma mark - 关于tableView
 -(void)setUpTableView{
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20+40*SizeScale, Width, Height-64-20-40*SizeScale-44) style:(UITableViewStylePlain)];
+    if (self.ISLevel) {
+        self.title = @"我的卡包";
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20+40*SizeScale, Width, Height-64-20-40*SizeScale) style:(UITableViewStylePlain)];
+    }else{
+        self.title = @"卡包";
+        self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 20+40*SizeScale, Width, Height-64-20-40*SizeScale-44) style:(UITableViewStylePlain)];
+    }
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor clearColor];
@@ -80,9 +86,12 @@
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.type = @"2";
     self.pageIndex =1;
+    [self  dataProcessing];
+
     [self requestAction];
     //上拉刷新下拉加载
     [self Refresh];
+    
 }
 -(void)Refresh{
     //下拉刷新
@@ -104,7 +113,6 @@
 }
 #pragma mark - 网络请求
 -(void)requestAction{
-    [self  dataProcessing];
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestBankCardListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10",@"type":self.type} active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
@@ -179,18 +187,28 @@
             //cell其他配置
             return cell;
         }else{
+         CardModel*   model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+            ///计划状态 1-待还款 2-待付款 3-执行中 4-冻结 5-还款完成
+
+            if ([model.plan_status isEqualToString:@"3"]||[model.plan_status isEqualToString:@"4"]) {
+                CardPackageOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageOneCell" forIndexPath:indexPath];
+                //cell赋值
+                cell.model = model;
+                //cell其他配置
+                return cell;
+            }else{
             HomePageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageThreeCell" forIndexPath:indexPath];
             //cell赋值
-            cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+            cell.model = model;
             //cell其他配置
             return cell;
+            }
         }
     }
 }
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    __weak typeof(self) weakSelf = self;
     if (self.dataArray.count==0) {
         ///是否实名认证
         if ([HTTPTool isCertification]) {
@@ -201,9 +219,6 @@
             //新增信用卡
             AddDebitCard * VC =  GetVC(AddDebitCard);
             VC.AddDebitCardVCBlock = ^(){
-//                [weakSelf segmentedData];
-//                weakSelf.pageIndex = 1;
-//                [weakSelf requestAction];
             };
             PushVC(VC)
         }
@@ -212,9 +227,6 @@
             //新增借记卡
             AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
             VC.AddDebitCardVCBlock = ^(){
-//                [weakSelf segmentedData];
-//                weakSelf.pageIndex = 1;
-//                [weakSelf requestAction];
             };
             PushVC(VC)
         }
@@ -228,7 +240,10 @@
         }
         //银行卡类型 1-借记卡（储蓄卡） 2-贷记卡（信用卡） 3-结算卡(储蓄卡）
         if ([_type isEqualToString:@"1"]) {
-            [DWAlertTool showToast:@"敬请期待..."];
+            //[DWAlertTool showToast:@"敬请期待..."];
+            //跳转
+            PublicVC * VC =  GetVC(PublicVC);
+            PushVC(VC);
         }
     }
 }
@@ -242,7 +257,7 @@
 #pragma mark - dealloc
 - (void)dealloc
 {
-    
+    [YKNotification removeObserver:self];
     NSLog(@"%@销毁了", [self class]);
 }
 

@@ -79,7 +79,6 @@
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
-            
             [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
             [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
             //返回
@@ -159,12 +158,20 @@
                 PushVC(VC)
             }
         } faild:^(NSError * _Nullable error) {
-            
         }];
         if (task) {
             [weakSelf.sessionArray addObject:task];
         }
     }];
+}
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField ==self.account) {
+        NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        return  [RegularTool checkNumber11:toString];
+    }
+    return YES;
 }
 #pragma mark - dealloc
 - (void)dealloc

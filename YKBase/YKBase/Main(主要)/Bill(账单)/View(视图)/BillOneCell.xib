@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="613" height="127"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="613" height="126.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="613" height="127"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kTJ-JI-nKe">
@@ -86,6 +86,13 @@
                     <constraint firstItem="kTJ-JI-nKe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="zoP-IA-yyh"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="bank_name" destination="ywo-eq-GNP" id="IOC-jR-QeJ"/>
+                <outlet property="flow_typeImg" destination="Nh6-6h-2J3" id="N7Z-on-yKy"/>
+                <outlet property="minute" destination="QGH-IN-f4J" id="Yzh-O6-5J4"/>
+                <outlet property="money" destination="ZFg-ls-1Q9" id="gJB-yf-OYp"/>
+                <outlet property="status" destination="Ihi-6D-ayd" id="7qf-8o-md7"/>
+            </connections>
             <point key="canvasLocation" x="180.5" y="95.5"/>
         </tableViewCell>
     </objects>

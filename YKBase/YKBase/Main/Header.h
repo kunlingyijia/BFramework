@@ -25,7 +25,7 @@
 #import "UICollectionView+NoData.h"
 #import "DWHelper.h"
 #import "EZTextView.h"
-//#import "LineView.h"
+#import "PublicVC.h"
 #import "ImageChooseVC.h"
 #import "UIImage+GIF.h"
 #import "NSString+TextHight.h"

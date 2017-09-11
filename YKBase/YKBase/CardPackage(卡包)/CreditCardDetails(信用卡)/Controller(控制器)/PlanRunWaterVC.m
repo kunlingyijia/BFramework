@@ -9,7 +9,6 @@
 #import "PlanRunWaterVC.h"
 #import "BillOneCell.h"
 #import "BillHeaderView.h"
-#import "BillSubModel.h"
 #import "BillModel.h"
 @interface PlanRunWaterVC ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -41,6 +40,7 @@
 #pragma mark - 关于UI
 -(void)SET_UI{
     self.title = @"计划流水";
+    [self showBackBtn];
     [self setUpTableView];
 }
 #pragma mark - 关于tableView
@@ -59,9 +59,9 @@
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
-    //    [self requestAction];
-    //    //上拉刷新下拉加载
-    //    [self Refresh];
+        [self requestAction];
+        //上拉刷新下拉加载
+        [self Refresh];
 }
 -(void)Refresh{
     //下拉刷新
@@ -78,7 +78,7 @@
 #pragma mark - 网络请求
 -(void)requestAction{
     __weak typeof(self) weakSelf = self;
-    NSURLSessionDataTask * task =  [HTTPTool  requestHomePageWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:YES success :^(BaseResponse * _Nullable baseRes) {
+    NSURLSessionDataTask * task =  [HTTPTool  requestBillListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10",@"bank_id":self.cardModel.bank_id} active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             if (weakSelf.pageIndex == 1) {
                 [weakSelf.dataArray removeAllObjects];
@@ -113,8 +113,7 @@
 ///tab个数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    BillModel *model=self.dataArray[section];
-    return ((NSMutableArray*)model.billSubModel).count;
+    return 1;
 }
 //tab设置
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -123,10 +122,10 @@
     if (indexPath.section>self.dataArray.count-1||self.dataArray.count==0) {
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
+        
         BillOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"BillOneCell" forIndexPath:indexPath];
         //cell 赋值
-        BillModel *model=self.dataArray[indexPath.section];
-        // cell.model = indexPath.section >= self.dataArray.count ? nil : model.billSubModel[indexPath.row];
+        cell.model =indexPath.section >= self.dataArray.count ? nil :self.dataArray[indexPath.section];
         // cell 其他配置
         return cell;
     }
@@ -147,16 +146,29 @@
 }
 #pragma mark - 页眉的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return Width*0.1;
+    if (section>0) {
+        BillModel* beforeModel= self.dataArray[section-1];
+        BillModel* afterModel= self.dataArray[section];
+        if (![beforeModel.create_time isEqualToString: afterModel.create_time]) {
+            return Width*0.1;
+        }else{
+            return 0;
+        }
+    }else{
+        BillModel* OneModel= self.dataArray[section];
+        if (OneModel) {
+            return Width*0.1;
+        }else{
+            return 0;
+        }
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01;
-    
 }
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Width*0.16;
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -168,4 +180,5 @@
 }
 
 @end
+
 

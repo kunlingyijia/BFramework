@@ -65,12 +65,11 @@
     if ([self.cardModel.status isEqualToString:@"1"]) {
         [self.submitBtn setTitle:@"支付" forState:(0)];
     }
-    
 }
 #pragma mark - 控件赋值
 -(void)ControlsAssignment{
-    self.plan_no.text = self.cardModel.plan_no;
-    self.beginAndend.text = [NSString stringWithFormat:@"%@~%@", [self.cardModel.begin_time timeStampString],[self.cardModel.end_time timeStampString]];
+    self.plan_no.text =[NSString stringWithFormat:@"计划单号: %@", self.cardModel.plan_no];
+    self.beginAndend.text = [NSString stringWithFormat:@"还款周期: %@~%@", [self.cardModel.begin_time timeStampString],[self.cardModel.end_time timeStampString]];
     self.total_money.text = self.cardModel.total_money;
     self.bond.text = self.cardModel.bond;
     self.fee.text = self.cardModel.fee;
@@ -78,18 +77,15 @@
 #pragma mark -tableView赋值
 -(void)tableViewAssignment{
     [self.dataArray removeAllObjects];
-        for (NSDictionary *dic  in [self.type isEqualToString:@"1"] ? self.cardModel.repayModel :self.cardModel.consumeModel) {
-            CardSubModel * model = [CardSubModel yy_modelWithJSON:dic];
-            model.type =self.type;
-            [self.dataArray addObject:model];
-        }
-        [self.tableView reloadData];
-    
-    
+    for (NSDictionary *dic  in [self.type isEqualToString:@"1"] ? self.cardModel.repayModel :self.cardModel.consumeModel) {
+        CardSubModel * model = [CardSubModel yy_modelWithJSON:dic];
+        model.type =self.type;
+        [self.dataArray addObject:model];
+    }
+    [self.tableView reloadData];
 }
 #pragma mark - 关于tableView
 -(void)setUpTableView{
-    
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.tableFooterView = [UIView new];
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
@@ -123,7 +119,6 @@
         //cell赋值
         return cell;
     }else{
-        
         PlanDetailsOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PlanDetailsOneCell" forIndexPath:indexPath];
         //cell赋值
         cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
@@ -134,11 +129,10 @@
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    __weak typeof(self) weakSelf = self;
 }
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return Width * 0.18;
+    return Width * 0.16;
 }
 #pragma mark - 提交
 - (IBAction)submitAction:(SubmitBtn *)sender {
@@ -159,15 +153,12 @@
         };
         PresentVC(VC);
     }
-
 }
 ///更换计划
 -(void)changePlan{
-    
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestReplacePlanWithParm:self.cardModel active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
-            
             NSDictionary * dic =baseRes.data;
             weakSelf.cardModel.repayModel = dic[@"repay"];
             weakSelf.cardModel.consumeModel = dic[@"consume"];
@@ -183,8 +174,6 @@
     if (task) {
         [self.sessionArray addObject:task];
     }
-
-    
 }
 
 

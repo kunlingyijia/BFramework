@@ -23,12 +23,10 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     //用户信息赋值
     [YKNotification addObserver:self selector:@selector(UserInfoForControls:) name:@"获取个人信息" object:nil];
-
     //UI
     [self SET_UI];
     //数据
@@ -37,8 +35,8 @@
 #pragma mark - 关于UI
 -(void)SET_UI{
     self.title = @"我的设置";
-  [self showBackBtn];
-  }
+    [self showBackBtn];
+}
 #pragma mark - 关于数据
 -(void)SET_DATA{
     YKHTTPSession * helper = [YKHTTPSession shareSession];
@@ -64,44 +62,40 @@
             VC.zoom= 1.0;
             VC.ImageChooseVCBlock =^(UIImage *image){
                 NSLog(@"%@",image);
-              [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:50 success:^(NSArray *urlArr) {
+                [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:50 success:^(NSArray *urlArr) {
                     NSDictionary * dic = urlArr[0];
                     Userinfo * model = [Userinfo new];
                     model.avatar_url =dic[@"url"];
                     NSURLSessionDataTask * task =    [HTTPTool requestUpdateUserInfoWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
-                            weakSelf.avatar_url.image = image;
-                            [YKHTTPSession shareSession].userinfo.avatar_url =dic[@"url"];
-                            //设置别名
-                            [YKNotification postNotificationName:@"获取个人信息" object:nil userInfo:nil];
-                     } faild:^(NSError * _Nullable error) {
-                         
-                     }];
-                  if (task) {
-                      [weakSelf.sessionArray addObject:task];
-                  }
+                        weakSelf.avatar_url.image = image;
+                        [YKHTTPSession shareSession].userinfo.avatar_url =dic[@"url"];
+                        //设置别名
+                        [YKNotification postNotificationName:@"获取个人信息" object:nil userInfo:nil];
+                    } faild:^(NSError * _Nullable error) {
+                        
+                    }];
+                    if (task) {
+                        [weakSelf.sessionArray addObject:task];
+                    }
                 } faild:^(id error) {
                     
                 }];
-                
             };
             [self presentViewController:VC animated:NO completion:nil];
         }
             break;
-            //个人账号
         case 102: {
-//            AboutUsVC *VC = GetVC(AboutUsVC);
-//            PushVC(VC)
+            //个人账号
         }
             break;
-            //当前版本
         case 103: {
+            //当前版本
             CurrentVersionVC *VC = GetVC(CurrentVersionVC);
             PushVC(VC)
-            }
+        }
             break;
-            //修改密码
         case 104: {
-            //Push 跳转
+            //修改密码
             PasswordVC * VC = GetVC(PasswordVC)
             VC.title = @"修改密码";
             __weak typeof(self) weakSelf = self;
@@ -129,13 +123,10 @@
     //退出登录
     [YKNotification postNotificationName:@"退出账号" object:nil userInfo:nil];
 }
-
-
-
 #pragma mark - dealloc
 - (void)dealloc
-{   
-
+{
+    [YKNotification removeObserver:self];
     NSLog(@"%@销毁了", [self class]);
 }
 @end

@@ -40,7 +40,7 @@ static NSString * const APIBaseURLString = @"http://www.baidu.com";
         AFJSONResponseSerializer * response = [AFJSONResponseSerializer serializer];
         response.removesKeysWithNullValues = YES;
         self.responseSerializer = response;
-                /**复杂的参数类型 需要使用json传值-设置请求内容的类型*/
+        /**复杂的参数类型 需要使用json传值-设置请求内容的类型*/
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         /**设置接受的类型*/
         [self.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/json", @"text/plain", @"text/html",@"application/x-www-form-urlencoded", nil]];

@@ -9,6 +9,7 @@
 #import "HomePageOneCell.h"
 #import "HomePageTwoCell.h"
 #import "HomePageThreeCell.h"
+#import "CardPackageOneCell.h"
 #import "MessageVC.h"
 #import "DebitCardDetailsVC.h"
 #import "CardModel.h"
@@ -64,22 +65,22 @@
         MessageVC * VC =  GetVC(MessageVC);
         PushVC(VC);
     }];
-    [self showLeftBtnImage:@"扫一扫" Back:^{
-        JQScanViewController *VC = [JQScanViewController new];
-        VC.JQScanVCBlock = ^(JQScanResult* strResult){
-            //  [DWAlertTool showToast:strResult.strScanned];
-            if ([RegularTool checkURL:strResult.strScanned]) {
-                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    BaseWKWebviewVC * VC = [[BaseWKWebviewVC alloc]initWithUrl:strResult.strScanned];
-                    PushVC(VC);
-                });
-            }else{
-                [DWAlertTool showToast:@"网址不合法"];
-            }
-        };
-        PushVC(VC)
-    }];
+    //    [self showLeftBtnImage:@"扫一扫" Back:^{
+    //        JQScanViewController *VC = [JQScanViewController new];
+    //        VC.JQScanVCBlock = ^(JQScanResult* strResult){
+    //            //  [DWAlertTool showToast:strResult.strScanned];
+    //            if ([RegularTool checkURL:strResult.strScanned]) {
+    //                // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+    //                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //                    BaseWKWebviewVC * VC = [[BaseWKWebviewVC alloc]initWithUrl:strResult.strScanned];
+    //                    PushVC(VC);
+    //                });
+    //            }else{
+    //                [DWAlertTool showToast:@"网址不合法"];
+    //            }
+    //        };
+    //        PushVC(VC)
+    //    }];
     self.title = @"首页";
     [(AppDelegate*)[UIApplication sharedApplication].delegate initUserGuidePage];
     [self setUpTableView];
@@ -93,7 +94,7 @@
     _tableView.tableFooterView = [UIView new];
     [self.view addSubview:_tableView];
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
-    [_tableView tableViewregisterNibArray:@[@"HomePageOneCell",@"HomePageTwoCell",@"HomePageThreeCell"]];
+    [_tableView tableViewregisterNibArray:@[@"HomePageOneCell",@"HomePageTwoCell",@"HomePageThreeCell",@"CardPackageOneCell"]];
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -101,11 +102,11 @@
     self.messageArray = [NSMutableArray arrayWithCapacity:0];
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
+    [self  dataProcessing];
     //更新版本
     [ThirdPartyTool updateVerison];
     //请求个人信息
     [self requestUserInfo];
-    [self requestAction];
     //上拉刷新下拉加载
     [self Refresh];
 }
@@ -134,16 +135,12 @@
 }
 #pragma mark - 网络请求
 -(void)requestAction{
-    [self  dataProcessing];
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestHomePageWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:YES success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             if (weakSelf.pageIndex == 1) {
                 [YKDataTool saveObject:baseRes.data byFileName:@"首页信息"];
                 NSLog(@"%@",NSHomeDirectory());
-                //                [weakSelf.imageArray removeAllObjects];
-                //                [weakSelf.messageArray removeAllObjects];
-                //                [weakSelf.dataArray removeAllObjects];
             }
             [weakSelf  dataProcessing];
         }else{
@@ -213,7 +210,6 @@
                 //消息
                 cell.HomePageOneCellLabelBlock = ^(NSInteger tag){
                     CardModel * model = weakSelf.messageArray[tag];
-                    //[DWAlertTool showToast:@"敬请期待..."];
                     //跳转
                     ArticleVC * VC =  GetVC(ArticleVC);
                     VC.article_id = model.article_id;
@@ -239,11 +235,22 @@
         }
         case 1:
         {
-            HomePageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageThreeCell" forIndexPath:indexPath];
-            //cell 赋值
-            cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
-            // cell 其他配置
-            return cell;
+            CardModel*   model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+            ///计划状态 1-待还款 2-待付款 3-执行中 4-冻结 5-还款完成
+            
+            if ([model.plan_status isEqualToString:@"3"]||[model.plan_status isEqualToString:@"4"]) {
+                CardPackageOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageOneCell" forIndexPath:indexPath];
+                //cell赋值
+                cell.model = model;
+                //cell其他配置
+                return cell;
+            }else{
+                HomePageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HomePageThreeCell" forIndexPath:indexPath];
+                //cell赋值
+                cell.model = model;
+                //cell其他配置
+                return cell;
+            }
             break;
         }
         default:{
@@ -256,38 +263,46 @@
 -(void)HomePageTwoCellBlockAction:( NSInteger )tag{
     __weak typeof(self) weakSelf = self;
     if (tag<4) {
-        ///是否实名认证
-        if ([HTTPTool isCertification]) {
-            return;
-        }
         switch (tag) {
             case 1:
             {
-                //                ///我的卡包
-                //                CardPackageVC * VC =  GetVC(CardPackageVC);
-                //                [VC showBackBtn];
-                //                PushVC(VC);
-                self.tabBarController.selectedIndex = 1;
+                ///我的卡包
+                CardPackageVC * VC =  GetVC(CardPackageVC);
+                VC.ISLevel = YES;
+                [VC showBackBtn];
+                PushVC(VC);
+                // self.tabBarController.selectedIndex = 1;
                 break;
             }
             case 2:
             {
-                //                //我的账单
-                //                BillVC * VC =  GetVC(BillVC);
-                //                [VC showBackBtn];
-                //                PushVC(VC);
-                self. tabBarController.selectedIndex = 2;
+                //我的账单
+                BillVC * VC =  GetVC(BillVC);
+                [VC showBackBtn];
+                VC.ISLevel = YES;
+                PushVC(VC);
+                //self. tabBarController.selectedIndex = 2;
                 break;
             }
             case 3:
             {
+                ///是否实名认证
+                if ([HTTPTool isCertification]) {
+                    return;
+                }
                 //快速充值
                 //TopUpVC * VC =  GetVC(TopUpVC);
                 //PushVC(VC);
                 //快速充值
                 ChargeVC * VC =  GetVC(ChargeVC);
                 VC.ChargeVCBlock =^(){
-                    weakSelf. tabBarController.selectedIndex = 2;
+                    //我的账单
+                    BillVC * VC =  GetVC(BillVC);
+                    [VC showBackBtn];
+                    VC.ISLevel = YES;
+                    PushVC(VC);
+                    
+                    //weakSelf. tabBarController.selectedIndex = 2;
                 };
                 PushVC(VC);
                 break;
@@ -297,7 +312,10 @@
             }
         }
     }else{
-        [DWAlertTool showToast:@"敬请期待..."];
+        //[DWAlertTool showToast:@"敬请期待..."];
+        //跳转
+        PublicVC * VC =  GetVC(PublicVC);
+        PushVC(VC);
     }
 }
 
@@ -340,6 +358,7 @@
 #pragma mark - dealloc
 - (void)dealloc
 {
+    [YKNotification removeObserver:self];
     NSLog(@"%@销毁了", [self class]);
 }
 

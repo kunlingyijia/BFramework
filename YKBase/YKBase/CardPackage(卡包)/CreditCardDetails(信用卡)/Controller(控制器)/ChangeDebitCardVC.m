@@ -44,7 +44,6 @@
     self.repay_date.text =[NSString stringWithFormat:@"%@日", self.cardModel.repay_date] ;
     self.bind_mobile.text = self.cardModel.bind_mobile;
 }
-
 #pragma mark - 日期选择
 - (IBAction)DataAction:(PublicBtn *)sender {
     __weak typeof(self) weakSelf = self;
@@ -58,7 +57,6 @@
                 NSLog(@"天天---%@",resultstr);
             }];
             [dayView show];
-            
             break;
         }
         case 303:
@@ -120,8 +118,11 @@
         NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         return  [RegularTool checkAmount:toString];
     }
+    if (textField ==self.bind_mobile) {
+        NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        return  [RegularTool checkNumber11:toString];
+    }
     return YES;
-    
 }
 
 #pragma mark - dealloc

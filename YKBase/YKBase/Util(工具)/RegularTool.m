@@ -337,5 +337,13 @@
     BOOL flag = [phoneTest evaluateWithObject:number];
     return flag;
 }
+#pragma mark - 正则匹配11位正整数(手机号位数)
++ (BOOL)checkNumber11:(NSString *) number{
+    // @"^[0-9]\\d{0,2}$"
+    NSString *stringRegex =  @"(\\+)?([0-9]\\d{0,10})?";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
+    BOOL flag = [phoneTest evaluateWithObject:number];
+    return flag;
+}
 
 @end

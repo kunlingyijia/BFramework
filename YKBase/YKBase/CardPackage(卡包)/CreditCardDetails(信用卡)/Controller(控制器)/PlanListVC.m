@@ -11,7 +11,6 @@
 #import "PlanDetailsVC.h"
 @interface PlanListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
-
 ///分页参数
 @property (nonatomic, assign) NSInteger pageIndex;
 ///数据
@@ -25,7 +24,6 @@
 #pragma mark - 视图已在屏幕上渲染完成
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
 }
 #pragma mark -  载入完成
 - (void)viewDidLoad {
@@ -41,7 +39,6 @@
     [self showBackBtn];
     [self setUpTableView];
 }
-
 #pragma mark - 关于tableView
 -(void)setUpTableView{
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Width, Height-64) style:(UITableViewStylePlain)];
@@ -54,13 +51,10 @@
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
     [_tableView tableViewregisterNibArray:@[@"PlanListOneCell"]];
     [_tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"UITableViewHeaderFooterView"];
-    
-    
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
-    
     self.pageIndex =1;
     [self requestAction];
     //上拉刷新下拉加载
@@ -130,7 +124,6 @@
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
         return cell;
     }else{
-        
         PlanListOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PlanListOneCell" forIndexPath:indexPath];
         //cell赋值
         cell.model = indexPath.section >= self.dataArray.count ? nil :self.dataArray[indexPath.section];
@@ -151,28 +144,23 @@
     };
     VC.cardModel = model;
     PushVC(VC);
-    
 }
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return Width * 0.2 ;
+    return Width * 0.21 ;
 }
 #pragma mark - 分区页眉
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
     UITableViewHeaderFooterView *header= [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"UITableViewHeaderFooterView" ];
     header.contentView.backgroundColor = [UIColor colorWithHexString:kViewBackgroundColor];
     return header;
-    
 }
 #pragma mark - 页眉的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
 }
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     CardModel*  model = indexPath.section >= self.dataArray.count ? nil :self.dataArray[indexPath.section];
-    
     return [model.status isEqualToString:@"1"]? YES :NO ;
 }
 //iOS 8.0 后才有的方法

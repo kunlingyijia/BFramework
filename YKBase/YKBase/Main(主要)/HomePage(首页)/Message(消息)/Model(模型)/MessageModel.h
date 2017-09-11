@@ -19,7 +19,11 @@
 @property (nonatomic, strong) NSString  *content ;
 ///通知 1-系统公告   2-个人通知
 @property (nonatomic, strong) NSString  *type ;
+///select
+@property (nonatomic, assign) BOOL  selected ;
 
+///Cell高度
+@property (nonatomic, assign) float CellHeight;
 
 
 

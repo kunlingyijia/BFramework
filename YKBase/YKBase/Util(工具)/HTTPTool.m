@@ -166,6 +166,18 @@
         faild(error);
     }];
 }
+#pragma mark -  卡片解绑
++ (nullable NSURLSessionDataTask *)requestDeleteCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_DeleteCard showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
+        }
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+
 #pragma mark -  快捷签约短信
 + (nullable NSURLSessionDataTask *)requestQuickSmsWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_quickSms showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -220,7 +232,7 @@
         faild(error);
     }];
 }
-#pragma mark -  获取银行卡信息
+#pragma mark - 获取银行卡信息
 + (nullable NSURLSessionDataTask *)requestBankCardInfoWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_BankCardInfo showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
         success(baseRes);
@@ -241,6 +253,9 @@
 #pragma mark - 提交计划
 + (nullable NSURLSessionDataTask *)requestSubmitPlanWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_SubmitPlan showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
+        }
         success(baseRes);
     } faild:^(NSError *  _Nullable error) {
         faild(error);
@@ -257,6 +272,9 @@
 #pragma mark -  删除计划
 + (nullable NSURLSessionDataTask *)requestDeletePlanWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_DeletePlan showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
+        }
         success(baseRes);
     } faild:^(NSError *  _Nullable error) {
         faild(error);
@@ -275,6 +293,7 @@
     return [self AESrequestWithParm:parm act:Request_PayPlan showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
+            [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
         }
         success(baseRes);
     } faild:^(NSError *  _Nullable error) {
@@ -289,17 +308,14 @@
         faild(error);
     }];
 }
-
-
-
-
-
-
-
-
-
-
-
+#pragma mark -  银行卡账单
++ (nullable NSURLSessionDataTask *)requestBillListWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_BillList showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
 #pragma mark - MD5格式
 +(nullable NSURLSessionDataTask *)MD5requestWithParm:(nullable id)parm act:( nonnull NSString *)actName showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     BaseRequest *baseReq = [[BaseRequest alloc] init];

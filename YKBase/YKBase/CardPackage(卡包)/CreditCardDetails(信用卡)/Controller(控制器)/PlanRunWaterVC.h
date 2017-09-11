@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface PlanRunWaterVC : BaseViewController
-
+///model
+@property (nonatomic, strong) CardModel *cardModel ;
 @end

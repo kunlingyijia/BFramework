@@ -59,17 +59,30 @@
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     NSMutableArray * arr = [NSMutableArray arrayWithCapacity:0];
-    [arr addObject:@"招商银行"];
-    [arr addObject:@"中国银行"];
+    
+    
+    
     [arr addObject:@"工商银行"];
-    [arr addObject:@"建设银行"];
-    [arr addObject:@"中信银行"];
     [arr addObject:@"农业银行"];
-    [arr addObject:@"深圳发展银行"];
-    [arr addObject:@"民生银行"];
-    [arr addObject:@"兴业银行"];
+    [arr addObject:@"建设银行"];
+    [arr addObject:@"交通银行"];
+    [arr addObject:@"中信银行"];
     [arr addObject:@"光大银行"];
     [arr addObject:@"华夏银行"];
+    [arr addObject:@"广发银行"];
+    [arr addObject:@"平安银行"];
+    [arr addObject:@"招商银行"];
+    [arr addObject:@"兴业银行"];
+    [arr addObject:@"宁波银行"];
+    [arr addObject:@"上海银行"];
+    
+    
+    
+    //[arr addObject:@"深圳发展银行"];
+    //[arr addObject:@"中国银行"];
+    //[arr addObject:@"民生银行"];
+    
+    
     
     for (NSString * bank_name in arr) {
         CardModel * model = [CardModel new];
@@ -78,7 +91,7 @@
         [self.dataArray addObject:model];
     }
     
-
+    
 }
 
 #pragma tableView 代理方法
@@ -95,13 +108,10 @@
 //tab设置
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //分割线
-    __weak typeof(self) weakSelf = self;
     if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
         BankCardListOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"BankCardListOneCell" forIndexPath:indexPath];
-//        cell.BankImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", self.dataArray[indexPath.row]]];
-//        cell.Bank_nameLabel.text = self.dataArray[indexPath.row];
         //cell赋值
         cell.model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
         // cell 其他配置
@@ -122,7 +132,7 @@
     // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
     __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-       
+        
         //返回
         [weakSelf.navigationController popViewControllerAnimated:YES] ;
     });

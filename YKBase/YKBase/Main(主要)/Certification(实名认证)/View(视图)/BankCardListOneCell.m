@@ -35,9 +35,6 @@
         self.selectedImage.image = IMG_Name(@"");
     }
     
-    
-    
-    
 }
 
 @end

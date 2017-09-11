@@ -71,6 +71,11 @@
 @property (nonatomic, strong) NSString  *payment_money ;
 ///状态1-预览（未支付） 2-确认（已支付，未执行）  3-执行中  4-冻结(取消) 5-删除
 @property (nonatomic, strong) NSString  *status ;
+///计划状态 1-待还款 2-待付款 3-执行中 4-冻结 5-还款完成
+@property (nonatomic, strong) NSString  *plan_status ;
+
+
+
 ///还款model数组
 @property (nonatomic, strong) NSArray <CardSubModel *> *repayModel;
 ///消费model数组
@@ -94,7 +99,7 @@
 @property (nonatomic, strong) NSString  *repay_time ;
 ///还款金额
 @property (nonatomic, strong) NSString  *money ;
-///状态1-未还款 2-已还款
+///状态 1-未还款 2-已还款 3-还款中 4-还款失败
 @property (nonatomic, strong) NSString  *status ;
 ///消费时间
 @property (nonatomic, strong) NSString  *consume_time ;

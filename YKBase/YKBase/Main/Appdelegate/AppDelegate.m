@@ -16,10 +16,7 @@
 // <BMKGeneralDelegate>
 
 @end
-
 @implementation AppDelegate
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //初始化服务(添加观察者)
     [self initService];
@@ -35,9 +32,8 @@
     self.window.rootViewController = tabbar;
     //设置广告页
     //[self initAdvertising];
-    
     //是否开启推送
-    //    if (IOS8) { //iOS8以上包含iOS8
+    //if (IOS8) { //iOS8以上包含iOS8
     //        if ([[UIApplication sharedApplication] currentUserNotificationSettings].types == 0) {
     //
     //        }else{
@@ -52,12 +48,7 @@
     //    }
     //获取配置信息
     [self requestSystem];
-    
-    
-    
-    
     return YES;
-    
 }
 #pragma mark - 获取配置信息
 -(void)requestSystem{
@@ -74,7 +65,6 @@
     //    if (!ret) {
     //        NSLog(@"manager start failed!");
     //    }
-    
 }
 //#pragma mark -- BMKGeneralDelegate
 //
@@ -94,16 +84,12 @@
 //        NSLog(@"onGetPermissionState %d",iError);
 //    }
 //}
-
 - (void)applicationWillResignActive:(UIApplication *)application {
 }
 - (void)applicationDidBecomeActive:(UIApplication *)application {
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
 }
-
-
-
 #pragma mark - 注意：收到内存警告时调用，
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
@@ -112,7 +98,4 @@
     // 2. 清除缓存
     [[SDWebImageManager sharedManager].imageCache clearMemory];
 }
-
-
-
 @end

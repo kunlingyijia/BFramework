@@ -11,7 +11,6 @@
 @interface AboutUsVC ()
 
 @end
-
 @implementation AboutUsVC
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -19,31 +18,24 @@
     [self SET_UI];
     //数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
     [self showBackBtn];
      self.title = @"关于我们";
- 
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
-    
-    
-    
+
 }
 #pragma - 按钮事件
 - (IBAction)ButtonAction:(UIButton *)sender {
     switch (sender.tag) {
             //喜欢我们,打分鼓励
         case 101: {
-            
             [DWAlertTool showToast:@"喜欢我们,打分鼓励,喜欢我们,打分鼓励,喜欢我们,打分鼓励,喜欢我们,打分鼓励,喜欢我们,打分鼓励,喜欢我们,打分鼓励"];
             [ThirdPartyTool ULoginType:UMSocialPlatformType_WechatSession ULoginSuccess:^(UMSocialUserInfoResponse *response) {
-                
             }];
-            
         }
             break;
             //分享给朋友

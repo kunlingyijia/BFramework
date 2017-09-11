@@ -12,7 +12,6 @@
 @interface AddDebitCard ()
 @property(nonatomic,strong)NSString * bank_card_photoUrl;
 @property(nonatomic,strong)NSString * bank_card_back_photoUrl;
-
 @end
 @implementation AddDebitCard
 - (void)viewDidLoad {
@@ -67,7 +66,6 @@
     };
     [self presentViewController:VC animated:NO completion:nil];
 }
-
 #pragma mark - 选择银行卡
 - (IBAction)BankNameAction:(UIButton *)sender {
     [self.view endEditing:YES];
@@ -134,11 +132,10 @@
     [DWAlertTool VerificationCodeBtn:sender];
     [HTTPTool requestQuickSmsWithParm:@{@"bind_mobile":self.bind_mobile.text,@"bank_card_no":self.bank_card_no.text,@"account_name":self.account_name.text} active:YES success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
-            [DWAlertTool showToast:@"验证码发送成功"];
+            [DWAlertTool showToast:@"验证码已发送"];
         }else{
             
         }
-        
     } faild:^(NSError * _Nullable error) {
     }];
 }
@@ -166,8 +163,7 @@
             if (baseRes.resultCode==1) {
                 //跳转
                 SigningVC * VC =  GetVC(SigningVC);
-                NSDictionary * dic = baseRes.data;
-                NSString * op_err_msg = dic[@"op_err_msg"];
+                NSDictionary * dic =[NSString dictionaryWithJsonString: baseRes.data];
                 if ([dic[@"op_ret_code"] isEqualToString:@"000"]) {
                     VC.form_data = dic[@"form_data"];
                     VC.SigningVCBlock = ^(){
@@ -178,11 +174,11 @@
                     PushVC(VC);
                 }else{
                     weakSelf.view.userInteractionEnabled =YES;
+                    NSString * op_err_msg = dic[@"op_err_msg"];
                     if (op_err_msg) {
                         [DWAlertTool showToast:op_err_msg];
                     }
                 }
-                
             }
         } faild:^(NSError * _Nullable error) {
         }];
@@ -235,10 +231,10 @@
         [DWAlertTool showToast:@"手机号码输入有误"];
         return NO;
     }
-    if (self.verify_code.text.length==0) {
-        [DWAlertTool showToast:@"请输入验证码"];
-        return NO;
-    }
+//    if (self.verify_code.text.length==0) {
+//        [DWAlertTool showToast:@"请输入验证码"];
+//        return NO;
+//    }
     return Y;
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -251,8 +247,13 @@
         NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         return  [RegularTool checkNumber3:toString];
     }
+    if (textField ==self.bind_mobile) {
+        NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        return  [RegularTool checkNumber11:toString];
+    }
     return YES;
 }
+
 
 #pragma mark - dealloc
 - (void)dealloc

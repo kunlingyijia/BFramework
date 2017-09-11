@@ -43,7 +43,36 @@
     self.bank_name.text = [NSString stringWithFormat:@"%@(%@)",model.bank_name,bank_card_no];
     self.credit_line.text = model.credit_line;
     self.state_date.text =[NSString stringWithFormat:@"%@日", model.state_date];
-    self.repay_date.text =[NSString stringWithFormat:@"%@日", model.repay_date] ;    
+    self.repay_date.text =[NSString stringWithFormat:@"%@日", model.repay_date] ;
+    ///计划状态 1-待还款 2-待付款 3-执行中 4-冻结 5-还款完成
+    if ([model.plan_status isEqualToString:@"1"]) {
+        self.plan_status.text = @"待还款";
+        [self.OneBtn setTitle:@"立即还款" forState:0];
+    }
+    if ([model.plan_status isEqualToString:@"2"]) {
+        self.plan_status.text = @"待付款";
+        [self.OneBtn setTitle:@"立即付款" forState:0];
+    }
+    if ([model.plan_status isEqualToString:@"3"]) {
+        self.plan_status.text = @"执行中";
+    }
+    if ([model.plan_status isEqualToString:@"4"]) {
+        self.plan_status.text = @"已冻结";
+    }
+    if ([model.plan_status isEqualToString:@"5"]) {
+        self.plan_status.text = @"还款完成";
+         [self.OneBtn setTitle:@"继续还款" forState:0];
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 @end

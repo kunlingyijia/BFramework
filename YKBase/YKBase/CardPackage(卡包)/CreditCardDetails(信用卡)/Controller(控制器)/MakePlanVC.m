@@ -9,7 +9,6 @@
 #import "MakePlanVC.h"
 #import "MakePlanDetailtsVC.h"
 @interface MakePlanVC ()<HZQDatePickerViewDelegate> {
-    
     HZQDatePickerView *_pikerView;
 }
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -19,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIView *FourView;
 @property(nonatomic,strong) NSString * feeStr;
 @end
-
 @implementation MakePlanVC
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,10 +66,12 @@
 #pragma mark - 计算保证金
 - (IBAction)calculateAction:(SubmitBtn *)sender {
     [self.view endEditing:YES];
-    if (self.total_money.text.length !=0 && [self.total_money.text floatValue] <= [self.credit_line.text floatValue]) {
+    if ( [self CalculateIF]) {
         CardModel *model =[CardModel new];
         model.total_money = self.total_money.text;
         model.bank_id = self.cardModel.bank_id;
+        model.begin_time = self.begin_time.text;
+        model.end_time = self.end_time.text;
         __weak typeof(self) weakSelf = self;
         NSURLSessionDataTask * task =  [HTTPTool requestCalculateFeeWithParm:model active:YES success:^(BaseResponse * _Nullable baseRes) {
             if (baseRes.resultCode==1) {
@@ -85,10 +85,31 @@
         if (task) {
             [self.sessionArray addObject:task];
         }
-    }else{
-        [DWAlertTool showToast:@"还款金额输入有误"];
     }
 }
+#pragma mark - 判断条件
+-(BOOL)CalculateIF{
+    [self.view endEditing:YES];
+    BOOL  Y = YES;
+    if ([self.total_money.text floatValue] > [self.credit_line.text floatValue]||self.total_money.text.length ==0) {
+        [DWAlertTool showToast:@"还款金额输入有误"];
+        return NO;
+    }
+    if (self.begin_time.text.length ==0) {
+        [DWAlertTool showToast:@"请选择开始时间"];
+        return NO;
+    }
+    if (self.end_time.text.length ==0) {
+        [DWAlertTool showToast:@"请选择结束时间"];
+        return NO;
+    }
+    if ([ self.end_time.text  compare: self.begin_time.text]==NSOrderedAscending) {
+        [DWAlertTool showToast:@"结束时间必须大于开始时间"];
+        return NO;
+    }
+    return Y;
+}
+
 #pragma mark - 选择时间
 - (IBAction)timeAction:(UIButton *)sender {
     [self.view endEditing:YES];
@@ -160,7 +181,18 @@
         [DWAlertTool showToast:@"还款金额输入有误"];
         return NO;
     }
-    
+    if (self.begin_time.text.length ==0) {
+        [DWAlertTool showToast:@"请选择开始时间"];
+        return NO;
+    }
+    if (self.end_time.text.length ==0) {
+        [DWAlertTool showToast:@"请选择结束时间"];
+        return NO;
+    }
+    if ([self.end_time.text compare:self.begin_time.text]==NSOrderedAscending) {
+        [DWAlertTool showToast:@"结束时间必须大于开始时间"];
+        return NO;
+    }
     if (self.bond.text.length ==0) {
         [DWAlertTool showToast:@"保证金输入有误"];
         return NO;
@@ -171,18 +203,6 @@
     }
     if (self.feeStr.length ==0) {
         [DWAlertTool showToast:@"请计算保证金"];
-        return NO;
-    }
-    if (self.begin_time.text.length ==0) {
-        [DWAlertTool showToast:@"请选择开始时间"];
-        return NO;
-    }
-    if (self.end_time.text.length ==0) {
-        [DWAlertTool showToast:@"请选择结束时间"];
-        return NO;
-    }
-    if ([ self.end_time.text  compare:  self.begin_time.text]==NSOrderedAscending) {
-        [DWAlertTool showToast:@"开始时间不能大于结束时间"];
         return NO;
     }
     return Y;

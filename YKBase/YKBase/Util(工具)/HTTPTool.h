@@ -46,7 +46,8 @@ typedef void(^DataFaild)(NSError * _Nullable error);
 + (nullable NSURLSessionDataTask *)requestAddCreditCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  添加信用卡
 + (nullable NSURLSessionDataTask *)requestEditCreditCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
-
+#pragma mark -  卡片解绑
++ (nullable NSURLSessionDataTask *)requestDeleteCardWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  快捷签约短信
 + (nullable NSURLSessionDataTask *)requestQuickSmsWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 
@@ -75,4 +76,16 @@ typedef void(^DataFaild)(NSError * _Nullable error);
 + (nullable NSURLSessionDataTask *)requestPayPlanWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  计算保证金/手续费
 + (nullable NSURLSessionDataTask *)requestCalculateFeeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  银行卡账单
++ (nullable NSURLSessionDataTask *)requestBillListWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+
+
+
+
+
+
+
+
+
+
 @end

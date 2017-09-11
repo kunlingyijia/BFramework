@@ -37,13 +37,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="345" height="49.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFr-PZ-3vM" customClass="DarkGreyLabel">
-                                    <rect key="frame" x="15" y="0.0" width="315" height="27.5"/>
+                                    <rect key="frame" x="15" y="0.0" width="315" height="29.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5u-2V-6wB" customClass="DarkGreyLabel">
-                                    <rect key="frame" x="15" y="27.5" width="315" height="22"/>
+                                    <rect key="frame" x="15" y="29.5" width="315" height="23"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -51,7 +51,7 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="L5u-2V-6wB" secondAttribute="bottom" id="5Az-AE-Ro6"/>
+                                <constraint firstAttribute="bottom" secondItem="L5u-2V-6wB" secondAttribute="bottom" constant="-3" id="5Az-AE-Ro6"/>
                                 <constraint firstAttribute="trailing" secondItem="aFr-PZ-3vM" secondAttribute="trailing" constant="15" id="RUq-GV-ej9"/>
                                 <constraint firstItem="L5u-2V-6wB" firstAttribute="leading" secondItem="yPW-oB-3AE" secondAttribute="leading" constant="15" id="Yq0-I2-tgT"/>
                                 <constraint firstAttribute="trailing" secondItem="L5u-2V-6wB" secondAttribute="trailing" constant="15" id="ZBU-VL-Uxg"/>
@@ -194,7 +194,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Km-Nj-mCb" customClass="SegmentedView">
                     <rect key="frame" x="15" y="158" width="345" height="40"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="GML-Oc-Kf3"/>
                     </constraints>

@@ -48,8 +48,6 @@
 		BD127FCC1F2AD18700DD9A8F /* BaseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127DFC1F2AD18600DD9A8F /* BaseWebViewController.m */; };
 		BD127FCD1F2AD18700DD9A8F /* BaseWKWebviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127DFE1F2AD18600DD9A8F /* BaseWKWebviewVC.m */; };
 		BD127FCE1F2AD18700DD9A8F /* DWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127E001F2AD18600DD9A8F /* DWTabBarController.m */; };
-		BD127FCF1F2AD18700DD9A8F /* PublicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127E021F2AD18600DD9A8F /* PublicViewController.m */; };
-		BD127FD01F2AD18700DD9A8F /* PublicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD127E031F2AD18600DD9A8F /* PublicViewController.xib */; };
 		BD127FD11F2AD18700DD9A8F /* DHGifImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127E081F2AD18600DD9A8F /* DHGifImageOperation.m */; };
 		BD127FD21F2AD18700DD9A8F /* DHGuidePageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127E0A1F2AD18600DD9A8F /* DHGuidePageHUD.m */; };
 		BD127FD31F2AD18700DD9A8F /* GuideImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BD127E0B1F2AD18600DD9A8F /* GuideImage.bundle */; };
@@ -230,6 +228,8 @@
 		BD3787F71F38A10300CB3561 /* CardPackageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD3787F51F38A10300CB3561 /* CardPackageVC.xib */; };
 		BD3787FB1F38A11800CB3561 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3787F91F38A11800CB3561 /* BillVC.m */; };
 		BD3787FC1F38A11800CB3561 /* BillVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD3787FA1F38A11800CB3561 /* BillVC.xib */; };
+		BD43FE7F1F611C3100904D51 /* WalletDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD43FE7D1F611C3100904D51 /* WalletDetailVC.m */; };
+		BD43FE801F611C3100904D51 /* WalletDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD43FE7E1F611C3100904D51 /* WalletDetailVC.xib */; };
 		BD5C28531F53EA1100D53678 /* SigningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C28511F53EA1100D53678 /* SigningVC.m */; };
 		BD5C28541F53EA1100D53678 /* SigningVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5C28521F53EA1100D53678 /* SigningVC.xib */; };
 		BD69981C1F5A913F001AACEA /* PayPlanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69981A1F5A913F001AACEA /* PayPlanVC.m */; };
@@ -242,6 +242,8 @@
 		BD7046F11F44365200DBC85E /* CertificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7046F01F44365200DBC85E /* CertificationModel.m */; };
 		BD7995811F2B20B800FA0CBF /* TouchTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7995801F2B20B800FA0CBF /* TouchTool.m */; };
 		BD7995841F2B37C100FA0CBF /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7995831F2B37C100FA0CBF /* UITabBar+badge.m */; };
+		BD8187FF1F62259E00287956 /* PublicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8187FD1F62259E00287956 /* PublicVC.m */; };
+		BD8188001F62259E00287956 /* PublicVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8187FE1F62259E00287956 /* PublicVC.xib */; };
 		BD855A071F3C3503008143C3 /* LoginRegModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD855A061F3C3503008143C3 /* LoginRegModel.m */; };
 		BD855A0B1F3C5848008143C3 /* BindingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD855A091F3C5848008143C3 /* BindingVC.m */; };
 		BD855A0C1F3C5848008143C3 /* BindingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD855A0A1F3C5848008143C3 /* BindingVC.xib */; };
@@ -317,7 +319,6 @@
 		BDBA1E421F4A865900ED633B /* JQZXingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBA1E301F4A865900ED633B /* JQZXingWrapper.m */; };
 		BDBA1E431F4A865900ED633B /* JQZXScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBA1E321F4A865900ED633B /* JQZXScanViewController.m */; };
 		BDBA1E461F4AB43600ED633B /* BillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBA1E451F4AB43600ED633B /* BillModel.m */; };
-		BDBA1E491F4AB44800ED633B /* BillSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBA1E481F4AB44800ED633B /* BillSubModel.m */; };
 		BDC0642E1F3468A4000FCDB5 /* UIColor+DWColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC0642D1F3468A4000FCDB5 /* UIColor+DWColor.m */; };
 		BDC064311F3468C7000FCDB5 /* UIImageView+SD.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC064301F3468C7000FCDB5 /* UIImageView+SD.m */; };
 		BDC064361F3468F5000FCDB5 /* NSString+DWString.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC064331F3468F5000FCDB5 /* NSString+DWString.m */; };
@@ -475,9 +476,6 @@
 		BD127DFE1F2AD18600DD9A8F /* BaseWKWebviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWKWebviewVC.m; sourceTree = "<group>"; };
 		BD127DFF1F2AD18600DD9A8F /* DWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWTabBarController.h; sourceTree = "<group>"; };
 		BD127E001F2AD18600DD9A8F /* DWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWTabBarController.m; sourceTree = "<group>"; };
-		BD127E011F2AD18600DD9A8F /* PublicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicViewController.h; sourceTree = "<group>"; };
-		BD127E021F2AD18600DD9A8F /* PublicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicViewController.m; sourceTree = "<group>"; };
-		BD127E031F2AD18600DD9A8F /* PublicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublicViewController.xib; sourceTree = "<group>"; };
 		BD127E071F2AD18600DD9A8F /* DHGifImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGifImageOperation.h; sourceTree = "<group>"; };
 		BD127E081F2AD18600DD9A8F /* DHGifImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHGifImageOperation.m; sourceTree = "<group>"; };
 		BD127E091F2AD18600DD9A8F /* DHGuidePageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGuidePageHUD.h; sourceTree = "<group>"; };
@@ -853,6 +851,9 @@
 		BD3787F81F38A11800CB3561 /* BillVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		BD3787F91F38A11800CB3561 /* BillVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
 		BD3787FA1F38A11800CB3561 /* BillVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillVC.xib; sourceTree = "<group>"; };
+		BD43FE7C1F611C3100904D51 /* WalletDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDetailVC.h; sourceTree = "<group>"; };
+		BD43FE7D1F611C3100904D51 /* WalletDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDetailVC.m; sourceTree = "<group>"; };
+		BD43FE7E1F611C3100904D51 /* WalletDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletDetailVC.xib; sourceTree = "<group>"; };
 		BD5C28501F53EA1100D53678 /* SigningVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigningVC.h; sourceTree = "<group>"; };
 		BD5C28511F53EA1100D53678 /* SigningVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigningVC.m; sourceTree = "<group>"; };
 		BD5C28521F53EA1100D53678 /* SigningVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SigningVC.xib; sourceTree = "<group>"; };
@@ -873,6 +874,9 @@
 		BD7995801F2B20B800FA0CBF /* TouchTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchTool.m; sourceTree = "<group>"; };
 		BD7995821F2B37C100FA0CBF /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+badge.h"; sourceTree = "<group>"; };
 		BD7995831F2B37C100FA0CBF /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
+		BD8187FC1F62259E00287956 /* PublicVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicVC.h; sourceTree = "<group>"; };
+		BD8187FD1F62259E00287956 /* PublicVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicVC.m; sourceTree = "<group>"; };
+		BD8187FE1F62259E00287956 /* PublicVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublicVC.xib; sourceTree = "<group>"; };
 		BD855A051F3C3503008143C3 /* LoginRegModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginRegModel.h; path = "YKBase/CardPackage(卡包)/DebitCardDetails(借记卡)/Controller(控制器)/LoginRegModel.h"; sourceTree = SOURCE_ROOT; };
 		BD855A061F3C3503008143C3 /* LoginRegModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginRegModel.m; path = "YKBase/CardPackage(卡包)/DebitCardDetails(借记卡)/Controller(控制器)/LoginRegModel.m"; sourceTree = SOURCE_ROOT; };
 		BD855A081F3C5848008143C3 /* BindingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingVC.h; sourceTree = "<group>"; };
@@ -999,8 +1003,6 @@
 		BDBA1E321F4A865900ED633B /* JQZXScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQZXScanViewController.m; sourceTree = "<group>"; };
 		BDBA1E441F4AB43600ED633B /* BillModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillModel.h; sourceTree = "<group>"; };
 		BDBA1E451F4AB43600ED633B /* BillModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillModel.m; sourceTree = "<group>"; };
-		BDBA1E471F4AB44800ED633B /* BillSubModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillSubModel.h; sourceTree = "<group>"; };
-		BDBA1E481F4AB44800ED633B /* BillSubModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillSubModel.m; sourceTree = "<group>"; };
 		BDC0642C1F3468A4000FCDB5 /* UIColor+DWColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DWColor.h"; sourceTree = "<group>"; };
 		BDC0642D1F3468A4000FCDB5 /* UIColor+DWColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DWColor.m"; sourceTree = "<group>"; };
 		BDC0642F1F3468C7000FCDB5 /* UIImageView+SD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SD.h"; sourceTree = "<group>"; };
@@ -1411,13 +1413,13 @@
 		BD127DF41F2AD18600DD9A8F /* Main(主要) */ = {
 			isa = PBXGroup;
 			children = (
-				BD9E39CB1F3A720900DF3374 /* Certification(实名认证) */,
-				BDB44A4F1F394FFF009AA91F /* Popup(弹窗) */,
 				BD127DF51F2AD18600DD9A8F /* Common(通用) */,
+				BD127E301F2AD18600DD9A8F /* LoginRegister(登录注册) */,
+				BDB44A4F1F394FFF009AA91F /* Popup(弹窗) */,
+				BD9E39CB1F3A720900DF3374 /* Certification(实名认证) */,
 				BD127E251F2AD18600DD9A8F /* HomePage(首页) */,
 				BDFC8A1B1F35668300692E5D /* CardPackage(卡包) */,
 				BDFC8A1C1F3566DA00692E5D /* Bill(账单) */,
-				BD127E301F2AD18600DD9A8F /* LoginRegister(登录注册) */,
 				BD127E371F2AD18600DD9A8F /* MyInfo(我的) */,
 				BD127E421F2AD18600DD9A8F /* Setting(设置) */,
 			);
@@ -1447,9 +1449,9 @@
 				BD127DFE1F2AD18600DD9A8F /* BaseWKWebviewVC.m */,
 				BD127DFF1F2AD18600DD9A8F /* DWTabBarController.h */,
 				BD127E001F2AD18600DD9A8F /* DWTabBarController.m */,
-				BD127E011F2AD18600DD9A8F /* PublicViewController.h */,
-				BD127E021F2AD18600DD9A8F /* PublicViewController.m */,
-				BD127E031F2AD18600DD9A8F /* PublicViewController.xib */,
+				BD8187FC1F62259E00287956 /* PublicVC.h */,
+				BD8187FD1F62259E00287956 /* PublicVC.m */,
+				BD8187FE1F62259E00287956 /* PublicVC.xib */,
 			);
 			path = "Controller(控制器)";
 			sourceTree = "<group>";
@@ -2454,8 +2456,6 @@
 			children = (
 				BDBA1E441F4AB43600ED633B /* BillModel.h */,
 				BDBA1E451F4AB43600ED633B /* BillModel.m */,
-				BDBA1E471F4AB44800ED633B /* BillSubModel.h */,
-				BDBA1E481F4AB44800ED633B /* BillSubModel.m */,
 			);
 			path = "Model(模型)";
 			sourceTree = "<group>";
@@ -2645,15 +2645,18 @@
 				BDB6D7271F3B0E11009C7A5B /* MyWalletVC.h */,
 				BDB6D7281F3B0E11009C7A5B /* MyWalletVC.m */,
 				BDB6D7291F3B0E11009C7A5B /* MyWalletVC.xib */,
-				BD2A24D71F3D8C5500B8E76B /* TopUpVC.h */,
-				BD2A24D81F3D8C5500B8E76B /* TopUpVC.m */,
-				BD2A24D91F3D8C5500B8E76B /* TopUpVC.xib */,
 				BD855A121F3C6304008143C3 /* ChooseDebitCardVC.h */,
 				BD855A131F3C6304008143C3 /* ChooseDebitCardVC.m */,
 				BD855A141F3C6304008143C3 /* ChooseDebitCardVC.xib */,
+				BD43FE7C1F611C3100904D51 /* WalletDetailVC.h */,
+				BD43FE7D1F611C3100904D51 /* WalletDetailVC.m */,
+				BD43FE7E1F611C3100904D51 /* WalletDetailVC.xib */,
 				BDA978EC1F55624B006AD490 /* ChargeVC.h */,
 				BDA978ED1F55624B006AD490 /* ChargeVC.m */,
 				BDA978EE1F55624B006AD490 /* ChargeVC.xib */,
+				BD2A24D71F3D8C5500B8E76B /* TopUpVC.h */,
+				BD2A24D81F3D8C5500B8E76B /* TopUpVC.m */,
+				BD2A24D91F3D8C5500B8E76B /* TopUpVC.xib */,
 			);
 			path = "Controller(控制器)";
 			sourceTree = "<group>";
@@ -2936,6 +2939,7 @@
 				BD12800A1F2AD18700DD9A8F /* EWMViewController.xib in Resources */,
 				BD127FD71F2AD18700DD9A8F /* guideImage4.jpg in Resources */,
 				BD12804F1F2AD18700DD9A8F /* 密码2@2x.png in Resources */,
+				BD8188001F62259E00287956 /* PublicVC.xib in Resources */,
 				BD2A24D61F3D86FE00B8E76B /* DWBanKMainCell.xib in Resources */,
 				BDBA1E331F4A865900ED633B /* CodeScan.bundle in Resources */,
 				BDC5175F1F2ADDDB00E1821E /* AdViewController.xib in Resources */,
@@ -2966,6 +2970,7 @@
 				BD1280241F2AD18700DD9A8F /* QQ好友@3x.png in Resources */,
 				BD7046EB1F4412C600DBC85E /* CurrentVersionVC.xib in Resources */,
 				BD2A24D21F3D86FE00B8E76B /* DWProvinceViewController.xib in Resources */,
+				BD43FE801F611C3100904D51 /* WalletDetailVC.xib in Resources */,
 				BDC5BF161F56A2A800E1B1FA /* BankCardListOneCell.xib in Resources */,
 				BD127FE51F2AD18700DD9A8F /* HomePageVC.xib in Resources */,
 				BD127FEB1F2AD18700DD9A8F /* AboutUsVC.xib in Resources */,
@@ -3005,7 +3010,6 @@
 				BD8EDB591F58F7C5003A9949 /* PlanDetailsOneCell.xib in Resources */,
 				BDB44A571F39501B009AA91F /* PopupVC.xib in Resources */,
 				BD127FD61F2AD18700DD9A8F /* guideImage3.jpg in Resources */,
-				BD127FD01F2AD18700DD9A8F /* PublicViewController.xib in Resources */,
 				BD1280291F2AD18700DD9A8F /* 微信好友@2x.png in Resources */,
 				BD1280331F2AD18700DD9A8F /* SharePanelVC.xib in Resources */,
 				BDC5BF111F56A28C00E1B1FA /* BankCardListVC.xib in Resources */,
@@ -3120,7 +3124,6 @@
 				BD127FCC1F2AD18700DD9A8F /* BaseWebViewController.m in Sources */,
 				BDC517711F2ADE5D00E1821E /* YKBase.xcdatamodeld in Sources */,
 				BD12805C1F2AD18700DD9A8F /* GKResizeableCropOverlayView.m in Sources */,
-				BD127FCF1F2AD18700DD9A8F /* PublicViewController.m in Sources */,
 				BD1280491F2AD18700DD9A8F /* RegionViewController.m in Sources */,
 				BD7995841F2B37C100FA0CBF /* UITabBar+badge.m in Sources */,
 				BDAA45DF1F4C03D8008C635C /* SXHeadLine.m in Sources */,
@@ -3155,6 +3158,7 @@
 				BD12804B1F2AD18700DD9A8F /* LxGridViewFlowLayout.m in Sources */,
 				BDB6D71E1F3B0496009C7A5B /* BillOneCell.m in Sources */,
 				BD127FF51F2AD18700DD9A8F /* NSData+Base64.m in Sources */,
+				BD43FE7F1F611C3100904D51 /* WalletDetailVC.m in Sources */,
 				BDC517601F2ADDDB00E1821E /* UserGuideViewController.m in Sources */,
 				BD12801D1F2AD18700DD9A8F /* YHActionSheet.m in Sources */,
 				BD1280411F2AD18700DD9A8F /* WHC_PlateView.m in Sources */,
@@ -3165,7 +3169,6 @@
 				BD127FFE1F2AD18700DD9A8F /* DataSigner.m in Sources */,
 				BDB6D7221F3B0879009C7A5B /* BillHeaderView.m in Sources */,
 				BD12801E1F2AD18700DD9A8F /* YHWorkGroupPhotoContainer.m in Sources */,
-				BDBA1E491F4AB44800ED633B /* BillSubModel.m in Sources */,
 				BD127FF01F2AD18700DD9A8F /* SuggestFeedbackVC.m in Sources */,
 				BD12806C1F2AD18700DD9A8F /* ThirdPartyTool.m in Sources */,
 				BD1280561F2AD18700DD9A8F /* BricklayingView.m in Sources */,
@@ -3313,6 +3316,7 @@
 				BD127FE61F2AD18700DD9A8F /* LoginVC.m in Sources */,
 				BDBA1E391F4A865900ED633B /* JQScanLineAnimation.m in Sources */,
 				BD127FF41F2AD18700DD9A8F /* AESCrypt.m in Sources */,
+				BD8187FF1F62259E00287956 /* PublicVC.m in Sources */,
 				BD127FA71F2AD18700DD9A8F /* NSDate+WHExtension.m in Sources */,
 				BDFC8A0F1F3551B100692E5D /* LBTabBar.m in Sources */,
 			);
@@ -3500,7 +3504,7 @@
 					"$(PROJECT_DIR)/YKBase/ThirdPart/WXChatPay",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/CoreJPush/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dw.bianmin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.nsbank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3548,7 +3552,7 @@
 					"$(PROJECT_DIR)/YKBase/ThirdPart/WXChatPay",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/CoreJPush/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dw.bianmin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.nsbank;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface Userinfo : NSObject
-
 ///真实姓名
 @property (nonatomic, strong) NSString  *real_name ;
 ///手机号

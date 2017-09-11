@@ -79,6 +79,8 @@
             }
             for (NSDictionary * dic in (NSMutableArray*)baseRes.data) {
                 MessageModel * model = [MessageModel yy_modelWithJSON:dic];
+                model.selected = NO;
+                model.CellHeight = [NSString getTextHight:model.content withSize:Width-38-(0.16*Width-20) withFont:14*SizeScale]+45;
                 [weakSelf.dataArray addObject:model];
             }
             //刷新
@@ -87,7 +89,6 @@
             weakSelf.pageIndex > 1 ? weakSelf.pageIndex-- : weakSelf.pageIndex;
         }
         [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
-        
     } faild:^(NSError * _Nullable error) {
         [ThirdPartyTool MJRefreshEndRefreView:weakSelf.tableView];
         
@@ -127,10 +128,20 @@
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MessageModel*  model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+    model.selected = !model.selected;
+      [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+    //[self.tableView reloadData];
 }
+
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 0.15*Width;
+    MessageModel*  model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
+    if (model.selected == NO) {
+        return 0.16*Width;
+    }else{
+        return model.CellHeight<0.16*Width ? 0.16*Width: model.CellHeight;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

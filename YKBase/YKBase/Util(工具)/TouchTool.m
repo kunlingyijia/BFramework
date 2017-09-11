@@ -13,12 +13,14 @@
 +(void)FingerprintUnlock:(Success)Success Faild:(Faild)Faild{
     //初始化上下文对象
     LAContext* context = [[LAContext alloc] init];
+    context.localizedFallbackTitle = @"可以输入登录密码哦";
     //错误对象
     NSError* error = nil;
     NSString* result =  [NSString stringWithFormat:@"%@需要验证你的指纹",appName];
     //首先使用canEvaluatePolicy判断设备支持状态
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
         //支持指纹验证
+        
         [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:result reply:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"验证成功");

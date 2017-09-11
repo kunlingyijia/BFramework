@@ -38,6 +38,7 @@
     YKAppClient*  manager = [YKAppClient sharedClient];
     _BaseVC.view.userInteractionEnabled = active;
     [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = active;
+    NSLog(@"断点***********\n\n%@&request=%@\n\n***********",url,parm);
     if (method == HTTPSRequestTypeGET) {
         return   [manager GET:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

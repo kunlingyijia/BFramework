@@ -97,8 +97,6 @@
         [self.sessionArray addObject:task];
     }
 }
-
-
 #pragma tableView 代理方法
 //tab分区个数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -107,14 +105,13 @@
 }
 ///tab个数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //[tableView tableViewDisplayWitimage:nil ifNecessaryForRowCount:self.dataArray.count];
-    return self.dataArray.count ==0 ? 1 :self.dataArray.count;
+    return self.dataArray.count == 0 ? 1 : self.dataArray.count;
 }
 //tab设置
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //分割线
     tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
+    if (indexPath.row>self.dataArray.count-1 || self.dataArray.count == 0) {
         CardPackageThreeCell * cell = [tableView dequeueReusableCellWithIdentifier:@"CardPackageThreeCell" forIndexPath:indexPath];
         //cell赋值
         cell.type = @"1";
@@ -136,33 +133,30 @@
         if ([HTTPTool isCertification]) {
             return;
         }
-        
-            //新增借记卡
+        //新增借记卡
         __weak typeof(self) weakSelf = self;
-            AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
-            VC.AddDebitCardVCBlock = ^(){
-                weakSelf.pageIndex = 1;
-                [weakSelf requestAction];
-            };
-            PushVC(VC)
-      
+        AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
+        VC.AddDebitCardVCBlock = ^(){
+            weakSelf.pageIndex = 1;
+            [weakSelf requestAction];
+        };
+        PushVC(VC)
     }else{
-    self.bank_id = model.bank_id;
-    for (CardModel*  model in self.dataArray) {
-        model.selected = [self.bank_id isEqualToString:model.bank_id] ? YES : NO;
-    }
-    self.ChooseDebitCardVCBlock(model.bank_name,model.bank_card_no,model.bank_id);
-    [self.tableView reloadData];
-    self.view.userInteractionEnabled = NO;
-    // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
-    __weak typeof(self) weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //返回
-        [weakSelf.navigationController popViewControllerAnimated:YES] ;
-    });
+        self.bank_id = model.bank_id;
+        for (CardModel*  model in self.dataArray) {
+            model.selected = [self.bank_id isEqualToString:model.bank_id] ? YES : NO;
+        }
+        self.ChooseDebitCardVCBlock(model.bank_name,model.bank_card_no,model.bank_id);
+        [self.tableView reloadData];
+        self.view.userInteractionEnabled = NO;
+        // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //返回
+            [weakSelf.navigationController popViewControllerAnimated:YES] ;
+        });
     }
 }
-
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Width*0.35;

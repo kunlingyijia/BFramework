@@ -26,26 +26,40 @@
 -(void)setModel:(CardSubModel *)model{
     if (!model) return;
     _model = model;
-    //还款
+    //还款 
     if ([model.type isEqualToString:@"1"]) {
         self.time.text = [model.repay_time timeStampString];
-         //1-未还款 2-已还款
+        //1-未还款 2-已还款 3-还款中 4-还款失败
+
         if ([model.status isEqualToString:@"1"]) {
             self.status.text = @"未还款";
         }
         if ([model.status isEqualToString:@"2"]) {
             self.status.text = @"已还款";
         }
+        if ([model.status isEqualToString:@"3"]) {
+            self.status.text = @"还款中";
+        }
+        if ([model.status isEqualToString:@"4"]) {
+            self.status.text = @"还款失败";
+        }
+
         
     }
     if ([model.type isEqualToString:@"2"]) {
         self.time.text = [model.consume_time timeStampString];
-        // 1-未消费 2-已消费
+        //  1-未消费 2-已消费 3-消费中 4-消费失败
         if ([model.status isEqualToString:@"1"]) {
              self.status.text = @"未消费";
         }
         if ([model.status isEqualToString:@"2"]) {
              self.status.text = @"已消费";
+        }
+        if ([model.status isEqualToString:@"3"]) {
+            self.status.text = @"消费中";
+        }
+        if ([model.status isEqualToString:@"4"]) {
+            self.status.text = @"消费失败";
         }
         
     }

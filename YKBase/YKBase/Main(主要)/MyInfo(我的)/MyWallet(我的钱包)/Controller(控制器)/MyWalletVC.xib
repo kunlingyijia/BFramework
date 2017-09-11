@@ -48,8 +48,8 @@
                                                         <constraint firstAttribute="width" constant="0.5" id="Mmc-vm-Xcq"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="945.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTd-4s-q8V" customClass="WhiteLabel">
-                                                    <rect key="frame" x="10" y="50" width="167" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTd-4s-q8V" customClass="WhiteLabel">
+                                                    <rect key="frame" x="10" y="50" width="167" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -78,8 +78,8 @@
                                             <rect key="frame" x="187.5" y="0.0" width="187.5" height="150"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="945.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3A-zC-wZh" customClass="WhiteLabel">
-                                            <rect key="frame" x="197" y="50" width="168" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3A-zC-wZh" customClass="WhiteLabel">
+                                            <rect key="frame" x="197" y="50" width="168" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -172,7 +172,7 @@
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p39-Pd-IFL" customClass="SubmitBtn">
                                     <rect key="frame" x="15" y="299" width="345" height="30"/>
-                                    <state key="normal" title="确认支付"/>
+                                    <state key="normal" title="提现"/>
                                     <connections>
                                         <action selector="BtnAction:" destination="-1" eventType="touchUpInside" id="Vz6-wC-dG9"/>
                                     </connections>

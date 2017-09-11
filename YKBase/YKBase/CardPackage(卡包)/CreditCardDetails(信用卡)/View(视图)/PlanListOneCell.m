@@ -46,7 +46,7 @@
     }
 
     if ([model.status isEqualToString:@"4"]) {
-        self.status.text = @"冻结";
+        self.status.text = @"已冻结";
     }
     if ([model.status isEqualToString:@"5"]) {
         self.status.text = @"已删除";

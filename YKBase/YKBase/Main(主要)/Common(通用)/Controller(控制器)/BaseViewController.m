@@ -95,7 +95,7 @@
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 0, 80, 40);
     [backBtn setTitle:tilte forState:(UIControlStateNormal)];
-    [backBtn setTitleColor:[UIColor colorWithHexString:kDarkGrey] forState:(UIControlStateNormal)];
+    [backBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     backBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     backBtn.titleLabel.font = [UIFont systemFontOfSize:15*SizeScale];
     [backBtn addTarget:self action:@selector(RightBtn:) forControlEvents:UIControlEventTouchUpInside];

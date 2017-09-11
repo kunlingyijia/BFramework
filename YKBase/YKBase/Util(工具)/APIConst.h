@@ -78,7 +78,8 @@ extern NSString * const  Request_BankAddDebitCard ;
 extern NSString * const  Request_AddCreditCard ;
 ///修改资料（信用卡）
 extern NSString * const  Request_EditCreditCard ;
-
+///卡片解绑
+extern NSString * const  Request_DeleteCard ;
 ///快捷签约短信
 extern NSString * const  Request_quickSms ;
 ///快捷签约查询
@@ -88,6 +89,8 @@ extern NSString * const  Request_Withdraw ;
 ///快速充值
 extern NSString * const  Request_QuickRecharge ;
 
+///银行卡账单
+extern NSString * const  Request_BillList ;
 
 
 

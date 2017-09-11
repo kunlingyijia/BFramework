@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,7 +37,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ok1-R5-Ys8">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="834"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="800.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3C-Ig-HRl">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
@@ -286,14 +286,14 @@
                                     <rect key="frame" x="0.0" y="408.5" width="375" height="46.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eo-TK-XhR" customClass="LineView">
-                                            <rect key="frame" x="0.0" y="46" width="375" height="1"/>
+                                            <rect key="frame" x="0.0" y="46.5" width="375" height="1"/>
                                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="w39-vb-N77"/>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账单日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aM0-T8-005" customClass="DarkGreyLabel">
-                                            <rect key="frame" x="15" y="1" width="70" height="45"/>
+                                            <rect key="frame" x="15" y="0.5" width="70" height="46"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="8V3-zr-yHe"/>
                                             </constraints>
@@ -302,13 +302,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择账单日" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b5G-FO-OeZ" customClass="DarkGreyTF">
-                                            <rect key="frame" x="95" y="1" width="265" height="45"/>
+                                            <rect key="frame" x="95" y="0.5" width="265" height="46"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <button opaque="NO" tag="302" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SBY-Vd-MDB" customClass="PublicBtn">
-                                            <rect key="frame" x="85" y="1" width="290" height="45"/>
+                                            <rect key="frame" x="85" y="0.5" width="290" height="46"/>
                                             <connections>
                                                 <action selector="DataAction:" destination="-1" eventType="touchUpInside" id="zBi-b0-ZCr"/>
                                             </connections>
@@ -406,6 +406,9 @@
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="SjH-NV-4RV"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -476,7 +479,7 @@
                                         <constraint firstItem="7LB-bx-2jR" firstAttribute="leading" secondItem="bR9-RE-voC" secondAttribute="leading" constant="15" id="wge-5g-paj"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将从你的卡里直接扣除10元手续费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mD3-uh-J5a" customClass="BlueLabel">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mD3-uh-J5a" customClass="BlueLabel">
                                     <rect key="frame" x="15" y="606" width="345" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="GTk-Gg-or6"/>
@@ -486,7 +489,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMb-eN-1N4" customClass="SubmitBtn">
-                                    <rect key="frame" x="15" y="774" width="345" height="30"/>
+                                    <rect key="frame" x="15" y="740.5" width="345" height="30"/>
                                     <state key="normal" title="添加信用卡"/>
                                     <connections>
                                         <action selector="submitBtn:" destination="-1" eventType="touchUpInside" id="1lb-k6-o04"/>
@@ -536,14 +539,14 @@
                                     <rect key="frame" x="0.0" y="221" width="375" height="46.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hVX-Pc-6P1" customClass="LineView">
-                                            <rect key="frame" x="0.0" y="46" width="375" height="1"/>
+                                            <rect key="frame" x="0.0" y="46.5" width="375" height="1"/>
                                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="ctV-9O-ykx"/>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发卡银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-Gt-IO9" customClass="DarkGreyLabel">
-                                            <rect key="frame" x="15" y="0.5" width="70" height="45.5"/>
+                                            <rect key="frame" x="15" y="1" width="70" height="45.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="jTW-3C-UFT"/>
                                             </constraints>
@@ -559,13 +562,13 @@
                                             </constraints>
                                         </imageView>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择发卡银行" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fov-hP-5Wd" customClass="DarkGreyTF">
-                                            <rect key="frame" x="95" y="0.5" width="244" height="46.5"/>
+                                            <rect key="frame" x="95" y="1" width="244" height="46.5"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fri-ry-kmT">
-                                            <rect key="frame" x="85" y="1" width="290" height="45"/>
+                                            <rect key="frame" x="85" y="0.5" width="290" height="46"/>
                                             <connections>
                                                 <action selector="BankNameAction:" destination="-1" eventType="touchUpInside" id="U3Y-kq-CLw"/>
                                             </connections>
@@ -645,6 +648,12 @@
                                 <constraint firstItem="4oQ-6B-VBC" firstAttribute="top" secondItem="vYS-02-qdW" secondAttribute="bottom" id="xAH-ee-PBK"/>
                                 <constraint firstItem="bMb-eN-1N4" firstAttribute="leading" secondItem="Ok1-R5-Ys8" secondAttribute="leading" constant="15" id="xAR-Lf-g5Q"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="bR9-RE-voC"/>
+                                    <exclude reference="mD3-uh-J5a"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
                     <constraints>
@@ -660,7 +669,7 @@
             <constraints>
                 <constraint firstItem="zLZ-yZ-rZW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0XI-N2-vE9"/>
                 <constraint firstAttribute="bottom" secondItem="zLZ-yZ-rZW" secondAttribute="bottom" id="2ae-oo-PcN"/>
-                <constraint firstItem="Ok1-R5-Ys8" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1.25" id="B9y-Bm-ljQ"/>
+                <constraint firstItem="Ok1-R5-Ys8" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1.2" id="B9y-Bm-ljQ"/>
                 <constraint firstItem="zLZ-yZ-rZW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bzt-HK-Dbb"/>
                 <constraint firstAttribute="trailing" secondItem="zLZ-yZ-rZW" secondAttribute="trailing" id="idv-cC-ijf"/>
             </constraints>

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet PublicBtn *OneBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *BankImageView;
 @property (weak, nonatomic) IBOutlet WhiteLabel *bank_name;
+@property (weak, nonatomic) IBOutlet WhiteLabel *plan_status;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *credit_line;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *state_date;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *repay_date;

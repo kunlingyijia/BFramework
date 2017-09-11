@@ -18,6 +18,7 @@
 #import "MyWalletVC.h"
 #import "TopUpVC.h"
 #import "ChargeVC.h"
+#import "WalletDetailVC.h"
 @interface DWTabBarController ()<LBTabBarDelegate>
 
 @end
@@ -32,7 +33,6 @@
     [tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:10*SizeScale],NSFontAttributeName, [UIColor colorWithHexString:kBlueColor],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
 }
 - (void)viewDidLoad {
-   
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setUpAllChildVc];
@@ -57,9 +57,7 @@
     [self setUpOneChildVcWithVc:billVC Image:@"账单" selectedImage:@"账单蓝" title:@"账单"];
     [self setUpOneChildVcWithVc:myInfoVC1 Image:@"我的" selectedImage:@"我的蓝" title:@"我的"];
 }
-
 #pragma mark - 初始化设置tabBar上面单个按钮的方法
-
 /**
  *  @author li bo, 16/05/10
  *
@@ -83,7 +81,6 @@
     Vc.tabBarItem.title = title;
     Vc.navigationItem.title = title;
     [self addChildViewController:nav];
-    
 }
 #pragma mark - ------------------------------------------------------------------
 #pragma mark - LBTabBarDelegate
@@ -115,7 +112,7 @@
                     //新增借记卡
                     AddDebitCardVC * VC =  GetVC(AddDebitCardVC);
                     VC.AddDebitCardVCBlock = ^(){
-                         [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 1;
+                    [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 1;
                     };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;
@@ -135,7 +132,9 @@
                     //掌上提现 跳转
                     MyWalletVC * VC = GetVC(MyWalletVC);
                     VC.MyWalletVCBlock = ^(){
-                        [DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 2;
+                        WalletDetailVC * VC =  GetVC(WalletDetailVC);
+                        [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES];
+                        //[DWAlertTool getCurrentUIVC].tabBarController.selectedIndex = 2;
                     };
                     [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES ];
                     break;

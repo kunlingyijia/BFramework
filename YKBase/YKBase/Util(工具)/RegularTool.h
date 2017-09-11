@@ -53,4 +53,6 @@
 + (BOOL)checkNumber6:(NSString *) number;
 /// 正则匹配3位正整数(cvn)
 + (BOOL)checkNumber3:(NSString *) number;
+/// 正则匹配11位正整数(手机号位数)
++ (BOOL)checkNumber11:(NSString *) number;
 @end

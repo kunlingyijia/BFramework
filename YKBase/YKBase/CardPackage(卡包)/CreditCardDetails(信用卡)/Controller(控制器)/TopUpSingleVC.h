@@ -8,5 +8,9 @@
 #import "BaseViewController.h"
 
 @interface TopUpSingleVC : BaseViewController
-
+@property (nonatomic, copy) void(^ TopUpSingleVCBlock)();
+@property (weak, nonatomic) IBOutlet DarkGreyTF *amount;
+@property (weak, nonatomic) IBOutlet DarkGreyTF *bank_card_no;
+///model
+@property (nonatomic, strong) CardModel *cardModel ;
 @end

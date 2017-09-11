@@ -28,7 +28,6 @@
     __weak typeof(self) weakSelf = self;
     self.segmented.SegmentedViewBlock = ^(NSInteger tag){
         [weakSelf.view endEditing:YES];
-        
         if (tag==0) {
             self.type = @"2";
         }
@@ -53,13 +52,13 @@
             if (baseRes.resultCode==1) {
                 SigningVC * VC =  GetVC(SigningVC);
                 NSDictionary * dic = baseRes.data;
-                    VC.form_data = dic[@"web"];
-                    VC.SigningVCBlock = ^(){
-                        weakSelf.ChargeVCBlock();
-                        //返回
-                        [weakSelf.navigationController popViewControllerAnimated:YES] ;
-                    };
-                    PushVC(VC);
+                VC.form_data = dic[@"web"];
+                VC.SigningVCBlock = ^(){
+                    weakSelf.ChargeVCBlock();
+                    //返回
+                    [weakSelf.navigationController popViewControllerAnimated:YES] ;
+                };
+                PushVC(VC);
             }
         } faild:^(NSError * _Nullable error) {
         }];
@@ -80,7 +79,7 @@
         [DWAlertTool showToast:@"充值金额不大于20000"];
         return NO;
     }
-
+    
     if (![RegularTool checkBankNumber:_bank_card_no.text]) {
         [DWAlertTool showToast:@"银行卡号输入有误"];
         return NO;

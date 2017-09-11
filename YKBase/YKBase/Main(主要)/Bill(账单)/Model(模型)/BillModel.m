@@ -7,12 +7,6 @@
 //
 
 #import "BillModel.h"
-#import "BillSubModel.h"
 @implementation BillModel
-//#把数组里面带有对象的类型专门按照这个方法，这个格式写出来
--(nullable NSDictionary<NSString *, id> *)modelContainerPropertyGenericClass{
-    return @{
-             @"goods" : BillSubModel.class,
-             };
-}
+
 @end

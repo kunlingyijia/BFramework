@@ -247,6 +247,15 @@
     
     return Y;
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField ==self.bind_mobile) {
+        NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        return  [RegularTool checkNumber11:toString];
+    }
+    return YES;
+}
 #pragma mark - dealloc
 - (void)dealloc
 {

@@ -8,18 +8,16 @@
 
 #import "MyWalletVC.h"
 #import "ChooseDebitCardVC.h"
-
+#import "WalletDetailVC.h"
 @interface MyWalletVC ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIView *OneView;
 @property (weak, nonatomic) IBOutlet UIView *TwoView;
 ///银行卡id
-@property (nonatomic, strong) NSString  *bank_id ;
+@property (nonatomic, strong) NSString  *bank_id;
 @end
-
 @implementation MyWalletVC
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     //UI
@@ -30,6 +28,12 @@
 #pragma mark - 关于UI
 -(void)SET_UI{
     [self showBackBtn];
+    __weak typeof(self) weakSelf = self;
+    [self ShowRightBtnTitle:@"交易明细" Back:^{
+        //跳转
+        WalletDetailVC * VC =  GetVC(WalletDetailVC);
+        [weakSelf.navigationController pushViewController:VC animated:YES];
+    }];
     _bottomView.backgroundColor = [UIColor colorWithHexString:kBlueColor];
     [self.OneView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
     [self.TwoView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
@@ -51,22 +55,16 @@
     VC.ChooseDebitCardVCBlock = ^(NSString * bankName,NSString * bank_card_no,NSString  *bank_id){
         weakSelf.bank_id = bank_id;
         if(bank_card_no.length>=4){
-            bank_card_no =
-            [bank_card_no substringFromIndex:bank_card_no.length-4];
+            bank_card_no = [bank_card_no substringFromIndex:bank_card_no.length-4];
         }else{
-            bank_card_no =
-            bank_card_no;
+            bank_card_no = bank_card_no;
         }
-          weakSelf.bankName.text  = [NSString stringWithFormat:@"%@(%@)",bankName,bank_card_no];
-      
-        
-        
+        weakSelf.bankName.text  = [NSString stringWithFormat:@"%@(%@)",bankName,bank_card_no];
     };
     PushVC(VC);
 }
 #pragma mark - 确认支付
 - (IBAction)BtnAction:(SubmitBtn *)sender {
-
     if ([self IF]) {
         Userinfo *model =[Userinfo new];
         model.money = self.money.text;
@@ -77,7 +75,6 @@
                 [weakSelf  requestUserInfo];
             }
         } faild:^(NSError * _Nullable error) {
-            
         }];
         if (task) {
             [self.sessionArray addObject:task];
@@ -90,12 +87,11 @@
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:YES success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             [DWAlertTool showToast:@"提现成功"];
-            YKHTTPSession * helper = [YKHTTPSession shareSession];
-            weakSelf.amount.text =helper.userinfo.amount;
-            weakSelf.frozen_amount.text = helper.userinfo.frozen_amount;
+            //YKHTTPSession * helper = [YKHTTPSession shareSession];
+            //weakSelf.amount.text =helper.userinfo.amount;
+            //weakSelf.frozen_amount.text = helper.userinfo.frozen_amount;
+            [weakSelf.navigationController popViewControllerAnimated:NO];
             weakSelf.MyWalletVCBlock();
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-
         }
     } faild:^(NSError * _Nullable error) {
     }];
@@ -107,7 +103,7 @@
 -(BOOL)IF{
     [self.view endEditing:YES];
     BOOL  Y = YES;
-    if (self.money.text.length==0) {
+    if (self.money.text.length==0||[self.money.text floatValue]==0) {
         [DWAlertTool showToast:@"金额输入有误"];
         return NO;
     }

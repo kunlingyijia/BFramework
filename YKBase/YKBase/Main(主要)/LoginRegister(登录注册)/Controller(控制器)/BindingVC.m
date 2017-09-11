@@ -23,7 +23,6 @@
     [self SET_UI];
     //数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
@@ -32,8 +31,6 @@
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
-    
-    
     
 }
 #pragma mark - 发送验证码
@@ -45,17 +42,12 @@
         [DWAlertTool VerificationCodeBtn:sender];
         [HTTPTool requestVerifyCodeWithParm:@{@"mobile":self.mobile.text,@"type":@"4"} active:YES success:^(BaseResponse * _Nullable baseRes) {
             if (baseRes.resultCode ==16) {
-                
-                //[DWAlertTool alertWithTitle:@"尚未注册,是否注册?" message:nil OKWithTitle:@"注册"CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
                 //Push 跳转
                 RegisteredVC * VC = GetVC(RegisteredVC)
                 VC.RegisteredVCBlock = ^(NSString  *account ,NSString  *password){
                     weakSelf.mobile.text = account;
                 };
                 PushVC(VC)
-                //                } withCancel:^(UIAlertAction *cancelaction) {
-                //
-                //                }];
             }
         } faild:^(NSError * _Nullable error) {
         }];
@@ -111,7 +103,6 @@
             //设置别名
             [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
             [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
-            
         }
     } faild:^(NSError * _Nullable error) {
         
@@ -119,6 +110,15 @@
     if (task) {
         [self.sessionArray addObject:task];
     }
+}
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField ==self.mobile) {
+        NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        return  [RegularTool checkNumber11:toString];
+    }
+    return YES;
 }
 
 #pragma mark - dealloc

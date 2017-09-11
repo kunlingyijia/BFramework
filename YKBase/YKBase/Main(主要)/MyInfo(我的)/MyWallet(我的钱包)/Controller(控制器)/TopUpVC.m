@@ -178,7 +178,7 @@
 #pragma mark - 立即支付
 - (IBAction)submitAction:(SubmitBtn *)sender {
     if ([self IF]) {
-           }
+    }
 }
 #pragma mark - 判断条件
 -(BOOL)IF{
@@ -189,7 +189,6 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 #pragma mark - dealloc
 - (void)dealloc

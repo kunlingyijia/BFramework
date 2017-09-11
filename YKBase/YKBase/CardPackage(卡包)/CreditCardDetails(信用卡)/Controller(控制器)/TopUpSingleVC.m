@@ -7,73 +7,88 @@
 //
 
 #import "TopUpSingleVC.h"
+#import "SigningVC.h"
 @interface TopUpSingleVC ()
-@property (weak, nonatomic) IBOutlet UIView *OneView;
 
 
 @end
 @implementation TopUpSingleVC
-#pragma mark -  视图将出现在屏幕之前
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
-#pragma mark - 视图已在屏幕上渲染完成
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-}
-#pragma mark -  载入完成
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //关于UI
+    //UI
     [self SET_UI];
-    //关于数据
+    //数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
-    self.title = @"快速充值";
     [self showBackBtn];
-    [self.OneView.layer setLaberMasksToBounds:YES cornerRadius:cutRadius*SizeScale borderWidth:borderW*SizeScale borderColor:[UIColor colorWithHexString:kLineColor]];
+    self.title = @"快速充值";
 }
-
 #pragma mark - 关于数据
 -(void)SET_DATA{
-    [self requestAction];
+    self.bank_card_no.text = self.cardModel.bank_card_no;
 }
-
-#pragma mark - 网络请求
--(void)requestAction{
-    
-}
-
-
 #pragma mark - 立即支付
 - (IBAction)submitAction:(SubmitBtn *)sender {
     if ([self IF]) {
-        
+        __weak typeof(self) weakSelf = self;
+        CardModel * model= [CardModel new];
+        model.amount = self.amount.text;
+        model.bank_card_no = self.bank_card_no.text;
+        model.type = @"2";
+        NSURLSessionDataTask * task =  [HTTPTool  requestQuickRechargeWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+            if (baseRes.resultCode==1) {
+                SigningVC * VC =  GetVC(SigningVC);
+                NSDictionary * dic = baseRes.data;
+                VC.form_data = dic[@"web"];
+                VC.SigningVCBlock = ^(){
+                    weakSelf.TopUpSingleVCBlock();
+                    //返回
+                    [weakSelf.navigationController popViewControllerAnimated:YES] ;
+                };
+                PushVC(VC);
+            }
+        } faild:^(NSError * _Nullable error) {
+        }];
+        if (task) {
+            [self.sessionArray addObject:task];
+        }
     }
-    
 }
 #pragma mark - 判断条件
 -(BOOL)IF{
     [self.view endEditing:YES];
     BOOL  Y = YES;
+    if ([self.amount.text floatValue]<50) {
+        [DWAlertTool showToast:@"充值金额不小于50"];
+        return NO;
+    }
+    if ([self.amount.text floatValue]>20000) {
+        [DWAlertTool showToast:@"充值金额不大于20000"];
+        return NO;
+    }
     
+    if (![RegularTool checkBankNumber:_bank_card_no.text]) {
+        [DWAlertTool showToast:@"银行卡号输入有误"];
+        return NO;
+    }
     return Y;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField ==self.amount) {
+        NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        return  [RegularTool checkAmount:toString];
+    }
+    return YES;
+    
 }
-
-
-
 
 #pragma mark - dealloc
 - (void)dealloc
 {
+    
     NSLog(@"%@销毁了", [self class]);
 }
-
 @end

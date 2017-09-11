@@ -233,7 +233,6 @@
         NSURL * myURL_APP_A = [NSURL URLWithString:@"alipay:"];
         if (![[UIApplication sharedApplication] canOpenURL:myURL_APP_A]) {
             [DWAlertTool showToast:@"尚未安装支付宝"];
-            
         }else{
             //          /*
             //         *商户的唯一的parnter和seller。

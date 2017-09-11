@@ -15,11 +15,9 @@
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *state_date;
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *repay_date;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *total_money;
-@property (weak, nonatomic) IBOutlet DarkGreyTF *bond;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *begin_time;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *end_time;
-
-
+@property (weak, nonatomic) IBOutlet DarkGreyTF *bond;
 
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *fee;
 

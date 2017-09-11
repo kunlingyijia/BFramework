@@ -12,6 +12,7 @@
 #import "MessageVC.h"
 #import "BillVC.h"
 #import "RegionViewController.h"
+#import "WalletDetailVC.h"
 @interface MyInfoVC ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -25,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //用户信息赋值
-    [YKNotification addObserver:self selector:@selector(UserInfoForControls:) name:@"获取个人信息" object:nil];
+    [YKNotification addObserver:self selector:@selector(UserInfoForControls) name:@"获取个人信息" object:nil];
     //UI
     [self SET_UI];
     //数据
@@ -58,7 +59,6 @@
     [ThirdPartyTool MJRefreshView:self.scrollView Header:YES Footer:NO HeaderBlock:^{
         [weakSelf requestUserInfo];
     } FooterBlock:^{
-        
     }];
 }
 #pragma mark - 请求个人信息
@@ -74,7 +74,7 @@
     }
 }
 #pragma mark - 用户赋值
--(void)UserInfoForControls:(NSNotification*)sender{
+-(void)UserInfoForControls{
     YKHTTPSession * helper = [YKHTTPSession shareSession];
     [self.avatar_url SD_WebimageUrlStr:helper.userinfo.avatar_url placeholderImage:@"60"];
     self.mobile.text = [NSString stringWithFormat:@"账号:  %@",helper.userinfo.mobile];
@@ -86,6 +86,7 @@
 }
 #pragma mark - 点击事件
 - (IBAction)BtnAction:(UIButton *)sender {
+    __weak typeof(self) weakSelf = self;
     switch (sender.tag) {
         case 101:
         {
@@ -96,27 +97,21 @@
             //我的钱包
             MyWalletVC * VC = GetVC(MyWalletVC);
             VC.MyWalletVCBlock = ^(){
-//                //我的账单
-//                BillVC * VC =  GetVC(BillVC);
-//                [VC showBackBtn];
-//                PushVC(VC);
-                
-            self. tabBarController.selectedIndex = 2;
+                //跳转
+                WalletDetailVC * VC =  GetVC(WalletDetailVC);
+                [weakSelf.navigationController pushViewController:VC animated:YES];
             };
             PushVC(VC)
             break;
         }
         case 102:
         {
-            ///是否实名认证
-            if ([HTTPTool isCertification]) {
-                return ;
-            }
-//            //我的账单
-//            BillVC * VC =  GetVC(BillVC);
-//            [VC showBackBtn];
-//            PushVC(VC);
-            self. tabBarController.selectedIndex = 2;
+            //我的账单
+            BillVC * VC =  GetVC(BillVC);
+            [VC showBackBtn];
+            VC.ISLevel = YES;
+            PushVC(VC);
+            //self. tabBarController.selectedIndex = 2;
             break ;
         }
         case 103:
@@ -129,28 +124,28 @@
         }
         case 104:
         {
-            
-            
-            
-            [DWAlertTool showToast:@"敬请期待..."];
-//            NSMutableArray * marr =[@[@"1",@"2",@"3",@"4"]mutableCopy];
-//            NSMutableArray * AfterMArray = [NSMutableArray arrayWithArray:marr];
-//            //插入数据到第二位
-//            [AfterMArray insertObject:@"3" atIndex:0];
-//            //去重
-//            NSMutableArray *listAry = [[NSMutableArray alloc]init];
-//            for (NSString *str in AfterMArray) {
-//                if (![listAry containsObject:str]) {
-//                    [listAry addObject:str];
-//                }
-//            }
-//            [YKDataTool saveUserData:[NSArray arrayWithArray:listAry] forKey:@"信用卡信息"];
-//            NSArray * arr =[YKDataTool readUserDataForKey:@"信用卡信息"];
-//            NSMutableArray * Marr =    [NSMutableArray arrayWithArray:arr];
-//            for (int i=0; i<Marr.count; i++) {
-//                NSLog(@"Marr----%@",Marr[i]);
-//
-//            }
+            //跳转
+            PublicVC * VC =  GetVC(PublicVC);
+            PushVC(VC);
+            //[DWAlertTool showToast:@"敬请期待..."];
+            //            NSMutableArray * marr =[@[@"1",@"2",@"3",@"4"]mutableCopy];
+            //            NSMutableArray * AfterMArray = [NSMutableArray arrayWithArray:marr];
+            //            //插入数据到第二位
+            //            [AfterMArray insertObject:@"3" atIndex:0];
+            //            //去重
+            //            NSMutableArray *listAry = [[NSMutableArray alloc]init];
+            //            for (NSString *str in AfterMArray) {
+            //                if (![listAry containsObject:str]) {
+            //                    [listAry addObject:str];
+            //                }
+            //            }
+            //            [YKDataTool saveUserData:[NSArray arrayWithArray:listAry] forKey:@"信用卡信息"];
+            //            NSArray * arr =[YKDataTool readUserDataForKey:@"信用卡信息"];
+            //            NSMutableArray * Marr =    [NSMutableArray arrayWithArray:arr];
+            //            for (int i=0; i<Marr.count; i++) {
+            //                NSLog(@"Marr----%@",Marr[i]);
+            //
+            //            }
             
             //ShareModel *model =[ShareModel new];
             //model.title = @"韩一帆❤️魏威 单身狗们,出来吃狗粮了";
@@ -181,6 +176,7 @@
 #pragma mark - dealloc
 - (void)dealloc
 {
+    [YKNotification removeObserver:self];
     NSLog(@"%@销毁了", [self class]);
 }
 @end

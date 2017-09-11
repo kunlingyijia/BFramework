@@ -92,10 +92,8 @@
 
 ///错误统计
 #define BuglyKey @"9e8b5f7341"
-
 #define YKNotification   [NSNotificationCenter defaultCenter]
 #define IOS8 ([[[UIDevice currentDevice] systemVersion] doubleValue] >=8.0 ? YES : NO)
-
 #ifndef __OPTIMIZE__
 #define NSLog(...) NSLog(__VA_ARGS__)
 #else

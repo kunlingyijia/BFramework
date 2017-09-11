@@ -31,7 +31,7 @@
 -(void)setModel:(BillModel *)model{
     if (!model) return;
     _model = model;
-     self.title .text = @"1991-02-06";
+     self.title .text = model.date;
 }
 
 @end

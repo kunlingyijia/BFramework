@@ -14,31 +14,22 @@
 @property (weak, nonatomic) IBOutlet DarkGreyTF *password;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *oncepassword;
 @property (weak, nonatomic) IBOutlet DarkGreyTF *inviter_code;
-
-
 @end
-
 @implementation RegisteredVC
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     //UI
     [self SET_UI];
     //数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
     [self showBackBtn];
     self.title = @"注册";
-    
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
-    
-    
-    
 }
 #pragma mark - 发送验证码
 - (IBAction)VerificationCodeAction:(UIButton *)sender {
@@ -54,7 +45,6 @@
     }
 }
 - (IBAction)registeredAction:(PublicBtn *)sender {
-    
     if ([self IF]) {
         LoginRegModel *model = [LoginRegModel new];
         model.mobile = self.mobile.text;
@@ -114,16 +104,19 @@
     };
     PushVC(VC)
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField ==self.mobile) {
+        NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        return  [RegularTool checkNumber11:toString];
+    }
+    return YES;
+}
 
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
+#pragma mark - dealloc
+- (void)dealloc
+{
+    NSLog(@"%@销毁了", [self class]);
+}
 @end

@@ -14,8 +14,8 @@
 -(void)initService{
     //退出登录
     [YKNotification  addObserver:self selector:@selector(logOut:)name:@"退出账号" object:nil];
-//    //设置别名
-//    [YKNotification addObserver:self selector:@selector(SetUpAlias:) name:@"设置别名" object:nil];
+    //设置别名
+    //[YKNotification addObserver:self selector:@selector(SetUpAlias:) name:@"设置别名" object:nil];
 }
 
 #pragma mark - 退出登录
@@ -35,12 +35,12 @@
 //
 //    [JPUSHService setAlias:self. pushAlias completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
 //        if (iResCode == 0) {
-//            
+//
 //        }
 //        if (iResCode == 6002) {
 //            [weakSelf SetUpAlias:sender];
 //        }
-//        
+//
 //    } seq:0];
 //   // [JPUSHService setAlias: self. pushAlias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
 //}
@@ -48,15 +48,15 @@
 //- (void)tagsAliasCallback:(int)iResCode
 //                     tags:(NSSet *)tags
 //                    alias:(NSString *)alias {
-//    
+//
 //    if (iResCode == 0) {
-//        
+//
 //    }
 //    if (iResCode == 6002) {
 //        [JPUSHService setAlias: self. pushAlias callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];
 //    }
 //    else{
-//        
+//
 //    }
 //    NSLog(@"push set alias success alisa = %@", alias);
 //}
@@ -65,15 +65,13 @@
 -(void)initWindow{
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-//    [self.window makeKeyWindow];
-//    [self.window makeKeyAndVisible];
-    
-   
+    //    [self.window makeKeyWindow];
+    //    [self.window makeKeyAndVisible];
 }
 #pragma mark ————— 网络状态监听 —————
 - (void)monitorNetworkStatus
 {
-    // 网络状态改变一次, networkStatusWithBlock就会响应一次
+    //网络状态改变一次, networkStatusWithBlock就会响应一次
     [YKHTTPSession  AFNetworkStatus];
     
 }
@@ -81,27 +79,21 @@
 #pragma mark - 设置所有第三方
 -(void)initThirdParty:(NSDictionary *)launchOptions{
     //设置错误统计
-     [self initBugly];
-//    //设置友盟
+    [self initBugly];
+    ////设置友盟
     [self UMManager];
-//    //设置微信支付
-//    [self WXApy];
-//    //高的地图
-//    [self AMap];
-//    //极光推送
-//    [self registerJPush:launchOptions];
-//   // [self JGPush:launchOptions];
-//    [self SetUpJGPush:launchOptions];
-//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-   
- 
+    ////设置微信支付
+    // [self WXApy];
+    //    //高的地图
+    //    [self AMap];
+    //    //极光推送
+    //    [self registerJPush:launchOptions];
+    //   // [self JGPush:launchOptions];
+    //    [self SetUpJGPush:launchOptions];
+    //    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 -(void)initBugly{
-    
-   
     [Bugly startWithAppId:BuglyKey];
-    
-    
 }
 #pragma mark - 设置微信支付
 -(void)WXApy{
@@ -142,7 +134,6 @@
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"%@",resultDic);
         }];
-        //
         // 授权跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"result = %@",resultDic);
@@ -162,8 +153,7 @@
         }];
         
     }
-      return result;
-
+    return result;
     //return YES;
 }
 -(void)onResp:(BaseResp*)resp{
@@ -185,17 +175,17 @@
             case WXErrCodeSentFail:
                 NSLog(@"发送失败");
                 [DWAlertTool showToast:@"微信支付-发送失败"];
-
+                
                 break;
             case WXErrCodeAuthDeny:
                 NSLog(@"授权失败 ");
                 [DWAlertTool showToast:@"微信支付-授权失败"];
-
+                
                 break;
             case WXErrCodeUnsupport:
                 NSLog(@"微信不支持");
                 [DWAlertTool showToast:@"微信支付-微信不支持"];
-
+                
                 break;
             default:
                 break;
@@ -206,20 +196,18 @@
 #pragma mark - 设置友盟
 -(void)UMManager{
     
-  // [[UMSocialManager defaultManager] setUmSocialAppkey:UMKey];
-//    //打开调试日志
-   [[UMSocialManager defaultManager] openLog:YES];
+    // [[UMSocialManager defaultManager] setUmSocialAppkey:UMKey];
+    //    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
     //设置友盟appkey
     // 获取友盟social版本号
     //NSLog(@"UMeng social version: %@", [UMSocialGlobal umSocialSDKVersion]);
     //设置微信的appKey和appSecret
     //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:WXKey appSecret:WXappSecret redirectURL:@"http://mobile.umeng.com/social"];
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxb1b2bfe44501f201" appSecret:@"5c9d1be2f5dc4cc975c248f9efd7b608" redirectURL:@"http://mobile.umeng.com/social"];
-    
-//    //设置分享到QQ互联的appKey和appSecret
-  //  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:QQKey  appSecret:QQappSecret redirectURL:@"http://mobile.umeng.com/social"];
-     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105466760"  appSecret:@"ZhkBC58lGdVq4kaw" redirectURL:@"http://mobile.umeng.com/social"];
-    
+    //设置分享到QQ互联的appKey和appSecret
+    //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:QQKey  appSecret:QQappSecret redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105466760"  appSecret:@"ZhkBC58lGdVq4kaw" redirectURL:@"http://mobile.umeng.com/social"];
     /*
      设置新浪的appKey和appSecret
      [新浪微博集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_2
@@ -230,7 +218,7 @@
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
- }
+}
 #pragma mark - 高的地图配置
 -(void)AMap{
     [AMapServices sharedServices].apiKey =GDKey;
@@ -239,8 +227,8 @@
 
 //#pragma mark - 极光推送
 //-(void)JGPush:(NSDictionary *)launchOptions{
-//    
-//    
+//
+//
 //}
 #pragma mark -  设置广告页
 -(void)initAdvertising{
@@ -266,20 +254,18 @@
         }];
     }
     //  2.初始化启动页广告
-   
 }
-
 #pragma mark -  用户引导页
 -(void)initUserGuidePage{
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:BOOLFORKEY]) {
-          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:BOOLFORKEY];
-            // 静态引导页
-            [self setStaticGuidePage];
-            // 动态引导页
-            //[self setDynamicGuidePage];
-            // 视频引导页
-            //[self setVideoGuidePage];
-       }
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:BOOLFORKEY]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:BOOLFORKEY];
+        //静态引导页
+        [self setStaticGuidePage];
+        //动态引导页
+        //[self setDynamicGuidePage];
+        //视频引导页
+        //[self setVideoGuidePage];
+    }
 }
 #pragma mark - 设置APP静态图片引导页
 - (void)setStaticGuidePage {
@@ -295,8 +281,8 @@
     DHGuidePageHUD *guidePage = [[DHGuidePageHUD alloc] dh_initWithFrame:[UIScreen mainScreen].bounds imageNameArray:imageNameArray buttonIsHidden:YES];
     guidePage.slideInto = YES;
     AppDelegate * del = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [del.window addSubview:guidePage];}
-
+    [del.window addSubview:guidePage];
+}
 #pragma mark - 设置APP视频引导页
 - (void)setVideoGuidePage {
     NSURL *videoURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"mqr" ofType:@"mp4"]];

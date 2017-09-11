@@ -82,42 +82,40 @@
 }
 #pragma mark - 提交
 - (IBAction)submitBtn:(SubmitBtn *)sender {
-    self.AddDebitCardVCBlock();
-    //返回
-    [self.navigationController popViewControllerAnimated:YES] ;
     
     
-//    if ([self IF]) {
-//        CardModel *model =[CardModel new];
-//        model.bank_card_photo = _bank_card_photoUrl ;
-//        model.bank_card_back_photo = _bank_card_back_photoUrl ;
-//        model. account_name = self.account_name.text;
-//        model.bank_card_no = self.bank_card_no.text;
-//        model.bank_name = self.bank_name.text;
-//        model.bind_mobile = self.bind_mobile.text ;
-//        __weak typeof(self) weakSelf = self;
-//        NSURLSessionDataTask * task =  [HTTPTool requestBankAddDebitCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
-//            if (baseRes.resultCode==1) {
-//                [DWAlertTool showToast:@"借记卡添加成功"];
-//                //请求个人信息
-//                [weakSelf requestUserInfo];
-//            }
-//            
-//        } faild:^(NSError * _Nullable error) {
-//        }];
-//        if (task) {
-//            [self.sessionArray addObject:task];
-//        }
-//    }
+    if ([self IF]) {
+        CardModel *model =[CardModel new];
+        model.bank_card_photo = _bank_card_photoUrl ;
+        model.bank_card_back_photo = _bank_card_back_photoUrl ;
+        model. account_name = self.account_name.text;
+        model.bank_card_no = self.bank_card_no.text;
+        model.bank_name = self.bank_name.text;
+        model.bind_mobile = self.bind_mobile.text ;
+        __weak typeof(self) weakSelf = self;
+        NSURLSessionDataTask * task =  [HTTPTool requestBankAddDebitCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
+            if (baseRes.resultCode==1) {
+                [DWAlertTool showToast:@"借记卡添加成功"];
+                //请求个人信息
+                [weakSelf requestUserInfo];
+            }
+            
+        } faild:^(NSError * _Nullable error) {
+        }];
+        if (task) {
+            [self.sessionArray addObject:task];
+        }
+    }
 }
 #pragma mark - 请求个人信息
 -(void)requestUserInfo{
     __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
+            weakSelf.AddDebitCardVCBlock();
+
             // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                weakSelf.AddDebitCardVCBlock();
                 
                 //返回
                 [weakSelf.navigationController popViewControllerAnimated:YES] ;
@@ -161,6 +159,16 @@
     
     return Y;
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField ==self.bind_mobile) {
+        NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        return  [RegularTool checkNumber11:toString];
+    }
+    return YES;
+}
+
 #pragma mark - dealloc
 - (void)dealloc
 {

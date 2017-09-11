@@ -17,10 +17,8 @@
 @interface DebitCardDetailsVC ()
 @property (weak, nonatomic) IBOutlet CutView *bottomView;
 @property (nonatomic, strong) CardModel *model ;
-
 @end
 @implementation DebitCardDetailsVC
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     //UI
@@ -71,17 +69,16 @@
     self.state_date.text =[NSString stringWithFormat:@"%@日", self.cardModel.state_date];
     self.repay_date.text =[NSString stringWithFormat:@"%@日", self.cardModel.repay_date] ;
 }
-
-
 #pragma mark - 点击事件
 - (IBAction)BtnAction:(PublicBtn *)sender {
+    __weak typeof(self) weakSelf = self;
     switch (sender.tag-100) {
         case 1:
         {
             //查看流水
             PlanRunWaterVC * VC =  GetVC(PlanRunWaterVC);
-            [VC showBackBtn];
-           // PushVC(VC);
+            VC.cardModel = self.cardModel;
+            PushVC(VC);
             break;
         }
         case 2:
@@ -104,8 +101,16 @@
         {
             //卡片充值
             TopUpSingleVC * VC =  GetVC(TopUpSingleVC);
-            
-            //PushVC(VC);
+            VC.cardModel =self.cardModel;
+            VC.TopUpSingleVCBlock =^(){
+                //我的账单
+                BillVC * VC =  GetVC(BillVC);
+                [VC showBackBtn];
+                VC.ISLevel = YES;
+                PushVC(VC);
+                //weakSelf. tabBarController.selectedIndex = 2;
+            };
+            PushVC(VC);
             break;
         }
         case 5:
@@ -117,29 +122,55 @@
             VC.ChangeDebitCardVCBlock =^(){
                 [weakSelf requestAction];
             };
-            //PushVC(VC);
+            PushVC(VC);
             break;
         }
         case 6:
         {
-            //卡片解绑
-            
+            [DWAlertTool alertWithTitle:@"是否解绑?" message:nil OKWithTitle:@"确定" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+                //卡片解绑
+                [weakSelf requestDeleteCardWithParm];
+            } withCancel:^(UIAlertAction *cancelaction) {
+                
+            }];
             break;
         }
         default:{
-            
             break;
-            
         }
     }
 }
-
-
+#pragma mark -卡片解绑
+-(void)requestDeleteCardWithParm{
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask * task =  [HTTPTool  requestDeleteCardWithParm:self.cardModel active:NO success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode==1) {
+            [weakSelf requestUserInfo];
+        }
+    } faild:^(NSError * _Nullable error) {
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
+}
+#pragma mark - 请求个人信息
+-(void)requestUserInfo{
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+    } faild:^(NSError * _Nullable error) {
+        
+    }];
+    if (task) {
+        [self.sessionArray addObject:task];
+    }
+}
 
 #pragma mark - dealloc
 - (void)dealloc
 {
-    
     NSLog(@"%@销毁了", [self class]);
 }
 

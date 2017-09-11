@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
 @interface CardPackageVC : BaseViewController
-
+///是否是一级界面
+@property (nonatomic, assign) BOOL ISLevel;
 @end

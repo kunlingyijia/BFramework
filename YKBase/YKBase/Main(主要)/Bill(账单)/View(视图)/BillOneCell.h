@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@class BillSubModel;
+@class BillModel;
 @interface BillOneCell : UITableViewCell
 ///model
-@property (nonatomic, strong) BillSubModel *model ;
+@property (nonatomic, strong) BillModel *model ;
+@property (weak, nonatomic) IBOutlet UIImageView *flow_typeImg;
+@property (weak, nonatomic) IBOutlet DarkGreyLabel *bank_name;
+@property (weak, nonatomic) IBOutlet DarkGreyLabel *money;
+@property (weak, nonatomic) IBOutlet DarkGreyLabel *minute;
+@property (weak, nonatomic) IBOutlet PublicLabel *status;
+
+
 @end
