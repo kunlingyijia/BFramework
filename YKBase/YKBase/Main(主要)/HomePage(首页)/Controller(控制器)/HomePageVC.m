@@ -84,6 +84,7 @@
     self.title = @"首页";
     [(AppDelegate*)[UIApplication sharedApplication].delegate initUserGuidePage];
     [self setUpTableView];
+    NSLog(@"####  %f",self.navigationController.navigationBar.frame.size.height);
 }
 #pragma mark - 关于tableView
 -(void)setUpTableView{
@@ -102,9 +103,9 @@
     self.messageArray = [NSMutableArray arrayWithCapacity:0];
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
-    [self  dataProcessing];
     //更新版本
-    [ThirdPartyTool updateVerison];
+    [ThirdPartyTool updateVerison:self];
+    [self  dataProcessing];
     //请求个人信息
     [self requestUserInfo];
     //上拉刷新下拉加载
@@ -126,6 +127,7 @@
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:YES success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode==1) {
             [weakSelf requestAction];
+            
         }
     } faild:^(NSError * _Nullable error) {
     }];
@@ -331,26 +333,7 @@
 }
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    switch (indexPath.section) {
-        case 0:
-        {
-            if (indexPath.row==0) {
-                return 0.40*Width +0.125*Width;
-            }else{
-                return 0.40*Width;
-            }
-            break;
-        }
-        case 1:
-        {
-            return Width *0.35;
-            break;
-        }
-        default:{
-            return 0.0;
-            break;
-        }
-    }
+    return  indexPath.section ==0 ? (indexPath.row==0 ? 0.525*Width  : 0.40*Width) :Width *0.35;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

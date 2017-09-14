@@ -7,14 +7,10 @@
 //
 
 #import "WalletDetailVC.h"
-
+#import "WalletDetailOneCell.h"
 #import "BillOneCell.h"
-#import "BillHeaderView.h"
 #import "BillModel.h"
 @interface WalletDetailVC ()<UITableViewDelegate,UITableViewDataSource>
-{
-    BillHeaderView * header;
-}
 @property (strong, nonatomic)  UITableView *tableView;
 ///分页参数
 @property (nonatomic, assign) NSInteger pageIndex;
@@ -71,8 +67,8 @@
     _tableView.tableFooterView = [UIView new];
     [self.view addSubview:_tableView];
     [_tableView tableViewregisterClassArray:@[@"UITableViewCell"]];
-    [_tableView tableViewregisterNibArray:@[@"BillOneCell"]];
-    [self.tableView registerClass:[BillHeaderView class] forHeaderFooterViewReuseIdentifier:@"BillHeaderView"];
+    [_tableView tableViewregisterNibArray:@[@"BillOneCell",@"WalletDetailOneCell"]];
+    
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
@@ -98,7 +94,7 @@
 #pragma mark - 网络请求
 -(void)requestAction{
     __weak typeof(self) weakSelf = self;
-    NSURLSessionDataTask * task =  [HTTPTool  requestBillListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10"} active:YES success :^(BaseResponse * _Nullable baseRes) {
+    NSURLSessionDataTask * task =  [HTTPTool  requestRequest_User_flowLisWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10",@"type":self.type} active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             if (weakSelf.pageIndex == 1) {
                 [weakSelf.dataArray removeAllObjects];
@@ -127,65 +123,36 @@
 //tab分区个数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     //分区个数
-    [tableView tableViewDisplayWitimage:nil ifNecessaryForRowCount:self.dataArray.count];
-    return self.dataArray.count;
+    return 1;
+   
 }
 ///tab个数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 1;
+    [tableView tableViewDisplayWitimage:nil ifNecessaryForRowCount:self.dataArray.count];
+    return self.dataArray.count;
 }
 //tab设置
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //分割线
     //tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.section>self.dataArray.count-1||self.dataArray.count==0) {
+    if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
         
-        BillOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"BillOneCell" forIndexPath:indexPath];
+        WalletDetailOneCell * cell = [tableView dequeueReusableCellWithIdentifier:@"WalletDetailOneCell" forIndexPath:indexPath];
         //cell 赋值
-        cell.model =indexPath.section >= self.dataArray.count ? nil :self.dataArray[indexPath.section];
+        //cell.model =indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
         // cell 其他配置
         return cell;
     }
 }
-#pragma mark - 分区页眉
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    //if (!header) {
-    header= [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BillHeaderView" ];
-    // }
-    if (header) {
-        header.model = section >= self.dataArray.count ? nil : self.dataArray[section];
-    }
-    return header;
-}
+
 #pragma mark - Cell点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-#pragma mark - 页眉的高度
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section>0) {
-        BillModel* beforeModel= self.dataArray[section-1];
-        BillModel* afterModel= self.dataArray[section];
-        if (![beforeModel.create_time isEqualToString: afterModel.create_time]) {
-            return Width*0.1;
-        }else{
-            return 0;
-        }
-    }else{
-        BillModel* OneModel= self.dataArray[section];
-        if (OneModel) {
-            return Width*0.1;
-        }else{
-            return 0;
-        }
-    }
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.01;
-}
+
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return Width*0.16;

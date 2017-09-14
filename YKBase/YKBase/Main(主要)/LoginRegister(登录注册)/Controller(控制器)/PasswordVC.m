@@ -10,9 +10,6 @@
 #import "LoginRegModel.h"
 #import "MyInfoVC.h"
 @interface PasswordVC ()
-@property (weak, nonatomic) IBOutlet DarkGreyTF *mobile;
-@property (weak, nonatomic) IBOutlet DarkGreyTF *verify_code;
-@property (weak, nonatomic) IBOutlet DarkGreyTF *password;
 @end
 @implementation PasswordVC
 - (void)viewDidLoad {
@@ -28,6 +25,11 @@
 }
 #pragma mark - 关于数据
 -(void)SET_DATA{
+    if ([self.title isEqualToString:@"修改密码"]) {
+        self.mobile.text =  [YKDataTool getuseraccount];
+        self.mobile.userInteractionEnabled = NO;
+    }
+
     
 }
 #pragma mark - 发送验证码

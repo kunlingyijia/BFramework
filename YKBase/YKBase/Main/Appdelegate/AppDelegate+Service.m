@@ -198,22 +198,21 @@
     
     // [[UMSocialManager defaultManager] setUmSocialAppkey:UMKey];
     //    //打开调试日志
-    [[UMSocialManager defaultManager] openLog:YES];
+    //[[UMSocialManager defaultManager] openLog:YES];
     //设置友盟appkey
     // 获取友盟social版本号
     //NSLog(@"UMeng social version: %@", [UMSocialGlobal umSocialSDKVersion]);
     //设置微信的appKey和appSecret
-    //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:WXKey appSecret:WXappSecret redirectURL:@"http://mobile.umeng.com/social"];
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxb1b2bfe44501f201" appSecret:@"5c9d1be2f5dc4cc975c248f9efd7b608" redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:WXKey appSecret:WXappSecret redirectURL:@"http://mobile.umeng.com/social"];
+    //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxb1b2bfe44501f201" appSecret:@"5c9d1be2f5dc4cc975c248f9efd7b608" redirectURL:@"http://mobile.umeng.com/social"];
     //设置分享到QQ互联的appKey和appSecret
-    //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:QQKey  appSecret:QQappSecret redirectURL:@"http://mobile.umeng.com/social"];
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105466760"  appSecret:@"ZhkBC58lGdVq4kaw" redirectURL:@"http://mobile.umeng.com/social"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:QQKey  appSecret:QQappSecret redirectURL:@"http://mobile.umeng.com/social"];
     /*
      设置新浪的appKey和appSecret
      [新浪微博集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_2
      */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:SinaKey  appSecret:SinaappSecret redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
-    UMConfigInstance.appKey = @"5760ee9be0f55a0dec0013e6";
+    //[[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:SinaKey  appSecret:SinaappSecret redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
+    UMConfigInstance.appKey = UMKey;
     UMConfigInstance.channelId = @"App Store";
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];

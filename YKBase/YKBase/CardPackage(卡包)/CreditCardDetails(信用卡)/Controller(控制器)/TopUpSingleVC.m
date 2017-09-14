@@ -68,7 +68,6 @@
         [DWAlertTool showToast:@"充值金额不大于20000"];
         return NO;
     }
-    
     if (![RegularTool checkBankNumber:_bank_card_no.text]) {
         [DWAlertTool showToast:@"银行卡号输入有误"];
         return NO;

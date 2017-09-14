@@ -34,8 +34,9 @@
 #pragma mark - 关于数据
 -(void)SET_DATA{
     self.account.text = [YKDataTool getuseraccount];
+    //更新版本
+    //[ThirdPartyTool updateVerison:self];
 }
-
 #pragma mark - 登录事件
 - (IBAction)LoginAction:(SubmitBtn *)sender {
     if ([self IF]) {
@@ -46,7 +47,6 @@
         NSURLSessionDataTask * task =  [HTTPTool  requestLoginWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
             if (baseRes.resultCode ==1) {
                 LoginRegModel *model = [LoginRegModel yy_modelWithJSON:baseRes.data];
-                [YKDataTool saveUserData:weakSelf.account.text forKey:@"useraccount"];
                 [YKDataTool saveUserData:model.key forKey:@"key"];
                 [YKDataTool saveUserData:model.token forKey:@"token"];
                 //设置别名
@@ -166,7 +166,6 @@
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    
     if (textField ==self.account) {
         NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         return  [RegularTool checkNumber11:toString];

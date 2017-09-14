@@ -55,6 +55,7 @@
 -(void)SET_DATA{
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
+     [self  dataProcessing];
     [self requestAction];
     //上拉刷新下拉加载
     [self Refresh];
@@ -77,15 +78,16 @@
     NSURLSessionDataTask * task =  [HTTPTool  requestBankCardListWithParm:@{@"pageIndex":@(self.pageIndex),@"pageCount":@"10",@"type":@"1"} active:YES success :^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             if (weakSelf.pageIndex == 1) {
-                [weakSelf.dataArray removeAllObjects];
+            [YKDataTool saveObject:baseRes.data byFileName:@"我的借记卡"];
             }
-            for (NSDictionary * dic in baseRes.data) {
-                CardModel * model = [CardModel yy_modelWithJSON:dic];
-                model.selected = [weakSelf.bank_id isEqualToString:model.bank_id] ? YES : NO;
-                [weakSelf.dataArray addObject:model];
-            }
-            //刷新
-            [weakSelf.tableView reloadData];
+            [weakSelf dataProcessing];
+//            for (NSDictionary * dic in baseRes.data) {
+//                CardModel * model = [CardModel yy_modelWithJSON:dic];
+//                model.selected = [weakSelf.bank_id isEqualToString:model.bank_id] ? YES : NO;
+//                [weakSelf.dataArray addObject:model];
+//            }
+//            //刷新
+//            [weakSelf.tableView reloadData];
         }else{
             weakSelf.pageIndex > 1 ? weakSelf.pageIndex -- : weakSelf.pageIndex;
         }
@@ -95,6 +97,24 @@
     }];
     if (task) {
         [self.sessionArray addObject:task];
+    }
+}
+#pragma mark - 数据处理
+-(void)dataProcessing{
+    NSMutableArray * Info = [NSMutableArray arrayWithCapacity:0];
+    Info = [YKDataTool getObjectByFileName:@"我的借记卡"];
+    [self.dataArray removeAllObjects];
+    if (Info.count!=0) {
+        for (NSDictionary * dic in Info) {
+            CardModel * model = [CardModel yy_modelWithJSON:dic];
+             model.selected = [self.bank_id isEqualToString:model.bank_id] ? YES : NO;
+            [self.dataArray addObject:model];
+        }
+        //刷新
+        [self.tableView reloadData];
+    }else{
+        //刷新
+        [self.tableView reloadData];
     }
 }
 #pragma tableView 代理方法

@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MySettingVC">
             <connections>
+                <outlet property="LogoutBtn" destination="2eD-ol-aoj" id="4oh-7U-OsU"/>
                 <outlet property="avatar_url" destination="MQH-xz-IFZ" id="I2V-Rc-b31"/>
                 <outlet property="mobile" destination="n46-Kl-690" id="6q5-WR-lU5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

@@ -207,7 +207,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="返回" translatesAutoresizingMaskIntoConstraints="NO" id="Jer-aX-j0d">
-                                            <rect key="frame" x="349" y="17" width="8" height="15"/>
+                                            <rect key="frame" x="349" y="16.5" width="8" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="8" id="ahk-pS-0Ih"/>
                                                 <constraint firstAttribute="height" constant="15" id="fQY-qn-Afi"/>

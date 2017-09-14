@@ -79,11 +79,11 @@
 //友盟
 #define UMKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"598b04535312dd365f000031" : @"598b04535312dd365f000031"
 //微信
-#define WXKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"wxb9bbefcbd98453bd" : @"wxb9bbefcbd98453bd"
-#define WXappSecret [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"3efe957a7146e5249a421791e54ef779" : @"3efe957a7146e5249a421791e54ef779"
+#define WXKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"wx917bd447e34a1df4" : @"wx917bd447e34a1df4"
+#define WXappSecret [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"f79f26495c029f72b689adf959996182" : @"f79f26495c029f72b689adf959996182"
 ///QQ
-#define QQKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"1105708203" : @"1105708203"
-#define QQappSecret [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"f2fbd2d88f92b5a6a836a4ef" : @"4faae306e8ea7918f81df6ba"
+#define QQKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"1106343194" : @"1106343194"
+#define QQappSecret [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"XhiRbz2TfV1XUojc" : @"XhiRbz2TfV1XUojc"
 ///Sina 新浪微博
 #define SinaKey  [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"1105708203" : @"1105708203"
 #define SinaappSecret [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] isEqualToString:BundleId] ? @"f2fbd2d88f92b5a6a836a4ef" : @"4faae306e8ea7918f81df6ba"

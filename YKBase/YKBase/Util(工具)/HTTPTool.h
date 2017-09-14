@@ -55,6 +55,12 @@ typedef void(^DataFaild)(NSError * _Nullable error);
 + (nullable NSURLSessionDataTask *)requestWithdrawWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  快速充值
 + (nullable NSURLSessionDataTask *)requestQuickRechargeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  快速充值--获取验证码（华付通)
++ (nullable NSURLSessionDataTask *)requestHftQuickSmsWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  快速充值（华付通）
++ (nullable NSURLSessionDataTask *)requestHftQuickRechargeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
+#pragma mark -  用户账户流水
++ (nullable NSURLSessionDataTask *)requestRequest_User_flowLisWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  首页轮播图+公告+我的信用卡
 + (nullable NSURLSessionDataTask *)requestHomePageWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild;
 #pragma mark -  首页 获取文章内容

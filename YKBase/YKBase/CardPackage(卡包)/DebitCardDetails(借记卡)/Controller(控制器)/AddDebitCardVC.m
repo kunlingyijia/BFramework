@@ -13,6 +13,8 @@
 @interface AddDebitCardVC ()
 @property(nonatomic,strong)NSString * bank_card_photoUrl;
 @property(nonatomic,strong)NSString * bank_card_back_photoUrl;
+@property(nonatomic,strong)NSString * branch_noStr;
+@property(nonatomic,strong)NSString * bank_codeStr;
 @end
 @implementation AddDebitCardVC
 - (void)viewDidLoad {
@@ -24,7 +26,14 @@
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
-    [self showBackBtn];
+    __weak typeof(self) weakSelf = self;
+    [self showBackBtn:^{
+        [DWAlertTool alertWithTitle:@"添加尚未完成,您确定要离开?" message:nil OKWithTitle:@"确定" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        } withCancel:^(UIAlertAction *cancelaction) {
+            
+        }];
+    }];
     self.title = @"添加借记卡";
 }
 #pragma mark - 关于数据
@@ -72,18 +81,18 @@
     [self.view endEditing:YES];
     //跳转
     BankCardListVC * VC =  GetVC(BankCardListVC);
+    VC.IsIncluding = YES;
     __weak typeof(self) weakSelf = self;
     VC.bank_name = self.bank_name.text;
-    VC.BankCardListVCBlock =^(NSString * bankName){
+    VC.BankCardListVCBlock =^(NSString * bankName,NSString * branch_no,NSString * bank_code){
         weakSelf.bank_name.text = bankName;
+        weakSelf.branch_noStr = branch_no;
+        weakSelf.bank_codeStr = bank_code;
     };
     PushVC(VC);
-    
 }
 #pragma mark - 提交
 - (IBAction)submitBtn:(SubmitBtn *)sender {
-    
-    
     if ([self IF]) {
         CardModel *model =[CardModel new];
         model.bank_card_photo = _bank_card_photoUrl ;
@@ -91,6 +100,8 @@
         model. account_name = self.account_name.text;
         model.bank_card_no = self.bank_card_no.text;
         model.bank_name = self.bank_name.text;
+        model.branch_no = self.branch_noStr;
+        model.bank_code = self.bank_codeStr;
         model.bind_mobile = self.bind_mobile.text ;
         __weak typeof(self) weakSelf = self;
         NSURLSessionDataTask * task =  [HTTPTool requestBankAddDebitCardWithParm:model active:NO success:^(BaseResponse * _Nullable baseRes) {
@@ -99,7 +110,6 @@
                 //请求个人信息
                 [weakSelf requestUserInfo];
             }
-            
         } faild:^(NSError * _Nullable error) {
         }];
         if (task) {
@@ -113,10 +123,8 @@
     NSURLSessionDataTask * task =  [HTTPTool  requestUserInfoWithParm:@{} active:NO success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
             weakSelf.AddDebitCardVCBlock();
-
             // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(backTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
                 //返回
                 [weakSelf.navigationController popViewControllerAnimated:YES] ;
             });
@@ -161,7 +169,6 @@
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    
     if (textField ==self.bind_mobile) {
         NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         return  [RegularTool checkNumber11:toString];

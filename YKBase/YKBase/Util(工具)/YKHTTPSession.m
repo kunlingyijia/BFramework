@@ -23,28 +23,28 @@
 }
 //网络请求
 - (nullable NSURLSessionDataTask *)requestDataWithParm:(nullable id)parm act:( nonnull NSString *)actName sign:(nullable id)sign method:(YKRequestMethod)method  showHUD:(BOOL)showHUD active:(BOOL)active success:(nullable YKSuccessCallback)success faild:(nullable YKFaildCallback)faild {
-    //showHUD ==YES ?[[LoadWaitSingle shareManager]showLoadWaitViewImage:@"兑富宝加载等待图"] :nil;
+    //showHUD ==YES ?[[LoadWaitSingle shareManager]showLoadWaitViewImage:@"巧巧科技加载灰"] :nil;
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     [SVProgressHUD setDefaultStyle:  SVProgressHUDStyleCustom];
     //设置背景颜色为透明色
     [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
     //[SVProgressHUD  setMinimumDismissTimeInterval:40];
     //利用SVP提供类方法设置 通过UIImage分类方法返回的动态UIImage对象
-    NSData* data =[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"兑富宝加载等待图" ofType:@"gif"]];
+    NSData* data =[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"巧巧科技加载灰" ofType:@"gif"]];
     showHUD == YES ?  [SVProgressHUD showImage: [UIImage sd_animatedGIFWithData:data] status:@""] : nil;
     [SVProgressHUD setForegroundColor :[UIColor colorWithHexString:kDarkGrey]];
-    [SVProgressHUD setFont:[UIFont systemFontOfSize:14.0*SizeScale]];
+    [SVProgressHUD setFont:[UIFont systemFontOfSize:10.0*SizeScale]];
     NSString *url = [NSString stringWithFormat:@"%@%@%@&sign=%@",kServerUrl,ACT_API,actName,sign];
     YKAppClient*  manager = [YKAppClient sharedClient];
     _BaseVC.view.userInteractionEnabled = active;
-    [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = active;
+//    [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = active;
     NSLog(@"断点***********\n\n%@&request=%@\n\n***********",url,parm);
     if (method == HTTPSRequestTypeGET) {
         return   [manager GET:url parameters:[NSDictionary dictionaryWithObject:parm forKey:@"request"] progress:^(NSProgress * _Nonnull downloadProgress) {
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if (![responseObject[@"resultCode"]isEqualToString:@"1"]) {
                 _BaseVC.view.userInteractionEnabled =YES;
-                [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = YES;
+//                [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = YES;
                 NSLog(@"错误码:--:%@\n错信息---:%@",responseObject[@"resultCode"],responseObject[@"msg"]);
             }
             [SVProgressHUD dismiss];
@@ -52,18 +52,11 @@
             success(responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             _BaseVC.view.userInteractionEnabled =YES;
-            [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = YES;
+//            [DWAlertTool getCurrentUIVC].view.userInteractionEnabled = YES;
             faild(error);
             NSLog(@"error--%@",error);
-            NSString * errorStr =error.localizedDescription;
             [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
-            if (![errorStr isEqualToString:@"已取消"]) {
-                if (errorStr.length>1) {
-                    [SVProgressHUD showErrorWithStatus:  [error.localizedDescription   substringToIndex:error.localizedDescription.length-1]];
-                }else{
-                    [SVProgressHUD showErrorWithStatus:@"网络连接失败"];
-                }
-            }
+            [self showError:error];
             //[[LoadWaitSingle shareManager] hideLoadWaitView];
         }];
     }
@@ -96,7 +89,7 @@
                 break;
             case AFNetworkReachabilityStatusReachableViaWWAN:
                 NSLog(@"蜂窝数据网");
-                //  networkReachabilityStatusReachableViaWWAN();
+                //networkReachabilityStatusReachableViaWWAN();
                 break;
             case AFNetworkReachabilityStatusReachableViaWiFi:
                 NSLog(@"WiFi网络");
@@ -108,7 +101,7 @@
 }
 void networkReachabilityStatusUnknown()
 {
-    [DWAlertTool alertWithTitle:[NSString stringWithFormat:@"%@关闭蜂窝移动数据",appName] message:@"您可以在”设置“中为此应用程序打开蜂窝移动数据." OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+    [DWAlertTool alertWithTitle:[NSString stringWithFormat:@"\"%@\" 已关闭无线数据",appName] message:@"您可以在”设置“中为此应用程序打开无线数据" OKWithTitle:@"设置" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
         NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if([[UIApplication sharedApplication] canOpenURL:url]) {
             NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
@@ -130,7 +123,7 @@ void networkReachabilityStatusReachableViaWWAN()
     //    }];
 }
 ///上传图片
--(void)UPImageToServer:(NSArray*)imageArr toKb:(NSInteger)kb success:(SuccessImageArr)success faild:(FaildCallback)faild{
+-(void)UPImageToServer:(NSArray*)imageArr toKb:(NSInteger)kb success:(YKSuccessImageArr)success faild:(YKFaildCallback)faild{
     NSString *password = [NSString stringWithFormat:@"%@%@%@",[YKDataTool getimage_account],[YKDataTool getimage_hostname],[[YKDataTool getimage_password]MD5Hash] ];
     NSDictionary * dic = @{@"image_account":[YKDataTool getimage_account],@"image_password":[password MD5Hash]};
     AFHTTPSessionManager *UPmanager = [AFHTTPSessionManager manager];
@@ -141,14 +134,14 @@ void networkReachabilityStatusReachableViaWWAN()
                                                            @"application/octet-stream",
                                                            @"text/json",
                                                            nil];
-    [[LoadWaitSingle shareManager]showLoadWaitViewImage:@"兑富宝加载等待图"];
+    [[LoadWaitSingle shareManager]showLoadWaitViewImage:@"巧巧科技加载灰"];
     [UPmanager POST:[YKDataTool getimage_hostname] parameters:[dic yy_modelToJSONObject] constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         for (int i= 0; i< imageArr.count; i++) {
             UIImage * image =  [UIImage scaleImageAtPixel:imageArr [i] pixel:1024];
             //1.把图片转换成二进制流
             NSData *imageData= [ UIImage scaleImage:image toKb:kb];
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            formatter.dateFormat =@"yyyyMMddHHmmss";
+            formatter.dateFormat =@"yyyy-MM-dd-HH-mm-ss";
             NSString *str = [formatter stringFromDate:[NSDate date]];
             NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
             //2.上传图片
@@ -162,14 +155,22 @@ void networkReachabilityStatusReachableViaWWAN()
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         faild(error);
         [[LoadWaitSingle shareManager] hideLoadWaitView];
-        NSString * errorStr =error.localizedDescription;
-        if (errorStr.length>1) {
-            [SVProgressHUD showErrorWithStatus:  [error.localizedDescription   substringToIndex:error.localizedDescription.length-1]];
-        }else{
-            [SVProgressHUD showErrorWithStatus:@"网络连接失败"];
-        }
+        [self showError:error];
+        
     }];
 }
+
+//显示错误信息
+-(void)showError:(NSError *)error{
+    NSString * errorStr =error.localizedDescription;
+    if (errorStr.length>1) {
+        [SVProgressHUD showErrorWithStatus:  [error.localizedDescription   substringToIndex:error.localizedDescription.length-1]];
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"网络连接失败"];
+    }
+    
+}
+
 /**
  *  拨打电话
  *

@@ -66,7 +66,7 @@
 #pragma mark - 计算保证金
 - (IBAction)calculateAction:(SubmitBtn *)sender {
     [self.view endEditing:YES];
-    if ( [self CalculateIF]) {
+    if ([self CalculateIF]) {
         CardModel *model =[CardModel new];
         model.total_money = self.total_money.text;
         model.bank_id = self.cardModel.bank_id;
@@ -91,8 +91,12 @@
 -(BOOL)CalculateIF{
     [self.view endEditing:YES];
     BOOL  Y = YES;
-    if ([self.total_money.text floatValue] > [self.credit_line.text floatValue]||self.total_money.text.length ==0) {
+    if (self.total_money.text.length ==0||[self.total_money.text floatValue]==0) {
         [DWAlertTool showToast:@"还款金额输入有误"];
+        return NO;
+    }
+    if ([self.total_money.text floatValue] > [self.credit_line.text floatValue]) {
+        [DWAlertTool showToast:@"信用卡额度不足"];
         return NO;
     }
     if (self.begin_time.text.length ==0) {

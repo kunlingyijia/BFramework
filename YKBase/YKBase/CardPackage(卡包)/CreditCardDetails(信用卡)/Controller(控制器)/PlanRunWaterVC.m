@@ -100,7 +100,6 @@
     if (task) {
         [self.sessionArray addObject:task];
     }
-    
 }
 
 #pragma tableView 代理方法
@@ -112,7 +111,6 @@
 }
 ///tab个数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return 1;
 }
 //tab设置

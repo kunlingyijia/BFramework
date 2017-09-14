@@ -17,6 +17,8 @@
 @property(nonatomic,strong)NSString * id_card_back_photoUrl;
 @property(nonatomic,strong)NSString * hand_id_card_photoUrl;
 @property(nonatomic,strong)NSString * bank_card_photoUrl;
+@property(nonatomic,strong)NSString * branch_noStr;
+@property(nonatomic,strong)NSString * bank_codeStr;
 @end
 @implementation CertificationVC
 - (void)viewDidLoad {
@@ -37,7 +39,16 @@
 
 #pragma mark - 关于UI
 -(void)SET_UI{
-    [self showBackBtn];
+    //    [self showBackBtn];
+    __weak typeof(self) weakSelf = self;
+    [self showBackBtn:^{
+        [DWAlertTool alertWithTitle:@"认证尚未完成,您确定要离开?" message:nil OKWithTitle:@"确定" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        } withCancel:^(UIAlertAction *cancelaction) {
+            
+        }];
+    }];
+    
     self.title = @"实名认证";
     self.address.placeholder = @"请输入详细地址(包括省市区/县)";
 }
@@ -56,7 +67,10 @@
                 weakSelf.id_card.text = model.id_card;
                 weakSelf.bank_card_no.text = model.bank_card_no;
                 weakSelf.bank_name.text = model.bank_name;
+                weakSelf.branch_noStr = model.branch_no;
+                weakSelf.bank_codeStr = model.bank_code;
                 weakSelf.bind_mobile.text = model.bind_mobile;
+                weakSelf.email.text = model.email;
                 weakSelf.address.text = model.address;
                 [_id_card_photo SD_WebimageUrlStr:model.id_card_photo placeholderImage:nil];
                 _id_card_photoUrl =model.id_card_photo;
@@ -84,7 +98,7 @@
     VC.imageType = EditedImage;
     VC.zoom= 0.6;
     VC.ImageChooseVCBlock =^(UIImage *image){
-            [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:100 success:^(NSArray *urlArr) {
+        [[YKHTTPSession shareSession]UPImageToServer:@[image] toKb:100 success:^(NSArray *urlArr) {
             NSDictionary * dic = urlArr[0];
             switch (sender.tag) {
                 case 401:
@@ -128,10 +142,13 @@
     [self.view endEditing:YES];
     //跳转
     BankCardListVC * VC =  GetVC(BankCardListVC);
+    VC.IsIncluding = YES;
     __weak typeof(self) weakSelf = self;
     VC.bank_name = self.bank_name.text;
-    VC.BankCardListVCBlock =^(NSString * bankName){
+    VC.BankCardListVCBlock =^(NSString * bankName,NSString * branch_no,NSString * bank_code){
         weakSelf.bank_name.text = bankName;
+        weakSelf.branch_noStr = branch_no;
+        weakSelf.bank_codeStr = bank_code;
     };
     PushVC(VC);
 }
@@ -162,7 +179,10 @@
         model.id_card= self.id_card.text ;
         model.bank_card_no= self.bank_card_no.text;
         model.bank_name = self.bank_name.text;
+        model.branch_no = self.branch_noStr;
+        model.bank_code = self.bank_codeStr;
         model.bind_mobile= self.bind_mobile.text ;
+        model.email= self.email.text ;
         model.address = self.address.text;
         model.id_card_photo=_id_card_photoUrl ;
         model.id_card_back_photo=_id_card_back_photoUrl ;
@@ -222,6 +242,10 @@
     }
     if (![RegularTool checkTelNumber:self.bind_mobile.text]) {
         [DWAlertTool showToast:@"手机号码输入有误"];
+        return NO;
+    }
+    if (![RegularTool checkMailInput:self.email.text]) {
+        [DWAlertTool showToast:@"邮箱号码输入有误"];
         return NO;
     }
     if (self.address.text.length==0) {

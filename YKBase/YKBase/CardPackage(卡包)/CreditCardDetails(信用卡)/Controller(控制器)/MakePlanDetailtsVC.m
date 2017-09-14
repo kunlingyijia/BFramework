@@ -22,7 +22,6 @@
     [self SET_UI];
     //数据
     [self  SET_DATA];
-    
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
@@ -59,7 +58,6 @@
 }
 #pragma mark - 提交
 - (IBAction)submitAction:(SubmitBtn *)sender {
-    
     if ([self IF]) {
         __weak typeof(self) weakSelf = self;
         NSURLSessionDataTask * task =  [HTTPTool requestSubmitPlanWithParm:self.planModel active:NO success:^(BaseResponse * _Nullable baseRes) {
@@ -82,18 +80,14 @@
         if (task) {
             [self.sessionArray addObject:task];
         }
-        
     }
-    
 }
 #pragma mark - 判断条件
 -(BOOL)IF{
     [self.view endEditing:YES];
-    BOOL  Y = YES;
-    
+    BOOL Y = YES;
     return Y;
 }
-
 #pragma mark - 预览计划
 - (IBAction)previewPlan:(SubmitBtn *)sender {
     //跳转
@@ -101,9 +95,6 @@
     VC.cardModel = self.planModel;
     PushVC(VC);
 }
-
-
-
 #pragma mark - dealloc
 - (void)dealloc
 {

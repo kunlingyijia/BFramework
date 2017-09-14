@@ -196,7 +196,6 @@
 		BD1280631F2AD18700DD9A8F /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD127F8A1F2AD18700DD9A8F /* AMapLocationKit.framework */; };
 		BD1280661F2AD18700DD9A8F /* APIConst.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127F901F2AD18700DD9A8F /* APIConst.m */; };
 		BD1280671F2AD18700DD9A8F /* DWAlertTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127F921F2AD18700DD9A8F /* DWAlertTool.m */; };
-		BD1280681F2AD18700DD9A8F /* DWHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127F941F2AD18700DD9A8F /* DWHelper.m */; };
 		BD1280691F2AD18700DD9A8F /* HTTPTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127F961F2AD18700DD9A8F /* HTTPTool.m */; };
 		BD12806A1F2AD18700DD9A8F /* NIBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127F981F2AD18700DD9A8F /* NIBHelper.m */; };
 		BD12806B1F2AD18700DD9A8F /* RegularTool.m in Sources */ = {isa = PBXBuildFile; fileRef = BD127F9A1F2AD18700DD9A8F /* RegularTool.m */; };
@@ -228,6 +227,8 @@
 		BD3787F71F38A10300CB3561 /* CardPackageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD3787F51F38A10300CB3561 /* CardPackageVC.xib */; };
 		BD3787FB1F38A11800CB3561 /* BillVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3787F91F38A11800CB3561 /* BillVC.m */; };
 		BD3787FC1F38A11800CB3561 /* BillVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD3787FA1F38A11800CB3561 /* BillVC.xib */; };
+		BD3A70C51F6908BC007FE44E /* 巧巧科技加载.gif in Resources */ = {isa = PBXBuildFile; fileRef = BD3A70C41F6908BC007FE44E /* 巧巧科技加载.gif */; };
+		BD3A70C71F690B18007FE44E /* 巧巧科技加载灰.gif in Resources */ = {isa = PBXBuildFile; fileRef = BD3A70C61F690B18007FE44E /* 巧巧科技加载灰.gif */; };
 		BD43FE7F1F611C3100904D51 /* WalletDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD43FE7D1F611C3100904D51 /* WalletDetailVC.m */; };
 		BD43FE801F611C3100904D51 /* WalletDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD43FE7E1F611C3100904D51 /* WalletDetailVC.xib */; };
 		BD5C28531F53EA1100D53678 /* SigningVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5C28511F53EA1100D53678 /* SigningVC.m */; };
@@ -236,6 +237,8 @@
 		BD69981D1F5A913F001AACEA /* PayPlanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD69981B1F5A913F001AACEA /* PayPlanVC.xib */; };
 		BD6998211F5A9D18001AACEA /* PayPlanOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69981F1F5A9D18001AACEA /* PayPlanOneCell.m */; };
 		BD6998221F5A9D18001AACEA /* PayPlanOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD6998201F5A9D18001AACEA /* PayPlanOneCell.xib */; };
+		BD6C8A5F1F6A135F003AA9EA /* WalletDetailOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6C8A5D1F6A135F003AA9EA /* WalletDetailOneCell.m */; };
+		BD6C8A601F6A135F003AA9EA /* WalletDetailOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD6C8A5E1F6A135F003AA9EA /* WalletDetailOneCell.xib */; };
 		BD7046EA1F4412C600DBC85E /* CurrentVersionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7046E81F4412C600DBC85E /* CurrentVersionVC.m */; };
 		BD7046EB1F4412C600DBC85E /* CurrentVersionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD7046E91F4412C600DBC85E /* CurrentVersionVC.xib */; };
 		BD7046EE1F4419C100DBC85E /* SystemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7046ED1F4419C100DBC85E /* SystemModel.m */; };
@@ -799,8 +802,6 @@
 		BD127F901F2AD18700DD9A8F /* APIConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIConst.m; sourceTree = "<group>"; };
 		BD127F911F2AD18700DD9A8F /* DWAlertTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWAlertTool.h; sourceTree = "<group>"; };
 		BD127F921F2AD18700DD9A8F /* DWAlertTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWAlertTool.m; sourceTree = "<group>"; };
-		BD127F931F2AD18700DD9A8F /* DWHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWHelper.h; sourceTree = "<group>"; };
-		BD127F941F2AD18700DD9A8F /* DWHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWHelper.m; sourceTree = "<group>"; };
 		BD127F951F2AD18700DD9A8F /* HTTPTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPTool.h; sourceTree = "<group>"; };
 		BD127F961F2AD18700DD9A8F /* HTTPTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPTool.m; sourceTree = "<group>"; };
 		BD127F971F2AD18700DD9A8F /* NIBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIBHelper.h; sourceTree = "<group>"; };
@@ -851,6 +852,8 @@
 		BD3787F81F38A11800CB3561 /* BillVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillVC.h; sourceTree = "<group>"; };
 		BD3787F91F38A11800CB3561 /* BillVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillVC.m; sourceTree = "<group>"; };
 		BD3787FA1F38A11800CB3561 /* BillVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BillVC.xib; sourceTree = "<group>"; };
+		BD3A70C41F6908BC007FE44E /* 巧巧科技加载.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "巧巧科技加载.gif"; sourceTree = "<group>"; };
+		BD3A70C61F690B18007FE44E /* 巧巧科技加载灰.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "巧巧科技加载灰.gif"; sourceTree = "<group>"; };
 		BD43FE7C1F611C3100904D51 /* WalletDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDetailVC.h; sourceTree = "<group>"; };
 		BD43FE7D1F611C3100904D51 /* WalletDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDetailVC.m; sourceTree = "<group>"; };
 		BD43FE7E1F611C3100904D51 /* WalletDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletDetailVC.xib; sourceTree = "<group>"; };
@@ -863,6 +866,9 @@
 		BD69981E1F5A9D18001AACEA /* PayPlanOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPlanOneCell.h; sourceTree = "<group>"; };
 		BD69981F1F5A9D18001AACEA /* PayPlanOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayPlanOneCell.m; sourceTree = "<group>"; };
 		BD6998201F5A9D18001AACEA /* PayPlanOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayPlanOneCell.xib; sourceTree = "<group>"; };
+		BD6C8A5C1F6A135F003AA9EA /* WalletDetailOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDetailOneCell.h; sourceTree = "<group>"; };
+		BD6C8A5D1F6A135F003AA9EA /* WalletDetailOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDetailOneCell.m; sourceTree = "<group>"; };
+		BD6C8A5E1F6A135F003AA9EA /* WalletDetailOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletDetailOneCell.xib; sourceTree = "<group>"; };
 		BD7046E71F4412C600DBC85E /* CurrentVersionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentVersionVC.h; sourceTree = "<group>"; };
 		BD7046E81F4412C600DBC85E /* CurrentVersionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentVersionVC.m; sourceTree = "<group>"; };
 		BD7046E91F4412C600DBC85E /* CurrentVersionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrentVersionVC.xib; sourceTree = "<group>"; };
@@ -1942,6 +1948,8 @@
 				BD127EE11F2AD18600DD9A8F /* LoadWaitSingle.m */,
 				BD127EE21F2AD18600DD9A8F /* LoadWaitView.h */,
 				BD127EE31F2AD18600DD9A8F /* LoadWaitView.m */,
+				BD3A70C61F690B18007FE44E /* 巧巧科技加载灰.gif */,
+				BD3A70C41F6908BC007FE44E /* 巧巧科技加载.gif */,
 				BD127EE41F2AD18600DD9A8F /* 兑富宝加载等待图.gif */,
 			);
 			path = LoadWaitView;
@@ -2248,8 +2256,6 @@
 				BD127F901F2AD18700DD9A8F /* APIConst.m */,
 				BD127F911F2AD18700DD9A8F /* DWAlertTool.h */,
 				BD127F921F2AD18700DD9A8F /* DWAlertTool.m */,
-				BD127F931F2AD18700DD9A8F /* DWHelper.h */,
-				BD127F941F2AD18700DD9A8F /* DWHelper.m */,
 				BD127F951F2AD18700DD9A8F /* HTTPTool.h */,
 				BD127F961F2AD18700DD9A8F /* HTTPTool.m */,
 				BD127F971F2AD18700DD9A8F /* NIBHelper.h */,
@@ -2671,6 +2677,9 @@
 		BDB6D7261F3B0DF1009C7A5B /* View(视图) */ = {
 			isa = PBXGroup;
 			children = (
+				BD6C8A5C1F6A135F003AA9EA /* WalletDetailOneCell.h */,
+				BD6C8A5D1F6A135F003AA9EA /* WalletDetailOneCell.m */,
+				BD6C8A5E1F6A135F003AA9EA /* WalletDetailOneCell.xib */,
 			);
 			path = "View(视图)";
 			sourceTree = "<group>";
@@ -2963,6 +2972,7 @@
 				BD127FDB1F2AD18700DD9A8F /* guideImage8.gif in Resources */,
 				BDBA1E371F4A865900ED633B /* JQTest.png in Resources */,
 				BD855A0C1F3C5848008143C3 /* BindingVC.xib in Resources */,
+				BD3A70C71F690B18007FE44E /* 巧巧科技加载灰.gif in Resources */,
 				BD12802C1F2AD18700DD9A8F /* 微博@3x.png in Resources */,
 				BD127FDA1F2AD18700DD9A8F /* guideImage7.gif in Resources */,
 				BD127FED1F2AD18700DD9A8F /* BusinessCooperationVC.xib in Resources */,
@@ -2996,11 +3006,13 @@
 				BD8A27661F3B3D2D00204AB2 /* MessageVC.xib in Resources */,
 				BD1280511F2AD18700DD9A8F /* 密码3.png in Resources */,
 				BD127FDC1F2AD18700DD9A8F /* mqr.mp4 in Resources */,
+				BD6C8A601F6A135F003AA9EA /* WalletDetailOneCell.xib in Resources */,
 				BDC5176C1F2ADE5D00E1821E /* Assets.xcassets in Resources */,
 				BD1280261F2AD18700DD9A8F /* QQ空间@3x.png in Resources */,
 				BD8EDB541F58F39E003A9949 /* PlanDetailsVC.xib in Resources */,
 				BD32BD0E1F3BF46800EBC853 /* DebitCardDetailsVC.xib in Resources */,
 				BD1280521F2AD18700DD9A8F /* 密码3@2x.png in Resources */,
+				BD3A70C51F6908BC007FE44E /* 巧巧科技加载.gif in Resources */,
 				BD1280611F2AD18700DD9A8F /* dfb_bankt.sqlite in Resources */,
 				BDB6D71F1F3B0496009C7A5B /* BillOneCell.xib in Resources */,
 				BD127FE91F2AD18700DD9A8F /* MyInfoVC.xib in Resources */,
@@ -3093,6 +3105,7 @@
 				BD1280161F2AD18700DD9A8F /* JHCoverView.m in Sources */,
 				BD127FBF1F2AD18700DD9A8F /* AdModel.m in Sources */,
 				BD8A6A041F3D4117006BA4FF /* ChangeDebitCardVC.m in Sources */,
+				BD6C8A5F1F6A135F003AA9EA /* WalletDetailOneCell.m in Sources */,
 				BD127FCE1F2AD18700DD9A8F /* DWTabBarController.m in Sources */,
 				BD127FEC1F2AD18700DD9A8F /* BusinessCooperationVC.m in Sources */,
 				BD1280211F2AD18700DD9A8F /* BaseSendBtnView.m in Sources */,
@@ -3189,7 +3202,6 @@
 				BD127FB61F2AD18700DD9A8F /* UIButton+WHCountDown.m in Sources */,
 				BD1280011F2AD18700DD9A8F /* NSDataEx.m in Sources */,
 				BD7995811F2B20B800FA0CBF /* TouchTool.m in Sources */,
-				BD1280681F2AD18700DD9A8F /* DWHelper.m in Sources */,
 				BDBA1E3B1F4A865900ED633B /* JQScanNetAnimation.m in Sources */,
 				BDE0E1C61F46C9B100086E6D /* UIColor+HexString.m in Sources */,
 				BD12801A1F2AD18700DD9A8F /* SDBrowserImageView.m in Sources */,
@@ -3504,7 +3516,7 @@
 					"$(PROJECT_DIR)/YKBase/ThirdPart/WXChatPay",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/CoreJPush/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.nsbank;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flxt.qqcredit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3552,7 +3564,7 @@
 					"$(PROJECT_DIR)/YKBase/ThirdPart/WXChatPay",
 					"$(PROJECT_DIR)/YKBase/ThirdPart/CoreJPush/Lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.nsbank;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flxt.qqcredit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

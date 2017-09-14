@@ -92,9 +92,11 @@
     VC.PopupVCBlock = ^(NSInteger tag){
         // 在主线程中延迟执行某动作，不会卡主主线程，不影响后面的东做执行
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0001 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            ///是否实名认证
-            if ([HTTPTool isCertification]) {
-                return;
+            if (tag !=0) {
+                ///是否实名认证
+                if ([HTTPTool isCertification]) {
+                    return;
+                }
             }
             switch (tag) {
                 case 1:

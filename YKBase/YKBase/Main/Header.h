@@ -23,7 +23,6 @@
 #import "UIButton+LXMImagePosition.h"
 #import "UITableView+NoData.h"
 #import "UICollectionView+NoData.h"
-#import "DWHelper.h"
 #import "EZTextView.h"
 #import "PublicVC.h"
 #import "ImageChooseVC.h"

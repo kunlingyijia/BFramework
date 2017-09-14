@@ -18,6 +18,11 @@
 @property (nonatomic, strong) NSString  *bank_card_no;
 ///开户银行
 @property (nonatomic, strong) NSString  *bank_name ;
+///联行号
+@property (nonatomic, strong) NSString  *branch_no ;
+///银行代码
+@property (nonatomic, strong) NSString  *bank_code ;
+
 ///预留手机号
 @property (nonatomic, strong) NSString  *bind_mobile ;
 ///银行下发的验证码
@@ -34,6 +39,8 @@
 @property (nonatomic, strong) NSString  *remark ;
 ///认证id
 @property (nonatomic, strong) NSString  *certify_id ;
+///邮箱
+@property (nonatomic, strong) NSString  *email ;
 ///详细地址
 @property (nonatomic, strong) NSString  *address ;
 

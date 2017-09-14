@@ -71,7 +71,6 @@
         NSLog(@"%ld",(long)weakself.pageIndex);
         [weakself requestAction];
     }];
-    
 }
 #pragma mark - 网络请求
 -(void)requestAction{

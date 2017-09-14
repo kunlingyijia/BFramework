@@ -30,7 +30,7 @@
    
     __weak typeof(self) weakSelf = self;
 
-    dispatch_queue_t queue2 = dispatch_queue_create("兑富宝加载等待图", DISPATCH_QUEUE_CONCURRENT); //字符串是指定唯一指示 ,DISPATCH_QUEUE_CONCURRENT 是指定为并发队列
+    dispatch_queue_t queue2 = dispatch_queue_create("巧巧科技加载灰", DISPATCH_QUEUE_CONCURRENT); //字符串是指定唯一指示 ,DISPATCH_QUEUE_CONCURRENT 是指定为并发队列
     //往队列添加任务
     dispatch_async(queue2, ^{
         //通知主线程刷新

@@ -10,7 +10,6 @@
 #import "BusinessCooperationVC.h"
 #import "AboutUsVC.h"
 #import "SuggestFeedbackVC.h"
-#import "UpdatePasswordVC.h"
 #import "AdModel.h"
 #import "CurrentVersionVC.h"
 #import "PasswordVC.h"
@@ -35,6 +34,7 @@
 #pragma mark - 关于UI
 -(void)SET_UI{
     self.title = @"我的设置";
+    self.LogoutBtn.backgroundColor = [UIColor redColor];
     [self showBackBtn];
 }
 #pragma mark - 关于数据
@@ -53,7 +53,7 @@
 #pragma - 按钮事件
 - (IBAction)ButtonAction:(UIButton *)sender {
     switch (sender.tag) {
-            //个人头像
+        //个人头像
         case 101: {
             __weak typeof(self) weakSelf = self;
             ImageChooseVC* VC = [[ImageChooseVC alloc]initWithNibName:@"ImageChooseVC" bundle:nil];

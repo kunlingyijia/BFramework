@@ -242,8 +242,8 @@
         if ([_type isEqualToString:@"1"]) {
             //[DWAlertTool showToast:@"敬请期待..."];
             //跳转
-            PublicVC * VC =  GetVC(PublicVC);
-            PushVC(VC);
+            //PublicVC * VC =  GetVC(PublicVC);
+            //PushVC(VC);
         }
     }
 }

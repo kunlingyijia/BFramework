@@ -108,7 +108,7 @@
                 [VC showBackBtn];
                 VC.ISLevel = YES;
                 PushVC(VC);
-                //weakSelf. tabBarController.selectedIndex = 2;
+                //weakSelf.tabBarController.selectedIndex = 2;
             };
             PushVC(VC);
             break;
@@ -131,7 +131,6 @@
                 //卡片解绑
                 [weakSelf requestDeleteCardWithParm];
             } withCancel:^(UIAlertAction *cancelaction) {
-                
             }];
             break;
         }
@@ -161,13 +160,11 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
     } faild:^(NSError * _Nullable error) {
-        
     }];
     if (task) {
         [self.sessionArray addObject:task];
     }
 }
-
 #pragma mark - dealloc
 - (void)dealloc
 {

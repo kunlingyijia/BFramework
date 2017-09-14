@@ -11,4 +11,6 @@
 @interface MySettingVC : BaseViewController
 @property (weak, nonatomic) IBOutlet DarkGreyLabel *mobile;
 @property (weak, nonatomic) IBOutlet UIImageView *avatar_url;
+@property (weak, nonatomic) IBOutlet SubmitBtn *LogoutBtn;
+
 @end

@@ -12,6 +12,8 @@
 @interface AddDebitCard ()
 @property(nonatomic,strong)NSString * bank_card_photoUrl;
 @property(nonatomic,strong)NSString * bank_card_back_photoUrl;
+@property(nonatomic,strong)NSString * branch_noStr;
+@property(nonatomic,strong)NSString * bank_codeStr;
 @end
 @implementation AddDebitCard
 - (void)viewDidLoad {
@@ -23,7 +25,14 @@
 }
 #pragma mark - 关于UI
 -(void)SET_UI{
-    [self showBackBtn];
+    __weak typeof(self) weakSelf = self;
+    [self showBackBtn:^{
+        [DWAlertTool alertWithTitle:@"添加尚未完成,您确定要离开?" message:nil OKWithTitle:@"确定" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        } withCancel:^(UIAlertAction *cancelaction) {
+            
+        }];
+    }];
     self.title = @"添加信用卡";
 }
 #pragma mark - 关于数据
@@ -72,9 +81,11 @@
     //跳转
     BankCardListVC * VC =  GetVC(BankCardListVC);
     __weak typeof(self) weakSelf = self;
-      VC.bank_name = self.bank_name.text;
-    VC.BankCardListVCBlock =^(NSString * bankName){
+    VC.bank_name = self.bank_name.text;
+    VC.BankCardListVCBlock =^(NSString * bankName,NSString * branch_no,NSString * bank_code ){
         weakSelf.bank_name.text = bankName;
+        weakSelf.branch_noStr = branch_no;
+        weakSelf.bank_codeStr = bank_code;
     };
     PushVC(VC);
 }
@@ -147,6 +158,8 @@
         model.bank_card_back_photo=_bank_card_back_photoUrl ;
         model.bank_card_no= self.bank_card_no.text;
         model.bank_name = self.bank_name.text;
+        model.branch_no = self.branch_noStr;
+        model.bank_code = self.bank_codeStr;
         model.credit_line = self.credit_line.text;
         NSString *valid_thru = [self.valid_thru.text stringByReplacingOccurrencesOfString:@"/" withString:@""];
         model.valid_thru= valid_thru ;
@@ -207,8 +220,12 @@
         [DWAlertTool showToast:@"请选择发卡银行"];
         return NO;
     }
-    if (self.credit_line.text.length==0) {
+    if (self.credit_line.text.length==0 ) {
         [DWAlertTool showToast:@"请输入信用额度"];
+        return NO;
+    }
+    if ( [self.credit_line.text floatValue]==0) {
+        [DWAlertTool showToast:@"信用额度输入有误"];
         return NO;
     }
     if (self.valid_thru.text.length==0) {
@@ -231,10 +248,10 @@
         [DWAlertTool showToast:@"手机号码输入有误"];
         return NO;
     }
-//    if (self.verify_code.text.length==0) {
-//        [DWAlertTool showToast:@"请输入验证码"];
-//        return NO;
-//    }
+    //    if (self.verify_code.text.length==0) {
+    //        [DWAlertTool showToast:@"请输入验证码"];
+    //        return NO;
+    //    }
     return Y;
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

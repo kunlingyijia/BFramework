@@ -70,7 +70,7 @@ typedef void(^ULoginSuccess)(UMSocialUserInfoResponse  * response);
 ///跳转到第三方地图
 +(void)PushThrdPatyMapWithStart:(ThreeMapModel*)startModel End:(ThreeMapModel*)endModel;
 ///更新版本
-+(void)updateVerison;
++(void)updateVerison:(BaseViewController*)VC;
 ///刷新加载
 +(void)MJRefreshView:(id)view  Header:(BOOL)header Footer:(BOOL)footer  HeaderBlock:(MJRefreshBlock)headerBlock FooterBlock:(MJRefreshBlock)footerBlock;
 ///开始加载

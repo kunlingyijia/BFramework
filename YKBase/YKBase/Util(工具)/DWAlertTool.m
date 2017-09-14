@@ -21,8 +21,6 @@
 #pragma mark - 取消确定 --居中
 +(void)alertWithTitle:(NSString*)title message:(NSString*)message OKWithTitle:(NSString*)OKtitle  CancelWithTitle:(NSString*)Canceltitle withOKDefault:(OKDefault)defaultaction withCancel:(Cancel)cancelaction{
     UIAlertController * alertC = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert)];
-   
-    
     UIAlertAction * OK = [UIAlertAction actionWithTitle:OKtitle style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         defaultaction (action);
     }];
@@ -31,8 +29,6 @@
     }];
     [alertC addAction:OK];
     [alertC addAction:cancel];
-    
-    
 //    UIView *subview = alertC.view.subviews.firstObject;
 //    UIView *alertContentView = subview.subviews.firstObject;
 //    UIView *ContentView = alertContentView.subviews.firstObject;
@@ -42,7 +38,6 @@
 //     UIView *Cont = Conte.subviews.firstObject;
 //    Cont.backgroundColor = [UIColor blueColor];;
 //   
-    
     [[self getCurrentUIVC] presentViewController:alertC animated:YES completion:nil];
 }
 #pragma mark - 单个确定
@@ -137,7 +132,7 @@
     [alertC addAction:OKTwo];
     [alertC addAction:OKThree];
     [alertC addAction:cancel];
-    [[self getCurrentUIVC] presentViewController:alertC animated:YES completion:nil];
+    [[DWAlertTool getCurrentUIVC] presentViewController:alertC animated:YES completion:nil];
     
 }
 #pragma mark - 获取当前界面

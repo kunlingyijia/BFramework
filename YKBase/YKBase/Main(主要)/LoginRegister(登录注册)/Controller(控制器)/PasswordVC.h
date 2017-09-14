@@ -11,5 +11,8 @@
 @interface PasswordVC : BaseViewController
 
 @property (nonatomic, copy) void(^ PasswordVCBlock)(NSString  *account ,NSString  *password);
+@property (weak, nonatomic) IBOutlet DarkGreyTF *mobile;
+@property (weak, nonatomic) IBOutlet DarkGreyTF *verify_code;
+@property (weak, nonatomic) IBOutlet DarkGreyTF *password;
 
 @end

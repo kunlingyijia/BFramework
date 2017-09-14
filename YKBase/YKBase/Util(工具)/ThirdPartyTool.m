@@ -90,7 +90,7 @@
     }];
 }
 #pragma mark - 更新版本
-+(void)updateVerison{
++(void)updateVerison:(BaseViewController*)VC{
     VerisonModel *model = [[VerisonModel alloc]init];
     model.os = 1;
     //代码实现获得应用的Verison号：
@@ -101,7 +101,7 @@
             VerisonModel* model =[VerisonModel yy_modelWithDictionary:((NSDictionary*)baseRes.data)];
             if ([oldVerison compare:model.version_code]==NSOrderedAscending) {
                 //NSOrderedAscending (升序)
-                [weakSelf addMandatoryAlertAction:model];
+                [weakSelf addMandatoryAlertAction:model VC:VC];
             }
         }
     } faild:^(id  _Nullable error) {
@@ -109,7 +109,7 @@
     }];
 }
 #pragma mark - 强制更新
-+(void)addMandatoryAlertAction:(VerisonModel*)model{
++(void)addMandatoryAlertAction:(VerisonModel*)model VC:(BaseViewController*)VC {
     UIAlertController * alertC = [UIAlertController alertControllerWithTitle:@"发现新版本\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
     UITextView *textView = [[UITextView alloc]initWithFrame:CGRectMake(30, 65, 210, 180)];
     textView.font = [UIFont systemFontOfSize:15];
@@ -119,17 +119,18 @@
     [alertC.view addSubview:textView];
     __weak typeof(self) weakSelf = self;
     UIAlertAction * cancel= [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
+        [YKNotification postNotificationName:@"刷新我的卡包" object:nil userInfo:nil];
     }];
     UIAlertAction * OK = [UIAlertAction actionWithTitle:@"我要去升级" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.download_url]];
-        [weakSelf addMandatoryAlertAction:model];
+        [weakSelf addMandatoryAlertAction:model VC:VC];
     }];
     //1-否，2-是
     if (![model.forced_update  isEqualToString:@"2"]) {
         [alertC addAction:cancel];
     }
     [alertC addAction:OK];
-    [[DWAlertTool getCurrentUIVC] presentViewController:alertC animated:YES completion:nil];
+    [VC presentViewController:alertC animated:YES completion:nil];
 }
 #pragma mark - 刷新加载
 +(void)MJRefreshView:(id)view  Header:(BOOL)header Footer:(BOOL)footer  HeaderBlock:(MJRefreshBlock)headerBlock FooterBlock:(MJRefreshBlock)footerBlock{

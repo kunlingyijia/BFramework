@@ -86,9 +86,14 @@ extern NSString * const  Request_quickSms ;
 extern NSString * const  Request_quickQuery ;
 ///提现
 extern NSString * const  Request_Withdraw ;
-///快速充值
+///快速充值（荣邦）
 extern NSString * const  Request_QuickRecharge ;
-
+///快速充值--获取验证码（华付通)
+extern NSString * const  Request_HftQuickSms ;
+///快速充值（华付通）
+extern NSString * const  Request_HftQuickRecharge ;
+///用户账户流水
+extern NSString * const  Request_User_flowLis ;
 ///银行卡账单
 extern NSString * const  Request_BillList ;
 

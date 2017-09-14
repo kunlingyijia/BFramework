@@ -172,7 +172,7 @@
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p39-Pd-IFL" customClass="SubmitBtn">
                                     <rect key="frame" x="15" y="299" width="345" height="30"/>
-                                    <state key="normal" title="提现"/>
+                                    <state key="normal" title="确认支付"/>
                                     <connections>
                                         <action selector="BtnAction:" destination="-1" eventType="touchUpInside" id="Vz6-wC-dG9"/>
                                     </connections>

@@ -112,7 +112,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //分割线
     //tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    __weak typeof(self) weakSelf = self;
     if (indexPath.row>self.dataArray.count-1||self.dataArray.count==0) {
         return [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     }else{
@@ -130,18 +129,13 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     MessageModel*  model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
     model.selected = !model.selected;
-      [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
-    //[self.tableView reloadData];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
 }
 
 #pragma mark - Cell的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     MessageModel*  model = indexPath.row >= self.dataArray.count ? nil :self.dataArray[indexPath.row];
-    if (model.selected == NO) {
-        return 0.16*Width;
-    }else{
-        return model.CellHeight<0.16*Width ? 0.16*Width: model.CellHeight;
-    }
+    return model.selected ==NO ?  0.16*Width :(model.CellHeight<0.16*Width ? 0.16*Width: model.CellHeight);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

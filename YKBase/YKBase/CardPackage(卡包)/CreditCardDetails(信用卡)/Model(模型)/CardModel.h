@@ -30,6 +30,10 @@
 @property (nonatomic, strong) NSString  *bank_card_no ;
 ///开户银行
 @property (nonatomic, strong) NSString  *bank_name ;
+///联行号
+@property (nonatomic, strong) NSString  *branch_no ;
+///银行代码
+@property (nonatomic, strong) NSString  *bank_code ;
 ///信用额度
 @property (nonatomic, strong) NSString  *credit_line ;
 ///有效期

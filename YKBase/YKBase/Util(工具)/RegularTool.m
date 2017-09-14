@@ -289,7 +289,7 @@
 }
 #pragma mark - 正则匹配银行卡号是否正确
 + (BOOL)checkBankNumber:(NSString *)bankNumber{
-    NSString *bankNum=@"^([0-9]{16}|[0-9]{19})$";
+    NSString *bankNum=@"^([0-9]{16}|[0-9]{17}|[0-9]{18}|[0-9]{19})$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",bankNum];
     BOOL isMatch = [pred evaluateWithObject:bankNumber];
     return isMatch;

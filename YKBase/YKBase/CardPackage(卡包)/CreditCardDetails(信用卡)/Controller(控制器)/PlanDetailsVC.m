@@ -175,9 +175,6 @@
         [self.sessionArray addObject:task];
     }
 }
-
-
-
 #pragma mark - dealloc
 - (void)dealloc
 {

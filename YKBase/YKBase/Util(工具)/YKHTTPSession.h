@@ -14,6 +14,8 @@
 //设置网络请求成功 失败的bolck
 typedef void(^YKSuccessCallback)(NSDictionary* _Nullable response);
 typedef void(^YKFaildCallback)(NSError * _Nonnull  error);
+typedef void(^YKSuccessImageArr)(NSArray* _Nullable response);
+
 
 //typedef NS_ENUM(NSUInteger,HTTPSRequestType)
 //{
@@ -41,7 +43,7 @@ typedef enum : NSUInteger {
 ///网络监测者
 + (void)AFNetworkStatus;
 //上传图片
--(void)UPImageToServer:(nonnull NSArray*)imageArr toKb:(NSInteger)kb success:(nullable SuccessImageArr)success faild:(nullable FaildCallback)faild;
+-(void)UPImageToServer:(nonnull NSArray*)imageArr toKb:(NSInteger)kb success:(nullable YKSuccessImageArr)success faild:(nullable YKFaildCallback)faild;
 //拨打电话
 - (void)CallPhoneNumber:(nonnull NSString *)phoneNumber inView:(nonnull UIView *)selfView;
 

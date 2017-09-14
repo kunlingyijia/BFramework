@@ -46,7 +46,6 @@
 }
 #pragma mark - 关于tableView
 -(void)setUpTableView{
-    
     if (self.ISLevel) {
         self.title = @"我的账单";
         self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Width, Height-64) style:(UITableViewStylePlain)];
@@ -54,7 +53,6 @@
         self.title = @"账单";
         self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, Width, Height-64) style:(UITableViewStylePlain)];
     }
-    
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor clearColor];
@@ -69,7 +67,7 @@
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.pageIndex =1;
     [self requestAction];
-    //    //上拉刷新下拉加载
+    //上拉刷新下拉加载
     [self Refresh];
     [self  dataProcessing];
 }
@@ -101,7 +99,7 @@
             }
             for (NSDictionary * dic in baseRes.data) {
                 BillModel * model = [BillModel yy_modelWithJSON:dic];
-                 [weakSelf.dataArray addObject:model];
+                [weakSelf.dataArray addObject:model];
             }
             //刷新
             [weakSelf.tableView reloadData];

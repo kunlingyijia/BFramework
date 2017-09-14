@@ -113,7 +113,6 @@
 }
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    
     if (textField ==self.mobile) {
         NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         return  [RegularTool checkNumber11:toString];

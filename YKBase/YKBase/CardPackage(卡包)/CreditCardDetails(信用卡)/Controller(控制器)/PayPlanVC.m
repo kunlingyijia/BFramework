@@ -121,8 +121,6 @@
         [DWAlertTool showToast:@"账户余额不足"];
         return NO;
     }
-    
-    
     return Y;
 }
 #pragma mark - 请求个人信息

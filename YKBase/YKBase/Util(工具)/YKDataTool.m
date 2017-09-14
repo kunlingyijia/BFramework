@@ -104,7 +104,6 @@
 ///登录手机号
 + (NSString *)getuseraccount{
      return [self readUserDataForKey:@"useraccount"];
-    
 }
 
 

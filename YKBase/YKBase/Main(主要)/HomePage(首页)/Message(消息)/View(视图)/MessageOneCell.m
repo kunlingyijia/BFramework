@@ -22,7 +22,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     //Cell右侧箭头
     //self.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0); // ViewWidth  [宏] 指的是手机屏幕的宽度
+    //self.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0); // ViewWidth  [宏] 指的是手机屏幕的宽度
 //    self.imgView = [[UIImageView alloc]init];
 //    self.imgView.frame = CGRectMake(15, 10, 50, 35) ;
 //    [self.contentView addSubview:self.imageView];

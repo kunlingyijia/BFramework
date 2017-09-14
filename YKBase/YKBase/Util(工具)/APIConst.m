@@ -85,20 +85,27 @@ NSString * const  Request_AddCreditCard = @"/Bank/addCreditCard";
 NSString * const  Request_EditCreditCard = @"/Bank/editCreditCard";
 ///卡片解绑
 NSString * const  Request_DeleteCard = @"/Bank/deleteCard";
-
-
 ///快捷签约短信
 NSString * const  Request_quickSms = @"/Bank/quickSms";
 ///快捷签约查询
 NSString * const  Request_quickQuery = @"/Bank/quickQuery";
 ///提现
 NSString * const  Request_Withdraw = @"/Bank/withdraw";
-///快速充值
+///快速充值（荣邦）
 NSString * const  Request_QuickRecharge = @"/UserRecharge/quickRecharge";
+///快速充值--获取验证码（华付通)
+NSString * const  Request_HftQuickSms = @"/UserRecharge/hftQuickSms";
+///快速充值（华付通）
+NSString * const  Request_HftQuickRecharge = @"/UserRecharge/hftQuickRecharge";
+///用户账户流水
+NSString * const  Request_User_flowLis = @"/User/flowList";
+
+
 
 
 ///银行卡账单
 NSString * const  Request_BillList = @"/Bank/billList";
+
 
 
 

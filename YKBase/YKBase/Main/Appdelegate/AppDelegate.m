@@ -46,6 +46,7 @@
     //
     //        }
     //    }
+    
     //获取配置信息
     [self requestSystem];
     return YES;

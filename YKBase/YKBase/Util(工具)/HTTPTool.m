@@ -95,6 +95,7 @@
     if (Info.count!=0) {
         Userinfo *userinfo = [Userinfo yy_modelWithJSON:Info];
         [YKHTTPSession shareSession].userinfo =userinfo;
+        [YKDataTool saveUserData:[YKHTTPSession shareSession].userinfo.mobile forKey:@"useraccount"];
         //设置别名
         [YKNotification postNotificationName:@"获取个人信息" object:nil userInfo:nil];
     }
@@ -104,6 +105,7 @@
             Userinfo *userinfo = [Userinfo yy_modelWithJSON:baseRes.data];
             NSLog(@"个人信息--%@",[baseRes yy_modelToJSONObject]);
             [YKHTTPSession shareSession].userinfo =userinfo;
+            [YKDataTool saveUserData:[YKHTTPSession shareSession].userinfo.mobile forKey:@"useraccount"];
             //设置别名
             [YKNotification postNotificationName:@"获取个人信息" object:nil userInfo:nil];
         }
@@ -197,7 +199,7 @@
         faild(error);
     }];
 }
-#pragma mark -  快速充值
+#pragma mark -  快速充值（荣邦）
 + (nullable NSURLSessionDataTask *)requestQuickRechargeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_QuickRecharge showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
         if (baseRes.resultCode ==1) {
@@ -208,6 +210,40 @@
         faild(error);
     }];
 }
+
+#pragma mark -  快速充值--获取验证码（华付通)
++ (nullable NSURLSessionDataTask *)requestHftQuickSmsWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_HftQuickSms showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [DWAlertTool showToast:@"验证码已发送"];
+        }
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+#pragma mark -  快速充值（华付通）
++ (nullable NSURLSessionDataTask *)requestHftQuickRechargeWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_HftQuickRecharge showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        if (baseRes.resultCode ==1) {
+            [YKNotification postNotificationName:@"刷新我的账单" object:nil userInfo:nil];
+        }
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+
+
+#pragma mark -  用户账户流水
++ (nullable NSURLSessionDataTask *)requestRequest_User_flowLisWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
+    return [self AESrequestWithParm:parm act:Request_User_flowLis showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
+        success(baseRes);
+    } faild:^(NSError *  _Nullable error) {
+        faild(error);
+    }];
+}
+
 #pragma mark -  首页轮播图+公告+我的信用卡
 + (nullable NSURLSessionDataTask *)requestHomePageWithParm:(nullable id)parm active:(BOOL)active success:(nullable DataSuccess)success faild:(nullable DataFaild)faild{
     return [self AESrequestWithParm:parm act:Request_Home_requestAd showHUD:YES active:active success:^(BaseResponse * _Nullable baseRes) {
@@ -383,19 +419,24 @@
         NSString * type =
         [YKHTTPSession shareSession].userinfo.certify_status;
         if ([type isEqualToString:@"0"]) {
-            //尚未认证
-            CertificationVC* VC = GetVC(CertificationVC)
-            [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES];
+            [DWAlertTool alertWithTitle:@"尚未实名认证,前去实名认证?" message:nil OKWithTitle:@"确定" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+                //尚未认证
+                CertificationVC* VC = GetVC(CertificationVC)
+                [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES];
+            } withCancel:^(UIAlertAction *cancelaction) {
+            }];
             return YES;
         }else if([type isEqualToString:@"1"]){
             //审核中
-            [DWAlertTool showToast:@"实名认证审核中..."];
+            [DWAlertTool showToast:@"实名认证中,请耐心等待..."];
             return YES;
         }else if([type isEqualToString:@"3"]){
-            //审核失败
-            CertificationVC* VC = GetVC(CertificationVC)
-            [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES];
-            //[DWAlertTool showToast:@"审核失败.."];
+            [DWAlertTool alertWithTitle:@"实名认证失败,前去重新认证?" message:nil OKWithTitle:@"确定" CancelWithTitle:@"取消" withOKDefault:^(UIAlertAction *defaultaction) {
+                //审核失败
+                CertificationVC* VC = GetVC(CertificationVC)
+                [[DWAlertTool getCurrentUIVC].navigationController pushViewController:VC animated:YES];
+            } withCancel:^(UIAlertAction *cancelaction) {
+            }];
             return YES;
         }else{
             //审核 成功
