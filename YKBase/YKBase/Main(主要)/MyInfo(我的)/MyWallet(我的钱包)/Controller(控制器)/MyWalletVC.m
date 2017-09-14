@@ -111,6 +111,9 @@
         [DWAlertTool showToast:@"账号余额不足"];
         return NO;
     }
+    
+    
+    
     if (self.bankName.text .length==0) {
         [DWAlertTool showToast:@"请选择到款储蓄卡"];
         return NO;
